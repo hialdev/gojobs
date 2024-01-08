@@ -1,6 +1,11 @@
 <template>
   <div>
-    <AppHeader />
+    <div v-if="isLogin === 'true'">
+        <SeekerHeader />
+    </div>
+    <div v-else>
+        <AppHeader />
+    </div>
     <div class="bg-[#fafafa] min-h-screen py-[2em]">
         <div class="container mx-auto px-5">
             <div class="lg:sticky lg:top-0 lg:bg-[#fafafa] pt-1 pb-1 mb-8 z-10">
@@ -27,6 +32,7 @@ export default {
     },
     data(){
         return{
+            isLogin : process.client ? localStorage.getItem('login') : null,
             jobs : [
                 {
                     id:1,

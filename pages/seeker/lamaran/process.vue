@@ -3,6 +3,7 @@
         <h1 class="text-2xl font-medium mb-5">Diproses</h1>
         <div class="flex items-center gap-12 border-b-2 mb-5">
             <div class="mb-[-2px] cursor-pointer py-5 border-b-2 border-primary">Semua</div>
+            <div class="mb-[-2px] cursor-pointer py-5 border-b-2 border-slate-150 hover:border-primary">Seleksi</div>
             <div class="mb-[-2px] cursor-pointer py-5 border-b-2 border-slate-150 hover:border-primary">Psikotest</div>
             <div class="mb-[-2px] cursor-pointer py-5 border-b-2 border-slate-150 hover:border-primary">Wawancara HR</div>
             <div class="mb-[-2px] cursor-pointer py-5 border-b-2 border-slate-150 hover:border-primary">Wawancara User</div>

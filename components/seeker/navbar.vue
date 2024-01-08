@@ -2,8 +2,7 @@
     <div class="items-center justify-center gap-8 hidden lg:flex">
         <NuxtLink :class="{'text-white':isBlended, 'text-black':!isBlended}" class="menu whitespace-nowrap" activeClass="active" to="/seeker/dashboard">Dashboard</NuxtLink>
         <NuxtLink :class="{'text-white':isBlended, 'text-black':!isBlended}" class="menu whitespace-nowrap" activeClass="active" to="/lowongan">Lowongan Kerja</NuxtLink>
-        <NuxtLink :class="{'text-white':isBlended, 'text-black':!isBlended}" class="menu whitespace-nowrap" activeClass="active" to="/bantuan">Bantuan</NuxtLink>
-    </div>
+        </div>
 </template>
   
 <script>

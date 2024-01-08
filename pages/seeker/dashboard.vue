@@ -1,6 +1,6 @@
 <template>
     <div class="container mx-auto px-5 py-12">
-        <h1 class="text-3xl md:text-5xl mb-10">Hi,<span class="font-bold text-primary"> Name Surname</span></h1>
+        <h1 class="text-3xl md:text-3xl mb-10">Hi,<span class="font-bold text-primary"> Name Surname</span></h1>
         <div class="grid grid-cols-12 gap-5">
             <div class="col-span-6 md:col-span-4 lg:col-span-3">
                 <NuxtLink to="/seeker/lamaran/process" class="block p-6 bg-white rounded-2xl hover:ring-[4px] border border-white hover:border-primary hover:ring-orange-700/10">
@@ -28,63 +28,11 @@
             </div>
         </div>
         <hr class="my-10">
-        <div class="grid grid-cols-12 sm:gap-8">
-            <div class="mb-4 col-span-12 lg:col-span-6">
-                <h2 class="text-2xl font-medium mb-5">Pengembangan diri</h2>
-                <NuxtImg src="/image/img-dash.png" alt="Dashboard Image" class="w-full" />
-            </div>
-            <div class="mb-4 col-span-12 lg:col-span-6">
-                <h2 class="text-2xl font-medium mb-3">Dapatkan kecocokan lowongan</h2>
-                <p class="text-slate-500">Perbarui profil Anda dengan informasi terbaru agar rekomendasi pekerjaan dapat mencerminkan perkembangan dan kemampuan terbaru yang Anda miliki.</p>
-                <div class="bg-white my-6 p-8 rounded-2xl">
-                    <div class="flex items-start justify-between pb-4 border-b">
-                        <div class="font-medium">
-                            <h6 class="text-primary">Pemula</h6>
-                        </div>
-                        <div class="text-center">
-                            <h6 class="font-medium text-slate-700">Medium</h6>
-                            <p class="text-slate-500 text-sm hidden md:block">Syarat untuk bisa melamar pekerjaan</p>
-                        </div>
-                        <div class="font-medium">
-                            <h6 class="text-slate-700">Proffesional</h6>
-                        </div>
-                    </div>
-                    
-                    <div class="py-6">
-                        <div class="relative">
-                            <div class="flex items-center gap-2">
-                                <span v-for="index in 10" :key="index" class="bg-slate-100 p-2 flex-auto rounded-2xl"></span>
-                            </div>
-                            <div class="absolute top-0 right-0 left-0 flex items-center gap-2">
-                                <span v-for="index in 10" :key="index" class="p-2 flex-auto rounded-2xl" :class="{ 'bg-orange-200': index <= 3 }"></span>
-                            </div>
-                            <div class="absolute top-0 right-0 left-0 mt-[-0.7em] flex items-center justify-between">
-                                <div class="flex items-center justify-center p-2 border-2 border-primary rounded-3xl bg-primary text-white">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M8 7a4 4 0 1 1 8 0a4 4 0 0 1-8 0Zm0 6a5 5 0 0 0-5 5a3 3 0 0 0 3 3h12a3 3 0 0 0 3-3a5 5 0 0 0-5-5H8Z" clip-rule="evenodd"/></svg>
-                                </div>
-                                <div class="flex items-center justify-center p-2 border-2 border-primary rounded-3xl bg-white text-primary">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path fill="currentColor" d="m14.16 10.4l-5-3.57c-.7-.5-1.63-.5-2.32 0l-5 3.57c-.53.38-.84.98-.84 1.63V20c0 .55.45 1 1 1h4v-6h4v6h4c.55 0 1-.45 1-1v-7.97c0-.65-.31-1.25-.84-1.63z"/><path fill="currentColor" d="M21.03 3h-9.06C10.88 3 10 3.88 10 4.97l.09.09c.08.05.16.09.24.14l5 3.57c.76.54 1.3 1.34 1.54 2.23H19v2h-2v2h2v2h-2v4h4.03c1.09 0 1.97-.88 1.97-1.97V4.97C23 3.88 22.12 3 21.03 3zM19 9h-2V7h2v2z"/></svg>
-                                </div>
-                                <div class="flex items-center justify-center p-2 border-2 border-primary rounded-3xl bg-white text-primary">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M14.285 2.142a3 3 0 0 0-4.57 0l-.042.05a1 1 0 0 1-.842.348l-.065-.005a3 3 0 0 0-3.23 3.231l.004.065a1 1 0 0 1-.348.842l-.05.042a3 3 0 0 0 0 4.57l.05.042a1 1 0 0 1 .348.842l-.005.065A3.002 3.002 0 0 0 8 15.429V22a1 1 0 0 0 1.555.832L12 21.202l2.445 1.63A1 1 0 0 0 16 22v-6.57a3.002 3.002 0 0 0 2.465-3.196l-.005-.065a1 1 0 0 1 .348-.842l.05-.042a3 3 0 0 0 0-4.57l-.05-.042a1 1 0 0 1-.348-.842l.005-.065a3 3 0 0 0-3.231-3.23l-.065.004a1 1 0 0 1-.842-.348l-.042-.05ZM10 20.132V16.15a3.002 3.002 0 0 0 4 0v3.98l-1.445-.963a1 1 0 0 0-1.11 0L10 20.131Zm4.707-11.425a1 1 0 0 0-1.414-1.414L11 9.586l-.293-.293a1 1 0 0 0-1.414 1.414l1 1a1 1 0 0 0 1.414 0l3-3Z" clip-rule="evenodd"/></svg>
-                                </div>
-                            </div>
-                            <div class="my-6 font-medium">kelengkapan profilmu <span class="text-primary">35%</span></div>
-                            <p class="text-slate-500 mb-6">Lengkapi profil Anda dengan detail yang tepat. Semakin lengkap profil Anda, semakin mudah bagi Anda untuk menemukan dan melamar posisi impian Anda</p>
-                            <PartialsButton :path="`/seeker/profile`" class="px-5 text-center min-w-[15em] mb-0">Lengkapi Profile</PartialsButton>
-                        </div>
-                    </div>
-
-
-                </div>
-            </div>
-        </div>
-        <hr class="my-10">
         <div class="grid grid-cols-12 gap-4">
             <div class="col-span-12">
                 <div class="flex items-center justify-between mb-4">
-                    <h3 class="text-2xl font-medium">Job rekomendasi untuk Anda</h3>
-                    <NuxtLink class="font-medium underline decoration-orange-500">See All</NuxtLink>
+                    <h3 class="text-2xl font-medium">Job yang cocok untuk kamu</h3>
+                    <NuxtLink to="/lowongan" class="font-medium underline decoration-orange-500">See All</NuxtLink>
                 </div>
             </div>
             <div v-for="job in jobs" :key="job?.id" class="col-span-12 md:col-span-6 lg:col-span-4">
@@ -142,6 +90,58 @@
                         </li>
                     </ul>
                 </NuxtLink>
+            </div>
+        </div>
+        <hr class="my-10">
+        <div class="grid grid-cols-12 sm:gap-8">
+            <div class="mb-4 col-span-12 lg:col-span-6">
+                <h2 class="text-2xl font-medium mb-5">Pengembangan diri</h2>
+                <NuxtImg src="/image/img-dash.png" alt="Dashboard Image" class="w-full" />
+            </div>
+            <div class="mb-4 col-span-12 lg:col-span-6">
+                <h2 class="text-2xl font-medium mb-3">Dapatkan kecocokan lowongan</h2>
+                <p class="text-slate-500">Perbarui profil Anda dengan informasi terbaru agar rekomendasi pekerjaan dapat mencerminkan perkembangan dan kemampuan terbaru yang Anda miliki.</p>
+                <div class="bg-white my-6 p-8 rounded-2xl">
+                    <div class="flex items-start justify-between pb-4 border-b">
+                        <div class="font-medium">
+                            <h6 class="text-primary">Pemula</h6>
+                        </div>
+                        <div class="text-center">
+                            <h6 class="font-medium text-slate-700">Medium</h6>
+                            <p class="text-slate-500 text-sm hidden md:block">Syarat untuk bisa melamar pekerjaan</p>
+                        </div>
+                        <div class="font-medium">
+                            <h6 class="text-slate-700">Proffesional</h6>
+                        </div>
+                    </div>
+                    
+                    <div class="py-6">
+                        <div class="relative">
+                            <div class="flex items-center gap-2">
+                                <span v-for="index in 10" :key="index" class="bg-slate-100 p-2 flex-auto rounded-2xl"></span>
+                            </div>
+                            <div class="absolute top-0 right-0 left-0 flex items-center gap-2">
+                                <span v-for="index in 10" :key="index" class="p-2 flex-auto rounded-2xl" :class="{ 'bg-orange-200': index <= 3 }"></span>
+                            </div>
+                            <div class="absolute top-0 right-0 left-0 mt-[-0.7em] flex items-center justify-between">
+                                <div class="flex items-center justify-center p-2 border-2 border-primary rounded-3xl bg-primary text-white">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M8 7a4 4 0 1 1 8 0a4 4 0 0 1-8 0Zm0 6a5 5 0 0 0-5 5a3 3 0 0 0 3 3h12a3 3 0 0 0 3-3a5 5 0 0 0-5-5H8Z" clip-rule="evenodd"/></svg>
+                                </div>
+                                <div class="flex items-center justify-center p-2 border-2 border-primary rounded-3xl bg-white text-primary">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path fill="currentColor" d="m14.16 10.4l-5-3.57c-.7-.5-1.63-.5-2.32 0l-5 3.57c-.53.38-.84.98-.84 1.63V20c0 .55.45 1 1 1h4v-6h4v6h4c.55 0 1-.45 1-1v-7.97c0-.65-.31-1.25-.84-1.63z"/><path fill="currentColor" d="M21.03 3h-9.06C10.88 3 10 3.88 10 4.97l.09.09c.08.05.16.09.24.14l5 3.57c.76.54 1.3 1.34 1.54 2.23H19v2h-2v2h2v2h-2v4h4.03c1.09 0 1.97-.88 1.97-1.97V4.97C23 3.88 22.12 3 21.03 3zM19 9h-2V7h2v2z"/></svg>
+                                </div>
+                                <div class="flex items-center justify-center p-2 border-2 border-primary rounded-3xl bg-white text-primary">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M14.285 2.142a3 3 0 0 0-4.57 0l-.042.05a1 1 0 0 1-.842.348l-.065-.005a3 3 0 0 0-3.23 3.231l.004.065a1 1 0 0 1-.348.842l-.05.042a3 3 0 0 0 0 4.57l.05.042a1 1 0 0 1 .348.842l-.005.065A3.002 3.002 0 0 0 8 15.429V22a1 1 0 0 0 1.555.832L12 21.202l2.445 1.63A1 1 0 0 0 16 22v-6.57a3.002 3.002 0 0 0 2.465-3.196l-.005-.065a1 1 0 0 1 .348-.842l.05-.042a3 3 0 0 0 0-4.57l-.05-.042a1 1 0 0 1-.348-.842l.005-.065a3 3 0 0 0-3.231-3.23l-.065.004a1 1 0 0 1-.842-.348l-.042-.05ZM10 20.132V16.15a3.002 3.002 0 0 0 4 0v3.98l-1.445-.963a1 1 0 0 0-1.11 0L10 20.131Zm4.707-11.425a1 1 0 0 0-1.414-1.414L11 9.586l-.293-.293a1 1 0 0 0-1.414 1.414l1 1a1 1 0 0 0 1.414 0l3-3Z" clip-rule="evenodd"/></svg>
+                                </div>
+                            </div>
+                            <div class="my-6 font-medium">kelengkapan profilmu <span class="text-primary">35%</span></div>
+                            <p class="text-slate-500 mb-6">Lengkapi profil Anda dengan detail yang tepat. Semakin lengkap profil Anda, semakin mudah bagi Anda untuk menemukan dan melamar posisi impian Anda</p>
+                            <PartialsButton :path="`/seeker/profile`" class="px-5 text-center min-w-[15em] mb-0">Lengkapi Profile</PartialsButton>
+                        </div>
+                    </div>
+
+
+                </div>
             </div>
         </div>
     </div>

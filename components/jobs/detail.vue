@@ -67,7 +67,7 @@
             </div>
             <div class="col-span-12 sticky bottom-0 z-[100]">
                 <div class="flex items-center gap-3 bg-white p-5 rounded-3xl">
-                    <PartialsButton class="w-full text-center" :path="`/lowongan/${selectedJob.id}/lamar`">Lamar</PartialsButton>
+                    <PartialsButton class="w-full text-center" @click="lamarHandle">Lamar</PartialsButton>
                     <PartialsButton class="bg-transparent border-primary" :primary="false">
                         <div class="w-[24px] h-[24px] text-orange-100">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 30" fill="currentColor">
@@ -85,13 +85,32 @@
                 </div>
             </div>
         </div>
+
+        <div v-if="lamarSuccess === true">
+            <ModalLamarSuccess />
+        </div>
     </div>    
 </template>
 
-<script>
-export default {
-  props: ['selectedJob']
+<script setup>
+
+const props = defineProps({
+    selectedJob : Object,
+})
+const route = useRoute()
+const lamarSuccess = ref(false);
+
+const lamarHandle = () => {
+    lamarSuccess.value = true;
 }
+
+watch(lamarSuccess, (newValue) => {
+    if (newValue) {
+        setTimeout(() => {
+        useRouter().push(`/lowongan`);
+        }, 3000);
+    }
+});
 </script>
 
 <style scoped>

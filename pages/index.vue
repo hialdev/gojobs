@@ -22,9 +22,13 @@ export default {
     data(){
         return {
             countries : [
-                { key: 'us', value: 'United States' },
-                { key: 'ca', value: 'Canada' },
-                { key: 'fr', value: 'France' },
+                { key: 'tg', value: 'Tangerang' },
+                { key: 'de', value: 'Depok' },
+                { key: 'js', value: 'Jakarta Selatan' },
+                { key: 'jb', value: 'Jakarta Barat' },
+                { key: 'bg', value: 'Bogor' },
+                { key: 'sr', value: 'Serang' },
+                { key: 'cb', value: 'Cirebon' },
             ],
             industries : [
                 { key: 'it', value: 'Information Technology' },
@@ -329,7 +333,7 @@ export default {
                         <h1 class="mb-12 text-white text-4xl lg:text-5xl font-semibold">Yuk Lamar di GoJobs! <br /><span class="font-normal">#Teman Cari Kerja</span></h1>
                         <PartialsSearch class="mb-4" :label="`Cari posisi / perusahaan lowongan`" />
                         <div class="grid grid-cols-2 gap-4 mb-4">
-                            <PartialsSelect :options="industries" :label="'Kategori'" />
+                            <PartialsSelect :options="industries" :label="'Profesi Pekerjaan'" />
                             <PartialsSelect :options="countries" :label="'Lokasi'" />
                         </div>
                         <PartialsButton>Cari Lowongan</PartialsButton>
@@ -342,14 +346,14 @@ export default {
             <div class="container mx-auto px-5">
                 <div class="grid grid-cols-12 md:gap-8">
                     <div class="col-span-12">
-                        <h2 class="text-2xl text-center my-9">Industri pekerjaan yang dibutuhkan</h2>
+                        <h2 class="text-2xl text-center my-9">Profesi pekerjaan yang dibutuhkan</h2>
                     </div>
                     <div v-for="industry in industriesList" :key="industry.title" class="col-span-12 md:col-span-6 lg:col-span-3 mb-8 md:mb-0">
                         <NuxtLink :to="industry.to" class="block w-full">
                             <div class="p-6 px-8 lg:px-6 bg-white rounded-[50px] shadow-4xl hover:shadow-2xl hover:shadow-orange-300/20">
                                 <div class="flex items-center gap-5 mb-6">
-                                    <NuxtImg :src="industry.image?.src" :alt="industry.image?.alt" :width="industry.image?.width" :height="industry.image?.height" class="w-[6em] h-[6em] rounded-[99px]" />
-                                    <h3 class="text-xl mb-4">{{industry.title}}</h3>
+                                    <NuxtImg :src="industry.image?.src" :alt="industry.image?.alt" :width="industry.image?.width" :height="industry.image?.height" class="w-[4em] h-[4em] rounded-[99px]" />
+                                    <h3 class="text-lg">{{industry.title}}</h3>
                                 </div>
                                 <ol v-for="(job, index) in industry.listJobs" :key="index" class="list-disc ms-5">
                                     <li class="text-sm text-slate-500 mb-1">{{job}}</li>

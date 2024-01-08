@@ -17,9 +17,13 @@ export default{
                             <path d="M18.75 8.875C18.75 12.6725 16.25 17 11.875 22C7.5 17 5 12.6725 5 8.875C5 7.05164 5.72433 5.30295 7.01364 4.01364C8.30295 2.72433 10.0516 2 11.875 2C13.6984 2 15.447 2.72433 16.7364 4.01364C18.0257 5.30295 18.75 7.05164 18.75 8.875Z" stroke="currentColor" stroke-linejoin="round"/>
                         </svg>`,
             countries : [
-                { key: 'us', value: 'United States' },
-                { key: 'ca', value: 'Canada' },
-                { key: 'fr', value: 'France' },
+                { key: 'tg', value: 'Tangerang' },
+                { key: 'de', value: 'Depok' },
+                { key: 'js', value: 'Jakarta Selatan' },
+                { key: 'jb', value: 'Jakarta Barat' },
+                { key: 'bg', value: 'Bogor' },
+                { key: 'sr', value: 'Serang' },
+                { key: 'cb', value: 'Cirebon' },
             ],
         }
     },

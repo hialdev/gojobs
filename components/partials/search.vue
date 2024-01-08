@@ -15,7 +15,6 @@
 </template>
 
 <script>
-
 export default{
     props:{
         label:{
@@ -33,5 +32,4 @@ export default{
         },
     },
 }
-
 </script>

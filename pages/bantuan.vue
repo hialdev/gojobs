@@ -69,7 +69,7 @@
 export default {
     data() {
         return {
-            accordions: Array.from({ length: 3 }, (_, index) => ({ isOpen: index === 0 })), // Set isOpen to true for the first accordion
+            accordions: Array.from({ length: 4 }, (_, index) => ({ isOpen: index === 0 })), // Set isOpen to true for the first accordion
         };
     },
     methods: {

@@ -16,11 +16,11 @@ svg, img{
 }
    
 *::-webkit-scrollbar-track {
-    @apply bg-gray-900;
+    @apply bg-slate-50;
 }
    
 *::-webkit-scrollbar-thumb {
-    @apply bg-primary rounded-2xl;
+    @apply bg-slate-300 rounded-2xl;
 }
 h5{
     @apply mb-3;
