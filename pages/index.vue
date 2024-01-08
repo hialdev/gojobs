@@ -31,16 +31,14 @@ export default {
                 { key: 'cb', value: 'Cirebon' },
             ],
             industries : [
-                { key: 'it', value: 'Information Technology' },
-                { key: 'eng', value: 'Engineering' },
-                { key: 'med', value: 'Medical' },
-                { key: 'fin', value: 'Finance' },
-                { key: 'edu', value: 'Education' },
-                { key: 'man', value: 'Manufacturing' },
-                { key: 'art', value: 'Arts and Entertainment' },
-                { key: 'mar', value: 'Marketing' },
-                { key: 'ret', value: 'Retail' },
-                { key: 'agr', value: 'Agriculture' }
+                { key: 'sls', value: 'Penjualan' },
+                { key: 'it', value: 'Teknologi Informasi' },
+                { key: 'ab', value: 'Administrasi Bisnis' },
+                { key: 'com', value: 'Teknologi Komunikasi' },
+                { key: 'mar', value: 'Pemasaran' },
+                { key: 'wrh', value: 'Warehouse' },
+                { key: 'rpr', value: 'Instalasi & Perbaikan' },
+                { key: 'srv', value: 'Pelayanan' },
             ],
             industriesList : [
                 {

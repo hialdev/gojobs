@@ -163,10 +163,21 @@
                                 </NuxtLink>
                             </li>
                             <li>
-                                <NuxtLink @click="logoutHandle" class="cursor-pointer block py-2 px-4 text-sm text-red-600 hover:bg-red-50">Keluar</NuxtLink>
+                                <div @click="logoutModalOn" class="cursor-pointer block py-2 px-4 text-sm text-red-600 hover:bg-red-50">Keluar</div>
                             </li>
                         </ul>
                     </div>
+                </div>
+            </div>
+        </div>
+
+        <div v-if="logoutModal" class="z-[99] flex items-center justify-center h-screen w-full fixed top-0 end-0 start-0 bottom-0 bg-black/20">
+            <div class="p-8 bg-white rounded-xl">
+                <h3 class="text-xl font-medium mb-2">Apakah kamu yakin ingin keluar ?</h3>
+                <p class="text-sm text-slate-500 mb-5">Setelah keluar kamu akan diarahkan kehalaman beranda</p>
+                <div class="flex items-center justify-end gap-4">
+                    <button @click="logoutHandle" class="p-2 px-4 rounded-lg bg-red-600 text-white">Keluar</button>
+                    <button @click="cancelLogout" class="p-2 px-4 rounded-lg bg-slate-100 text-slate-600">Batal</button>
                 </div>
             </div>
         </div>
@@ -176,6 +187,14 @@
 <script setup>
 const notifShow = ref(false);
 const menuShow = ref(false);
+const logoutModal = ref(false);
+
+const logoutModalOn = () => {
+    logoutModal.value = true;
+}
+const cancelLogout = () => {
+    logoutModal.value = false;
+}
 const logoutHandle = () => {
     localStorage.setItem('login','false');
     setTimeout(() => {

@@ -4,7 +4,7 @@
             <div class="bg-white p-10 rounded-2xl max-w-[35em]">
                 <h1 class="text-xl font-medium">Hey, Beritahu kami seperti apa pekerjaan yang kamu minati!</h1>
                 <form class="flex flex-col mt-5 gap-5">
-                    <PartialsMultiselect class="z-[14] border-2 rounded-2xl" :label="`Industri`" :svgData="svgIndustry" :options="industries" />
+                    <PartialsMultiselect class="z-[14] border-2 rounded-2xl" :label="`Profesi Pekerjaan`" :svgData="svgIndustry" :options="industries" />
                     <PartialsMultiselect class="z-[12] border-2 rounded-2xl" :label="`Lokasi / Penempatan`" :svgData="svgLocation" :options="countries" />
                     <PartialsMultiselect class="z-[10] border-2 rounded-2xl" :label="`Jenis Kontrak`" :svgData="svgJenisKontrak" :options="[{'key':1,'value':'full time'},{'key':2,'value':'part time'},{'key':3,'value':'freelance'},{'key':4,'value':'remote'}]" />
                     <div class="flex justify-center">
@@ -28,21 +28,23 @@ const svgJenisKontrak = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24
 const svgIndustry = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M18 15h-2v2h2m0-6h-2v2h2m2 6h-8v-2h2v-2h-2v-2h2v-2h-2V9h8M10 7H8V5h2m0 6H8V9h2m0 6H8v-2h2m0 6H8v-2h2M6 7H4V5h2m0 6H4V9h2m0 6H4v-2h2m0 6H4v-2h2m6-10V3H2v18h20V7H12Z"/></svg>`
 
 const countries = [
-                { key: 'us', value: 'United States' },
-                { key: 'ca', value: 'Canada' },
-                { key: 'fr', value: 'France' },
+                { key: 'tg', value: 'Tangerang' },
+                { key: 'de', value: 'Depok' },
+                { key: 'js', value: 'Jakarta Selatan' },
+                { key: 'jb', value: 'Jakarta Barat' },
+                { key: 'bg', value: 'Bogor' },
+                { key: 'sr', value: 'Serang' },
+                { key: 'cb', value: 'Cirebon' },
             ]
 const industries = [
-                { key: 'it', value: 'Information Technology' },
-                { key: 'eng', value: 'Engineering' },
-                { key: 'med', value: 'Medical' },
-                { key: 'fin', value: 'Finance' },
-                { key: 'edu', value: 'Education' },
-                { key: 'man', value: 'Manufacturing' },
-                { key: 'art', value: 'Arts and Entertainment' },
-                { key: 'mar', value: 'Marketing' },
-                { key: 'ret', value: 'Retail' },
-                { key: 'agr', value: 'Agriculture' }
+                { key: 'sls', value: 'Penjualan' },
+                { key: 'it', value: 'Teknologi Informasi' },
+                { key: 'ab', value: 'Administrasi Bisnis' },
+                { key: 'com', value: 'Teknologi Komunikasi' },
+                { key: 'mar', value: 'Pemasaran' },
+                { key: 'wrh', value: 'Warehouse' },
+                { key: 'rpr', value: 'Instalasi & Perbaikan' },
+                { key: 'srv', value: 'Pelayanan' },
             ]
 </script>
 
