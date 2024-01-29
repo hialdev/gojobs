@@ -5,12 +5,12 @@
             <p class="text-slate-500 text-sm">Daftar GRATIS dan dapatkan pekerjaan yang sesuai dengan mudah kemudian lamar.</p>
         </div>
         <div class="grid grid-cols-12 gap-3">
-            <input type="text" class="col-span-12 md:col-span-6 p-3 px-4 rounded-xl border-2 block w-full focus:outline-primary" placeholder="First Name">
-            <input type="text" class="col-span-12 md:col-span-6 p-3 px-4 rounded-xl border-2 block w-full focus:outline-primary" placeholder="Last Name">
-            <input type="text" class="col-span-12 md:col-span-6 p-3 px-4 rounded-xl border-2 block w-full focus:outline-primary" placeholder="Email">
-            <input type="number" class="col-span-12 md:col-span-6 p-3 px-4 rounded-xl border-2 block w-full focus:outline-primary" placeholder="No. Handphone">
+            <input @input="applyFilters" v-model="registForm.name" type="text" class="col-span-12 md:col-span-6 p-3 px-4 rounded-xl border-2 block w-full focus:outline-primary" placeholder="Name">
+            <input @input="applyFilters" v-model="registForm.username" type="text" class="col-span-12 md:col-span-6 p-3 px-4 rounded-xl border-2 block w-full focus:outline-primary" placeholder="Username">
+            <input @input="applyFilters" v-model="registForm.email" type="email" class="col-span-12 md:col-span-6 p-3 px-4 rounded-xl border-2 block w-full focus:outline-primary" placeholder="Email">
+            <input @input="applyFilters" v-model="registForm.mobile" type="number" class="col-span-12 md:col-span-6 p-3 px-4 rounded-xl border-2 block w-full focus:outline-primary" placeholder="No. Handphone">
             <div class="col-span-12 md:col-span-6 flex items-center gap-2 border-2 hover:border-2 p-3 px-4 rounded-xl hover:border-primary mb-3">
-                <input :type="isShowPwd ? 'text' : 'password'" class="w-full block focus:outline-0" placeholder="Password">
+                <input @input="applyFilters" v-model="registForm.password" :type="isShowPwd ? 'text' : 'password'" class="w-full block focus:outline-0" placeholder="Password">
                 <div v-if="isShowPwd" @click="hidePassword" class="w-[20px] cursor-pointer text-primary">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="17.34" viewBox="0 0 576 512"><path fill="currentColor" d="M288 32c-80.8 0-145.5 36.8-192.6 80.6C48.6 156 17.3 208 2.5 243.7c-3.3 7.9-3.3 16.7 0 24.6C17.3 304 48.6 356 95.4 399.4C142.5 443.2 207.2 480 288 480s145.5-36.8 192.6-80.6c46.8-43.5 78.1-95.4 93-131.1c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C433.5 68.8 368.8 32 288 32zM144 256a144 144 0 1 1 288 0a144 144 0 1 1-288 0zm144-64c0 35.3-28.7 64-64 64c-7.1 0-13.9-1.2-20.3-3.3c-5.5-1.8-11.9 1.6-11.7 7.4c.3 6.9 1.3 13.8 3.2 20.7c13.7 51.2 66.4 81.6 117.6 67.9s81.6-66.4 67.9-117.6c-11.1-41.5-47.8-69.4-88.6-71.1c-5.8-.2-9.2 6.1-7.4 11.7c2.1 6.4 3.3 13.2 3.3 20.3z"/></svg>
                 </div>
@@ -22,7 +22,7 @@
                 </div>
             </div>
             <div class="col-span-12 md:col-span-6 flex items-center gap-2 border-2 hover:border-2 p-3 px-4 rounded-xl hover:border-primary mb-3">
-                <input :type="isShowPwd ? 'text' : 'password'" class="w-full block focus:outline-0" placeholder="Konfirmasi Password">
+                <input @input="applyFilters" v-model="registForm.confirm_password" :type="isShowPwd ? 'text' : 'password'" class="w-full block focus:outline-0" placeholder="Konfirmasi Password">
                 <div v-if="isShowPwd" @click="hidePassword" class="w-[20px] cursor-pointer text-primary">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="17.34" viewBox="0 0 576 512"><path fill="currentColor" d="M288 32c-80.8 0-145.5 36.8-192.6 80.6C48.6 156 17.3 208 2.5 243.7c-3.3 7.9-3.3 16.7 0 24.6C17.3 304 48.6 356 95.4 399.4C142.5 443.2 207.2 480 288 480s145.5-36.8 192.6-80.6c46.8-43.5 78.1-95.4 93-131.1c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C433.5 68.8 368.8 32 288 32zM144 256a144 144 0 1 1 288 0a144 144 0 1 1-288 0zm144-64c0 35.3-28.7 64-64 64c-7.1 0-13.9-1.2-20.3-3.3c-5.5-1.8-11.9 1.6-11.7 7.4c.3 6.9 1.3 13.8 3.2 20.7c13.7 51.2 66.4 81.6 117.6 67.9s81.6-66.4 67.9-117.6c-11.1-41.5-47.8-69.4-88.6-71.1c-5.8-.2-9.2 6.1-7.4 11.7c2.1 6.4 3.3 13.2 3.3 20.3z"/></svg>
                 </div>
@@ -34,10 +34,10 @@
                 </div>
             </div>
         </div>
-        <PartialsSelect class="border-2 rounded-xl mb-4" :options="sources" :label="`Dari mana kamu mengetahui kami ?`" />
+        <PartialsSelect @selected="" class="border-2 rounded-xl mb-4" :options="sources" :label="`Dari mana kamu mengetahui kami ?`" />
         <div class="flex items-center justify-between mb-4">
             <div class="flex items-start gap-2">
-                <input type="checkbox" name="" class="mt-1">
+                <input @change="applyFilters" v-model="registForm.agree" type="checkbox" class="mt-1">
                 <div class="text-slate-500 text-sm">Saya setuju terhadap <NuxtLink to="" class="text-primary underline">Aturan Penggunaan</NuxtLink> dan <NuxtLink to="" class="text-primary underline">Kebijakan Privasi</NuxtLink> dari gojobs</div>
             </div>
         </div>
@@ -51,7 +51,7 @@
             </div>
         </div>
         <div class="flex justify-center">
-            <PartialsButton :path="`/auth/verifikasi`" class="text-center px-6 min-w-[15em]">Daftar</PartialsButton>
+            <PartialsButton @click="registHandle" class="text-center px-6 min-w-[15em]">Daftar</PartialsButton>
         </div>
         <div class="flex items-center gap-3 text-slate-500 my-6 text-sm">
             <hr class="w-full" />
@@ -75,18 +75,24 @@
     </div>
 </template>
 
-<script>
-export default {
-    props: {
-        isOpen: {
-            type: Boolean,
-            default: false,
-        },
+<script setup>
+const props = defineProps({
+    isOpen: {
+        type: Boolean,
+        default: false,
     },
-    data(){
-        return{
-            isShowPwd : false,
-            sources : [
+})
+const store = useUserStore()
+const registForm = ref({
+            name : '',
+            username : '',
+            email : '',
+            mobile : '',
+            password : '',
+            confirm_password : '',
+            agree : false,
+        });
+const sources = [
                 { key: 'teman', value: 'Dari teman' },
                 { key: 'internet', value: 'Melalui internet' },
                 { key: 'iklan', value: 'Melalui iklan' },
@@ -100,15 +106,27 @@ export default {
                 { key: 'komunitas', value: 'Dari komunitas' },
                 { key: 'lainnya', value: 'Lainnya' },
             ]
-        }
-    },
-    methods:{
-        showPassword(){
-            this.isShowPwd = true
-        },
-        hidePassword(){
-            this.isShowPwd = false
-        },
-    }
+const isShowPwd = ref(false);
+const showPassword = () => {
+    isShowPwd.value = true
+};
+const hidePassword = () => {
+    isShowPwd.value = false
+};
+const registHandle = () => {
+    // console.log(registForm.value);
+    // console.log(store.registForm);
+    
+    // store.register()
+    navigateTo('/auth/verifikasi')
+}
+const applyFilters = () => {
+    store.setRegist('name',registForm.value.name);
+    store.setRegist('username',registForm.value.username);
+    store.setRegist('email',registForm.value.email);
+    store.setRegist('mobile',registForm.value.mobile);
+    store.setRegist('password',registForm.value.password);
+    store.setRegist('confirm_password',registForm.value.confirm_password);
+    store.setRegist('agree',registForm.value.agree);
 }
 </script>

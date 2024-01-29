@@ -69,35 +69,30 @@
     </div>
 </template>
 
-<script>
-export default {
-    props: {
-        isOpen: {
-            type: Boolean,
-            default: false,
-        },
+<script setup>
+const store = useUserStore();
+const props = defineProps({
+    isOpen: {
+        type: Boolean,
+        default: false,
     },
-    data(){
-        return{
-            isShowPwd : false
-        }
-    },
-    methods:{
-        closeLogin(){
-            this.$emit('close')
-        },
-        showPassword(){
-            this.isShowPwd = true
-        },
-        hidePassword(){
-            this.isShowPwd = false
-        },
-        loginHandle(){
-            localStorage.setItem('login', 'true');
-            setTimeout(() => {
-                navigateTo('/seeker/dashboard');
-            }, 1000);
-        }
-    }
+})
+const isShowPwd = ref(false);
+const emit = defineEmits(['close']);
+const closeLogin = () => {
+    emit('close')
+}
+const showPassword = () => {
+    isShowPwd.value = true
+}
+const hidePassword = () => {
+    isShowPwd.value = false
+}
+const loginHandle = () => {
+    // store.login();
+    localStorage.setItem('login', 'true');
+    setTimeout(() => {
+        navigateTo('/seeker/dashboard');
+    }, 1000);
 }
 </script>

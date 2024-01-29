@@ -267,30 +267,30 @@ export default {
                         src:"testi (1).png",
                         alt:"image testi (1)",
                     },
-                    name: "Albert Flores",
+                    name: "Vebriyano Lahallo",
                     rate: 5,
-                    position: "Admin HR",
-                    quote: "GoJobs membantu saya menemukan kandidat berkualitas dengan cepat dan mudah.",
+                    position: "Promotor Elektronik",
+                    quote: "Terima Kasih kepada ISH telah memberikan kesempatan sayainterview untuk ke 2 kalinya, dan pada akhirnya saya bisabergabung di perusahaan besar ini",
                 },
                 {
                     image:{
                         src:"testi (2).png",
                         alt:"image testi (2)",
                     },
-                    name: "Eva Simmons",
+                    name: "Siska Ramadhona",
                     rate: 4,
-                    position: "Recruitment Manager",
-                    quote: "Pelayanan pelanggan GoJobs sangat responsif dan membantu kami mengelola proses rekrutmen dengan baik.",
+                    position: "Promotor Elektronik",
+                    quote: "Selama saya event di ISH sangat nyaman karena memiliki leader yang humble dan bisa mengayomi saya selama event  disana dan salary nya juga sesuai dengan perjanjian diawal",
                 },
                 {
                     image:{
                         src:"testi (3).png",
                         alt:"image testi (3)",
                     },
-                    name: "John Carter",
+                    name: "Ferdiansyah",
                     rate: 5,
                     position: "Senior Developer",
-                    quote: "Saya sangat senang bisa bergabung dengan perusahaan ini melalui GoJobs. Prosesnya sangat lancar dan efisien.",
+                    quote: "Selama bekerja di ISH hak- hak karyawan sangat di hargai, seperti jam kerja dan ijin sakit , tidak ada potongan jika ijin tidak masuk kerja",
                 },
                 {
                     image:{
@@ -324,11 +324,13 @@ export default {
 <template>
     <div>
         <AuthLogin />
-        <section class="bg-cover min-h-screen" style="background:linear-gradient(0deg, rgba(0, 0, 0, 0.30) 0%, rgba(0, 0, 0, 0.30) 100%), url('/image/banner-hero.png'), lightgray 0px -117px / 100% 117.676% no-repeat; background-size:cover; background-repeat: no-repeat;">
+        <section class="bg-cover min-h-screen bg-gray-800">
             <div class="container mx-auto h-screen px-5">
                 <div class="grid grid-cols-12 items-center h-full">
-                    <div class="col-span-12 lg:col-span-6">
+                    <div class="col-span-6">
                         <h1 class="mb-12 text-white text-4xl lg:text-5xl font-semibold">Yuk Lamar di GoJobs! <br /><span class="font-normal">#Teman Cari Kerja</span></h1>
+                    </div>
+                    <div class="col-span-6">
                         <PartialsSearch class="mb-4" :label="`Cari posisi / perusahaan lowongan`" />
                         <div class="grid grid-cols-2 gap-4 mb-4">
                             <PartialsSelect :options="industries" :label="'Profesi Pekerjaan'" />
@@ -342,19 +344,19 @@ export default {
         </section>
         <section class="py-[4em] bg-slate-200">
             <div class="container mx-auto px-5">
-                <div class="grid grid-cols-12 md:gap-8">
+                <div class="grid grid-cols-12 gap-3">
                     <div class="col-span-12">
-                        <h2 class="text-2xl text-center my-9">Profesi pekerjaan yang dibutuhkan</h2>
+                        <h2 class="text-2xl text-center mb-7">Profesi pekerjaan yang dibutuhkan</h2>
                     </div>
                     <div v-for="industry in industriesList" :key="industry.title" class="col-span-12 md:col-span-6 lg:col-span-3 mb-8 md:mb-0">
                         <NuxtLink :to="industry.to" class="block w-full">
-                            <div class="p-6 px-8 lg:px-6 bg-white rounded-[50px] shadow-4xl hover:shadow-2xl hover:shadow-orange-300/20">
+                            <div class="p-4 bg-white rounded-[25px] shadow-4xl hover:shadow-2xl hover:shadow-orange-300/20">
                                 <div class="flex items-center gap-5 mb-6">
-                                    <NuxtImg :src="industry.image?.src" :alt="industry.image?.alt" :width="industry.image?.width" :height="industry.image?.height" class="w-[4em] h-[4em] rounded-[99px]" />
+                                    <NuxtImg :src="industry.image?.src" :alt="industry.image?.alt" :width="industry.image?.width" :height="industry.image?.height" class="w-[3em] h-[3em] rounded-[99px]" />
                                     <h3 class="text-lg">{{industry.title}}</h3>
                                 </div>
-                                <ol v-for="(job, index) in industry.listJobs" :key="index" class="list-disc ms-5">
-                                    <li class="text-sm text-slate-500 mb-1">{{job}}</li>
+                                <ol class="list-disc ms-6">
+                                    <li v-for="(job, index) in industry.listJobs" :key="index" class="text-xs text-slate-500">{{job}}</li>
                                 </ol>
                             </div>
                         </NuxtLink>
@@ -394,25 +396,23 @@ export default {
                 <div class="grid grid-cols-12 lg:gap-12">
                     <div class="col-span-12 mb-12 lg:mb-0 lg:col-span-5">
                         <NuxtImg
-                            src="/image/rekurt.png"
+                            src="/image/alur.png"
                             alt="Pekerja yang ceria di Gojobs"
-                            class="w-full"
-                            height="860"
-                            width="599"
+                            class="w-full block"
                         />
                     </div>
                     <div class="col-span-12 lg:col-span-7">
-                        <h2 class="text-2xl mb-3">Alur Proses Rekurtmen</h2>
-                        <p class="text-slate-500 mb-6">ISH berkomitmen menyediakan tenaga kerja sesuai dengan kualifikasi yang ditentukan klien. Berikutalur proses CV kamu dikerjakan oleh Tim ISH :</p>
+                        <h2 class="text-xl mb-3">Alur Proses Rekurtmen</h2>
+                        <p class="text-slate-500 mb-6 text-sm">ISH berkomitmen menyediakan tenaga kerja sesuai dengan kualifikasi yang ditentukan klien. Berikutalur proses CV kamu dikerjakan oleh Tim ISH :</p>
                         
                         <ol class="relative text-gray-500 border-s border-gray-200 dark:border-gray-700 dark:text-gray-400 ms-4">                  
-                            <li v-for="alur in recruitmentProcess" :key="alur.number" class="mb-7 ms-6">            
+                            <li v-for="alur in recruitmentProcess" :key="alur.number" class="mb-4 ms-6">            
                                 <span class="absolute flex items-center justify-center w-10 h-10 bg-primary text-white rounded-full -start-5 ring-4 ring-orange-300/40">
                                     {{alur?.number}}
                                 </span>
                                 <div class="ps-4">
-                                    <h3 class="font-medium mb-3 text-primary">{{alur?.title}}</h3>
-                                    <p class="text-sm">{{alur?.description}}</p>
+                                    <h3 class="font-medium mb-3 text-primary text-sm">{{alur?.title}}</h3>
+                                    <p class="text-xs">{{alur?.description}}</p>
                                 </div>
                             </li>
                             
@@ -448,7 +448,7 @@ export default {
                             />
                         </div>
                         <div class="p-6 pt-12 bg-white rounded-3xl">
-                            <q class="text-slate-500 italic pb-5 block border-b text-center">{{testimonial?.quote}}</q>
+                            <q class="text-slate-500 italic pb-5 block border-b text-center text-sm">{{testimonial?.quote}}</q>
                             <div class="pt-6 text-center">
                                 <h5 class="font-medium mb-1">{{testimonial?.name}}</h5>
                                 <div class="text-sm text-blue-500 mb-3">{{testimonial?.position}}</div>

@@ -29,8 +29,8 @@ export default {
     computed: {
         imgBlended() {
             return this.isBlended
-            ? "/image/placehold-logo-white.svg"
-            : "/image/placehold-logo-black.svg";
+            ? "/image/logo-gojobs-colour.png"
+            : "/image/logo-gojobs-colour.png";
         },
     },
 };

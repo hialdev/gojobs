@@ -2,7 +2,7 @@
     <div class="bg-white p-6 py-12 rounded-3xl w-full max-w-[30em] relative overflow-hidden my-2">
         <div class="text-center mb-6">
             <h3 class="text-3xl mb-2 uppercase font-medium text-primary">Konfirmasi Kode</h3>
-            <p class="text-slate-500 text-sm">Jangan khawatir! Masukkan email Anda di bawah ini dan kami akan membantu Anda mengatur ulang password Anda.</p>
+            <p class="text-slate-500 text-sm">Isi dengan kode token yang telah dikirimkan ke : <strong>********@gm***.com</strong></p>
         </div>
         <div class="grid grid-cols-12 gap-8 mb-7">
             <input type="text" maxlength="1" oninput="this.value=this.value.replace(/[^0-9]/g,'');"  class="no-arrow block text-center col-span-3 p-4 text-4xl border-b-2 focus:outline-0 focus:border-b-2 focus:border-b-primary" />

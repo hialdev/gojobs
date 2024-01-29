@@ -1,14 +1,14 @@
 <template>
     <div :class="{' bg-white text-black': !isBlended, 'absolute top-0 start-0 end-0 lg:fixed bg-transparent text-white': isBlended, 'lg:fixed lg:start-0 lg:end-0 lg:top-0 lg:w-full':isFixed }" class="z-50">
         <div id="navbar" class="grid grid-cols-12 items-center gap-3 px-5 md:px-7 py-3 container mx-auto">
-            <div class="col-span-6 lg:col-span-6">
+            <div class="col-span-6 lg:col-span-4">
                 <PartialsLogo :isBlended="isBlended" class="inline-block my-auto" />
             </div>
-            <div class="col-span-6 lg:col-span-6">
-                <div class="flex items-center gap-10 justify-end">
-                    <PartialsNavbar :isBlended="isBlended"/>
-                    <PartialsButton @click="openLoginDialog" class="text-sm lg:text-normal whitespace-nowrap" :primary="true">Masuk</PartialsButton>
-                </div>
+            <div class="col-span-6 lg:col-span-4">
+                <PartialsNavbar :isBlended="isBlended"/>
+            </div>
+            <div class="col-span-6 lg:col-span-4 ms-auto">
+                <PartialsButton @click="openLoginDialog" class="text-sm lg:text-normal whitespace-nowrap" :primary="true">Masuk</PartialsButton>
             </div>
         </div>
 

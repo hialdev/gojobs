@@ -21,6 +21,8 @@
   },
   "dependencies": {
     "@nuxt/image": "^1.0.0",
+    "@pinia/nuxt": "^0.5.1",
+    "pinia": "^2.1.7",
     "swiper": "^11.0.4",
     "vue3-lottie": "^3.2.0"
   }
