@@ -328,7 +328,7 @@ export default {
             <div class="container mx-auto h-screen px-5">
                 <div class="grid grid-cols-12 items-center h-full">
                     <div class="col-span-12 lg:col-span-6">
-                        <h1 class="mb-12 text-white text-4xl lg:text-5xl font-semibold">Yuk Lamar di GoJobs! <br /><span class="font-normal">#Teman Cari Kerja</span></h1>
+                        <h1 class="text-white text-4xl lg:text-5xl font-semibold">Yuk Lamar di GoJobs! <br /><span class="font-normal">#Teman Cari Kerja</span></h1>
                     </div>
                     <div class="col-span-12 lg:col-span-6">
                         <PartialsSearch class="mb-4" :label="`Cari posisi / perusahaan lowongan`" />
