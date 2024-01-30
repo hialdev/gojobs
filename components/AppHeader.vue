@@ -4,7 +4,7 @@
             <div class="col-span-6 lg:col-span-4">
                 <PartialsLogo :isBlended="isBlended" class="inline-block my-auto" />
             </div>
-            <div class="col-span-6 lg:col-span-4 hidden md:block">
+            <div class="col-span-6 lg:col-span-4 hidden lg:block">
                 <PartialsNavbar :isBlended="isBlended"/>
             </div>
             <div class="col-span-6 lg:col-span-4 ms-auto">

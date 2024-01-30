@@ -9,7 +9,7 @@
             </div>
             <div class="me-auto text-slate-500">
                 <div v-if="selecteds.length > 0" class="flex items-center gap-1">
-                    <div v-for="selected in selecteds.slice(0, 2)" :key="selected?.key" class="bg-orange-100 text-primary rounded-3xl px-2">
+                    <div v-for="selected in selecteds.slice(0, 2)" :key="selected?.key" class="bg-orange-100 text-primary rounded-3xl px-2 lowercase">
                         {{ selected?.value }}
                     </div>
                     <div v-if="selecteds.length > 2" class="bg-orange-100 text-primary rounded-3xl px-2">
@@ -37,7 +37,7 @@
                     >
                         <div class="cursor-pointer flex items-center justify-between gap-3">
 
-                            <span>{{ option?.value }}</span>
+                            <span class="lowercase">{{ option?.value }}</span>
                             <div :class="{'text-primary':selecteds.includes(option), 'text-slate-300':!selecteds.includes(option)}" class="w-[20px]">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" fill="none">
                                     <mask id="mask0_218_260" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="2" y="2" width="44" height="44">

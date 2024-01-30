@@ -37,13 +37,22 @@
                 <span class="font-medium">Warning alert!</span> Change a few things up and try submitting again.
             </div>
         </div>
-        <div class="flex justify-center">
-            <PartialsButton :path="`/auth/verifikasi`" class="px-6 min-w-[15em] text-center">Perbarui Kata Sandi</PartialsButton>
+        <div @click="changePwd" class="flex justify-center">
+            <PartialsButton class="px-6 min-w-[15em] text-center">Perbarui Kata Sandi</PartialsButton>
         </div>
         
+        <ModalAuthSuccess v-if="isSuccess" :title="`Berhasil Mengubah Password`" :message="`Silahkan login dengan password terbaru :D`" />
     </div>
 </template>
 
-<script>
+<script setup>
 const isShowPwd = ref(false);
+const isSuccess = ref(false);
+const changePwd = () => {
+    isSuccess.value = true;
+    setTimeout(() => {
+        navigateTo('/');
+    }, 2500);
+}
+
 </script>

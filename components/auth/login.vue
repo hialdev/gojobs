@@ -13,9 +13,9 @@
                     <h3 class="text-3xl mb-2 uppercase font-medium text-primary">LOGIN</h3>
                     <p class="text-slate-500 text-sm">Masuk ke akun gojobs Anda untuk melanjutkan</p>
                 </div>
-                <input type="text" class="p-3 px-4 rounded-xl border-2 mb-3 block w-full focus:outline-primary" placeholder="email">
+                <input v-model="loginForm.username" @input="error = null;" type="text" class="p-3 px-4 rounded-xl border-2 mb-3 block w-full focus:outline-primary text-slate-900" placeholder="username">
                 <div class="flex items-center gap-2 border-2 hover:border-2 p-3 px-4 rounded-xl hover:border-primary mb-3">
-                    <input :type="isShowPwd ? 'text' : 'password'" class="w-full block focus:outline-0" placeholder="password">
+                    <input v-model="loginForm.password" @input="error = null;" :type="isShowPwd ? 'text' : 'password'" class="text-slate-900 w-full block focus:outline-0" placeholder="password">
                     <div v-if="isShowPwd" @click="hidePassword" class="w-[20px] cursor-pointer text-primary">
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="17.34" viewBox="0 0 576 512"><path fill="currentColor" d="M288 32c-80.8 0-145.5 36.8-192.6 80.6C48.6 156 17.3 208 2.5 243.7c-3.3 7.9-3.3 16.7 0 24.6C17.3 304 48.6 356 95.4 399.4C142.5 443.2 207.2 480 288 480s145.5-36.8 192.6-80.6c46.8-43.5 78.1-95.4 93-131.1c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C433.5 68.8 368.8 32 288 32zM144 256a144 144 0 1 1 288 0a144 144 0 1 1-288 0zm144-64c0 35.3-28.7 64-64 64c-7.1 0-13.9-1.2-20.3-3.3c-5.5-1.8-11.9 1.6-11.7 7.4c.3 6.9 1.3 13.8 3.2 20.7c13.7 51.2 66.4 81.6 117.6 67.9s81.6-66.4 67.9-117.6c-11.1-41.5-47.8-69.4-88.6-71.1c-5.8-.2-9.2 6.1-7.4 11.7c2.1 6.4 3.3 13.2 3.3 20.3z"/></svg>
                     </div>
@@ -33,13 +33,13 @@
                     </div>
                     <NuxtLink to="/auth/lupa-sandi" class="text-blue-600 underline text-sm">Lupa Sandi</NuxtLink>
                 </div>
-                <div class="flex items-center p-4 mb-4 text-sm text-yellow-800 border border-yellow-300 rounded-2xl bg-yellow-50" role="alert">
+                <div v-if="error" class="flex items-center p-4 mb-4 text-sm text-yellow-800 border border-yellow-300 rounded-2xl bg-yellow-50" role="alert">
                     <svg class="flex-shrink-0 inline w-4 h-4 me-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
                         <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
                     </svg>
                     <span class="sr-only">Info</span>
                     <div>
-                        <span class="font-medium">Warning alert!</span> Change a few things up and try submitting again.
+                        <span class="font-medium">Warning!</span> {{error.message}}
                     </div>
                 </div>
                 <div class="flex justify-center">
@@ -77,6 +77,11 @@ const props = defineProps({
         default: false,
     },
 })
+const error = ref(null)
+const loginForm = ref({
+    username : '',
+    password : '',
+})
 const isShowPwd = ref(false);
 const emit = defineEmits(['close']);
 const closeLogin = () => {
@@ -88,11 +93,21 @@ const showPassword = () => {
 const hidePassword = () => {
     isShowPwd.value = false
 }
-const loginHandle = () => {
-    // store.login();
-    localStorage.setItem('login', 'true');
-    setTimeout(() => {
-        navigateTo('/seeker/dashboard');
-    }, 1000);
+const loginHandle = async () => {
+    const login = await store.login(loginForm.value.username, loginForm.value.password);
+    console.log(login);
+    if(login?.success){
+        if(login?.verify_status == 1){
+            setTimeout(() => {
+                navigateTo('/seeker/dashboard');
+            }, 1000);
+        }else{
+            setTimeout(() => {
+                navigateTo('/auth/verifikasi');
+            }, 1000);
+        }
+    }else{
+        error.value = login;
+    }
 }
 </script>

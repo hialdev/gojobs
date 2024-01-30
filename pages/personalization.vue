@@ -5,8 +5,8 @@
                 <h1 class="text-xl font-medium">Hey, Beritahu kami seperti apa pekerjaan yang kamu minati!</h1>
                 <form class="flex flex-col mt-5 gap-5">
                     <PartialsMultiselect class="z-[14] border-2 rounded-2xl" :label="`Kategori`" :svgData="svgIndustry" :options="industries" />
-                    <PartialsMultiselect class="z-[12] border-2 rounded-2xl" :label="`Lokasi Kerja`" :svgData="svgLocation" :options="countries" />
-                    <PartialsMultiselect class="z-[10] border-2 rounded-2xl" :label="`Tipe Pekerjaan`" :svgData="svgJenisKontrak" :options="[{'key':1,'value':'full time'},{'key':2,'value':'part time'},{'key':3,'value':'freelance'},{'key':4,'value':'remote'}]" />
+                    <PartialsMultiselect class="z-[12] border-2 rounded-2xl" :label="`Lokasi Kerja`" :svgData="svgLocation" :options="cityOptions" />
+                    <PartialsMultiselect class="z-[10] border-2 rounded-2xl" :label="`Tipe Pekerjaan`" :svgData="svgJenisKontrak" :options="contractOptions" />
                     <div class="flex justify-center">
                         <PartialsButton :path="`/seeker/dashboard`" class="text-center px-6 min-w-[15em]">Tetapkan</PartialsButton>
                     </div>
@@ -46,5 +46,15 @@ const industries = [
                 { key: 'rpr', value: 'Instalasi & Perbaikan' },
                 { key: 'srv', value: 'Pelayanan' },
             ]
+
+const contract = useContractStore();
+const city = useCityStore();
+const contractOptions = ref([]);
+const cityOptions = ref([]);
+
+onMounted(async () => {
+    contractOptions.value = await contract.getOptions();
+    cityOptions.value = await city.getOptions();
+})
 </script>
 

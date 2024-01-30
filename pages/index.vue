@@ -5,13 +5,13 @@
             <div class="container mx-auto h-screen px-5">
                 <div class="grid grid-cols-12 items-center h-full">
                     <div class="col-span-12 lg:col-span-6">
-                        <h1 class="text-white text-4xl lg:text-7xl font-semibold">Yuk Lamar di GoJobs! <br /><span class="font-normal text-5xl">#Teman Cari Kerja</span></h1>
+                        <h1 class="text-white text-5xl mt-5 lg:mt-0 lg:text-7xl font-semibold">Yuk Lamar di GoJobs! <br /><span class="font-normal text-4xl lg:text-5xl">#Teman Cari Kerja</span></h1>
                     </div>
                     <div class="col-span-12 lg:col-span-6">
-                        <PartialsSearch class="mb-4" :label="`Cari posisi / perusahaan lowongan`" />
+                        <PartialsSearch class="mb-4" :label="`Cari posisi / Jabatan`" />
                         <div class="grid grid-cols-2 gap-4 mb-4">
                             <PartialsSelect :options="industries" :label="'Kategori'" />
-                            <PartialsSelect :options="countries" :label="'Lokasi'" />
+                            <PartialsSelect :options="cityOptions" :label="'Lokasi'" />
                         </div>
                         <PartialsButton>Cari Lowongan</PartialsButton>
                         <NuxtLink to="/lowongan" class="mt-12 text-normal lowercase text-white flex items-center gap-4">lihat semua lowongan <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 16 16"><path fill="currentColor" fill-rule="evenodd" d="M10.159 10.72a.75.75 0 1 0 1.06 1.06l3.25-3.25L15 8l-.53-.53l-3.25-3.25a.75.75 0 0 0-1.061 1.06l1.97 1.97H1.75a.75.75 0 1 0 0 1.5h10.379l-1.97 1.97Z" clip-rule="evenodd"/></svg></NuxtLink>
@@ -107,6 +107,7 @@
                     <p class="text-slate-500">Simak apa kata mereka yang berhasil mendapatkan pekerjaan melalui gojobs.id</p>
                 </div>
                 <swiper
+                    v-if="isReady"
                     :slidesPerView="'auto'"
                     :spaceBetween="30"
                     :modules="modules"
@@ -223,322 +224,316 @@
 definePageMeta({
     layout: 'fixed',
 })
-</script>
-
-<script>
-// Import Swiper Vue.js components
 import { Swiper, SwiperSlide } from 'swiper/vue';
-
-// Import Swiper styles
 import 'swiper/css';
+import { Autoplay } from 'swiper/modules';
+import { useContractStore, useCityStore } from '#imports';
 
-// import required modules
-import { Autoplay } from 'swiper/modules'
-export default {
-    components: {
-        Swiper,
-        SwiperSlide,
-    },
+const isReady = ref(false);
+const modules = ref([Autoplay]);
+const countries = ref([
+  { key: 'tg', value: 'Tangerang' },
+  { key: 'de', value: 'Depok' },
+  { key: 'js', value: 'Jakarta Selatan' },
+  { key: 'jb', value: 'Jakarta Barat' },
+  { key: 'bg', value: 'Bogor' },
+  { key: 'sr', value: 'Serang' },
+  { key: 'cb', value: 'Cirebon' },
+]);
 
-    data(){
-        return {
-            modules : [Autoplay],
-            countries : [
-                { key: 'tg', value: 'Tangerang' },
-                { key: 'de', value: 'Depok' },
-                { key: 'js', value: 'Jakarta Selatan' },
-                { key: 'jb', value: 'Jakarta Barat' },
-                { key: 'bg', value: 'Bogor' },
-                { key: 'sr', value: 'Serang' },
-                { key: 'cb', value: 'Cirebon' },
-            ],
-            industries : [
-                { key: 'sls', value: 'Penjualan' },
-                { key: 'it', value: 'Teknologi Informasi' },
-                { key: 'ab', value: 'Administrasi Bisnis' },
-                { key: 'com', value: 'Teknologi Komunikasi' },
-                { key: 'mar', value: 'Pemasaran' },
-                { key: 'wrh', value: 'Warehouse' },
-                { key: 'rpr', value: 'Instalasi & Perbaikan' },
-                { key: 'srv', value: 'Pelayanan' },
-            ],
-            industriesList : [
-                {
-                    title: "Penjualan",
-                    listJobs: [
-                        "Sales",
-                        "Sales Technical",
-                        "Merchandiser",
-                        "Promotor",
-                        "SPG/B Reguler & Event",
-                    ],
-                    to: "/lowongan?industri=penjualan",
-                    image: {
-                        src: "/icon/sales.svg",
-                        alt: "Icon Penjualan Industry",
-                        width: 100,
-                        height: 100,
-                    },
-                },
-                {
-                    title: "Teknologi Informasi",
-                    listJobs: [
-                        "Software Developer",
-                        "Mobile Developer",
-                        "Frontend & Backend Engineer",
-                        "System Analyst",
-                        "IT Helpdesk Support",
-                    ],
-                    to: "/lowongan?industri=it",
-                    image: {
-                        src: "/icon/it.svg",
-                        alt: "Icon IT Industry",
-                        width: 100,
-                        height: 100,
-                    },
-                },
-                {
-                    title: "Administrasi Bisnis",
-                    listJobs: [
-                        "Admin",
-                        "Sekretaris",
-                        "Receptionist",
-                        "Kurir",
-                        "Staff Bagian Umum",
-                    ],
-                    to: "/lowongan?industri=admin",
-                    image: {
-                        src: "/icon/admin.svg",
-                        alt: "Icon Administrasi Bisnis Industry",
-                        width: 100,
-                        height: 100,
-                    },
-                },
-                {
-                    title: "Teknologi Komunikasi",
-                    listJobs: [
-                        "Project Manager",
-                        "Network Engineer",
-                        "Network Security",
-                        "Network Operation Center",
-                        "Teknisi Jaringan",
-                    ],
-                    to: "/lowongan?industri=teknologi+komunikasi",
-                    image: {
-                        src: "/icon/network.svg",
-                        alt: "Icon Teknologi Komunikasi Industry",
-                        width: 100,
-                        height: 100,
-                    },
-                },
-                {
-                    title: "Pemasaran",
-                    listJobs: [
-                        "Digital Marketing",
-                        "SEO Specialist",
-                        "Desain Grafis & UI/UX",
-                        "Content Creator",
-                        "Riset & Surveyor",
-                    ],
-                    to: "/lowongan/industri=pemasaran",
-                    image: {
-                        src: "/icon/marketing.svg",
-                        alt: "Icon Pemasaran Industry",
-                        width: 100,
-                        height: 100,
-                    },
-                },
-                {
-                    title: "Warehouse",
-                    listJobs: [
-                        "Operator Alat Berat",
-                        "Admin Gudang",
-                        "Packer",
-                        "Kepala Gudang",
-                        "Security",
-                    ],
-                    to: "/lowongan?industri=warehouse",
-                    image: {
-                        src: "/icon/warehouse.svg",
-                        alt: "Icon Warehouse Industry",
-                        width: 100,
-                        height: 100,
-                    },
-                },
-                {
-                    title: "Instalasi & Perbaikan",
-                    listJobs: [
-                        "ATM Monitoring / Testing",
-                        "Engineering on Site",
-                        "Mechanical Electrical Engineer",
-                        "Building Maintenance",
-                        "Teknisi Elektronik",
-                    ],
-                    to: "/lowongan?industri=Instalasi+Perbaikan",
-                    image: {
-                        src: "/icon/repair.svg",
-                        alt: "Icon Instalasi & Perbaikan Industry",
-                        width: 100,
-                        height: 100,
-                    },
-                },
-                {
-                    title: "Pelayanan",
-                    listJobs: [
-                        "Customer Service",
-                        "Agent Call Center",
-                        "Petugas Tiket",
-                        "Office Boy / Girl",
-                        "Cleaning Service",
-                    ],
-                    to: "/lowongan?industri=pelayanan",
-                    image: {
-                        src: "/icon/service.svg",
-                        alt: "Icon Pelayanan Industry",
-                        width: 100,
-                        height: 100,
-                    },
-                }
-            ],
-            values: [
-                {
-                    title: "Brand Terbaik",
-                    icon: {
-                        src: "/icon/achiev.svg",
-                        width: 50,
-                        height: 50,
-                    },
-                    description: "Kesempatan bekerja bersama brand terbaik di bidang Elektronik, Telekomunikasi, FMCG, Farmasi, Kosmetik, dan Logistik.",
-                },
-                {
-                    title: "Pengembangan",
-                    icon: {
-                        src: "/icon/toga.svg",
-                        width: 50,
-                        height: 50,
-                    },
-                    description: "Tersedia pelatihan dan pengembangan dengan modul serta trainer handal untuk meningkatkan ketrampilanmu. ",
-                },
-                {
-                    title: "Kompensasi",
-                    icon: {
-                        src: "/icon/letter.svg",
-                        width: 50,
-                        height: 50,
-                    },
-                    description: "Mendapatkan kompensasi, jaminan ketenagakerjaan, dan jaminan kesehatan sesuai ketentuan yang berlaku.",
-                },
-                {
-                    title: "Jenjang Karir",
-                    icon: {
-                        src: "/icon/jenjangkarir.svg",
-                        width: 50,
-                        height: 50,
-                    },
-                    description: "Beragam pilihan lowongan kerja yang sesuai dengan minat dan bakat kerjamu.",
-                },
-                {
-                    title: "CV Gratis",
-                    icon: {
-                        src: "/icon/card.svg",
-                        width: 50,
-                        height: 50,
-                    },
-                    description: "Ngga perlu bingung buat CV! Fitur Gojobs dukung kamu bikin CV Online secara gratis dan mudah.",
-                },
-                {
-                    title: "Share",
-                    icon: {
-                        src: "/icon/health.svg",
-                        width: 50,
-                        height: 50,
-                    },
-                    description: "Bagikan informasi lowongan pekerjaan dengan Besti, Teman, dan Sodara dengan cepat dan mudah.",
-                },
-            ],
-            recruitmentProcess: [
-                {
-                    number: 1,
-                    title: "Seleksi CV",
-                    description: "Mulai dari sini! Tim ISH akan reviu CV / Resume yang kamu kirim, mencocokkan kompetensimudengan kualifikasi yang dibutuhkan dan kontak kamu bila memenuhi kualifikasi",
-                },
-                {
-                    number: 2,
-                    title: "Psikotest",
-                    description: "Agar memastikan profilmu cocok dengan dengan jabatan yang dilamar kamu diminta untukmengerjakan soal-soal psikotes. Tips: Kerjakan tes di pagi hari, fokus tanpa gangguan, danselesaikan segera.",
-                },
-                {
-                    number: 3,
-                    title: "Wawancara HR",
-                    description: "Tim ISH akan menggali lebih dalam pengalaman, ketrampilan, dan pengetahuan seputar profesiserta jabatan yang kamu lamar. Tips: Persiapan, Berlatih, dan tampil percaya diri.",
-                },
-                {
-                    number: 4,
-                    title: "Wawancara User",
-                    description: "Di tahap ini profil kamu akan digali lebih dalam oleh Tim Klien. Pertanyaan teknis dan roleplaybiasanya diajukan dalam sesi wawancara. Tips: Kuasai teknis pekerjaan, banyak berlatih, dan hadir tepat waktu. ",
-                },
-                {
-                    number: 5,
-                    title: "Hiring",
-                    description: "Hore! Ini tahap akhir proses rekrutmen kamu. Segera melengkapi data untuk pembuatan kontrakkerja dan payroll. Semakin cepat kamu lengkapi, semakin cepat kamu bisa bekerja. Selamat ya Ka!",
-                },
-            ],
-            testimonials: [
-                {
-                    image:{
-                        src:"testi (1).png",
-                        alt:"image testi (1)",
-                    },
-                    name: "Vebriyano Lahallo",
-                    rate: 5,
-                    position: "Promotor Elektronik",
-                    quote: "Terima Kasih kepada ISH telah memberikan kesempatan sayainterview untuk ke 2 kalinya, dan pada akhirnya saya bisabergabung di perusahaan besar ini",
-                },
-                {
-                    image:{
-                        src:"testi (2).png",
-                        alt:"image testi (2)",
-                    },
-                    name: "Siska Ramadhona",
-                    rate: 4,
-                    position: "Promotor Elektronik",
-                    quote: "Selama saya event di ISH sangat nyaman karena memiliki leader yang humble dan bisa mengayomi saya selama event  disana dan salary nya juga sesuai dengan perjanjian diawal",
-                },
-                {
-                    image:{
-                        src:"testi (3).png",
-                        alt:"image testi (3)",
-                    },
-                    name: "Ferdiansyah",
-                    rate: 5,
-                    position: "Senior Developer",
-                    quote: "Selama bekerja di ISH hak- hak karyawan sangat di hargai, seperti jam kerja dan ijin sakit , tidak ada potongan jika ijin tidak masuk kerja",
-                },
-                {
-                    image:{
-                        src:"testi (2).png",
-                        alt:"image testi (2)",
-                    },
-                    name: "Grace Lee",
-                    rate: 3,
-                    position: "Marketing Specialist",
-                    quote: "GoJobs memberikan banyak peluang pekerjaan menarik, namun masih perlu beberapa fitur penyempurnaan.",
-                },
-                {
-                    image:{
-                        src:"testi (1).png",
-                        alt:"image testi (1)",
-                    },
-                    name: "Diana Miller",
-                    rate: 5,
-                    position: "HR Coordinator",
-                    quote: "Pengalaman menggunakan GoJobs sangat memuaskan. Saya merekomendasikannya kepada rekan-rekan HR lainnya.",
-                },
-            ],
-        }
+const industries = [
+    { key: 'sls', value: 'Penjualan' },
+    { key: 'it', value: 'Teknologi Informasi' },
+    { key: 'ab', value: 'Administrasi Bisnis' },
+    { key: 'com', value: 'Teknologi Komunikasi' },
+    { key: 'mar', value: 'Pemasaran' },
+    { key: 'wrh', value: 'Warehouse' },
+    { key: 'rpr', value: 'Instalasi & Perbaikan' },
+    { key: 'srv', value: 'Pelayanan' },
+]
+const industriesList = [
+    {
+        title: "Penjualan",
+        listJobs: [
+            "Sales",
+            "Sales Technical",
+            "Merchandiser",
+            "Promotor",
+            "SPG/B Reguler & Event",
+        ],
+        to: "/lowongan?industri=penjualan",
+        image: {
+            src: "/icon/sales.svg",
+            alt: "Icon Penjualan Industry",
+            width: 100,
+            height: 100,
+        },
     },
-    mounted() {
-       
+    {
+        title: "Teknologi Informasi",
+        listJobs: [
+            "Software Developer",
+            "Mobile Developer",
+            "Frontend & Backend Engineer",
+            "System Analyst",
+            "IT Helpdesk Support",
+        ],
+        to: "/lowongan?industri=it",
+        image: {
+            src: "/icon/it.svg",
+            alt: "Icon IT Industry",
+            width: 100,
+            height: 100,
+        },
     },
-};
+    {
+        title: "Administrasi Bisnis",
+        listJobs: [
+            "Admin",
+            "Sekretaris",
+            "Receptionist",
+            "Kurir",
+            "Staff Bagian Umum",
+        ],
+        to: "/lowongan?industri=admin",
+        image: {
+            src: "/icon/admin.svg",
+            alt: "Icon Administrasi Bisnis Industry",
+            width: 100,
+            height: 100,
+        },
+    },
+    {
+        title: "Teknologi Komunikasi",
+        listJobs: [
+            "Project Manager",
+            "Network Engineer",
+            "Network Security",
+            "Network Operation Center",
+            "Teknisi Jaringan",
+        ],
+        to: "/lowongan?industri=teknologi+komunikasi",
+        image: {
+            src: "/icon/network.svg",
+            alt: "Icon Teknologi Komunikasi Industry",
+            width: 100,
+            height: 100,
+        },
+    },
+    {
+        title: "Pemasaran",
+        listJobs: [
+            "Digital Marketing",
+            "SEO Specialist",
+            "Desain Grafis & UI/UX",
+            "Content Creator",
+            "Riset & Surveyor",
+        ],
+        to: "/lowongan/industri=pemasaran",
+        image: {
+            src: "/icon/marketing.svg",
+            alt: "Icon Pemasaran Industry",
+            width: 100,
+            height: 100,
+        },
+    },
+    {
+        title: "Warehouse",
+        listJobs: [
+            "Operator Alat Berat",
+            "Admin Gudang",
+            "Packer",
+            "Kepala Gudang",
+            "Security",
+        ],
+        to: "/lowongan?industri=warehouse",
+        image: {
+            src: "/icon/warehouse.svg",
+            alt: "Icon Warehouse Industry",
+            width: 100,
+            height: 100,
+        },
+    },
+    {
+        title: "Instalasi & Perbaikan",
+        listJobs: [
+            "ATM Monitoring / Testing",
+            "Engineering on Site",
+            "Mechanical Electrical Engineer",
+            "Building Maintenance",
+            "Teknisi Elektronik",
+        ],
+        to: "/lowongan?industri=Instalasi+Perbaikan",
+        image: {
+            src: "/icon/repair.svg",
+            alt: "Icon Instalasi & Perbaikan Industry",
+            width: 100,
+            height: 100,
+        },
+    },
+    {
+        title: "Pelayanan",
+        listJobs: [
+            "Customer Service",
+            "Agent Call Center",
+            "Petugas Tiket",
+            "Office Boy / Girl",
+            "Cleaning Service",
+        ],
+        to: "/lowongan?industri=pelayanan",
+        image: {
+            src: "/icon/service.svg",
+            alt: "Icon Pelayanan Industry",
+            width: 100,
+            height: 100,
+        },
+    }
+]
+const values = [
+    {
+        title: "Brand Terbaik",
+        icon: {
+            src: "/icon/achiev.svg",
+            width: 50,
+            height: 50,
+        },
+        description: "Kesempatan bekerja bersama brand terbaik di bidang Elektronik, Telekomunikasi, FMCG, Farmasi, Kosmetik, dan Logistik.",
+    },
+    {
+        title: "Pengembangan",
+        icon: {
+            src: "/icon/toga.svg",
+            width: 50,
+            height: 50,
+        },
+        description: "Tersedia pelatihan dan pengembangan dengan modul serta trainer handal untuk meningkatkan ketrampilanmu. ",
+    },
+    {
+        title: "Kompensasi",
+        icon: {
+            src: "/icon/letter.svg",
+            width: 50,
+            height: 50,
+        },
+        description: "Mendapatkan kompensasi, jaminan ketenagakerjaan, dan jaminan kesehatan sesuai ketentuan yang berlaku.",
+    },
+    {
+        title: "Jenjang Karir",
+        icon: {
+            src: "/icon/jenjangkarir.svg",
+            width: 50,
+            height: 50,
+        },
+        description: "Beragam pilihan lowongan kerja yang sesuai dengan minat dan bakat kerjamu.",
+    },
+    {
+        title: "CV Gratis",
+        icon: {
+            src: "/icon/card.svg",
+            width: 50,
+            height: 50,
+        },
+        description: "Ngga perlu bingung buat CV! Fitur Gojobs dukung kamu bikin CV Online secara gratis dan mudah.",
+    },
+    {
+        title: "Share",
+        icon: {
+            src: "/icon/health.svg",
+            width: 50,
+            height: 50,
+        },
+        description: "Bagikan informasi lowongan pekerjaan dengan Besti, Teman, dan Sodara dengan cepat dan mudah.",
+    },
+]
+const recruitmentProcess = [
+    {
+        number: 1,
+        title: "Seleksi CV",
+        description: "Mulai dari sini! Tim ISH akan reviu CV / Resume yang kamu kirim, mencocokkan kompetensimudengan kualifikasi yang dibutuhkan dan kontak kamu bila memenuhi kualifikasi",
+    },
+    {
+        number: 2,
+        title: "Psikotest",
+        description: "Agar memastikan profilmu cocok dengan dengan jabatan yang dilamar kamu diminta untukmengerjakan soal-soal psikotes. Tips: Kerjakan tes di pagi hari, fokus tanpa gangguan, danselesaikan segera.",
+    },
+    {
+        number: 3,
+        title: "Wawancara HR",
+        description: "Tim ISH akan menggali lebih dalam pengalaman, ketrampilan, dan pengetahuan seputar profesiserta jabatan yang kamu lamar. Tips: Persiapan, Berlatih, dan tampil percaya diri.",
+    },
+    {
+        number: 4,
+        title: "Wawancara User",
+        description: "Di tahap ini profil kamu akan digali lebih dalam oleh Tim Klien. Pertanyaan teknis dan roleplaybiasanya diajukan dalam sesi wawancara. Tips: Kuasai teknis pekerjaan, banyak berlatih, dan hadir tepat waktu. ",
+    },
+    {
+        number: 5,
+        title: "Hiring",
+        description: "Hore! Ini tahap akhir proses rekrutmen kamu. Segera melengkapi data untuk pembuatan kontrakkerja dan payroll. Semakin cepat kamu lengkapi, semakin cepat kamu bisa bekerja. Selamat ya Ka!",
+    },
+]
+const testimonials = [
+    {
+        image:{
+            src:"testi (1).png",
+            alt:"image testi (1)",
+        },
+        name: "Vebriyano Lahallo",
+        rate: 5,
+        position: "Promotor Elektronik",
+        quote: "Terima Kasih kepada ISH telah memberikan kesempatan sayainterview untuk ke 2 kalinya, dan pada akhirnya saya bisabergabung di perusahaan besar ini",
+    },
+    {
+        image:{
+            src:"testi (2).png",
+            alt:"image testi (2)",
+        },
+        name: "Siska Ramadhona",
+        rate: 4,
+        position: "Promotor Elektronik",
+        quote: "Selama saya event di ISH sangat nyaman karena memiliki leader yang humble dan bisa mengayomi saya selama event  disana dan salary nya juga sesuai dengan perjanjian diawal",
+    },
+    {
+        image:{
+            src:"testi (3).png",
+            alt:"image testi (3)",
+        },
+        name: "Ferdiansyah",
+        rate: 5,
+        position: "Senior Developer",
+        quote: "Selama bekerja di ISH hak- hak karyawan sangat di hargai, seperti jam kerja dan ijin sakit , tidak ada potongan jika ijin tidak masuk kerja",
+    },
+    {
+        image:{
+            src:"testi (2).png",
+            alt:"image testi (2)",
+        },
+        name: "Grace Lee",
+        rate: 3,
+        position: "Marketing Specialist",
+        quote: "GoJobs memberikan banyak peluang pekerjaan menarik, namun masih perlu beberapa fitur penyempurnaan.",
+    },
+    {
+        image:{
+            src:"testi (1).png",
+            alt:"image testi (1)",
+        },
+        name: "Diana Miller",
+        rate: 5,
+        position: "HR Coordinator",
+        quote: "Pengalaman menggunakan GoJobs sangat memuaskan. Saya merekomendasikannya kepada rekan-rekan HR lainnya.",
+    },
+]
+
+const city = useCityStore();
+const contract = useContractStore();
+
+const cityOptions = ref([]);
+const contractOptions = ref([]);
+
+onMounted(async () => {
+  isReady.value = true;
+  contractOptions.value = await contract.getOptions();
+  cityOptions.value = await city.getOptions();
+});
 </script>

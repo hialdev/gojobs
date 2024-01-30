@@ -92,14 +92,14 @@
                 <div class="relative">
                     <button @click="() => {menuShow = !menuShow; notifShow = false}" type="button" class="bg-slate-50 p-1 flex items-center gap-3 text-slate-400 rounded-3xl pe-4" id="user-menu-button" aria-expanded="false" data-dropdown-toggle="dropdown">
                         <span class="sr-only">Open user menu</span>
-                        <NuxtImg class="w-8 h-8 rounded-full" src="https://flowbite.com/docs/images/people/profile-picture-5.jpg" alt="user photo" />
+                        <NuxtImg class="w-8 h-8 rounded-full" :src="`https://ui-avatars.com/api/?name=${profile?.name}`" alt="user photo" />
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 256 256"><path fill="currentColor" d="m216.49 104.49l-80 80a12 12 0 0 1-17 0l-80-80a12 12 0 0 1 17-17L128 159l71.51-71.52a12 12 0 0 1 17 17Z"/></svg>
                     </button>
                     <!-- Dropdown menu -->
                     <div v-if="menuShow" class="absolute top-[2em] end-0 min-w-[20em] max-w-[30em] w-full z-50 my-4 w-56 text-base list-none bg-white rounded divide-y divide-gray-100 shadow text-gray-500">
                         <div class="py-3 px-4">
-                            <span class="block text-sm font-semibold text-gray-900 dark:text-white">Name Surname</span>
-                            <span class="block text-sm text-gr uncate">mail@mail.com</span>
+                            <span class="block text-sm font-semibold text-gray-900 dark:text-white">{{profile?.name}}</span>
+                            <span class="block text-sm text-gr uncate">{{profile?.email}}</span>
                         </div>
                         <ul class="m-0 py- ay-500">
                             <li>
@@ -185,20 +185,30 @@
 </template>
 
 <script setup>
+import {useUserStore} from '@/stores/user'
 const notifShow = ref(false);
 const menuShow = ref(false);
 const logoutModal = ref(false);
-
+const profile = ref(null);
+const store = useUserStore();
 const logoutModalOn = () => {
     logoutModal.value = true;
 }
 const cancelLogout = () => {
     logoutModal.value = false;
 }
-const logoutHandle = () => {
-    localStorage.setItem('login','false');
-    setTimeout(() => {
-        navigateTo('/');
-    }, 500);
+const logoutHandle = async () => {
+    const logout = await store.logout();
+    console.log(logout);
+    if(logout.success){
+        localStorage.setItem('login','false');
+        setTimeout(() => {
+            navigateTo('/');
+        }, 500);
+    }
 }
+
+onMounted(() => {
+    profile.value = JSON.parse(localStorage.getItem('profile'));
+})
 </script>

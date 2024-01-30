@@ -8,7 +8,7 @@
             <input @input="applyFilters" v-model="registForm.name" type="text" class="col-span-12 md:col-span-6 p-3 px-4 rounded-xl border-2 block w-full focus:outline-primary" placeholder="Name">
             <input @input="applyFilters" v-model="registForm.username" type="text" class="col-span-12 md:col-span-6 p-3 px-4 rounded-xl border-2 block w-full focus:outline-primary" placeholder="Username">
             <input @input="applyFilters" v-model="registForm.email" type="email" class="col-span-12 md:col-span-6 p-3 px-4 rounded-xl border-2 block w-full focus:outline-primary" placeholder="Email">
-            <input @input="applyFilters" v-model="registForm.mobile" type="number" class="col-span-12 md:col-span-6 p-3 px-4 rounded-xl border-2 block w-full focus:outline-primary" placeholder="No. Handphone">
+            <input @input="applyFilters" v-model="registForm.mobile" oninput="this.value=this.value.replace(/[^0-9]/g,'');" type="text" class="col-span-12 md:col-span-6 p-3 px-4 rounded-xl border-2 block w-full focus:outline-primary" placeholder="No. Handphone">
             <div class="col-span-12 md:col-span-6 flex items-center gap-2 border-2 hover:border-2 p-3 px-4 rounded-xl hover:border-primary mb-3">
                 <input @input="applyFilters" v-model="registForm.password" :type="isShowPwd ? 'text' : 'password'" class="w-full block focus:outline-0" placeholder="Password">
                 <div v-if="isShowPwd" @click="hidePassword" class="w-[20px] cursor-pointer text-primary">
@@ -33,6 +33,9 @@
                     </svg>
                 </div>
             </div>
+            <div class="col-span-12 mb-4">
+                <div class="text-xs text-slate-500"><span class="text-rose-600">*</span>password harus berisi kombinasi huruf kapital, huruf kecil, dan angka</div>
+            </div>
         </div>
         <PartialsSelect @selected="" class="border-2 rounded-xl mb-4" :options="sources" :label="`Dari mana kamu mengetahui kami ?`" />
         <div class="flex items-center justify-between mb-4">
@@ -41,13 +44,13 @@
                 <div class="text-slate-500 text-sm">Saya setuju terhadap <NuxtLink to="" class="text-primary underline">Aturan Penggunaan</NuxtLink> dan <NuxtLink to="" class="text-primary underline">Kebijakan Privasi</NuxtLink> dari gojobs</div>
             </div>
         </div>
-        <div class="flex items-center p-4 mb-4 text-sm text-yellow-800 border border-yellow-300 rounded-2xl bg-yellow-50" role="alert">
+        <div v-if="error" class="flex items-center p-4 mb-4 text-sm text-yellow-800 border border-yellow-300 rounded-2xl bg-yellow-50" role="alert">
             <svg class="flex-shrink-0 inline w-4 h-4 me-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
                 <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
             </svg>
             <span class="sr-only">Info</span>
             <div>
-                <span class="font-medium">Warning alert!</span> Change a few things up and try submitting again.
+                <span class="font-medium">Ooopss!</span> {{error?.message}}
             </div>
         </div>
         <div class="flex justify-center">
@@ -72,6 +75,8 @@
         <div class="text-center text-sm md:text-normal text-gray-800 mt-6">
             Sudah mempunyai akun gojobs? <NuxtLink to="/" class="text-primary underline">Kembali dan Login</NuxtLink>
         </div>
+
+        <ModalAuthSuccess v-if="successRegister" :title="`Berhasil Daftar`" :message="`Kami telah mengirimkan kode verifikasi ke ${registForm.email}, Silahkan periksa email anda (termasuk folder spam)`"/>
     </div>
 </template>
 
@@ -82,6 +87,7 @@ const props = defineProps({
         default: false,
     },
 })
+const successRegister = ref(false);
 const store = useUserStore()
 const registForm = ref({
             name : '',
@@ -113,12 +119,28 @@ const showPassword = () => {
 const hidePassword = () => {
     isShowPwd.value = false
 };
-const registHandle = () => {
-    // console.log(registForm.value);
-    // console.log(store.registForm);
-    
-    // store.register()
-    navigateTo('/auth/verifikasi')
+const error = ref(null);
+const registHandle = async () => {
+    console.log(registForm.value);
+    console.log(store.registForm);
+
+    const regist = await store.register();
+    console.log(regist);
+
+    if (regist.success) {
+        successRegister.value = true;
+        const autoLogin = await store.login(registForm.value.username, registForm.value.password);
+        console.log(autoLogin);
+
+        if (autoLogin.success) {
+            setTimeout(() => {
+                navigateTo('/auth/verifikasi');
+                successRegister.value = false;
+            }, 2000);
+        }
+    }else{
+        error.value = regist;
+    }
 }
 const applyFilters = () => {
     store.setRegist('name',registForm.value.name);
