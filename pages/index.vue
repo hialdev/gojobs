@@ -327,10 +327,10 @@ export default {
         <section class="bg-cover min-h-screen bg-gray-800">
             <div class="container mx-auto h-screen px-5">
                 <div class="grid grid-cols-12 items-center h-full">
-                    <div class="col-span-6">
+                    <div class="col-span-12 lg:col-span-6">
                         <h1 class="mb-12 text-white text-4xl lg:text-5xl font-semibold">Yuk Lamar di GoJobs! <br /><span class="font-normal">#Teman Cari Kerja</span></h1>
                     </div>
-                    <div class="col-span-6">
+                    <div class="col-span-12 lg:col-span-6">
                         <PartialsSearch class="mb-4" :label="`Cari posisi / perusahaan lowongan`" />
                         <div class="grid grid-cols-2 gap-4 mb-4">
                             <PartialsSelect :options="industries" :label="'Profesi Pekerjaan'" />
@@ -356,7 +356,7 @@ export default {
                                     <h3 class="text-lg">{{industry.title}}</h3>
                                 </div>
                                 <ol class="list-disc ms-6">
-                                    <li v-for="(job, index) in industry.listJobs" :key="index" class="text-xs text-slate-500">{{job}}</li>
+                                    <li v-for="(job, index) in industry.listJobs" :key="index" class="text-sm lg:text-xs text-slate-500">{{job}}</li>
                                 </ol>
                             </div>
                         </NuxtLink>
