@@ -1,5 +1,5 @@
 <template>
-    <div class="bg-white rounded-3xl lg:overflow-hidden lg:max-h-[47em] lg:overflow-y-scroll listjob">
+    <div class="bg-white rounded-3xl lg:overflow-hidden lg:max-h-[75vh] lg:overflow-y-scroll listjob">
         <div class="grid grid-cols-12 relative">
             <div class="col-span-12 px-5">
                 <div class="mb-3 mt-6 px-5">
@@ -85,10 +85,9 @@
                 <div class="flex items-center gap-3 bg-white p-5 rounded-3xl">
                     <PartialsButton class="w-full text-center" @click="lamarHandle">Lamar</PartialsButton>
                     <PartialsButton class="bg-transparent border-primary" :primary="false">
-                        <div class="w-[24px] h-[24px] text-orange-100">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 30" fill="currentColor">
-                                <path d="M23.75 26.25L15 21.25L6.25 26.25V6.25C6.25 5.58696 6.51339 4.95107 6.98223 4.48223C7.45107 4.01339 8.08696 3.75 8.75 3.75H21.25C21.913 3.75 22.5489 4.01339 23.0178 4.48223C23.4866 4.95107 23.75 5.58696 23.75 6.25V26.25Z" stroke="#FA6900" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
-                            </svg>
+                        <div class="w-[24px] h-[24px] text-primary">
+                            <svg v-if="!selectedJob?.favorite" xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30"><g fill="none"><path fill="currentColor" d="M19.071 13.142L13.414 18.8a2 2 0 0 1-2.828 0l-5.657-5.657A5 5 0 1 1 12 6.072a5 5 0 0 1 7.071 7.07" opacity=".16"/><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.071 13.142L13.414 18.8a2 2 0 0 1-2.828 0l-5.657-5.657a5 5 0 0 1 7.07-7.071a5 5 0 0 1 7.072 7.071"/></g></svg>
+                            <svg v-if="selectedJob?.favorite" xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30"><path fill="currentColor" fill-rule="evenodd" d="M4.222 5.364A6.002 6.002 0 0 1 12 4.758a6.002 6.002 0 0 1 7.778 9.091l-5.657 5.657a3 3 0 0 1-4.242 0L4.222 13.85a6 6 0 0 1 0-8.485" clip-rule="evenodd"/></svg>
                         </div>
                     </PartialsButton>
                     <PartialsButton class="bg-transparent border-primary" :primary="false">

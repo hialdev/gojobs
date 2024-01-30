@@ -1,19 +1,53 @@
 <template>
     <div class="bg-slate-50">
-        <div class="container mx-auto py-5 md:p-8">
-            <div class="grid grid-cols-12 gap-0 md:gap-4">
+        <div class="container mx-auto p-8 px-0 md:px-8">
+            <div class="grid grid-cols-12 gap-4">
                 <div class="col-span-12">
                     <div class="flex flex-wrap items-center justify-end gap-4 my-5 px-5">
-                        <span class="flex-initial w-full md:flex-auto md:w-auto text-slate-600 text-xs text-right md:text-left">terakhir disimpan 6 menit yang lalu</span>
+                        <span class="flex-initial w-full md:flex-auto md:w-auto text-slate-600 text-xs text-right md:text-left">terakhir diperbaharui 6 menit yang lalu</span>
                         <PartialsButton class="border-2 border-primary text-sm" :primary="false">Simpan</PartialsButton>
-                        <PartialsButton class="flex gap-5 items-center justify-between px-5 rounded-lg text-sm">Download CV
+                        <PartialsButton @click="downloadHandle" class="flex gap-5 items-center justify-between px-5 rounded-lg text-sm">Download CV
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2M7 11l5 5l5-5m-5-7v12"/></svg>
                         </PartialsButton>
                     </div>
                 </div>
                 <div class="col-span-12 lg:col-span-4">
-                    <div class="bg-white rounded-0 md:rounded-2xl p-6">
-                        <div class="flex flex-col items-center md:gap-1 border-b pb-5 relative">
+                    <div class="bg-white rounded-none md:rounded-2xl p-6">
+                        <div v-if="!show.editImageSosmed" class="flex flex-col items-center gap-1 border-b pb-5 relative">
+                            <div @click="show.editImageSosmed = true" class="cursor-pointer absolute top-0 end-0 flex items-center justify-center text-slate-300 hover:text-primary">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                    <path d="M15 5.9997L18 8.9997M13 19.9997H21M5 15.9997L4 19.9997L8 18.9997L19.586 7.4137C19.9609 7.03864 20.1716 6.53003 20.1716 5.9997C20.1716 5.46937 19.9609 4.96075 19.586 4.5857L19.414 4.4137C19.0389 4.03876 18.5303 3.82812 18 3.82812C17.4697 3.82813 16.9611 4.03876 16.586 4.4137L5 15.9997Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </div>
+                            <NuxtImg src="/image/person.png" height="100" width="100" class="block rounded-full border p-1" />
+                            <h2 class="text-xl font-medium">John Smith</h2>
+                            <div>Developer</div>
+                            <p class="text-sm text-gray-500">3 Tahun Pengalaman</p>
+                            <div class="flex items-center gap-3 my-3">
+                                <NuxtLink class="flex items-center justify-center p-2 rounded-xl text-red-600 bg-red-100">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 16 16"><path fill="currentColor" d="M8 0C5.829 0 5.556.01 4.703.048C3.85.088 3.269.222 2.76.42a3.917 3.917 0 0 0-1.417.923A3.927 3.927 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7C.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297c.04.852.174 1.433.372 1.942c.205.526.478.972.923 1.417c.444.445.89.719 1.416.923c.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.916 3.916 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417c.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.926 3.926 0 0 0-.923-1.417A3.911 3.911 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0h.003zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046c.78.035 1.204.166 1.486.275c.373.145.64.319.92.599c.28.28.453.546.598.92c.11.281.24.705.275 1.485c.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.47 2.47 0 0 1-.599.919c-.28.28-.546.453-.92.598c-.28.11-.704.24-1.485.276c-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.478 2.478 0 0 1-.92-.598a2.48 2.48 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485c-.038-.843-.046-1.096-.046-3.233c0-2.136.008-2.388.046-3.231c.036-.78.166-1.204.276-1.486c.145-.373.319-.64.599-.92c.28-.28.546-.453.92-.598c.282-.11.705-.24 1.485-.276c.738-.034 1.024-.044 2.515-.045v.002zm4.988 1.328a.96.96 0 1 0 0 1.92a.96.96 0 0 0 0-1.92zm-4.27 1.122a4.109 4.109 0 1 0 0 8.217a4.109 4.109 0 0 0 0-8.217zm0 1.441a2.667 2.667 0 1 1 0 5.334a2.667 2.667 0 0 1 0-5.334"/></svg>
+                                </NuxtLink>
+                                <NuxtLink class="flex items-center justify-center p-2 rounded-xl text-orange-600 bg-orange-100">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                        <path d="M18.7165 4.99967C18.0749 5.29134 17.3832 5.48301 16.6665 5.57467C17.3999 5.13301 17.9665 4.43301 18.2332 3.59134C17.5415 4.00801 16.7749 4.29967 15.9665 4.46634C15.3082 3.74967 14.3832 3.33301 13.3332 3.33301C11.3749 3.33301 9.77487 4.93301 9.77487 6.90801C9.77487 7.19134 9.8082 7.46634 9.86654 7.72468C6.89987 7.57468 4.2582 6.14967 2.49987 3.99134C2.19154 4.51634 2.01654 5.13301 2.01654 5.78301C2.01654 7.02467 2.64154 8.12467 3.6082 8.74967C3.01654 8.74967 2.46654 8.58301 1.9832 8.33301V8.35801C1.9832 10.0913 3.21654 11.5413 4.84987 11.8663C4.32548 12.0098 3.77495 12.0298 3.24154 11.9247C3.46788 12.6351 3.91115 13.2567 4.50905 13.7021C5.10695 14.1476 5.82941 14.3944 6.57487 14.408C5.31123 15.4084 3.74487 15.9491 2.1332 15.9413C1.84987 15.9413 1.56654 15.9247 1.2832 15.8913C2.86654 16.908 4.74987 17.4997 6.76654 17.4997C13.3332 17.4997 16.9415 12.0497 16.9415 7.32467C16.9415 7.16634 16.9415 7.01634 16.9332 6.85801C17.6332 6.35801 18.2332 5.72467 18.7165 4.99967Z" fill="#FFB400"/>
+                                    </svg>
+                                </NuxtLink>
+                                <NuxtLink class="flex items-center justify-center p-2 rounded-xl text-blue-600 bg-blue-100">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                        <path d="M11.6673 11.2503H13.7507L14.584 7.91699H11.6673V6.25033C11.6673 5.39199 11.6673 4.58366 13.334 4.58366H14.584V1.78366C14.3123 1.74783 13.2865 1.66699 12.2032 1.66699C9.94065 1.66699 8.33398 3.04783 8.33398 5.58366V7.91699H5.83398V11.2503H8.33398V18.3337H11.6673V11.2503Z" fill="#277DA1"/>
+                                    </svg>
+                                </NuxtLink>
+                                <NuxtLink class="flex items-center justify-center p-2 rounded-xl text-green-600 bg-green-100">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                        <path d="M5.78255 4.16652C5.78233 4.60855 5.60652 5.03239 5.29381 5.34479C4.98109 5.6572 4.55708 5.83258 4.11505 5.83236C3.67302 5.83214 3.24919 5.65633 2.93678 5.34361C2.62438 5.0309 2.449 4.60688 2.44922 4.16486C2.44944 3.72283 2.62525 3.29899 2.93796 2.98659C3.25068 2.67419 3.67469 2.4988 4.11672 2.49902C4.55875 2.49924 4.98258 2.67505 5.29499 2.98777C5.60739 3.30049 5.78277 3.7245 5.78255 4.16652ZM5.83255 7.06652H2.49922V17.4999H5.83255V7.06652ZM11.0992 7.06652H7.78255V17.4999H11.0659V12.0249C11.0659 8.97486 15.0409 8.69152 15.0409 12.0249V17.4999H18.3326V10.8915C18.3326 5.74986 12.4492 5.94152 11.0659 8.46652L11.0992 7.06652Z" fill="#90BE6D"/>
+                                    </svg>
+                                </NuxtLink> 
+                            </div>
+                        </div>
+                        <div v-if="show.editImageSosmed" class="flex flex-col items-center md:gap-1 border-b pb-5 relative">
+                            <div @click="show.editImageSosmed = false" class="cursor-pointer absolute top-0 end-0 flex items-center justify-center text-slate-300 hover:text-primary">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"><path fill="currentColor" d="M21 7v12q0 .825-.587 1.413T19 21H5q-.825 0-1.412-.587T3 19V5q0-.825.588-1.412T5 3h12zm-9 11q1.25 0 2.125-.875T15 15q0-1.25-.875-2.125T12 12q-1.25 0-2.125.875T9 15q0 1.25.875 2.125T12 18m-6-8h9V6H6z"/></svg>
+                            </div>
                             <PartialsImage />
                             <span class="text-xs text-slate-500">Klik gambar untuk upload</span>
                             <PartialsInput :inputClass="`text-center border-b rounded-none focus:rounded-3xl focus:border-transparent w-full block`" :placeholder="`Nama Lengkap`" />
@@ -50,11 +84,80 @@
                                     <input type="text" class="p-2 px-3 border-b focus:outline-none block w-full" placeholder="username" />
                                 </div>
                             </div>
-                            
                         </div>
-                        <ul class="flex flex-col py-5 border-b">
+
+                        <ul v-if="!show.biodata" class="flex flex-col py-5 border-b">
                             <li class="flex items-center justify-between">
                                 <h3 class="font-medium">Biodata</h3>
+                                <div @click="show.biodata = true" class="cursor-pointer flex items-center justify-center text-slate-300 hover:text-primary">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                        <path d="M15 5.9997L18 8.9997M13 19.9997H21M5 15.9997L4 19.9997L8 18.9997L19.586 7.4137C19.9609 7.03864 20.1716 6.53003 20.1716 5.9997C20.1716 5.46937 19.9609 4.96075 19.586 4.5857L19.414 4.4137C19.0389 4.03876 18.5303 3.82812 18 3.82812C17.4697 3.82813 16.9611 4.03876 16.586 4.4137L5 15.9997Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </div>
+                            </li>
+                            <li class="flex items-center gap-4 text-sm">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="21" viewBox="0 0 20 21" fill="none">
+                                    <g clip-path="url(#clip0_927_182)">
+                                        <path d="M16.4844 9.33117H12.1875V5.58117H10.7812C11.2165 5.00008 11.4504 4.29287 11.4474 3.56684C11.4474 2.48715 10.9365 1.47266 10.1141 0.919336L9.76519 0.68457L9.41633 0.919336C8.59375 1.47273 8.08301 2.48719 8.08301 3.56684C8.08008 4.29288 8.31403 5.00008 8.74937 5.58113H7.1875V9.33113H3.51562C2.91495 9.33182 2.33908 9.57073 1.91434 9.99547C1.4896 10.4202 1.25068 10.9961 1.25 11.5968V18.6254C1.25037 18.9568 1.38219 19.2746 1.61653 19.5089C1.85087 19.7432 2.16859 19.8751 2.5 19.8754H17.5C17.8314 19.8751 18.1491 19.7432 18.3835 19.5089C18.6178 19.2746 18.7496 18.9568 18.75 18.6254V11.5968C18.7493 10.9961 18.5104 10.4203 18.0857 9.99551C17.6609 9.57077 17.085 9.33185 16.4844 9.33117ZM9.76519 2.27941C10.0382 2.61863 10.1974 3.07887 10.1974 3.56688C10.1974 4.05488 10.0382 4.51516 9.76519 4.85434C9.49219 4.51516 9.33301 4.05488 9.33301 3.56684C9.33301 3.07879 9.49219 2.61863 9.76519 2.27941ZM8.4375 6.83117H10.9375V9.33117H8.4375V6.83117ZM2.5 11.5968C2.50031 11.3275 2.60741 11.0694 2.79781 10.879C2.98821 10.6886 3.24636 10.5815 3.51562 10.5812H16.4844C16.7536 10.5815 17.0118 10.6886 17.2022 10.879C17.3926 11.0694 17.4997 11.3275 17.5 11.5968V12.8303L16.6562 13.2026C16.4912 13.2752 16.3129 13.3127 16.1326 13.3127C15.9524 13.3127 15.774 13.2752 15.609 13.2026L14.1406 12.5547L12.6719 13.2025C12.5069 13.2752 12.3285 13.3127 12.1482 13.3127C11.968 13.3127 11.7896 13.2752 11.6246 13.2025L10.1562 12.5546L8.6875 13.2025C8.52248 13.2751 8.34416 13.3126 8.16387 13.3126C7.98357 13.3126 7.80525 13.2751 7.64023 13.2025L6.17188 12.5547L4.7034 13.2025C4.53838 13.2751 4.36006 13.3126 4.17977 13.3126C3.99947 13.3126 3.82115 13.2751 3.65613 13.2025L2.5 12.6925V11.5968ZM17.5 18.6254H2.5V14.0588L3.15148 14.3462C3.47552 14.4888 3.82567 14.5624 4.17969 14.5624C4.53371 14.5624 4.88385 14.4888 5.20789 14.3462L6.17188 13.9209L7.1359 14.3462C7.45993 14.4888 7.81007 14.5624 8.16408 14.5624C8.51809 14.5624 8.86824 14.4888 9.19227 14.3462L10.1562 13.9209L11.1202 14.3462C11.4442 14.4888 11.7944 14.5624 12.1484 14.5624C12.5024 14.5624 12.8525 14.4888 13.1765 14.3462L14.1406 13.9209L15.1046 14.3462C15.4286 14.4888 15.7788 14.5624 16.1328 14.5624C16.4868 14.5624 16.8369 14.4888 17.1609 14.3462L17.5005 14.1964L17.5008 18.6254H17.5Z" fill="#797979"/>
+                                    </g>
+                                    <defs>
+                                        <clipPath id="clip0_927_182">
+                                        <rect width="20" height="20" fill="white" transform="translate(0 0.5)"/>
+                                        </clipPath>
+                                    </defs>
+                                </svg>
+                                <span class="">Jakarta, 10 Mei 2000</span>
+                            </li>
+                            <li class="flex items-center gap-4 text-sm">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="21" viewBox="0 0 20 21" fill="none">
+                                    <path d="M16.2495 2.375H13.1245C12.9587 2.375 12.7997 2.44085 12.6825 2.55806C12.5653 2.67527 12.4995 2.83424 12.4995 3C12.4995 3.16576 12.5653 3.32473 12.6825 3.44194C12.7997 3.55915 12.9587 3.625 13.1245 3.625H14.7409L12.776 5.58984C12.1991 5.05218 11.5032 4.65861 10.7451 4.44128C9.98698 4.22396 9.18823 4.18903 8.41406 4.33936C7.63989 4.4897 6.91226 4.82102 6.2906 5.30628C5.66894 5.79154 5.17088 6.41696 4.8371 7.13148C4.50332 7.84599 4.34329 8.62932 4.37007 9.4175C4.39686 10.2057 4.6097 10.9763 4.99122 11.6665C5.37273 12.3567 5.9121 12.9469 6.56527 13.3888C7.21844 13.8308 7.96688 14.1119 8.74947 14.2094V15.5H6.87447C6.70871 15.5 6.54974 15.5658 6.43253 15.6831C6.31532 15.8003 6.24947 15.9592 6.24947 16.125C6.24947 16.2908 6.31532 16.4497 6.43253 16.5669C6.54974 16.6842 6.70871 16.75 6.87447 16.75H8.74947V18.625C8.74947 18.7908 8.81532 18.9497 8.93253 19.0669C9.04974 19.1842 9.20871 19.25 9.37447 19.25C9.54023 19.25 9.6992 19.1842 9.81641 19.0669C9.93362 18.9497 9.99947 18.7908 9.99947 18.625V16.75H11.8745C12.0402 16.75 12.1992 16.6842 12.3164 16.5669C12.4336 16.4497 12.4995 16.2908 12.4995 16.125C12.4995 15.9592 12.4336 15.8003 12.3164 15.6831C12.1992 15.5658 12.0402 15.5 11.8745 15.5H9.99947V14.2094C10.8372 14.1047 11.6348 13.7894 12.3176 13.2928C13.0004 12.7963 13.5461 12.1347 13.9038 11.37C14.2615 10.6052 14.4195 9.76228 14.363 8.9199C14.3065 8.07753 14.0374 7.26324 13.5807 6.55313L15.6245 4.50859V6.125C15.6245 6.29076 15.6903 6.44973 15.8075 6.56694C15.9247 6.68415 16.0837 6.75 16.2495 6.75C16.4152 6.75 16.5742 6.68415 16.6914 6.56694C16.8086 6.44973 16.8745 6.29076 16.8745 6.125V3C16.8745 2.83424 16.8086 2.67527 16.6914 2.55806C16.5742 2.44085 16.4152 2.375 16.2495 2.375ZM9.37447 13C8.63279 13 7.90777 12.7801 7.29108 12.368C6.6744 11.956 6.19375 11.3703 5.90993 10.6851C5.6261 9.99984 5.55183 9.24584 5.69653 8.51841C5.84122 7.79098 6.19838 7.1228 6.72282 6.59835C7.24727 6.0739 7.91546 5.71675 8.64288 5.57206C9.37031 5.42736 10.1243 5.50162 10.8095 5.78545C11.4948 6.06928 12.0804 6.54993 12.4925 7.16661C12.9045 7.7833 13.1245 8.50832 13.1245 9.25C13.1234 10.2442 12.728 11.1975 12.025 11.9005C11.3219 12.6035 10.3687 12.999 9.37447 13Z" fill="#797979"/>
+                                </svg>
+                                <span class="">Laki Laki</span>
+                            </li>
+                            <li class="flex items-center gap-4 text-sm">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="21" viewBox="0 0 20 21" fill="none">
+                                    <path d="M6.4 3.5C3.97 3.5 2 5.47 2 7.9C2 12.3 7.2 16.3 10 17.2304C12.8 16.3 18 12.3 18 7.9C18 5.47 16.03 3.5 13.6 3.5C12.112 3.5 10.796 4.2388 10 5.3696C9.59427 4.79168 9.05526 4.32004 8.42861 3.9946C7.80196 3.66915 7.10612 3.4995 6.4 3.5Z" stroke="#797979" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                                <span class="">Belum Menikah</span>
+                            </li>
+                            <li class="flex items-center gap-4 text-sm">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                    <g clip-path="url(#clip0_927_194)">
+                                        <mask id="mask0_927_194" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="0" y="0" width="20" height="20">
+                                        <path d="M0 1.90735e-06H20V20H0V1.90735e-06Z" fill="white"/>
+                                        </mask>
+                                        <g mask="url(#mask0_927_194)">
+                                        <path d="M4.87109 12.0229L6.3373 10.8357L7.39445 2.54863C7.48637 1.90348 8.03879 1.42418 8.69043 1.42418C9.41336 1.42418 9.99945 2.01027 9.99945 2.7332V11.5376C9.99945 11.8709 9.86703 12.1905 9.63141 12.4262L7.55461 14.5029" stroke="#797979" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+                                        <path d="M4.19738 11.3381L8.03199 15.2336L4.72488 18.5762L0.585938 14.1228L4.19738 11.3381Z" stroke="#797979" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+                                        <path d="M15.1284 12.0229L13.6621 10.8357L12.605 2.54863C12.5131 1.90348 11.9607 1.42418 11.309 1.42418C10.5861 1.42418 10 2.01027 10 2.7332V11.5376C10 11.8709 10.1324 12.1905 10.368 12.4262L12.4448 14.5029" stroke="#797979" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+                                        <path d="M15.8034 11.3381L11.9688 15.2336L15.2759 18.5762L19.4148 14.1228L15.8034 11.3381Z" stroke="#797979" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+                                        </g>
+                                    </g>
+                                    <defs>
+                                        <clipPath id="clip0_927_194">
+                                        <rect width="20" height="20" fill="white"/>
+                                        </clipPath>
+                                    </defs>
+                                </svg>
+                                <span class="">Islam</span>
+                            </li>
+                            <li class="flex items-center gap-4 text-sm">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                    <path d="M10 6.66667C9.34073 6.66667 8.69626 6.86216 8.1481 7.22844C7.59994 7.59471 7.17269 8.1153 6.9204 8.72439C6.66811 9.33348 6.6021 10.0037 6.73072 10.6503C6.85933 11.2969 7.1768 11.8908 7.64298 12.357C8.10915 12.8232 8.7031 13.1407 9.3497 13.2693C9.9963 13.3979 10.6665 13.3319 11.2756 13.0796C11.8847 12.8273 12.4053 12.4001 12.7716 11.8519C13.1378 11.3037 13.3333 10.6593 13.3333 10C13.3333 9.11595 12.9821 8.2681 12.357 7.64298C11.7319 7.01786 10.8841 6.66667 10 6.66667ZM10 12C9.60444 12 9.21776 11.8827 8.88886 11.6629C8.55996 11.4432 8.30362 11.1308 8.15224 10.7654C8.00087 10.3999 7.96126 9.99778 8.03843 9.60982C8.1156 9.22186 8.30608 8.86549 8.58579 8.58579C8.86549 8.30608 9.22186 8.1156 9.60982 8.03843C9.99778 7.96126 10.3999 8.00087 10.7654 8.15224C11.1308 8.30362 11.4432 8.55996 11.6629 8.88886C11.8827 9.21776 12 9.60444 12 10C12 10.5304 11.7893 11.0391 11.4142 11.4142C11.0391 11.7893 10.5304 12 10 12ZM19.3333 4H0.666667C0.489856 4 0.320286 4.07024 0.195262 4.19526C0.0702379 4.32029 0 4.48986 0 4.66667V15.3333C0 15.5101 0.0702379 15.6797 0.195262 15.8047C0.320286 15.9298 0.489856 16 0.666667 16H19.3333C19.5101 16 19.6797 15.9298 19.8047 15.8047C19.9298 15.6797 20 15.5101 20 15.3333V4.66667C20 4.48986 19.9298 4.32029 19.8047 4.19526C19.6797 4.07024 19.5101 4 19.3333 4ZM15.4708 14.6667H4.52917C4.30534 13.9097 3.89567 13.2207 3.33749 12.6625C2.7793 12.1043 2.09033 11.6947 1.33333 11.4708V8.52917C2.09033 8.30534 2.7793 7.89567 3.33749 7.33749C3.89567 6.7793 4.30534 6.09033 4.52917 5.33333H15.4708C15.6947 6.09033 16.1043 6.7793 16.6625 7.33749C17.2207 7.89567 17.9097 8.30534 18.6667 8.52917V11.4708C17.9097 11.6947 17.2207 12.1043 16.6625 12.6625C16.1043 13.2207 15.6947 13.9097 15.4708 14.6667ZM18.6667 7.11417C17.867 6.77033 17.2297 6.13297 16.8858 5.33333H18.6667V7.11417ZM3.11417 5.33333C2.77033 6.13297 2.13297 6.77033 1.33333 7.11417V5.33333H3.11417ZM1.33333 12.8858C2.13297 13.2297 2.77033 13.867 3.11417 14.6667H1.33333V12.8858ZM16.8858 14.6667C17.2297 13.867 17.867 13.2297 18.6667 12.8858V14.6667H16.8858Z" fill="#797979"/>
+                                </svg>
+                                <span class="">IDR 7.500.000</span>
+                            </li>
+                            <li class="flex items-center gap-4 text-sm">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="text-slate-500" width="18" height="18" viewBox="0 0 24 24"><path fill="currentColor" d="M19 4h-1.45A3.08 3.08 0 0 0 17 3a3 3 0 0 0-2.25-1H9.27A3 3 0 0 0 7 3a3.08 3.08 0 0 0-.57 1H5a3 3 0 0 0-3 3v12a3 3 0 0 0 3 3h14a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3m-10.48.34A1 1 0 0 1 9.27 4h5.46a1 1 0 0 1 .75.34a1 1 0 0 1 .25.78l-.5 4a1 1 0 0 1-1 .88h-1.64l1.14-2.4a1 1 0 0 0-1.8-.86L10.37 10h-.6a1 1 0 0 1-1-.88l-.5-4a1 1 0 0 1 .25-.78M20 19a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h1.37l.42 3.37a3 3 0 0 0 3 2.63h4.46a3 3 0 0 0 3-2.63L17.63 6H19a1 1 0 0 1 1 1Zm-6-3h-4a1 1 0 0 0 0 2h4a1 1 0 0 0 0-2"/></svg>
+                                <span class="">77kg / 180cm</span>
+                            </li>
+                        </ul>
+                        <ul v-if="show.biodata" class="flex flex-col py-5 border-b">
+                            <li class="flex items-center justify-between">
+                                <h3 class="font-medium">Biodata</h3>
+                                <div @click="show.biodata = false" class="cursor-pointer flex items-center justify-center text-slate-300 hover:text-primary">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"><path fill="currentColor" d="M21 7v12q0 .825-.587 1.413T19 21H5q-.825 0-1.412-.587T3 19V5q0-.825.588-1.412T5 3h12zm-9 11q1.25 0 2.125-.875T15 15q0-1.25-.875-2.125T12 12q-1.25 0-2.125.875T9 15q0 1.25.875 2.125T12 18m-6-8h9V6H6z"/></svg>
+                                </div>
                             </li>
                             <li class="flex items-center gap-4 text-sm">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="21" viewBox="0 0 20 21" fill="none">
@@ -138,9 +241,69 @@
                                 </div>
                             </li>
                         </ul>
-                        <ul class="flex flex-col py-5">
+
+                        <ul v-if="!show.informasi" class="flex flex-col py-5">
                             <li class="flex items-center justify-between">
                                 <h3 class="font-medium">Informasi</h3>
+                                <div @click="show.informasi = true" class="cursor-pointer flex items-center justify-center text-slate-300 hover:text-primary">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                        <path d="M15 5.9997L18 8.9997M13 19.9997H21M5 15.9997L4 19.9997L8 18.9997L19.586 7.4137C19.9609 7.03864 20.1716 6.53003 20.1716 5.9997C20.1716 5.46937 19.9609 4.96075 19.586 4.5857L19.414 4.4137C19.0389 4.03876 18.5303 3.82812 18 3.82812C17.4697 3.82813 16.9611 4.03876 16.586 4.4137L5 15.9997Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </div>
+                            </li>
+                            <li class="flex items-center gap-4 text-sm">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="21" viewBox="0 0 20 21" fill="none">
+                                    <path d="M17.3727 12.8795L13.6922 11.2303L13.682 11.2256C13.491 11.1439 13.2825 11.1111 13.0756 11.1302C12.8687 11.1493 12.6698 11.2197 12.4969 11.335C12.4765 11.3484 12.457 11.3631 12.4383 11.3787L10.5367 12.9998C9.33204 12.4147 8.08829 11.1803 7.50313 9.99125L9.12657 8.06078C9.14219 8.04125 9.15704 8.02172 9.1711 8.00062C9.28394 7.8282 9.35239 7.63056 9.37039 7.42529C9.38838 7.22002 9.35534 7.01348 9.27423 6.82406V6.81469L7.62032 3.12797C7.51309 2.88052 7.3287 2.67438 7.09468 2.54034C6.86067 2.4063 6.58958 2.35153 6.32188 2.38422C5.26326 2.52352 4.29155 3.04341 3.58824 3.84679C2.88492 4.65017 2.49809 5.6821 2.50001 6.74984C2.50001 12.953 7.54688 17.9998 13.75 17.9998C14.8177 18.0018 15.8497 17.6149 16.6531 16.9116C17.4564 16.2083 17.9763 15.2366 18.1156 14.178C18.1484 13.9104 18.0937 13.6393 17.9598 13.4053C17.8259 13.1713 17.62 12.9869 17.3727 12.8795ZM13.75 16.7498C11.0987 16.7469 8.55687 15.6924 6.68214 13.8177C4.8074 11.943 3.7529 9.40112 3.75001 6.74984C3.74707 5.98694 4.02192 5.24906 4.52324 4.67399C5.02456 4.09892 5.71806 3.72599 6.47423 3.62484C6.47392 3.62796 6.47392 3.6311 6.47423 3.63422L8.11485 7.30609L6.50001 9.2389C6.48362 9.25776 6.46873 9.27788 6.45548 9.29906C6.33791 9.47947 6.26894 9.68718 6.25525 9.90208C6.24157 10.117 6.28362 10.3318 6.37735 10.5256C7.08516 11.9733 8.54376 13.4209 10.007 14.128C10.2023 14.2208 10.4184 14.2614 10.634 14.2458C10.8497 14.2302 11.0576 14.1589 11.2375 14.0389C11.2576 14.0254 11.2769 14.0108 11.2953 13.9952L13.1945 12.3748L16.8664 14.0194H16.875C16.7751 14.7766 16.4027 15.4715 15.8275 15.9741C15.2524 16.4766 14.5138 16.7524 13.75 16.7498Z" fill="#797979"/>
+                                </svg>
+                                <span class="">+62 878 888 5555</span>
+                            </li>
+                            <li class="flex items-center gap-4 text-sm">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="21" viewBox="0 0 20 21" fill="none">
+                                    <g clip-path="url(#clip0_441_1566)">
+                                        <path d="M13.7367 10.4797L18.8625 6.02634V14.8822L13.7367 10.4797ZM7.13167 11.2338L8.93167 12.7963C9.21417 13.0363 9.5825 13.1813 9.985 13.1813H9.99917H10.01C10.4133 13.1813 10.7817 13.0355 11.0675 12.7938L11.065 12.7955L12.865 11.233L18.3367 15.9322H1.6625L7.13167 11.2338ZM1.655 4.97051H18.3467L10.3292 11.9338C10.239 12.0051 10.1274 12.0439 10.0125 12.0438H10.0008H9.99C9.87466 12.044 9.76269 12.0049 9.6725 11.933L9.67333 11.9338L1.655 4.97051ZM1.1375 6.02551L6.2625 10.4788L1.1375 14.8788V6.02551ZM19.1375 3.99134C18.9375 3.89134 18.7025 3.83301 18.4533 3.83301H1.54917C1.30763 3.83307 1.06942 3.88927 0.853333 3.99717L0.8625 3.99301C0.603811 4.1206 0.385956 4.31799 0.233545 4.56288C0.0811339 4.80777 0.000239457 5.0904 0 5.37884L0 15.5222C0.00044117 15.9327 0.16371 16.3263 0.453984 16.6165C0.744257 16.9068 1.13783 17.0701 1.54833 17.0705H18.4508C18.8613 17.0701 19.2549 16.9068 19.5452 16.6165C19.8355 16.3263 19.9987 15.9327 19.9992 15.5222V5.37884C19.9992 4.77301 19.65 4.24801 19.1417 3.99551L19.1325 3.99134H19.1375Z" fill="#797979"/>
+                                    </g>
+                                    <defs>
+                                        <clipPath id="clip0_441_1566">
+                                        <rect width="20" height="20" fill="white" transform="translate(0 0.5)"/>
+                                        </clipPath>
+                                    </defs>
+                                </svg>
+                                <span class="">jhonsmith@gmail.com</span>
+                            </li>
+                            <li class="flex items-center gap-4 text-sm">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="21" viewBox="0 0 20 21" fill="none">
+                                    <g clip-path="url(#clip0_441_1570)">
+                                        <path d="M5.41602 8.83301H3.74935V14.6663H5.41602V8.83301ZM10.416 8.83301H8.74935V14.6663H10.416V8.83301ZM17.4993 16.333H1.66602V17.9997H17.4993V16.333ZM15.416 8.83301H13.7493V14.6663H15.416V8.83301ZM9.58268 3.21634L13.9243 5.49967H5.24102L9.58268 3.21634ZM9.58268 1.33301L1.66602 5.49967V7.16634H17.4993V5.49967L9.58268 1.33301Z" fill="#797979"/>
+                                    </g>
+                                    <defs>
+                                        <clipPath id="clip0_441_1570">
+                                        <rect width="20" height="20" fill="white" transform="translate(0 0.5)"/>
+                                        </clipPath>
+                                    </defs>
+                                </svg>
+                                <span class="">Prov. DKI Jakarta</span>
+                            </li>
+                            <li class="flex items-start gap-4 text-sm">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" viewBox="0 0 20 20" fill="none">
+                                    <g clip-path="url(#clip0_441_1575)">
+                                        <path d="M9.99935 1.66699C6.77435 1.66699 4.16602 4.27533 4.16602 7.50033C4.16602 11.8753 9.99935 18.3337 9.99935 18.3337C9.99935 18.3337 15.8327 11.8753 15.8327 7.50033C15.8327 4.27533 13.2243 1.66699 9.99935 1.66699ZM5.83268 7.50033C5.83268 5.20033 7.69935 3.33366 9.99935 3.33366C12.2993 3.33366 14.166 5.20033 14.166 7.50033C14.166 9.90033 11.766 13.492 9.99935 15.7337C8.26602 13.5087 5.83268 9.87533 5.83268 7.50033Z" fill="#797979"/>
+                                        <path d="M9.99935 9.58366C11.1499 9.58366 12.0827 8.65092 12.0827 7.50033C12.0827 6.34973 11.1499 5.41699 9.99935 5.41699C8.84876 5.41699 7.91602 6.34973 7.91602 7.50033C7.91602 8.65092 8.84876 9.58366 9.99935 9.58366Z" fill="#797979"/>
+                                    </g>
+                                    <defs>
+                                        <clipPath id="clip0_441_1575">
+                                        <rect width="35" height="35" fill="white"/>
+                                        </clipPath>
+                                    </defs>
+                                </svg>
+                                <span class="">Jl. Raya Condet No.13B RT.4/RW.4, Batu Ampar, Kramat Jati, Jagakarsa, 13910</span>
+                            </li>
+                        </ul>
+                        <ul v-if="show.informasi" class="flex flex-col py-5">
+                            <li class="flex items-center justify-between">
+                                <h3 class="font-medium">Informasi</h3>
+                                <div @click="show.informasi = false" class="cursor-pointer flex items-center justify-center text-slate-300 hover:text-primary">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"><path fill="currentColor" d="M21 7v12q0 .825-.587 1.413T19 21H5q-.825 0-1.412-.587T3 19V5q0-.825.588-1.412T5 3h12zm-9 11q1.25 0 2.125-.875T15 15q0-1.25-.875-2.125T12 12q-1.25 0-2.125.875T9 15q0 1.25.875 2.125T12 18m-6-8h9V6H6z"/></svg>
+                                </div>
                             </li>
                             <li class="flex items-center gap-4 text-sm">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="21" viewBox="0 0 20 21" fill="none">
@@ -180,6 +343,7 @@
                             </li>
                         </ul>
                     </div>
+                    
                 </div>
                 <div class="col-span-12 lg:col-span-8">
                     <div class="bg-white w-full rounded-0 md:rounded-2xl p-6 mb-5">
@@ -187,14 +351,14 @@
                             <h3 class="font-medium">Ringkasan</h3>
                         </div>
                         <div class="text-sm pt-5 text-slate-500 font-light">
-                            <textarea class="border rounded-xl block w-full p-3" name="" id="" cols="20" rows="5" placeholder="Jelaskan siapa diri anda, tips: ketertarikan, pengalaman, pencapaian, visi-misi"></textarea>
+                            <textarea class="w-full rounded-lg border border-slate-200 text-sm p-2 px-4" name="" id="" cols="20" rows="6" :placeholder="`Jelaskan siapa diri anda, tips: ketertarikan, pengalaman, pencapaian, visi-misi`"></textarea>
                         </div>
                     </div>
 
                     <div class="bg-white rounded-0 md:rounded-2xl p-6 mb-5">
                         <div class="cursor-pointer flex items-center justify-between border-b pb-4">
                             <h3 class="font-medium">Pengalaman Kerja</h3>
-                            <div class="flex items-center gap-2 text-sm p-2 px-4 text-slate-400 hover:text-slate-600 hover:bg-slate-100 rounded-lg">
+                            <div @click="show.pengalaman = !show.pengalaman" class="flex items-center gap-2 text-sm p-2 px-4 text-slate-400 hover:text-slate-600 hover:bg-slate-100 rounded-lg">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none">
                                     <g clip-path="url(#clip0_428_2643)">
                                         <path d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM16 13H13V16C13 16.55 12.55 17 12 17C11.45 17 11 16.55 11 16V13H8C7.45 13 7 12.55 7 12C7 11.45 7.45 11 8 11H11V8C11 7.45 11.45 7 12 7C12.55 7 13 7.45 13 8V11H16C16.55 11 17 11.45 17 12C17 12.55 16.55 13 16 13Z" fill="currentColor"/>
@@ -210,33 +374,33 @@
                             
                         </div>
                         <div class="pt-5">
-                            <div class="grid grid-cols-12 gap-x-5 py-3 mb-5">
+                            <div v-if="show.pengalaman" class="grid grid-cols-12 gap-x-5 py-3 mb-5">
                                 <div class="col-span-12 md:col-span-6">
-                                    <PartialsInput :inputClass="`border rounded-lg`" :placeholder="`Jabatan / Posisi`" :label="`Jabatan / Posisi`" />
+                                    <PartialsInput :inputClass="`border border-slate-200`" :placeholder="`Jabatan / Posisi`" :label="`Jabatan / Posisi`" />
                                 </div>
                                 <div class="col-span-12 md:col-span-6">
-                                    <PartialsInput :inputClass="`border rounded-lg`" :placeholder="`Nama Perusahaan`" :label="`Nama Perusahaan`" />
+                                    <PartialsInput :inputClass="`border border-slate-200`" :placeholder="`Nama Perusahaan`" :label="`Nama Perusahaan`" />
                                 </div>
                                 <div class="col-span-12 md:col-span-6">
-                                    <PartialsInput :inputClass="`border rounded-lg`" :placeholder="`Lokasi kerja`" :label="`Lokasi kerja`" />
+                                    <PartialsInput :inputClass="`border border-slate-200`" :placeholder="`Lokasi kerja`" :label="`Lokasi kerja`" />
                                 </div>
                                 <div class="col-span-12 md:col-span-6">
                                     <PartialsSelect :label="`Jenis Kontrak`" :options="[{key:'ct', value: 'Contract'},{key:'fr', value: 'freelance'},{key:'pt', value: 'Part Time'}]" :showLabel="true" class="z-[99] mb-5" :customClass="`border rounded-lg z-[99]`" />
                                 </div>
                                 <div class="col-span-12 md:col-span-6">
-                                    <PartialsInput :label="`Tgl Mulai Kerja`" :inputClass="`border rounded-lg`" :typeInput="`date`" />
+                                    <PartialsInput :inputClass="`border border-slate-200`" :label="`Tgl Mulai Kerja`" :typeInput="`date`" />
                                 </div>
                                 <div class="col-span-12 md:col-span-6">
-                                    <PartialsInput :label="`Tgl Berakhir`" :inputClass="`border rounded-lg`" :typeInput="`date`" />
-                                    <div class="mb-5"><input type="checkbox" class="form-checkbox rounded text-pink-500 me-4" /><span class="text-sm">Saya masih kerja disini</span></div>
+                                    <PartialsInput :inputClass="`border border-slate-200`" :label="`Tgl Berakhir`" :typeInput="`date`" />
+                                    <div class="mb-5"><input type="checkbox" class="form-checkbox rounded text-emerald-500 me-4 focus:ring-emerald-600" /><span class="text-sm">Saya masih kerja disini</span></div>
                                 </div>
                                 <div class="col-span-12">
-                                    <label for="" class="text-sm mb-3 block">Deksripsi Pekerjaan</label>
-                                    <textarea name="" id="" cols="30" rows="10" class="block w-full rounded-lg border focus:outline-primary p-3"></textarea>
+                                    <label for="" class="text-sm mb-3 block text-slate-500">Deksripsi Pekerjaan</label>
+                                    <textarea name="" id="" cols="30" rows="10" class="w-full rounded-lg border border-slate-200 text-sm p-2 px-4 focus:border-emerald-600 focus:ring-emerald-600"></textarea>
                                 </div>
                                 <div class="col-span-12">
                                     <div class="flex items-center justify-end gap-3 mt-4">
-                                        <PartialsButton :primary="false">Batal</PartialsButton>
+                                        <PartialsButton @click="show.pengalaman = false" :primary="false">Batal</PartialsButton>
                                         <PartialsButton>Tambahkan</PartialsButton>
                                     </div>
                                 </div>
@@ -290,7 +454,7 @@
                     <div class="bg-white rounded-0 md:rounded-2xl p-6 mb-5">
                         <div class="cursor-pointer flex items-center justify-between border-b pb-4">
                             <h3 class="font-medium">Pendidikan</h3>
-                            <div class="flex items-center gap-2 text-sm p-2 px-4 text-slate-400 hover:text-slate-600 hover:bg-slate-100 rounded-lg">
+                            <div @click="show.pendidikan = !show.pendidikan" class="flex items-center gap-2 text-sm p-2 px-4 text-slate-400 hover:text-slate-600 hover:bg-slate-100 rounded-lg">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none">
                                     <g clip-path="url(#clip0_428_2643)">
                                         <path d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM16 13H13V16C13 16.55 12.55 17 12 17C11.45 17 11 16.55 11 16V13H8C7.45 13 7 12.55 7 12C7 11.45 7.45 11 8 11H11V8C11 7.45 11.45 7 12 7C12.55 7 13 7.45 13 8V11H16C16.55 11 17 11.45 17 12C17 12.55 16.55 13 16 13Z" fill="currentColor"/>
@@ -305,33 +469,33 @@
                             </div>
                         </div>
                         <div class="pt-5">
-                            <div class="grid grid-cols-12 gap-x-5 py-3 mb-5">
+                            <div v-if="show.pendidikan" class="grid grid-cols-12 gap-x-5 py-3 mb-5">
                                 <div class="col-span-12 md:col-span-6">
-                                    <PartialsInput :inputClass="`border rounded-lg`" :placeholder="`Nama Kampus / Univ / Institute`" :label="`Nama Kampus / Univ / Institute`" />
+                                    <PartialsInput :inputClass="`border border-slate-200`" :placeholder="`Nama Kampus / Univ / Institute`" :label="`Nama Kampus / Univ / Institute`" />
                                 </div>
                                 <div class="col-span-12 md:col-span-6">
-                                    <PartialsInput :inputClass="`border rounded-lg`" :placeholder="`Kejuruan / Program Studi`" :label="`Kejuruan / Program Studi`" />
+                                    <PartialsInput :inputClass="`border border-slate-200`" :placeholder="`Kejuruan / Program Studi`" :label="`Kejuruan / Program Studi`" />
                                 </div>
                                 <div class="col-span-12 md:col-span-6">
-                                    <PartialsInput :inputClass="`border rounded-lg`" :placeholder="`Lokasi`" :label="`Lokasi`" />
+                                    <PartialsInput :inputClass="`border border-slate-200`" :placeholder="`Lokasi`" :label="`Lokasi`" />
                                 </div>
                                 <div class="col-span-12 md:col-span-6">
-                                    <PartialsInput :inputClass="`border rounded-lg`" :placeholder="`IPK`" :label="`IPK`" :typeInput="`number`" />
+                                    <PartialsInput :inputClass="`border border-slate-200`" :placeholder="`IPK`" :label="`IPK`" :typeInput="`number`" />
                                 </div>
                                 <div class="col-span-12 md:col-span-6">
-                                    <PartialsInput :label="`Tgl Mulai`" :inputClass="`border rounded-lg`" :typeInput="`date`" />
+                                    <PartialsInput :inputClass="`border border-slate-200`" :label="`Tgl Mulai`" :typeInput="`date`" />
                                 </div>
                                 <div class="col-span-12 md:col-span-6">
-                                    <PartialsInput :label="`Tgl Berakhir`" :inputClass="`border rounded-lg`" :typeInput="`date`" />
-                                    <div class="mb-5"><input type="checkbox" class="form-checkbox rounded text-pink-500 me-4" /><span class="text-sm">Saya masih aktif disini</span></div>
+                                    <PartialsInput :inputClass="`border border-slate-200`" :label="`Tgl Berakhir`" :typeInput="`date`" />
+                                    <div class="mb-5"><input type="checkbox" class="form-checkbox rounded text-emerald-500 focus:ring-emerald-500 me-4" /><span class="text-sm">Saya masih aktif disini</span></div>
                                 </div>
                                 <div class="col-span-12">
-                                    <label for="" class="text-sm mb-3 block">Deksripsi Pekerjaan</label>
-                                    <textarea name="" id="" cols="30" rows="10" class="block w-full rounded-lg border focus:outline-primary p-3"></textarea>
+                                    <label for="" class="text-sm mb-3 block text-slate-500">Deksripsi Pekerjaan</label>
+                                    <textarea name="" id="" cols="30" rows="10" class="w-full rounded-lg border border-slate-200 text-sm p-2 px-4 focus:border-emerald-600 focus:ring-emerald-600"></textarea>
                                 </div>
                                 <div class="col-span-12">
                                     <div class="flex items-center justify-end gap-3 mt-4">
-                                        <PartialsButton :primary="false">Batal</PartialsButton>
+                                        <PartialsButton @click="show.pendidikan = false" :primary="false">Batal</PartialsButton>
                                         <PartialsButton>Tambahkan</PartialsButton>
                                     </div>
                                 </div>
@@ -375,14 +539,297 @@
                             </ol>
                         </div>
                     </div>
+
+                    <!-- Organisasi -->
+                    <div class="bg-white rounded-0 md:rounded-2xl p-6 mb-5">
+                        <div class="cursor-pointer flex items-center justify-between border-b pb-4">
+                            <h3 class="font-medium">Organisasi</h3>
+                            <div @click="show.organisasi = !show.organisasi" class="flex items-center gap-2 text-sm p-2 px-4 text-slate-400 hover:text-slate-600 hover:bg-slate-100 rounded-lg">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none">
+                                    <g clip-path="url(#clip0_428_2643)">
+                                        <path d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM16 13H13V16C13 16.55 12.55 17 12 17C11.45 17 11 16.55 11 16V13H8C7.45 13 7 12.55 7 12C7 11.45 7.45 11 8 11H11V8C11 7.45 11.45 7 12 7C12.55 7 13 7.45 13 8V11H16C16.55 11 17 11.45 17 12C17 12.55 16.55 13 16 13Z" fill="currentColor"/>
+                                    </g>
+                                    <defs>
+                                        <clipPath id="clip0_428_2643">
+                                        <rect width="24" height="24" fill="white"/>
+                                        </clipPath>
+                                    </defs>
+                                </svg>
+                                <span>Tambah</span>
+                            </div>
+                        </div>
+                        <div class="pt-5">
+                            <div v-if="show.organisasi" class="grid grid-cols-12 gap-x-5 py-3 mb-5">
+                                <div class="col-span-12 md:col-span-6">
+                                    <PartialsInput :inputClass="`border border-slate-200`" :placeholder="`Nama Lembaga / Organisasi`" :label="`Nama Lembaga / Organisasi`" />
+                                </div>
+                                <div class="col-span-12 md:col-span-6">
+                                    <PartialsInput :inputClass="`border border-slate-200`" :placeholder="`Peran / Posisi`" :label="`Peran / Posisi`" />
+                                </div>
+                                <div class="col-span-12 md:col-span-6">
+                                    <PartialsInput :inputClass="`border border-slate-200`" :label="`Tgl Mulai`" :typeInput="`date`" />
+                                </div>
+                                <div class="col-span-12 md:col-span-6">
+                                    <PartialsInput :inputClass="`border border-slate-200`" :label="`Tgl Berakhir`" :typeInput="`date`" />
+                                    <div class="mb-5"><input type="checkbox" class="form-checkbox rounded text-emerald-500 focus:ring-emerald-500 me-4" /><span class="text-sm">Saya masih aktif disini</span></div>
+                                </div>
+                                <div class="col-span-12">
+                                    <label for="" class="text-sm mb-3 block text-slate-500">Deksripsi Pengalaman Organisasi</label>
+                                    <textarea name="" id="" cols="30" rows="10" class="w-full rounded-lg border border-slate-200 text-sm p-2 px-4 focus:border-emerald-600 focus:ring-emerald-600"></textarea>
+                                </div>
+                                <div class="col-span-12">
+                                    <div class="flex items-center justify-end gap-3 mt-4">
+                                        <PartialsButton @click="show.organisasi = false" :primary="false">Batal</PartialsButton>
+                                        <PartialsButton>Tambahkan</PartialsButton>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <ol class="relative text-gray-500 border-s border-gray-200 dark:border-gray-700 dark:text-gray-400 ms-4">
+                                <li>
+                                    <div class="absolute top-0 end-0 cursor-pointer flex items-center justify-center text-slate-300 hover:text-primary">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                            <path d="M15 5.9997L18 8.9997M13 19.9997H21M5 15.9997L4 19.9997L8 18.9997L19.586 7.4137C19.9609 7.03864 20.1716 6.53003 20.1716 5.9997C20.1716 5.46937 19.9609 4.96075 19.586 4.5857L19.414 4.4137C19.0389 4.03876 18.5303 3.82812 18 3.82812C17.4697 3.82813 16.9611 4.03876 16.586 4.4137L5 15.9997Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                        </svg>
+                                    </div>
+                                </li>                  
+                                <li class="mb-7 ms-6">            
+                                    <span class="absolute flex items-center justify-center w-10 h-10 bg-orange-100 text-primary rounded-full -start-5">
+                                        B
+                                    </span>
+                                    <div class="ps-4">
+                                        <h4 class="text-sm md:text-base mb-1 font-medium">BEM Universitas Indonesia</h4>
+                                        <div class="flex items-center gap-x-4 text-sm text-slate-500 mb-4">
+                                            <div class="flex items-center gap-3 flex-1">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 48 48"><g fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="4"><path d="M24 44c11.046 0 20-8.954 20-20S35.046 4 24 4S4 12.954 4 24s8.954 20 20 20Z"/><path stroke-linecap="round" d="M24.008 12v12.01l8.479 8.48"/></g></svg>
+                                                Januari 2018 s.d 08 Agustus 2019
+                                            </div>
+                                            <div class="flex items-center gap-3 flex-1">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 36 36"><circle cx="16.86" cy="9.73" r="6.46" fill="currentColor"/><path fill="currentColor" d="M21 28h7v1.4h-7z"/><path fill="currentColor" d="M15 30v3a1 1 0 0 0 1 1h17a1 1 0 0 0 1-1V23a1 1 0 0 0-1-1h-7v-1.47a1 1 0 0 0-2 0V22h-2v-3.58a32.12 32.12 0 0 0-5.14-.42a26 26 0 0 0-11 2.39a3.28 3.28 0 0 0-1.88 3V30Zm17 2H17v-8h7v.42a1 1 0 0 0 2 0V24h6Z"/></svg>
+                                                Sekretaris
+                                            </div>
+                                        </div>
+                                        <div class="text-sm font-light">
+                                            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Alias ea aspernatur incidunt velit ab illo molestias ratione maxime iure! Reprehenderit optio eligendi, fugiat eos nihil vel et sapiente alias autem.
+                                            Molestias accusamus architecto tempore impedit. Atque, ab dolore! Molestiae quas cumque aspernatur culpa beatae dignissimos rerum, praesentium excepturi commodi itaque obcaecati neque esse blanditiis, quod totam quis officia eligendi earum!
+                                        </div>
+                                    </div>
+                                </li>
+                                
+                            </ol>
+                        </div>
+                    </div>
+
+                    <!-- Keterampilan -->
+                    <div class="bg-white rounded-0 md:rounded-2xl p-6 mb-5">
+                        <div class="cursor-pointer flex items-center justify-between border-b pb-4">
+                            <h3 class="font-medium">Keterampilan</h3>
+                            <div @click="show.skill = !show.skill" class="flex items-center gap-2 text-sm p-2 px-4 text-slate-400 hover:text-slate-600 hover:bg-slate-100 rounded-lg">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none">
+                                    <g clip-path="url(#clip0_428_2643)">
+                                        <path d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM16 13H13V16C13 16.55 12.55 17 12 17C11.45 17 11 16.55 11 16V13H8C7.45 13 7 12.55 7 12C7 11.45 7.45 11 8 11H11V8C11 7.45 11.45 7 12 7C12.55 7 13 7.45 13 8V11H16C16.55 11 17 11.45 17 12C17 12.55 16.55 13 16 13Z" fill="currentColor"/>
+                                    </g>
+                                    <defs>
+                                        <clipPath id="clip0_428_2643">
+                                        <rect width="24" height="24" fill="white"/>
+                                        </clipPath>
+                                    </defs>
+                                </svg>
+                                <span>Tambah</span>
+                            </div>
+                        </div>
+                        <div class="pt-5">
+                            <div v-if="show.skill" class="grid grid-cols-12 gap-x-5 py-3 mb-5">
+                                <div class="col-span-12">
+                                    <PartialsInput :inputClass="`border border-slate-200`" :placeholder="`Keterampilan`" :label="`Keterampilan`" />
+                                </div>
+                                <div class="col-span-12">
+                                    <label for="" class="text-sm mb-3 block text-slate-500">Deksripsi Keterampilan</label>
+                                    <textarea name="" id="" cols="30" rows="10" class="w-full rounded-lg border border-slate-200 text-sm p-2 px-4 focus:border-emerald-600 focus:ring-emerald-600"></textarea>
+                                </div>
+                                <div class="col-span-12">
+                                    <div class="flex items-center justify-end gap-3 mt-4">
+                                        <PartialsButton @click="show.skill = false" :primary="false">Batal</PartialsButton>
+                                        <PartialsButton>Tambahkan</PartialsButton>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <ol class="relative text-gray-500 border-s border-gray-200 dark:border-gray-700 dark:text-gray-400 ms-4">
+                                <li>
+                                    <div class="absolute top-0 end-0 cursor-pointer flex items-center justify-center text-slate-300 hover:text-primary">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                            <path d="M15 5.9997L18 8.9997M13 19.9997H21M5 15.9997L4 19.9997L8 18.9997L19.586 7.4137C19.9609 7.03864 20.1716 6.53003 20.1716 5.9997C20.1716 5.46937 19.9609 4.96075 19.586 4.5857L19.414 4.4137C19.0389 4.03876 18.5303 3.82812 18 3.82812C17.4697 3.82813 16.9611 4.03876 16.586 4.4137L5 15.9997Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                        </svg>
+                                    </div>
+                                </li>                  
+                                <li class="mb-7 ms-6">            
+                                    <span class="absolute flex items-center justify-center w-10 h-10 bg-orange-100 text-primary rounded-full -start-5">
+                                        H
+                                    </span>
+                                    <div class="ps-4">
+                                        <h4 class="text-sm md:text-base mb-1 font-medium ">Hard Skill</h4>
+                                        <div class="text-sm font-light">
+                                            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Alias ea aspernatur incidunt velit ab illo molestias ratione maxime iure! Reprehenderit optio eligendi, fugiat eos nihil vel et sapiente alias autem.
+                                            Molestias accusamus architecto tempore impedit. Atque, ab dolore! Molestiae quas cumque aspernatur culpa beatae dignissimos rerum, praesentium excepturi commodi itaque obcaecati neque esse blanditiis, quod totam quis officia eligendi earum!
+                                        </div>
+                                    </div>
+                                </li>
+                                
+                            </ol>
+                        </div>
+                    </div>
+
+                    <!-- Bahasa -->
+                    <div class="bg-white rounded-0 md:rounded-2xl p-6 mb-5">
+                        <div class="cursor-pointer flex items-center justify-between border-b pb-4">
+                            <h3 class="font-medium">Bahasa</h3>
+                            <div @click="show.bahasa = !show.bahasa" class="flex items-center gap-2 text-sm p-2 px-4 text-slate-400 hover:text-slate-600 hover:bg-slate-100 rounded-lg">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none">
+                                    <g clip-path="url(#clip0_428_2643)">
+                                        <path d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM16 13H13V16C13 16.55 12.55 17 12 17C11.45 17 11 16.55 11 16V13H8C7.45 13 7 12.55 7 12C7 11.45 7.45 11 8 11H11V8C11 7.45 11.45 7 12 7C12.55 7 13 7.45 13 8V11H16C16.55 11 17 11.45 17 12C17 12.55 16.55 13 16 13Z" fill="currentColor"/>
+                                    </g>
+                                    <defs>
+                                        <clipPath id="clip0_428_2643">
+                                        <rect width="24" height="24" fill="white"/>
+                                        </clipPath>
+                                    </defs>
+                                </svg>
+                                <span>Tambah</span>
+                            </div>
+                        </div>
+                        <div class="pt-5">
+                            <div v-if="show.bahasa" class="grid grid-cols-12 gap-x-5 py-3 mb-5">
+                                <div class="col-span-12">
+                                    <PartialsInput :inputClass="`border border-slate-200`" :placeholder="`Bahasa`" :label="`Bahasa`" />
+                                </div>
+                                <div class="col-span-12 lg:col-span-4">
+                                    <div class="text-sm mb-2 block text-slate-500">Membaca</div>
+                                    <select name="" id="" class="border border-slate-200 rounded-lg p-2 px-3 block w-full focus:border-emerald-600 focus:ring-emerald-600 text-sm">
+                                        <option selected>-- Lvl. Membaca --</option>
+                                        <option value="1">Kurang</option>
+                                        <option value="2">Baik</option>
+                                        <option value="3">Lancar</option>
+                                    </select>
+                                </div>
+                                <div class="col-span-12 lg:col-span-4">
+                                    <div class="text-sm mb-2 block text-slate-500">Menulis</div>
+                                    <select name="" id="" class="border border-slate-200 rounded-lg p-2 px-3 block w-full focus:border-emerald-600 focus:ring-emerald-600 text-sm">
+                                        <option selected>-- Lvl. Menulis --</option>
+                                        <option value="1">Kurang</option>
+                                        <option value="2">Baik</option>
+                                        <option value="3">Lancar</option>
+                                    </select>
+                                </div>
+                                <div class="col-span-12 lg:col-span-4">
+                                    <div class="text-sm mb-2 block text-slate-500">Berbicara</div>
+                                    <select name="" id="" class="border border-slate-200 rounded-lg p-2 px-3 block w-full focus:border-emerald-600 focus:ring-emerald-600 text-sm">
+                                        <option selected>-- Lvl. Berbicara --</option>
+                                        <option value="1">Kurang</option>
+                                        <option value="2">Baik</option>
+                                        <option value="3">Lancar</option>
+                                    </select>
+                                </div>
+                                <div class="col-span-12">
+                                    <div class="flex items-center justify-end gap-3 mt-4">
+                                        <PartialsButton @click="show.bahasa = false" :primary="false">Batal</PartialsButton>
+                                        <PartialsButton>Tambahkan</PartialsButton>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="grid grid-cols-12 gap-x-5">
+                                <div class="col-span-6">
+                                    <div class="relative">
+                                        <div class="absolute top-0 end-0 flex items-center justify-center w-[20px] h-[20px]">
+                                            <svg class="text-slate-300 hover:text-primary" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                <path d="M15 5.9997L18 8.9997M13 19.9997H21M5 15.9997L4 19.9997L8 18.9997L19.586 7.4137C19.9609 7.03864 20.1716 6.53003 20.1716 5.9997C20.1716 5.46937 19.9609 4.96075 19.586 4.5857L19.414 4.4137C19.0389 4.03876 18.5303 3.82812 18 3.82812C17.4697 3.82813 16.9611 4.03876 16.586 4.4137L5 15.9997Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                            </svg>     
+                                        </div>
+                                        <div class="flex flex-col gap-3">
+                                            <div class="font-medium text-sm">Inggriss</div>
+                                            <table class="w-full rounded-xl overflow-hidden">
+                                                <tr>
+                                                    <th class="text-start p-2 px-4 font-medium text-xs bg-slate-50 border-b">Membaca</th>
+                                                    <td class="p-2 px-4 text-sm">Baik</td>
+                                                </tr>
+                                                <tr>
+                                                    <th class="text-start p-2 px-4 font-medium text-xs bg-slate-50 border-b">Menulis</th>
+                                                    <td class="p-2 px-4 text-sm">Baik</td>
+                                                </tr>
+                                                <tr>
+                                                    <th class="text-start p-2 px-4 font-medium text-xs bg-slate-50 border-b">Berbicara</th>
+                                                    <td class="p-2 px-4 text-sm">Baik</td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-span-6">
+                                    <div class="relative">
+                                        <div class="absolute top-0 end-0 flex items-center justify-center w-[20px] h-[20px]">
+                                            <svg class="text-slate-300 hover:text-primary" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                <path d="M15 5.9997L18 8.9997M13 19.9997H21M5 15.9997L4 19.9997L8 18.9997L19.586 7.4137C19.9609 7.03864 20.1716 6.53003 20.1716 5.9997C20.1716 5.46937 19.9609 4.96075 19.586 4.5857L19.414 4.4137C19.0389 4.03876 18.5303 3.82812 18 3.82812C17.4697 3.82813 16.9611 4.03876 16.586 4.4137L5 15.9997Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                            </svg>
+                                        </div>
+                                        <div class="flex flex-col gap-3">
+                                            <div class="font-medium text-sm">Jepang</div>
+                                            <table class="w-full rounded-xl overflow-hidden">
+                                                <tr>
+                                                    <th class="text-start p-2 px-4 font-medium text-xs bg-slate-50 border-b">Membaca</th>
+                                                    <td class="p-2 px-4 text-sm">Baik</td>
+                                                </tr>
+                                                <tr>
+                                                    <th class="text-start p-2 px-4 font-medium text-xs bg-slate-50 border-b">Menulis</th>
+                                                    <td class="p-2 px-4 text-sm">Baik</td>
+                                                </tr>
+                                                <tr>
+                                                    <th class="text-start p-2 px-4 font-medium text-xs bg-slate-50 border-b">Berbicara</th>
+                                                    <td class="p-2 px-4 text-sm">Baik</td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
+
+        <AuthLogin :isOpen="openLogin" @close="openLogin = false" />
+
     </div>
 </template>
 
 <script setup>
 definePageMeta({
     layout:'default'
-})
+});
+
+const openLogin = ref(false)
+
+const show = ref({
+    editImageSosmed : true,
+    biodata : true,
+    informasi : true,
+    pendidikan : true,
+    pengalaman : true,
+    sertifikasi : true,
+    organisasi : true,
+    skill : true,
+    bahasa : true,
+});
+
+const downloadHandle = () => {
+    const login = localStorage.getItem('login')
+    if(login != 'true'){
+        openLogin.value = true;
+    }else{
+        const dokumenUrl = '/Example CV.pdf';
+        window.open(dokumenUrl, '_blank')
+    }
+       
+}
 </script>

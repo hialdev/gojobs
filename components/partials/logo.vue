@@ -4,7 +4,7 @@
             <NuxtImg
                 :src="imgBlended"
                 alt="Logo Gojobs"
-                :class="['h-[25px] cursor-pointer', customClass]"
+                :class="['h-[35px] cursor-pointer', customClass]"
             />
         </NuxtLink>
     </div>

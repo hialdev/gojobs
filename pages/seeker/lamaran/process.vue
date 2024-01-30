@@ -1,17 +1,17 @@
 <template>
     <div class="container mx-auto py-12 px-5">
         <h1 class="text-2xl font-medium mb-5">Diproses</h1>
-        <div class="flex items-center gap-12 border-b-2 mb-5">
-            <div class="mb-[-2px] cursor-pointer py-5 border-b-2 border-primary">Semua</div>
-            <div class="mb-[-2px] cursor-pointer py-5 border-b-2 border-slate-150 hover:border-primary">Seleksi</div>
-            <div class="mb-[-2px] cursor-pointer py-5 border-b-2 border-slate-150 hover:border-primary">Psikotest</div>
-            <div class="mb-[-2px] cursor-pointer py-5 border-b-2 border-slate-150 hover:border-primary">Wawancara HR</div>
-            <div class="mb-[-2px] cursor-pointer py-5 border-b-2 border-slate-150 hover:border-primary">Wawancara User</div>
-            <div class="mb-[-2px] cursor-pointer py-5 border-b-2 border-slate-150 hover:border-primary">Hiring</div>
+        <div class="flex items-center gap-x-9 lg:gap-x-12 border-b-2 border-slate-100 mb-5 overflow-x-auto">
+            <div @click="filter.status = null" class="cursor-pointer py-5 border-b-2 text-sm whitespace-nowrap" :class="{'border-slate-150 hover:border-primary' : filter.status != null, 'border-primary' : filter.status == null}">Semua</div>
+            <div @click="filter.status = 2 " class="cursor-pointer py-5 border-b-2 text-sm whitespace-nowrap" :class="{'border-slate-150 hover:border-primary' : filter.status != 2, 'border-primary' : filter.status == 2}">Seleksi</div>
+            <div @click="filter.status = 3 " class="cursor-pointer py-5 border-b-2 text-sm whitespace-nowrap" :class="{'border-slate-150 hover:border-primary' : filter.status != 3, 'border-primary' : filter.status == 3}">Psikotest</div>
+            <div @click="filter.status = 4 " class="cursor-pointer py-5 border-b-2 text-sm whitespace-nowrap" :class="{'border-slate-150 hover:border-primary' : filter.status != 4, 'border-primary' : filter.status == 4}">Wawancara HR</div>
+            <div @click="filter.status = 5 " class="cursor-pointer py-5 border-b-2 text-sm whitespace-nowrap" :class="{'border-slate-150 hover:border-primary' : filter.status != 5, 'border-primary' : filter.status == 5}">Wawancara User</div>
+            <div @click="filter.status = 6 " class="cursor-pointer py-5 border-b-2 text-sm whitespace-nowrap" :class="{'border-slate-150 hover:border-primary' : filter.status != 6, 'border-primary' : filter.status == 6}">Hiring</div>
         </div>
         <PartialsSelect class="block max-w-[15em] ms-auto" :label="`Urutkan`" />
         <div class="grid grid-cols-12 gap-4 mt-6">
-            <div v-for="job in jobs" class="col-span-12">
+            <div v-for="job in filteredJobs" class="col-span-12">
                 <NuxtLink :to="!job.open ? `` : `/lowongan/${job?.id}`" class="flex items-start gap-4 bg-white p-8 rounded-2xl flex-wrap" :class="!job.open ? `opacity-50` : ``">
                     <div class="flex-initial w-[6em]">
                         <NuxtImg :src="`${job?.logo}`" :alt="`${job.company} Logo`" class="block w-full" />
@@ -57,6 +57,10 @@ definePageMeta({
     layout:'seeker'
 })
 
+const filter = ref({
+    order : 'desc',
+    status : null,
+});
 const jobs = [
     {
         id:1,
@@ -146,11 +150,36 @@ const jobs = [
         open: true,
         logo: '/image/company/3.png',
     },
+    {
+        id:9,
+        title: 'Sales Representative',
+        company: 'Sales Dynamics Ltd.',
+        location: 'Cirebon',
+        salary: '6 - 8jt per bulan',
+        sent: '1 bulan yang lalu',
+        status: 2,
+        open: false,
+        logo: '/image/company/1.png',
+    },
+    {
+        id:10,
+        title: 'Human Resources Manager',
+        company: 'PeopleFirst Solutions',
+        location: 'Serang',
+        salary: '8 - 10jt per bulan',
+        sent: '1 bulan yang lalu',
+        status: 2,
+        open: true,
+        logo: '/image/company/3.png',
+    },
 ]
 
 const status = (key) => {
     let status = ""
     switch (key) {
+        case 2:
+            status = "Seleksi"
+            break;
         case 3:
             status = "Psikotest"
             break;
@@ -169,4 +198,30 @@ const status = (key) => {
     }
     return status;
 }
+
+const filteredJobs = computed(() => {
+    return jobs.filter((job) => {
+        let statusMatch = true;
+        if (filter.value.status !== null) {
+            statusMatch = filter.value.status === job.status;
+        }
+
+        return statusMatch;
+    });
+});
 </script>
+
+<style scoped>
+*::-webkit-scrollbar {
+  width: 2px;
+  height: 2px;
+}
+
+*::-webkit-scrollbar-track {
+  @apply bg-slate-100;
+}
+
+*::-webkit-scrollbar-thumb {
+  @apply bg-slate-100 rounded-2xl;
+}
+</style>

@@ -3,13 +3,13 @@
         <NuxtLayout name="lowongan">
             <div class="grid grid-cols-12 gap-4">
                 <!-- List Jobs -->
-                <div class="col-span-12 order-last lg:order-first lg:col-span-6 max-h-[47em] listjob lg:overflow-auto p-1 grid grid-cols-12 gap-4 pe-3">
+                <div class="col-span-12 order-last lg:order-first lg:col-span-6 max-h-[75vh] listjob lg:overflow-auto p-1 grid grid-cols-12 gap-4 pe-3">
                     <JobsCard v-if="jobs && jobs.length > 0" :jobs="jobs" />
                 </div>
                 <!-- End List Jobs -->
 
                 <!-- Jobs Detail -->
-                <div class="col-span-12 lg:col-span-6 ">
+                <div class="col-span-12 lg:col-span-6">
                   <slot />
                 </div>
                 <!-- End Jobs Detail -->
