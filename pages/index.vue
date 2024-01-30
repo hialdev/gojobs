@@ -348,7 +348,7 @@ export default {
                     <div class="col-span-12">
                         <h2 class="text-2xl text-center mb-7">Profesi pekerjaan yang dibutuhkan</h2>
                     </div>
-                    <div v-for="industry in industriesList" :key="industry.title" class="col-span-12 md:col-span-6 lg:col-span-3 mb-8 md:mb-0">
+                    <div v-for="industry in industriesList" :key="industry.title" class="col-span-12 md:col-span-6 lg:col-span-3 mb-4 md:mb-0">
                         <NuxtLink :to="industry.to" class="block w-full">
                             <div class="p-4 bg-white rounded-[25px] shadow-4xl hover:shadow-2xl hover:shadow-orange-300/20">
                                 <div class="flex items-center gap-5 mb-6">
