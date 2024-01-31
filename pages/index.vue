@@ -1,5 +1,6 @@
 <template>
-    <div>
+    <ModalLazyLoad v-if="!isReady" />
+    <div v-if="isReady">
         <AuthLogin />
         <section class="bg-cover min-h-screen bg-gray-800">
             <div class="container mx-auto h-screen px-5">

@@ -1,20 +1,27 @@
 <template>
     <div v-for="job in jobs" :key="job?.id" class="col-span-12 lg:col-span-6">
-        <NuxtLink :to="`/lowongan/${job.id}`" activeClass="ring-4 ring-orange-700/20 border-primary border" class="cursor-pointer block bg-white rounded-3xl p-6 hover:ring-4 hover:ring-orange-700/20 border border-white hover:border-primary">
+        <NuxtLink :to="`/lowongan/${job?.id}`" activeClass="activeCard" class="block bg-white p-6 rounded-3xl hover:ring-4 hover:ring-orange-700/20 border border-white hover:border hover:border-primary">
             <div class="flex items-start justify-between">
-                <NuxtImg :src="job?.logo" :alt="`Logo ${job?.company}`" class="h-[3em] mb-3" />
-                <PartialsFavbtn />
+                <NuxtImg
+                    :src="`${job?.logo ?? '/image/logo-ish.png'}`"
+                    alt=""
+                    width=""
+                    height=""
+                    class="h-[3em] mb-3 object-fit-contain"
+                />
+                <PartialsFavbtn :job="job" />
             </div>
-            <h3 class="text-base">{{job?.title}}</h3>
-            <p class="text-slate-500 text-sm mb-4">{{job?.company}}</p>
-            <ul class="text-sm md:text-base text-slate-600">
+            <h2 class="text-base">{{ job?.job_title }}</h2>
+            <p class="text-slate-500 text-sm mb-3">{{ job?.job_number }}</p>
+            <ul class="text-slate-600">
                 <li class="flex items-center gap-3 text-sm">
                     <div class="w-[20px]">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
                             <path d="M12 11.5C11.337 11.5 10.7011 11.2366 10.2322 10.7678C9.76339 10.2989 9.5 9.66304 9.5 9C9.5 8.33696 9.76339 7.70107 10.2322 7.23223C10.7011 6.76339 11.337 6.5 12 6.5C12.663 6.5 13.2989 6.76339 13.7678 7.23223C14.2366 7.70107 14.5 8.33696 14.5 9C14.5 9.3283 14.4353 9.65339 14.3097 9.95671C14.1841 10.26 13.9999 10.5356 13.7678 10.7678C13.5356 10.9999 13.26 11.1841 12.9567 11.3097C12.6534 11.4353 12.3283 11.5 12 11.5ZM12 2C10.1435 2 8.36301 2.7375 7.05025 4.05025C5.7375 5.36301 5 7.14348 5 9C5 14.25 12 22 12 22C12 22 19 14.25 19 9C19 7.14348 18.2625 5.36301 16.9497 4.05025C15.637 2.7375 13.8565 2 12 2Z" fill="#A6A6A6"/>
                         </svg>
                     </div>
-                    <span>{{ job?.location }}</span>
+                    <!-- Location -->
+                    <span>{{ job?.sap_area }}</span>
                 </li>
                 <li class="flex items-center gap-3 text-sm">
                     <div class="w-[20px]">
@@ -23,7 +30,8 @@
                             <path d="M2.25 9H21.75M6 14.0625H8.25V15H6V14.0625Z" stroke="#A6A6A6" stroke-width="1.5" stroke-linejoin="round"/>
                         </svg>
                     </div>
-                    <span>{{ job?.salary }}</span>
+                    <!-- Salary -->
+                    <span>up to {{ job?.salary ?? 'IDR 20.000.000' }}</span>
                 </li>
                 <li class="flex items-center gap-3 text-sm">
                     <div class="w-[20px]">
@@ -31,7 +39,8 @@
                             <path d="M20 6H16V4C16 2.89 15.11 2 14 2H10C8.89 2 8 2.89 8 4V6H4C2.89 6 2.01 6.89 2.01 8L2 19C2 20.11 2.89 21 4 21H20C21.11 21 22 20.11 22 19V8C22 6.89 21.11 6 20 6ZM14 6H10V4H14V6Z" fill="#A6A6A6"/>
                         </svg>
                     </div>
-                    <span>{{ job?.typeJob }}</span>
+                    <!-- Type -->
+                    <span>{{ job?.job_contract }}</span>
                 </li>
                 <li class="flex items-center gap-3 text-sm">
                     <div class="w-[20px]">
@@ -40,26 +49,22 @@
                             <path d="M12.0039 6V12.005L16.2434 16.245" stroke="#A6A6A6" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
                     </div>
-                    <span>{{ job?.datePosted }}</span>
+                    <span>{{ job?.datePosted ?? '2 hari yang lalu' }}</span>
                 </li>
             </ul>
         </NuxtLink>
     </div>       
 </template>
 
-<script>
-export default {
-    props: ['jobs'],
-    data(){
-        return{
-            
-        }
-    },
-    mounted() {
-        console.log('JobsListjob received jobs:', this.jobs);
-    },
-    methods: {
-        
-    },
-}
+<script setup>
+const props = defineProps({
+    jobs : Object,
+})
+
 </script>
+
+<style scoped>
+.activeCard{
+    @apply ring-4 border-primary ring-orange-700/20 ;
+}
+</style>

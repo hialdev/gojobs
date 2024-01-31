@@ -6,18 +6,13 @@
         <div v-else>
             <AppHeader :isBlended="isBlended" :isFixed="isFixed" />
         </div>
+        
         <slot />
     </div>
 </template>
 
-<script>
-export default {
-    data() {
-        return {
-            isBlended: false,
-            isFixed: false,
-            isLogin : process.client ? localStorage.getItem('login') : null,
-        };
-    },
-};
+<script setup>
+const isBlended = ref(false);
+const isFixed = ref(false);
+const isLogin = process.client ? localStorage.getItem('login') : null;
 </script>

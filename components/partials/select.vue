@@ -1,6 +1,6 @@
 <template>
     <div>
-        <label v-if="showLabel" for="" class="text-sm mb-3 block">{{label}}</label>
+        <label v-if="showLabel" for="" class="text-xs mb-3 block">{{label}}</label>
         <div class="relative z-[10]">
             <div :class="['cursor-pointer bg-white p-3 px-5 rounded-4xl flex justify-between items-center gap-3 text-gray-800 rounded-3xl', $parent.class, customClass]"
                 @click="toggleModal"

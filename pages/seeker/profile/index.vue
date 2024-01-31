@@ -1,5 +1,6 @@
 <template>
-    <div class="container mx-auto p-8 px-0 md:px-8">
+    <ModalLazyLoad v-if="!isReady"/>
+    <div v-if="isReady" class="container mx-auto p-8 px-0 md:px-8">
         <div class="grid grid-cols-12 gap-4">
             <div class="col-span-12">
                 <div class="flex flex-wrap items-center justify-end gap-4 my-5 px-5">
@@ -411,7 +412,7 @@
                                 <PartialsInput :inputClass="`border border-slate-200`" :placeholder="`Lokasi kerja`" :label="`Lokasi kerja`" />
                             </div>
                             <div class="col-span-12 md:col-span-6">
-                                <PartialsSelect :label="`Jenis Kontrak`" :options="[{key:'ct', value: 'Contract'},{key:'fr', value: 'freelance'},{key:'pt', value: 'Part Time'}]" :showLabel="true" class="z-[99] mb-5" :customClass="`border rounded-lg z-[99]`" />
+                                <PartialsSelect :label="`Jenis Kontrak`" :options="[{key:'ct', value: 'Contract'},{key:'fr', value: 'freelance'},{key:'pt', value: 'Part Time'}]" :showLabel="true" class="z-[99] mb-5" :customClass="`border rounded-3xl text-sm z-[99]`" />
                             </div>
                             <div class="col-span-12 md:col-span-6">
                                 <PartialsInput :inputClass="`border border-slate-200`" :label="`Tgl Mulai Kerja`" :typeInput="`date`" />
@@ -611,7 +612,7 @@
                             </div>
                         </div>
 
-                        <ol class="relative text-gray-500 border-s border-gray-200 dark:border-gray-700 dark:text-gray-400 ms-4">
+                        <ol v-for="organisasi in profileFull?.organizations?.data" class="relative text-gray-500 border-s border-gray-200 dark:border-gray-700 dark:text-gray-400 ms-4">
                             <li>
                                 <div class="absolute top-0 end-0 cursor-pointer flex items-center justify-center text-slate-300 hover:text-primary">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -621,10 +622,10 @@
                             </li>                  
                             <li class="mb-7 ms-6">            
                                 <span class="absolute flex items-center justify-center w-10 h-10 bg-orange-100 text-primary rounded-full -start-5">
-                                    B
+                                    {{organisasi?.organization_name.substring(0,1)}}
                                 </span>
                                 <div class="ps-4">
-                                    <h4 class="text-sm md:text-base mb-1 font-medium">BEM Universitas Indonesia</h4>
+                                    <h4 class="text-sm md:text-base mb-1 font-medium">{{organisasi?.organization_name}}</h4>
                                     <div class="flex items-center gap-x-4 text-sm text-slate-500 mb-4">
                                         <div class="flex items-center gap-3 flex-1">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 48 48"><g fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="4"><path d="M24 44c11.046 0 20-8.954 20-20S35.046 4 24 4S4 12.954 4 24s8.954 20 20 20Z"/><path stroke-linecap="round" d="M24.008 12v12.01l8.479 8.48"/></g></svg>
@@ -632,7 +633,7 @@
                                         </div>
                                         <div class="flex items-center gap-3 flex-1">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 36 36"><circle cx="16.86" cy="9.73" r="6.46" fill="currentColor"/><path fill="currentColor" d="M21 28h7v1.4h-7z"/><path fill="currentColor" d="M15 30v3a1 1 0 0 0 1 1h17a1 1 0 0 0 1-1V23a1 1 0 0 0-1-1h-7v-1.47a1 1 0 0 0-2 0V22h-2v-3.58a32.12 32.12 0 0 0-5.14-.42a26 26 0 0 0-11 2.39a3.28 3.28 0 0 0-1.88 3V30Zm17 2H17v-8h7v.42a1 1 0 0 0 2 0V24h6Z"/></svg>
-                                            Sekretaris
+                                            {{organisasi?.position}}
                                         </div>
                                     </div>
                                     <div class="text-sm font-light">
@@ -641,6 +642,90 @@
                                     </div>
                                 </div>
                             </li>
+                            
+                        </ol>
+                    </div>
+                </div>
+
+                <!-- Sertifikasi -->
+                <div class="bg-white rounded-0 md:rounded-2xl p-6 mb-5">
+                    <div class="cursor-pointer flex items-center justify-between border-b pb-4">
+                        <h3 class="font-medium">Sertifikasi</h3>
+                        <div @click="show.sertifikasi = !show.sertifikasi" class="flex items-center gap-2 text-sm p-2 px-4 text-slate-400 hover:text-slate-600 hover:bg-slate-100 rounded-lg">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none">
+                                <g clip-path="url(#clip0_428_2643)">
+                                    <path d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM16 13H13V16C13 16.55 12.55 17 12 17C11.45 17 11 16.55 11 16V13H8C7.45 13 7 12.55 7 12C7 11.45 7.45 11 8 11H11V8C11 7.45 11.45 7 12 7C12.55 7 13 7.45 13 8V11H16C16.55 11 17 11.45 17 12C17 12.55 16.55 13 16 13Z" fill="currentColor"/>
+                                </g>
+                                <defs>
+                                    <clipPath id="clip0_428_2643">
+                                    <rect width="24" height="24" fill="white"/>
+                                    </clipPath>
+                                </defs>
+                            </svg>
+                            <span>Tambah</span>
+                        </div>
+                    </div>
+                    <div class="pt-5">
+                        <div v-if="show.sertifikasi" class="grid grid-cols-12 gap-x-5 py-3 mb-5">
+                            <div class="col-span-12 md:col-span-6">
+                                <PartialsInput :inputClass="`border border-slate-200`" :placeholder="`Nama Sertifikasi`" :label="`Nama Sertifikasi`" />
+                            </div>
+                            <div class="col-span-12 md:col-span-6">
+                                <PartialsInput :inputClass="`border border-slate-200`" :placeholder="`Dikeluarkan oleh`" :label="`Dikeluarkan oleh`" />
+                            </div>
+                            <div class="col-span-12 md:col-span-6">
+                                <div class="text-xs mb-3">File</div>
+                                <PartialsFile />
+                            </div>
+                            <div class="col-span-12 md:col-span-6">
+                                <PartialsInput :inputClass="`border border-slate-200 text-sm`" :label="`Tgl Terbit`" :typeInput="`date`" />
+                            </div>
+                            <div class="col-span-12">
+                                <label for="" class="text-sm mb-3 block text-slate-500">Deksripsi Pengalaman Organisasi</label>
+                                <textarea name="" id="" cols="30" rows="10" class="w-full rounded-lg border border-slate-200 text-sm p-2 px-4 focus:border-emerald-600 focus:ring-emerald-600"></textarea>
+                            </div>
+                            <div class="col-span-12">
+                                <div class="flex items-center justify-end gap-3 mt-4">
+                                    <PartialsButton @click="show.sertifikasi = false" :primary="false">Batal</PartialsButton>
+                                    <PartialsButton>Tambahkan</PartialsButton>
+                                </div>
+                            </div>
+                        </div>
+
+                        <ol class="relative text-gray-500">
+                            <li>
+                                <div class="absolute top-0 end-0 cursor-pointer flex items-center justify-center text-slate-300 hover:text-primary">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                        <path d="M15 5.9997L18 8.9997M13 19.9997H21M5 15.9997L4 19.9997L8 18.9997L19.586 7.4137C19.9609 7.03864 20.1716 6.53003 20.1716 5.9997C20.1716 5.46937 19.9609 4.96075 19.586 4.5857L19.414 4.4137C19.0389 4.03876 18.5303 3.82812 18 3.82812C17.4697 3.82813 16.9611 4.03876 16.586 4.4137L5 15.9997Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </div>
+                                <div class="">
+                                    <h4 class="text-sm md:text-base mb-1 font-medium">Professional Certified</h4>
+                                    <div class="flex items-center gap-x-4 text-sm text-slate-500 mb-4">
+                                        <div class="flex items-center gap-3">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"><g fill="none"><path fill="currentColor" d="M4 7v2h16V7a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2"/><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 5h2a2 2 0 0 1 2 2v2H4V7a2 2 0 0 1 2-2h2m8 0V3m0 2H8m0-2v2M4 9.5V19a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9.5"/></g></svg>
+                                            29 Agustus 2019
+                                        </div>
+                                        <div class="flex items-center gap-3">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 36 36"><circle cx="16.86" cy="9.73" r="6.46" fill="currentColor"/><path fill="currentColor" d="M21 28h7v1.4h-7z"/><path fill="currentColor" d="M15 30v3a1 1 0 0 0 1 1h17a1 1 0 0 0 1-1V23a1 1 0 0 0-1-1h-7v-1.47a1 1 0 0 0-2 0V22h-2v-3.58a32.12 32.12 0 0 0-5.14-.42a26 26 0 0 0-11 2.39a3.28 3.28 0 0 0-1.88 3V30Zm17 2H17v-8h7v.42a1 1 0 0 0 2 0V24h6Z"/></svg>
+                                            CEP CCIT Fakultas Teknik Universitas Indonesia
+                                        </div>
+                                    </div>
+                                    <div class="p-5 flex items-center gap-5 rounded-lg border-slate-200 border-2">
+                                        <div class="flex items-center gap-3 text-primary cursor-pointer">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24"><path fill="currentColor" d="M18 22a2 2 0 0 0 2-2V8l-6-6H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2zM13 4l5 5h-5zM7 8h3v2H7zm0 4h10v2H7zm0 4h10v2H7z"/></svg>
+                                            <div>
+                                                <div class="text-sm font-medium">filename.pdf</div>
+                                                <div class="text-xs text-slate-500">1.5 MB</div>
+                                            </div>
+                                        </div>
+                                        <div class="text-xs font-light">
+                                            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Alias ea aspernatur incidunt velit ab illo molestias ratione maxime iure! Reprehenderit optio eligendi, fugiat eos nihil vel et sapiente alias autem.
+                                            Molestias accusamus architecto tempore impedit. Atque, ab dolore! Molestiae quas cumque aspernatur culpa beatae dignissimos rerum, praesentium excepturi commodi itaque obcaecati neque esse blanditiis, quod totam quis officia eligendi earum!
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>                  
                             
                         </ol>
                     </div>
@@ -844,9 +929,148 @@ const show = ref({
     skill : false,
     bahasa : false,
 });
+
+const profileForm = ref({
+    profile: {
+        image: {
+            path: '',
+            alt: ''
+        },
+        fullname: '',
+        email: '',
+        username: '',
+        lama_pengalaman: '',
+        posisi: '',
+        ringkasan: '',
+        sallary_exp: ''
+    },
+
+    sosmed: {
+        instagram: '',
+        twitter: '',
+        facebook: '',
+        linkedin: ''
+    },
+
+    biodata: {
+        kota_lahir: '',
+        tgl_lahir: '',
+        gender: '',
+        pernikahan: '',
+        agama: '',
+        tb: '',
+        bb: ''
+    },
+
+    informasi: {
+        mobile: '',
+        province: '',
+        full_address: ''
+    },
+
+    experience:
+    {
+        id: '',
+        jabatan: '',
+        company: '',
+        location: '',
+        type_contract: '',
+        start_date: '',
+        end_date: '',
+        total_month: '',
+        still: '',
+        description: '',
+        created_at: '',
+        updated_at: ''
+    },
+  
+    educations: 
+    {
+        id: '',
+        name: '',
+        majority: '',
+        location: '',
+        gpa: '',
+        start_date: '',
+        start_end: '',
+        still: '',
+        description: '',
+        created_at: '',
+        updated_at: ''
+    },
+    
+    organization:
+    {
+        id: '',
+        name: '',
+        role: '',
+        start_date: '',
+        start_end: '',
+        still: '',
+        description: '',
+        created_at: '',
+        updated_at: ''
+    },
+    
+    skill:
+    {
+        id: '',
+        name: '',
+        description: '',
+        created_at: '',
+        updated_at: ''
+    },
+    
+    language:
+    {
+        id: '',
+        name: '',
+        read: '',
+        write: '',
+        talk: '',
+        created_at: '',
+        updated_at: ''
+    },
+    
+    document:
+    {
+        ktp: {
+            no_ktp: '',
+            file_path: ''
+        },
+        npwp: {
+            no_npwp: '',
+            file_path: ''
+        },
+        sim: [
+            {
+                type: 'a',
+                no_sim: '',
+                file_path: ''
+            },
+            {
+                type: 'b',
+                no_sim: '',
+                file_path: ''
+            },
+            {
+                type: 'c',
+                no_sim: '',
+                file_path: ''
+            },
+        ]
+    },
+})
+
 const profile = ref(null)
-onMounted(() => {
+const isReady = ref(false)
+const profileFull = ref(null)
+onMounted(async () => {
+    profileFull.value = await user.getFullProfile();
     profile.value = JSON.parse(localStorage.getItem('profile'));
     console.log(profile?.value);
+    console.log(profileFull?.value);
+
+    isReady.value = true;
 })
 </script>

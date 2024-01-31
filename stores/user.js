@@ -137,43 +137,43 @@ export const useUserStore = defineStore('user',{
             var headers = new Headers();
             headers.append("token", localStorage.getItem('access_token'));
 
-            const profiles = await $fetch(`${this.API_URL}/biodata-profile/read`, {
+            const profiles = await $fetch(`${this.API_URL}/user/profile`, {
                 method : 'GET',
                 headers: headers,
             })
 
-            const experiences = await $fetch(`${this.API_URL}/biodata-experience/read`, {
-                method : 'GET',
-                headers: headers,
-            })
+            // const experiences = await $fetch(`${this.API_URL}/biodata-experience/read`, {
+            //     method : 'GET',
+            //     headers: headers,
+            // })
 
-            const educations = await $fetch(`${this.API_URL}/biodata-education/read`, {
-                method : 'GET',
-                headers: headers,
-            })
+            // const educations = await $fetch(`${this.API_URL}/biodata-education/read`, {
+            //     method : 'GET',
+            //     headers: headers,
+            // })
 
             const organizations = await $fetch(`${this.API_URL}/organization/read`, {
                 method : 'GET',
                 headers: headers,
             })
 
-            const languanges = await $fetch(`${this.API_URL}/biodata-languange/read`, {
-                method : 'GET',
-                headers: headers,
-            })
+            // const languanges = await $fetch(`${this.API_URL}/biodata-languange/read`, {
+            //     method : 'GET',
+            //     headers: headers,
+            // })
 
-            const eduNonformals = await $fetch(`${this.API_URL}/biodata-education-nonformal/read`, {
-                method : 'GET',
-                headers: headers,
-            })
+            // const eduNonformals = await $fetch(`${this.API_URL}/biodata-education-nonformal/read`, {
+            //     method : 'GET',
+            //     headers: headers,
+            // })
 
             return {
                 profile : profiles,
-                experiences : experiences,
-                educations : educations,
+                //experiences : experiences,
+                //educations : educations,
                 organizations : organizations,
-                languanges : languanges,
-                eduNonformals : eduNonformals,
+                //languanges : languanges,
+                //eduNonformals : eduNonformals,
             }
         }
     },

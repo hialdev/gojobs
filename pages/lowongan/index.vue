@@ -1,6 +1,7 @@
 <template>
-    <div class="grid grid-cols-12 gap-4">
-        <div v-for="job in listJobs" :key="job?.id" class="col-span-12 md:col-span-6 lg:col-span-3">
+    <ModalLazyLoad v-if="!isReady" />
+    <div v-if="isReady" class="grid grid-cols-12 gap-4">
+        <div v-for="job in job?.jobs?.data" :key="job?.id" class="col-span-12 md:col-span-6 lg:col-span-3">
             <NuxtLink :to="`/lowongan/${job?.id}`" class="block bg-white p-6 rounded-3xl hover:ring-4 hover:ring-orange-700/20 border border-white hover:border hover:border-primary">
                 <div class="flex items-start justify-between">
                     <NuxtImg
@@ -57,8 +58,8 @@
         </div>
         <div class="col-span-12 mb-12">
             <div class="flex items-center justify-center">
-                <button v-if="listJobs" @click="showMore" class="flex items-center gap-3 p-2 px-4 text-sm rounded-lg border-2 border-slate-100 hover:border-slate-300 bg-slate-100">
-                    <svg v-if="showClicked" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"><circle cx="12" cy="3.5" r="1.5" fill="currentColor" opacity="0"><animateTransform attributeName="transform" calcMode="discrete" dur="2.4s" repeatCount="indefinite" type="rotate" values="0 12 12;90 12 12;180 12 12;270 12 12"/><animate attributeName="opacity" dur="0.6s" keyTimes="0;0.5;1" repeatCount="indefinite" values="1;1;0"/></circle><circle cx="12" cy="3.5" r="1.5" fill="currentColor" opacity="0"><animateTransform attributeName="transform" begin="0.2s" calcMode="discrete" dur="2.4s" repeatCount="indefinite" type="rotate" values="30 12 12;120 12 12;210 12 12;300 12 12"/><animate attributeName="opacity" begin="0.2s" dur="0.6s" keyTimes="0;0.5;1" repeatCount="indefinite" values="1;1;0"/></circle><circle cx="12" cy="3.5" r="1.5" fill="currentColor" opacity="0"><animateTransform attributeName="transform" begin="0.4s" calcMode="discrete" dur="2.4s" repeatCount="indefinite" type="rotate" values="60 12 12;150 12 12;240 12 12;330 12 12"/><animate attributeName="opacity" begin="0.4s" dur="0.6s" keyTimes="0;0.5;1" repeatCount="indefinite" values="1;1;0"/></circle></svg>
+                <button v-if="job?.jobs?.data.length > 0" @click="showMore" class="flex items-center gap-3 p-2 px-4 text-sm rounded-lg border-2 border-slate-100 hover:border-slate-300 bg-slate-100">
+                    <svg v-if="showLoad" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"><circle cx="12" cy="3.5" r="1.5" fill="currentColor" opacity="0"><animateTransform attributeName="transform" calcMode="discrete" dur="2.4s" repeatCount="indefinite" type="rotate" values="0 12 12;90 12 12;180 12 12;270 12 12"/><animate attributeName="opacity" dur="0.6s" keyTimes="0;0.5;1" repeatCount="indefinite" values="1;1;0"/></circle><circle cx="12" cy="3.5" r="1.5" fill="currentColor" opacity="0"><animateTransform attributeName="transform" begin="0.2s" calcMode="discrete" dur="2.4s" repeatCount="indefinite" type="rotate" values="30 12 12;120 12 12;210 12 12;300 12 12"/><animate attributeName="opacity" begin="0.2s" dur="0.6s" keyTimes="0;0.5;1" repeatCount="indefinite" values="1;1;0"/></circle><circle cx="12" cy="3.5" r="1.5" fill="currentColor" opacity="0"><animateTransform attributeName="transform" begin="0.4s" calcMode="discrete" dur="2.4s" repeatCount="indefinite" type="rotate" values="60 12 12;150 12 12;240 12 12;330 12 12"/><animate attributeName="opacity" begin="0.4s" dur="0.6s" keyTimes="0;0.5;1" repeatCount="indefinite" values="1;1;0"/></circle></svg>
                     Tampilkan lebih banyak
                 </button>
             </div>
@@ -73,7 +74,9 @@ definePageMeta({
     layout: 'lowongan',
 });
 
-const showClicked = ref(false);
+const showLoad = ref(false);
+const isReady = ref(false)
+
 const job = useJobStore();
 const listJobs = ref([]);
 const filter = ref({
@@ -81,21 +84,19 @@ const filter = ref({
 })
 
 onMounted(
-    async () => {
-        const jobget = await job.getJobs();
-        listJobs.value = jobget.data;
-        console.log(listJobs)
+    () => {
+        job.getJobs();
+        isReady.value = true;
     }
+    
 )
 
-const showMore = async () => {
-    showClicked.value = true;
-
-    // Merequest ulang getJobs dengan parameter pageSize yang baru
-    const additionalJobs = await job.getJobs(filter.value.page_size);
-    listJobs.value = [...listJobs.value, ...additionalJobs.data];
-
-    showClicked.value = false;
+const showMore = () => {
+    showLoad.value = true;
+    setTimeout(() => {
+        job.moreJobs();
+        showLoad.value = false;
+    },2000);
 }
 
 const jobs = [

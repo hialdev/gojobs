@@ -1,5 +1,6 @@
 <template>
-    <div>
+    <ModalLazyLoad v-if="!isReady" />
+    <div v-if="isReady">
         <NuxtLayout name="notif">
             <template #notiflist>
                 <div class="flex flex-col gap-3">
@@ -51,6 +52,12 @@ const selectNotif = (notif) => {
 const isSelected = (notif) => {
   return selectedNotif.value && selectedNotif.value.id === notif.id;
 }
+
+const isReady = ref(false);
+
+onMounted(() => {
+    isReady.value = true;
+})
 const notifications = [
     {
         id : 1,

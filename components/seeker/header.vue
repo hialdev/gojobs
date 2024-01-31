@@ -1,6 +1,6 @@
 
 <template>
-    <div class="bg-white">
+    <div v-if="isReady" class="bg-white">
         <div class="container mx-auto flex items-center justify-between px-5 py-2">
             <PartialsLogo :path="`/seeker/dashboard`" />
             <div class="flex-1 flex justify-center">
@@ -189,6 +189,7 @@ import {useUserStore} from '@/stores/user'
 const notifShow = ref(false);
 const menuShow = ref(false);
 const logoutModal = ref(false);
+const isReady = ref(false);
 const profile = ref(null);
 const store = useUserStore();
 const logoutModalOn = () => {
@@ -209,6 +210,7 @@ const logoutHandle = async () => {
 }
 
 onMounted(() => {
+    isReady.value = true;
     profile.value = JSON.parse(localStorage.getItem('profile'));
 })
 </script>

@@ -1,5 +1,6 @@
 <template>
-    <div class="bg-slate-50">
+    <ModalLazyLoad v-if="!isReady" />
+    <div v-if="isReady" class="bg-slate-50">
         <div class="container mx-auto p-8 px-0 md:px-8">
             <div class="grid grid-cols-12 gap-4">
                 <div class="col-span-12">
@@ -809,6 +810,7 @@ definePageMeta({
 });
 
 const openLogin = ref(false)
+const isReady = ref(false)
 
 const show = ref({
     editImageSosmed : true,
@@ -832,4 +834,8 @@ const downloadHandle = () => {
     }
        
 }
+
+onMounted(() => {
+     isReady.value = true;
+})
 </script>

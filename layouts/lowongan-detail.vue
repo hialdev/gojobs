@@ -3,8 +3,16 @@
         <NuxtLayout name="lowongan">
             <div class="grid grid-cols-12 gap-4">
                 <!-- List Jobs -->
-                <div class="col-span-12 order-last lg:order-first lg:col-span-6 max-h-[75vh] listjob lg:overflow-auto p-1 grid grid-cols-12 gap-4 pe-3">
-                    <JobsCard v-if="jobs && jobs.length > 0" :jobs="jobs" />
+                <div class="col-span-12 order-last lg:order-first lg:col-span-6 max-h-[84vh] listjob lg:overflow-auto p-1 grid grid-cols-12 gap-4 pe-3">
+                    <JobsCard :jobs="store?.jobs?.data" />
+                    <div class="col-span-12">
+                        <div class="flex items-center justify-center">
+                            <button v-if="store?.jobs?.data?.length > 0" @click="showMore" class="flex items-center gap-3 p-2 px-4 text-sm rounded-lg border-2 border-slate-100 hover:border-slate-300 bg-slate-100">
+                                <svg v-if="showLoad" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"><circle cx="12" cy="3.5" r="1.5" fill="currentColor" opacity="0"><animateTransform attributeName="transform" calcMode="discrete" dur="2.4s" repeatCount="indefinite" type="rotate" values="0 12 12;90 12 12;180 12 12;270 12 12"/><animate attributeName="opacity" dur="0.6s" keyTimes="0;0.5;1" repeatCount="indefinite" values="1;1;0"/></circle><circle cx="12" cy="3.5" r="1.5" fill="currentColor" opacity="0"><animateTransform attributeName="transform" begin="0.2s" calcMode="discrete" dur="2.4s" repeatCount="indefinite" type="rotate" values="30 12 12;120 12 12;210 12 12;300 12 12"/><animate attributeName="opacity" begin="0.2s" dur="0.6s" keyTimes="0;0.5;1" repeatCount="indefinite" values="1;1;0"/></circle><circle cx="12" cy="3.5" r="1.5" fill="currentColor" opacity="0"><animateTransform attributeName="transform" begin="0.4s" calcMode="discrete" dur="2.4s" repeatCount="indefinite" type="rotate" values="60 12 12;150 12 12;240 12 12;330 12 12"/><animate attributeName="opacity" begin="0.4s" dur="0.6s" keyTimes="0;0.5;1" repeatCount="indefinite" values="1;1;0"/></circle></svg>
+                                Tampilkan lebih banyak
+                            </button>
+                        </div>
+                    </div>
                 </div>
                 <!-- End List Jobs -->
 
@@ -18,101 +26,22 @@
   </div>
 </template>
 
-<script>
-export default {
-    data(){
-        return{
-            jobs : [
-                {
-                    id:1,
-                    title: 'Administrative Assistant',
-                    company: 'Cogency Marketing Indonesia',
-                    location: 'Jakarta Barat',
-                    salary: '4,8 - 6jt per bulan',
-                    datePosted: '3 hari yang lalu',
-                    typeJob: 'full-time',
-                    logo: '/image/company/4.png',
-                },
-                {
-                    id:2,
-                    title: 'Software Developer',
-                    company: 'Tech Solutions Inc.',
-                    location: 'Jakarta Selatan',
-                    salary: '8 - 10jt per bulan',
-                    datePosted: '5 hari yang lalu',
-                    typeJob: 'part-time',
-                    logo: '/image/company/1.png',
-                },
-                {
-                    id:3,
-                    title: 'Marketing Specialist',
-                    company: 'Dynamic Marketing Agency',
-                    location: 'Tangerang',
-                    salary: '5 - 7jt per bulan',
-                    datePosted: '1 minggu yang lalu',
-                    typeJob: 'freelance',
-                    logo: '/image/company/2.png',
-                },
-                {
-                    id:4,
-                    title: 'Graphic Designer',
-                    company: 'Creative Designs Studio',
-                    location: 'Depok',
-                    salary: '6 - 8jt per bulan',
-                    datePosted: '2 minggu yang lalu',
-                    typeJob: 'temporary',
-                    logo: '/image/company/3.png',
-                },
-                {
-                    id:5,
-                    title: 'Customer Support Specialist',
-                    company: 'Supportive Solutions LLC',
-                    location: 'Bekasi',
-                    salary: '5 - 7jt per bulan',
-                    datePosted: '2 minggu yang lalu',
-                    typeJob: 'full-time',
-                    logo: '/image/company/4.png',
-                },
-                {
-                    id:6,
-                    title: 'Accounting Assistant',
-                    company: 'Numbers Crunch Inc.',
-                    location: 'Bogor',
-                    salary: '4,5 - 6,5jt per bulan',
-                    datePosted: '3 minggu yang lalu',
-                    typeJob:'remote',
-                    logo: '/image/company/2.png',
-                },
-                {
-                    id:7,
-                    title: 'Sales Representative',
-                    company: 'Sales Dynamics Ltd.',
-                    location: 'Cirebon',
-                    salary: '6 - 8jt per bulan',
-                    datePosted: '1 bulan yang lalu',
-                    typeJob: 'full-time',
-                    logo: '/image/company/1.png',
-                },
-                {
-                    id:8,
-                    title: 'Human Resources Manager',
-                    company: 'PeopleFirst Solutions',
-                    location: 'Serang',
-                    salary: '8 - 10jt per bulan',
-                    datePosted: '1 bulan yang lalu',
-                    typeJob: 'part-time',
-                    logo: '/image/company/3.png',
-                },
-            ]
-        }
-    },
-    computed:{
-        
-    },
-    methods: {
-        
-    },
+<script setup>
+const store = useJobStore();
+const showLoad = ref(false);
+
+onMounted(async () => {
+    store.getJobs();
+})
+
+const showMore = () => {
+    showLoad.value = true;
+    setTimeout(() => {
+        store.moreJobs();
+        showLoad.value = false;
+    },2000);
 }
+
 </script>
 
 <style scoped>
