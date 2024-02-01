@@ -97,7 +97,9 @@ const loginHandle = async () => {
     const login = await store.login(loginForm.value.username, loginForm.value.password);
     console.log(login);
     if(login?.success){
-        if(login?.verify_status == 1){
+        const profile = await store.getProfile();
+        if(profile?.verify_status == 1){
+            localStorage.setItem('profile',JSON.stringify(profile));
             setTimeout(() => {
                 navigateTo('/seeker/dashboard');
             }, 1000);

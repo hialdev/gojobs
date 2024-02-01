@@ -51,7 +51,6 @@ export const useUserStore = defineStore('user',{
             })
             if(login.success){
                 localStorage.setItem('login','true');
-                localStorage.setItem('profile',JSON.stringify(login));
                 localStorage.setItem('access_token',login.access_token);
             }
 
@@ -137,44 +136,12 @@ export const useUserStore = defineStore('user',{
             var headers = new Headers();
             headers.append("token", localStorage.getItem('access_token'));
 
-            const profiles = await $fetch(`${this.API_URL}/user/profile`, {
+            const profiles = await $fetch(`${this.API_URL}/user/profile-detail`, {
                 method : 'GET',
                 headers: headers,
             })
 
-            // const experiences = await $fetch(`${this.API_URL}/biodata-experience/read`, {
-            //     method : 'GET',
-            //     headers: headers,
-            // })
-
-            // const educations = await $fetch(`${this.API_URL}/biodata-education/read`, {
-            //     method : 'GET',
-            //     headers: headers,
-            // })
-
-            const organizations = await $fetch(`${this.API_URL}/organization/read`, {
-                method : 'GET',
-                headers: headers,
-            })
-
-            // const languanges = await $fetch(`${this.API_URL}/biodata-languange/read`, {
-            //     method : 'GET',
-            //     headers: headers,
-            // })
-
-            // const eduNonformals = await $fetch(`${this.API_URL}/biodata-education-nonformal/read`, {
-            //     method : 'GET',
-            //     headers: headers,
-            // })
-
-            return {
-                profile : profiles,
-                //experiences : experiences,
-                //educations : educations,
-                organizations : organizations,
-                //languanges : languanges,
-                //eduNonformals : eduNonformals,
-            }
+            return profiles
         }
     },
     

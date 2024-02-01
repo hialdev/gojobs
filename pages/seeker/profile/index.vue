@@ -19,8 +19,8 @@
                                 <path d="M15 5.9997L18 8.9997M13 19.9997H21M5 15.9997L4 19.9997L8 18.9997L19.586 7.4137C19.9609 7.03864 20.1716 6.53003 20.1716 5.9997C20.1716 5.46937 19.9609 4.96075 19.586 4.5857L19.414 4.4137C19.0389 4.03876 18.5303 3.82812 18 3.82812C17.4697 3.82813 16.9611 4.03876 16.586 4.4137L5 15.9997Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                             </svg>
                         </div>
-                        <NuxtImg :src="profile?.image ?? `https://ui-avatars.com/api/?name=${profile?.profile?.fullname}`" height="100" width="100" class="block rounded-full border p-1" />
-                        <h2 class="text-xl font-medium">{{profile?.profile?.fullname}}</h2>
+                        <NuxtImg :src="profile?.image ?? `https://ui-avatars.com/api/?name=${profile?.profile[0]?.fullname}`" height="100" width="100" class="block rounded-full border p-1" />
+                        <h2 class="text-xl font-medium">{{profile?.profile[0]?.fullname}}</h2>
                         <div>{{profile?.username}}</div>
                         <p class="text-sm text-gray-500">{{profile?.email}}</p>
                         <div class="flex items-center gap-3 my-3">
@@ -106,19 +106,19 @@
                                     </clipPath>
                                 </defs>
                             </svg>
-                            <span class="">{{profile?.profile?.birthplace}}, {{profile?.profile?.birthdate}}</span>
+                            <span class="">{{profile?.profile[0]?.birth_place}}, {{profile?.profile[0]?.birth_date}}</span>
                         </li>
                         <li class="flex items-center gap-4 text-sm">
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="21" viewBox="0 0 20 21" fill="none">
                                 <path d="M16.2495 2.375H13.1245C12.9587 2.375 12.7997 2.44085 12.6825 2.55806C12.5653 2.67527 12.4995 2.83424 12.4995 3C12.4995 3.16576 12.5653 3.32473 12.6825 3.44194C12.7997 3.55915 12.9587 3.625 13.1245 3.625H14.7409L12.776 5.58984C12.1991 5.05218 11.5032 4.65861 10.7451 4.44128C9.98698 4.22396 9.18823 4.18903 8.41406 4.33936C7.63989 4.4897 6.91226 4.82102 6.2906 5.30628C5.66894 5.79154 5.17088 6.41696 4.8371 7.13148C4.50332 7.84599 4.34329 8.62932 4.37007 9.4175C4.39686 10.2057 4.6097 10.9763 4.99122 11.6665C5.37273 12.3567 5.9121 12.9469 6.56527 13.3888C7.21844 13.8308 7.96688 14.1119 8.74947 14.2094V15.5H6.87447C6.70871 15.5 6.54974 15.5658 6.43253 15.6831C6.31532 15.8003 6.24947 15.9592 6.24947 16.125C6.24947 16.2908 6.31532 16.4497 6.43253 16.5669C6.54974 16.6842 6.70871 16.75 6.87447 16.75H8.74947V18.625C8.74947 18.7908 8.81532 18.9497 8.93253 19.0669C9.04974 19.1842 9.20871 19.25 9.37447 19.25C9.54023 19.25 9.6992 19.1842 9.81641 19.0669C9.93362 18.9497 9.99947 18.7908 9.99947 18.625V16.75H11.8745C12.0402 16.75 12.1992 16.6842 12.3164 16.5669C12.4336 16.4497 12.4995 16.2908 12.4995 16.125C12.4995 15.9592 12.4336 15.8003 12.3164 15.6831C12.1992 15.5658 12.0402 15.5 11.8745 15.5H9.99947V14.2094C10.8372 14.1047 11.6348 13.7894 12.3176 13.2928C13.0004 12.7963 13.5461 12.1347 13.9038 11.37C14.2615 10.6052 14.4195 9.76228 14.363 8.9199C14.3065 8.07753 14.0374 7.26324 13.5807 6.55313L15.6245 4.50859V6.125C15.6245 6.29076 15.6903 6.44973 15.8075 6.56694C15.9247 6.68415 16.0837 6.75 16.2495 6.75C16.4152 6.75 16.5742 6.68415 16.6914 6.56694C16.8086 6.44973 16.8745 6.29076 16.8745 6.125V3C16.8745 2.83424 16.8086 2.67527 16.6914 2.55806C16.5742 2.44085 16.4152 2.375 16.2495 2.375ZM9.37447 13C8.63279 13 7.90777 12.7801 7.29108 12.368C6.6744 11.956 6.19375 11.3703 5.90993 10.6851C5.6261 9.99984 5.55183 9.24584 5.69653 8.51841C5.84122 7.79098 6.19838 7.1228 6.72282 6.59835C7.24727 6.0739 7.91546 5.71675 8.64288 5.57206C9.37031 5.42736 10.1243 5.50162 10.8095 5.78545C11.4948 6.06928 12.0804 6.54993 12.4925 7.16661C12.9045 7.7833 13.1245 8.50832 13.1245 9.25C13.1234 10.2442 12.728 11.1975 12.025 11.9005C11.3219 12.6035 10.3687 12.999 9.37447 13Z" fill="#797979"/>
                             </svg>
-                            <span class="">{{profile?.profile?.gender}}</span>
+                            <span class="">{{profile?.profile[0]?.gender}}</span>
                         </li>
                         <li class="flex items-center gap-4 text-sm">
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="21" viewBox="0 0 20 21" fill="none">
                                 <path d="M6.4 3.5C3.97 3.5 2 5.47 2 7.9C2 12.3 7.2 16.3 10 17.2304C12.8 16.3 18 12.3 18 7.9C18 5.47 16.03 3.5 13.6 3.5C12.112 3.5 10.796 4.2388 10 5.3696C9.59427 4.79168 9.05526 4.32004 8.42861 3.9946C7.80196 3.66915 7.10612 3.4995 6.4 3.5Z" stroke="#797979" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
                             </svg>
-                            <span class="">Belum Menikah</span>
+                            <span class="">{{profile?.profile[0]?.marital_status}}</span>
                         </li>
                         <li class="flex items-center gap-4 text-sm">
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
@@ -139,13 +139,13 @@
                                     </clipPath>
                                 </defs>
                             </svg>
-                            <span class="">Islam</span>
+                            <span class="">{{profile?.profile[0]?.religion}}</span>
                         </li>
                         <li class="flex items-center gap-4 text-sm">
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
                                 <path d="M10 6.66667C9.34073 6.66667 8.69626 6.86216 8.1481 7.22844C7.59994 7.59471 7.17269 8.1153 6.9204 8.72439C6.66811 9.33348 6.6021 10.0037 6.73072 10.6503C6.85933 11.2969 7.1768 11.8908 7.64298 12.357C8.10915 12.8232 8.7031 13.1407 9.3497 13.2693C9.9963 13.3979 10.6665 13.3319 11.2756 13.0796C11.8847 12.8273 12.4053 12.4001 12.7716 11.8519C13.1378 11.3037 13.3333 10.6593 13.3333 10C13.3333 9.11595 12.9821 8.2681 12.357 7.64298C11.7319 7.01786 10.8841 6.66667 10 6.66667ZM10 12C9.60444 12 9.21776 11.8827 8.88886 11.6629C8.55996 11.4432 8.30362 11.1308 8.15224 10.7654C8.00087 10.3999 7.96126 9.99778 8.03843 9.60982C8.1156 9.22186 8.30608 8.86549 8.58579 8.58579C8.86549 8.30608 9.22186 8.1156 9.60982 8.03843C9.99778 7.96126 10.3999 8.00087 10.7654 8.15224C11.1308 8.30362 11.4432 8.55996 11.6629 8.88886C11.8827 9.21776 12 9.60444 12 10C12 10.5304 11.7893 11.0391 11.4142 11.4142C11.0391 11.7893 10.5304 12 10 12ZM19.3333 4H0.666667C0.489856 4 0.320286 4.07024 0.195262 4.19526C0.0702379 4.32029 0 4.48986 0 4.66667V15.3333C0 15.5101 0.0702379 15.6797 0.195262 15.8047C0.320286 15.9298 0.489856 16 0.666667 16H19.3333C19.5101 16 19.6797 15.9298 19.8047 15.8047C19.9298 15.6797 20 15.5101 20 15.3333V4.66667C20 4.48986 19.9298 4.32029 19.8047 4.19526C19.6797 4.07024 19.5101 4 19.3333 4ZM15.4708 14.6667H4.52917C4.30534 13.9097 3.89567 13.2207 3.33749 12.6625C2.7793 12.1043 2.09033 11.6947 1.33333 11.4708V8.52917C2.09033 8.30534 2.7793 7.89567 3.33749 7.33749C3.89567 6.7793 4.30534 6.09033 4.52917 5.33333H15.4708C15.6947 6.09033 16.1043 6.7793 16.6625 7.33749C17.2207 7.89567 17.9097 8.30534 18.6667 8.52917V11.4708C17.9097 11.6947 17.2207 12.1043 16.6625 12.6625C16.1043 13.2207 15.6947 13.9097 15.4708 14.6667ZM18.6667 7.11417C17.867 6.77033 17.2297 6.13297 16.8858 5.33333H18.6667V7.11417ZM3.11417 5.33333C2.77033 6.13297 2.13297 6.77033 1.33333 7.11417V5.33333H3.11417ZM1.33333 12.8858C2.13297 13.2297 2.77033 13.867 3.11417 14.6667H1.33333V12.8858ZM16.8858 14.6667C17.2297 13.867 17.867 13.2297 18.6667 12.8858V14.6667H16.8858Z" fill="#797979"/>
                             </svg>
-                            <span class="">IDR 7.500.000</span>
+                            <span class="">IDR {{profile?.profile[0]?.exp_salary ?? '8000000'}}</span>
                         </li>
                         <li class="flex items-center gap-4 text-sm">
                             <svg xmlns="http://www.w3.org/2000/svg" class="text-slate-500" width="18" height="18" viewBox="0 0 24 24"><path fill="currentColor" d="M19 4h-1.45A3.08 3.08 0 0 0 17 3a3 3 0 0 0-2.25-1H9.27A3 3 0 0 0 7 3a3.08 3.08 0 0 0-.57 1H5a3 3 0 0 0-3 3v12a3 3 0 0 0 3 3h14a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3m-10.48.34A1 1 0 0 1 9.27 4h5.46a1 1 0 0 1 .75.34a1 1 0 0 1 .25.78l-.5 4a1 1 0 0 1-1 .88h-1.64l1.14-2.4a1 1 0 0 0-1.8-.86L10.37 10h-.6a1 1 0 0 1-1-.88l-.5-4a1 1 0 0 1 .25-.78M20 19a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h1.37l.42 3.37a3 3 0 0 0 3 2.63h4.46a3 3 0 0 0 3-2.63L17.63 6H19a1 1 0 0 1 1 1Zm-6-3h-4a1 1 0 0 0 0 2h4a1 1 0 0 0 0-2"/></svg>
@@ -255,7 +255,7 @@
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="21" viewBox="0 0 20 21" fill="none">
                                 <path d="M17.3727 12.8795L13.6922 11.2303L13.682 11.2256C13.491 11.1439 13.2825 11.1111 13.0756 11.1302C12.8687 11.1493 12.6698 11.2197 12.4969 11.335C12.4765 11.3484 12.457 11.3631 12.4383 11.3787L10.5367 12.9998C9.33204 12.4147 8.08829 11.1803 7.50313 9.99125L9.12657 8.06078C9.14219 8.04125 9.15704 8.02172 9.1711 8.00062C9.28394 7.8282 9.35239 7.63056 9.37039 7.42529C9.38838 7.22002 9.35534 7.01348 9.27423 6.82406V6.81469L7.62032 3.12797C7.51309 2.88052 7.3287 2.67438 7.09468 2.54034C6.86067 2.4063 6.58958 2.35153 6.32188 2.38422C5.26326 2.52352 4.29155 3.04341 3.58824 3.84679C2.88492 4.65017 2.49809 5.6821 2.50001 6.74984C2.50001 12.953 7.54688 17.9998 13.75 17.9998C14.8177 18.0018 15.8497 17.6149 16.6531 16.9116C17.4564 16.2083 17.9763 15.2366 18.1156 14.178C18.1484 13.9104 18.0937 13.6393 17.9598 13.4053C17.8259 13.1713 17.62 12.9869 17.3727 12.8795ZM13.75 16.7498C11.0987 16.7469 8.55687 15.6924 6.68214 13.8177C4.8074 11.943 3.7529 9.40112 3.75001 6.74984C3.74707 5.98694 4.02192 5.24906 4.52324 4.67399C5.02456 4.09892 5.71806 3.72599 6.47423 3.62484C6.47392 3.62796 6.47392 3.6311 6.47423 3.63422L8.11485 7.30609L6.50001 9.2389C6.48362 9.25776 6.46873 9.27788 6.45548 9.29906C6.33791 9.47947 6.26894 9.68718 6.25525 9.90208C6.24157 10.117 6.28362 10.3318 6.37735 10.5256C7.08516 11.9733 8.54376 13.4209 10.007 14.128C10.2023 14.2208 10.4184 14.2614 10.634 14.2458C10.8497 14.2302 11.0576 14.1589 11.2375 14.0389C11.2576 14.0254 11.2769 14.0108 11.2953 13.9952L13.1945 12.3748L16.8664 14.0194H16.875C16.7751 14.7766 16.4027 15.4715 15.8275 15.9741C15.2524 16.4766 14.5138 16.7524 13.75 16.7498Z" fill="#797979"/>
                             </svg>
-                            <span class="">+62 878 888 5555</span>
+                            <span class="">{{profile?.mobile}}</span>
                         </li>
                         <li class="flex items-center gap-4 text-sm">
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="21" viewBox="0 0 20 21" fill="none">
@@ -268,7 +268,7 @@
                                     </clipPath>
                                 </defs>
                             </svg>
-                            <span class="">jhonsmith@gmail.com</span>
+                            <span class="">{{profile?.email}}</span>
                         </li>
                         <li class="flex items-center gap-4 text-sm">
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="21" viewBox="0 0 20 21" fill="none">
@@ -281,21 +281,11 @@
                                     </clipPath>
                                 </defs>
                             </svg>
-                            <span class="">Prov. DKI Jakarta</span>
+                            <span class="">{{profile?.profile[0]?.address}}</span>
                         </li>
                         <li class="flex items-start gap-4 text-sm">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" viewBox="0 0 20 20" fill="none">
-                                <g clip-path="url(#clip0_441_1575)">
-                                    <path d="M9.99935 1.66699C6.77435 1.66699 4.16602 4.27533 4.16602 7.50033C4.16602 11.8753 9.99935 18.3337 9.99935 18.3337C9.99935 18.3337 15.8327 11.8753 15.8327 7.50033C15.8327 4.27533 13.2243 1.66699 9.99935 1.66699ZM5.83268 7.50033C5.83268 5.20033 7.69935 3.33366 9.99935 3.33366C12.2993 3.33366 14.166 5.20033 14.166 7.50033C14.166 9.90033 11.766 13.492 9.99935 15.7337C8.26602 13.5087 5.83268 9.87533 5.83268 7.50033Z" fill="#797979"/>
-                                    <path d="M9.99935 9.58366C11.1499 9.58366 12.0827 8.65092 12.0827 7.50033C12.0827 6.34973 11.1499 5.41699 9.99935 5.41699C8.84876 5.41699 7.91602 6.34973 7.91602 7.50033C7.91602 8.65092 8.84876 9.58366 9.99935 9.58366Z" fill="#797979"/>
-                                </g>
-                                <defs>
-                                    <clipPath id="clip0_441_1575">
-                                    <rect width="35" height="35" fill="white"/>
-                                    </clipPath>
-                                </defs>
-                            </svg>
-                            <span class="">Jl. Raya Condet No.13B RT.4/RW.4, Batu Ampar, Kramat Jati, Jagakarsa, 13910</span>
+                            <svg class="text-gray-500" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M9 11a3 3 0 1 0 6 0a3 3 0 0 0-6 0"/><path d="M17.657 16.657L13.414 20.9a2 2 0 0 1-2.827 0l-4.244-4.243a8 8 0 1 1 11.314 0"/></g></svg>
+                            <span class="">{{profile?.profile[0]?.address}}, {{profile?.profile[0]?.postalcode}}</span>
                         </li>
                     </ul>
                     <ul v-if="show.informasi" class="flex flex-col py-5">
@@ -433,42 +423,42 @@
                             </div>
                         </div>
                         <ol class="relative text-gray-500 border-s border-gray-200 dark:border-gray-700 dark:text-gray-400 ms-4">
-                            <li>
-                                <div class="absolute top-0 end-0 cursor-pointer flex items-center justify-center text-slate-300 hover:text-primary">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                        <path d="M15 5.9997L18 8.9997M13 19.9997H21M5 15.9997L4 19.9997L8 18.9997L19.586 7.4137C19.9609 7.03864 20.1716 6.53003 20.1716 5.9997C20.1716 5.46937 19.9609 4.96075 19.586 4.5857L19.414 4.4137C19.0389 4.03876 18.5303 3.82812 18 3.82812C17.4697 3.82813 16.9611 4.03876 16.586 4.4137L5 15.9997Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                    </svg>
-                                </div>
-                            </li>
-                            <li class="mb-7 ms-6">            
+                            <li v-for="(exp, index) in profile?.experience" :key="index" class="mb-7 ms-6">            
                                 <span class="absolute flex items-center justify-center w-10 h-10 bg-orange-100 text-primary rounded-full -start-5">
-                                    W
+                                    {{exp?.last_position?.substring(0,1)}}
                                 </span>
-                                <div class="ps-4">
-                                    <h4 class="text-sm md:text-base font-medium mb-1">Web Design & Development Team Leader</h4>
-                                    <div class="flex flex-wrap items-center gap-x-4 mb-3 text-xs md:text-sm">
-                                        <span>Tech Solutions Inc</span>|
-                                        <span>May - September 2022</span>|
-                                        <span>5 bulan</span>
+                                <div class="flex items-start justify-between">
+                                    <div class="ps-4">
+                                        <h4 class="text-sm md:text-base font-medium mb-1">{{exp?.last_position}}</h4>
+                                        <div class="flex flex-wrap items-center gap-x-4 mb-3 text-xs md:text-sm">
+                                            <span>{{exp?.company_name}}</span>|
+                                            <span>{{formatTanggal(exp?.start_date)}} - {{formatTanggal(exp?.end_date)}}</span>|
+                                            <span>{{hitungSelisihBulan(exp?.start_date, exp?.end_date)}}</span>
+                                        </div>
+                                        <ul class="flex items-center gap-6 text-xs md:text-sm mb-3">
+                                            <li class="flex items-center gap-2">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                                    <path d="M12 7.83398C12 8.36442 11.7893 8.87312 11.4142 9.2482C11.0391 9.62327 10.5304 9.83398 10 9.83398C9.46957 9.83398 8.96086 9.62327 8.58579 9.2482C8.21071 8.87312 8 8.36442 8 7.83398C8 7.30355 8.21071 6.79484 8.58579 6.41977C8.96086 6.0447 9.46957 5.83398 10 5.83398C10.5304 5.83398 11.0391 6.0447 11.4142 6.41977C11.7893 6.79484 12 7.30355 12 7.83398Z" fill="#797979"/>
+                                                    <path d="M15.6243 7.39616C15.6243 10.5607 13.541 14.167 9.89518 18.3337C6.24935 14.167 4.16602 10.5607 4.16602 7.39616C4.16602 5.87669 4.76962 4.41945 5.84405 3.34503C6.91848 2.2706 8.37571 1.66699 9.89518 1.66699C11.4147 1.66699 12.8719 2.2706 13.9463 3.34503C15.0207 4.41945 15.6243 5.87669 15.6243 7.39616Z" stroke="#797979" stroke-linejoin="round"/>
+                                                </svg>
+                                                <span>{{exp?.company_address}}</span>
+                                            </li>
+                                            <li class="flex items-center gap-2">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                                    <path d="M17.9996 4.43959H13.6276V3.37559C13.6276 3.00428 13.4801 2.64819 13.2176 2.38564C12.955 2.12309 12.5989 1.97559 12.2276 1.97559H7.77161C7.40031 1.97559 7.04421 2.12309 6.78166 2.38564C6.51911 2.64819 6.37161 3.00428 6.37161 3.37559V4.43959H1.99961C1.62831 4.43959 1.27221 4.58709 1.00966 4.84964C0.747109 5.11219 0.599609 5.46828 0.599609 5.83959V16.6236C0.599609 16.9949 0.747109 17.351 1.00966 17.6135C1.27221 17.8761 1.62831 18.0236 1.99961 18.0236H17.9996C18.3709 18.0236 18.727 17.8761 18.9896 17.6135C19.2521 17.351 19.3996 16.9949 19.3996 16.6236V5.83959C19.3996 5.46828 19.2521 5.11219 18.9896 4.84964C18.727 4.58709 18.3709 4.43959 17.9996 4.43959ZM7.17161 3.37559C7.17161 3.21646 7.23482 3.06384 7.34734 2.95132C7.45987 2.8388 7.61248 2.77559 7.77161 2.77559H12.2276C12.3867 2.77559 12.5394 2.8388 12.6519 2.95132C12.7644 3.06384 12.8276 3.21646 12.8276 3.37559V4.43959H7.17161V3.37559ZM1.39961 5.83959C1.39961 5.68046 1.46282 5.52784 1.57535 5.41532C1.68787 5.3028 1.84048 5.23959 1.99961 5.23959H17.9996C18.1587 5.23959 18.3114 5.3028 18.4239 5.41532C18.5364 5.52784 18.5996 5.68046 18.5996 5.83959V8.38759C18.5986 9.08319 18.3218 9.75 17.8299 10.2419C17.338 10.7337 16.6712 11.0105 15.9756 11.0116H11.6416V9.77559C11.6416 9.6695 11.5995 9.56776 11.5245 9.49274C11.4494 9.41773 11.3477 9.37559 11.2416 9.37559H8.75761C8.65152 9.37559 8.54978 9.41773 8.47477 9.49274C8.39975 9.56776 8.35761 9.6695 8.35761 9.77559V11.0116H4.02361C3.32801 11.0105 2.6612 10.7337 2.16933 10.2419C1.67746 9.75 1.40067 9.08319 1.39961 8.38759V5.83959ZM10.8416 10.1756V12.6476H9.15761V10.1756H10.8416ZM18.5996 16.6236C18.5996 16.7827 18.5364 16.9353 18.4239 17.0478C18.3114 17.1604 18.1587 17.2236 17.9996 17.2236H1.99961C1.84048 17.2236 1.68787 17.1604 1.57535 17.0478C1.46282 16.9353 1.39961 16.7827 1.39961 16.6236V10.5836C1.72037 10.9679 2.12164 11.2772 2.57507 11.4894C3.02849 11.7015 3.52299 11.8116 4.02361 11.8116H8.35761V13.0476C8.35761 13.1537 8.39975 13.2554 8.47477 13.3304C8.54978 13.4054 8.65152 13.4476 8.75761 13.4476H11.2416C11.3477 13.4476 11.4494 13.4054 11.5245 13.3304C11.5995 13.2554 11.6416 13.1537 11.6416 13.0476V11.8116H15.9756C16.4762 11.8116 16.9707 11.7015 17.4242 11.4894C17.8776 11.2772 18.2788 10.9679 18.5996 10.5836V16.6236Z" fill="#797979"/>
+                                                </svg>
+                                                <span>{{exp?.industry}}</span>
+                                            </li>
+                                        </ul>
+                                        <div v-if="exp?.description" class="text-sm font-light">
+                                            {{exp?.description}}
+                                        </div>
                                     </div>
-                                    <ul class="flex items-center gap-6 text-xs md:text-sm mb-3">
-                                        <li class="flex items-center gap-2">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
-                                                <path d="M12 7.83398C12 8.36442 11.7893 8.87312 11.4142 9.2482C11.0391 9.62327 10.5304 9.83398 10 9.83398C9.46957 9.83398 8.96086 9.62327 8.58579 9.2482C8.21071 8.87312 8 8.36442 8 7.83398C8 7.30355 8.21071 6.79484 8.58579 6.41977C8.96086 6.0447 9.46957 5.83398 10 5.83398C10.5304 5.83398 11.0391 6.0447 11.4142 6.41977C11.7893 6.79484 12 7.30355 12 7.83398Z" fill="#797979"/>
-                                                <path d="M15.6243 7.39616C15.6243 10.5607 13.541 14.167 9.89518 18.3337C6.24935 14.167 4.16602 10.5607 4.16602 7.39616C4.16602 5.87669 4.76962 4.41945 5.84405 3.34503C6.91848 2.2706 8.37571 1.66699 9.89518 1.66699C11.4147 1.66699 12.8719 2.2706 13.9463 3.34503C15.0207 4.41945 15.6243 5.87669 15.6243 7.39616Z" stroke="#797979" stroke-linejoin="round"/>
-                                            </svg>
-                                            <span>Depok</span>
-                                        </li>
-                                        <li class="flex items-center gap-2">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
-                                                <path d="M17.9996 4.43959H13.6276V3.37559C13.6276 3.00428 13.4801 2.64819 13.2176 2.38564C12.955 2.12309 12.5989 1.97559 12.2276 1.97559H7.77161C7.40031 1.97559 7.04421 2.12309 6.78166 2.38564C6.51911 2.64819 6.37161 3.00428 6.37161 3.37559V4.43959H1.99961C1.62831 4.43959 1.27221 4.58709 1.00966 4.84964C0.747109 5.11219 0.599609 5.46828 0.599609 5.83959V16.6236C0.599609 16.9949 0.747109 17.351 1.00966 17.6135C1.27221 17.8761 1.62831 18.0236 1.99961 18.0236H17.9996C18.3709 18.0236 18.727 17.8761 18.9896 17.6135C19.2521 17.351 19.3996 16.9949 19.3996 16.6236V5.83959C19.3996 5.46828 19.2521 5.11219 18.9896 4.84964C18.727 4.58709 18.3709 4.43959 17.9996 4.43959ZM7.17161 3.37559C7.17161 3.21646 7.23482 3.06384 7.34734 2.95132C7.45987 2.8388 7.61248 2.77559 7.77161 2.77559H12.2276C12.3867 2.77559 12.5394 2.8388 12.6519 2.95132C12.7644 3.06384 12.8276 3.21646 12.8276 3.37559V4.43959H7.17161V3.37559ZM1.39961 5.83959C1.39961 5.68046 1.46282 5.52784 1.57535 5.41532C1.68787 5.3028 1.84048 5.23959 1.99961 5.23959H17.9996C18.1587 5.23959 18.3114 5.3028 18.4239 5.41532C18.5364 5.52784 18.5996 5.68046 18.5996 5.83959V8.38759C18.5986 9.08319 18.3218 9.75 17.8299 10.2419C17.338 10.7337 16.6712 11.0105 15.9756 11.0116H11.6416V9.77559C11.6416 9.6695 11.5995 9.56776 11.5245 9.49274C11.4494 9.41773 11.3477 9.37559 11.2416 9.37559H8.75761C8.65152 9.37559 8.54978 9.41773 8.47477 9.49274C8.39975 9.56776 8.35761 9.6695 8.35761 9.77559V11.0116H4.02361C3.32801 11.0105 2.6612 10.7337 2.16933 10.2419C1.67746 9.75 1.40067 9.08319 1.39961 8.38759V5.83959ZM10.8416 10.1756V12.6476H9.15761V10.1756H10.8416ZM18.5996 16.6236C18.5996 16.7827 18.5364 16.9353 18.4239 17.0478C18.3114 17.1604 18.1587 17.2236 17.9996 17.2236H1.99961C1.84048 17.2236 1.68787 17.1604 1.57535 17.0478C1.46282 16.9353 1.39961 16.7827 1.39961 16.6236V10.5836C1.72037 10.9679 2.12164 11.2772 2.57507 11.4894C3.02849 11.7015 3.52299 11.8116 4.02361 11.8116H8.35761V13.0476C8.35761 13.1537 8.39975 13.2554 8.47477 13.3304C8.54978 13.4054 8.65152 13.4476 8.75761 13.4476H11.2416C11.3477 13.4476 11.4494 13.4054 11.5245 13.3304C11.5995 13.2554 11.6416 13.1537 11.6416 13.0476V11.8116H15.9756C16.4762 11.8116 16.9707 11.7015 17.4242 11.4894C17.8776 11.2772 18.2788 10.9679 18.5996 10.5836V16.6236Z" fill="#797979"/>
-                                            </svg>
-                                            <span>Magang</span>
-                                        </li>
-                                    </ul>
-                                    <div class="text-sm font-light">
-                                        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Alias ea aspernatur incidunt velit ab illo molestias ratione maxime iure! Reprehenderit optio eligendi, fugiat eos nihil vel et sapiente alias autem.
-                                        Molestias accusamus architecto tempore impedit. Atque, ab dolore! Molestiae quas cumque aspernatur culpa beatae dignissimos rerum, praesentium excepturi commodi itaque obcaecati neque esse blanditiis, quod totam quis officia eligendi earum!
+
+                                    <div class="cursor-pointer flex items-center justify-center text-slate-300 hover:text-primary">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                            <path d="M15 5.9997L18 8.9997M13 19.9997H21M5 15.9997L4 19.9997L8 18.9997L19.586 7.4137C19.9609 7.03864 20.1716 6.53003 20.1716 5.9997C20.1716 5.46937 19.9609 4.96075 19.586 4.5857L19.414 4.4137C19.0389 4.03876 18.5303 3.82812 18 3.82812C17.4697 3.82813 16.9611 4.03876 16.586 4.4137L5 15.9997Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                        </svg>
                                     </div>
                                 </div>
                             </li>
@@ -529,36 +519,37 @@
                         </div>
 
                         <ol class="relative text-gray-500 border-s border-gray-200 dark:border-gray-700 dark:text-gray-400 ms-4">
-                            <li>
-                                <div class="absolute top-0 end-0 cursor-pointer flex items-center justify-center text-slate-300 hover:text-primary">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                        <path d="M15 5.9997L18 8.9997M13 19.9997H21M5 15.9997L4 19.9997L8 18.9997L19.586 7.4137C19.9609 7.03864 20.1716 6.53003 20.1716 5.9997C20.1716 5.46937 19.9609 4.96075 19.586 4.5857L19.414 4.4137C19.0389 4.03876 18.5303 3.82812 18 3.82812C17.4697 3.82813 16.9611 4.03876 16.586 4.4137L5 15.9997Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                    </svg>
-                                </div>
-                            </li>                  
-                            <li class="mb-7 ms-6">            
+                 
+                            <li v-for="(edu, index) in profile?.education" class="mb-7 ms-6">            
+                                
                                 <span class="absolute flex items-center justify-center w-10 h-10 bg-orange-100 text-primary rounded-full -start-5">
-                                    U
+                                    {{edu?.institutions.substring(0,1)}}
                                 </span>
-                                <div class="ps-4">
-                                    <h4 class="text-sm md:text-base mb-1 font-medium">Universitas Indonesia</h4>
-                                    <div class="flex items-center gap-4 mb-3 text-xs flex-wrap md:text-sm">
-                                        <span>Sarjana Ilmu Komputer</span>|
-                                        <span>Depok</span>
-                                    </div>
-                                    <div class="flex items-center gap-7 text-xs md:text-sm mb-4">
-                                        <div class="font-medium">
-                                            Jurusan<br/>
-                                            IPK
+                                <div class="flex items-start justify-between">
+                                    <div class="ps-4">
+                                        <h4 class="text-sm md:text-base mb-1 font-medium">{{edu?.institutions}}</h4>
+                                        <div class="flex items-center gap-4 mb-3 text-xs flex-wrap md:text-sm">
+                                            <span>{{hitungSelisihBulan(edu?.start_date, edu?.end_date)}}</span>|
+                                            <span>{{edu?.status}}</span>
                                         </div>
-                                        <div>
-                                            Sistem Informasi<br/>
-                                            3.68
+                                        <div class="flex items-center gap-7 text-xs md:text-sm mb-4">
+                                            <div class="font-medium">
+                                                Jurusan<br/>
+                                                IPK
+                                            </div>
+                                            <div>
+                                                {{edu?.majoring}}<br/>
+                                                3.68
+                                            </div>
+                                        </div>
+                                        <div v-if="edu?.description" class="text-sm font-light">
+                                            {{edu?.description}}
                                         </div>
                                     </div>
-                                    <div class="text-sm font-light">
-                                        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Alias ea aspernatur incidunt velit ab illo molestias ratione maxime iure! Reprehenderit optio eligendi, fugiat eos nihil vel et sapiente alias autem.
-                                        Molestias accusamus architecto tempore impedit. Atque, ab dolore! Molestiae quas cumque aspernatur culpa beatae dignissimos rerum, praesentium excepturi commodi itaque obcaecati neque esse blanditiis, quod totam quis officia eligendi earum!
+                                    <div class="cursor-pointer flex items-center justify-center text-slate-300 hover:text-primary">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                            <path d="M15 5.9997L18 8.9997M13 19.9997H21M5 15.9997L4 19.9997L8 18.9997L19.586 7.4137C19.9609 7.03864 20.1716 6.53003 20.1716 5.9997C20.1716 5.46937 19.9609 4.96075 19.586 4.5857L19.414 4.4137C19.0389 4.03876 18.5303 3.82812 18 3.82812C17.4697 3.82813 16.9611 4.03876 16.586 4.4137L5 15.9997Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                        </svg>
                                     </div>
                                 </div>
                             </li>
@@ -612,33 +603,33 @@
                             </div>
                         </div>
 
-                        <ol v-for="organisasi in profileFull?.organizations?.data" class="relative text-gray-500 border-s border-gray-200 dark:border-gray-700 dark:text-gray-400 ms-4">
-                            <li>
-                                <div class="absolute top-0 end-0 cursor-pointer flex items-center justify-center text-slate-300 hover:text-primary">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                        <path d="M15 5.9997L18 8.9997M13 19.9997H21M5 15.9997L4 19.9997L8 18.9997L19.586 7.4137C19.9609 7.03864 20.1716 6.53003 20.1716 5.9997C20.1716 5.46937 19.9609 4.96075 19.586 4.5857L19.414 4.4137C19.0389 4.03876 18.5303 3.82812 18 3.82812C17.4697 3.82813 16.9611 4.03876 16.586 4.4137L5 15.9997Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                    </svg>
-                                </div>
-                            </li>                  
-                            <li class="mb-7 ms-6">            
+                        <ol class="relative text-gray-500 border-s border-gray-200 dark:border-gray-700 dark:text-gray-400 ms-4">
+                 
+                            <li v-for="organisasi in profile?.organization" class="mb-7 ms-6">            
                                 <span class="absolute flex items-center justify-center w-10 h-10 bg-orange-100 text-primary rounded-full -start-5">
                                     {{organisasi?.organization_name.substring(0,1)}}
                                 </span>
-                                <div class="ps-4">
-                                    <h4 class="text-sm md:text-base mb-1 font-medium">{{organisasi?.organization_name}}</h4>
-                                    <div class="flex items-center gap-x-4 text-sm text-slate-500 mb-4">
-                                        <div class="flex items-center gap-3 flex-1">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 48 48"><g fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="4"><path d="M24 44c11.046 0 20-8.954 20-20S35.046 4 24 4S4 12.954 4 24s8.954 20 20 20Z"/><path stroke-linecap="round" d="M24.008 12v12.01l8.479 8.48"/></g></svg>
-                                            Januari 2018 s.d 08 Agustus 2019
+                                <div class="flex justify-between items-start">
+                                    <div class="ps-4">
+                                        <h4 class="text-sm md:text-base mb-1 font-medium">{{organisasi?.organization_name}}</h4>
+                                        <div class="flex items-center gap-x-4 text-sm text-slate-500 mb-4">
+                                            <div class="flex items-center gap-3">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 48 48"><g fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="4"><path d="M24 44c11.046 0 20-8.954 20-20S35.046 4 24 4S4 12.954 4 24s8.954 20 20 20Z"/><path stroke-linecap="round" d="M24.008 12v12.01l8.479 8.48"/></g></svg>
+                                                {{organisasi?.duration}}
+                                            </div>
+                                            <div class="flex items-center gap-3">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 36 36"><circle cx="16.86" cy="9.73" r="6.46" fill="currentColor"/><path fill="currentColor" d="M21 28h7v1.4h-7z"/><path fill="currentColor" d="M15 30v3a1 1 0 0 0 1 1h17a1 1 0 0 0 1-1V23a1 1 0 0 0-1-1h-7v-1.47a1 1 0 0 0-2 0V22h-2v-3.58a32.12 32.12 0 0 0-5.14-.42a26 26 0 0 0-11 2.39a3.28 3.28 0 0 0-1.88 3V30Zm17 2H17v-8h7v.42a1 1 0 0 0 2 0V24h6Z"/></svg>
+                                                {{organisasi?.position}}
+                                            </div>
                                         </div>
-                                        <div class="flex items-center gap-3 flex-1">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 36 36"><circle cx="16.86" cy="9.73" r="6.46" fill="currentColor"/><path fill="currentColor" d="M21 28h7v1.4h-7z"/><path fill="currentColor" d="M15 30v3a1 1 0 0 0 1 1h17a1 1 0 0 0 1-1V23a1 1 0 0 0-1-1h-7v-1.47a1 1 0 0 0-2 0V22h-2v-3.58a32.12 32.12 0 0 0-5.14-.42a26 26 0 0 0-11 2.39a3.28 3.28 0 0 0-1.88 3V30Zm17 2H17v-8h7v.42a1 1 0 0 0 2 0V24h6Z"/></svg>
+                                        <div v-if="organisasi?.description" class="text-sm font-light">
                                             {{organisasi?.position}}
                                         </div>
                                     </div>
-                                    <div class="text-sm font-light">
-                                        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Alias ea aspernatur incidunt velit ab illo molestias ratione maxime iure! Reprehenderit optio eligendi, fugiat eos nihil vel et sapiente alias autem.
-                                        Molestias accusamus architecto tempore impedit. Atque, ab dolore! Molestiae quas cumque aspernatur culpa beatae dignissimos rerum, praesentium excepturi commodi itaque obcaecati neque esse blanditiis, quod totam quis officia eligendi earum!
+                                    <div class="cursor-pointer flex items-center justify-center text-slate-300 hover:text-primary">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                            <path d="M15 5.9997L18 8.9997M13 19.9997H21M5 15.9997L4 19.9997L8 18.9997L19.586 7.4137C19.9609 7.03864 20.1716 6.53003 20.1716 5.9997C20.1716 5.46937 19.9609 4.96075 19.586 4.5857L19.414 4.4137C19.0389 4.03876 18.5303 3.82812 18 3.82812C17.4697 3.82813 16.9611 4.03876 16.586 4.4137L5 15.9997Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                        </svg>
                                     </div>
                                 </div>
                             </li>
@@ -911,7 +902,6 @@
 </template>
 
 <script setup>
-import {useUserStore} from '@/stores/user';
 const user = useUserStore();
 
 definePageMeta({
@@ -1062,15 +1052,55 @@ const profileForm = ref({
     },
 })
 
-const profile = ref(null)
 const isReady = ref(false)
-const profileFull = ref(null)
+const profile = ref(null)
 onMounted(async () => {
-    profileFull.value = await user.getFullProfile();
-    profile.value = JSON.parse(localStorage.getItem('profile'));
-    console.log(profile?.value);
-    console.log(profileFull?.value);
+    const getFull = await user.getFullProfile();
+    profile.value = getFull;
 
     isReady.value = true;
 })
+
+const formatTanggal = (inputTanggal) => {
+  const tanggalObj = new Date(inputTanggal);
+
+  const namaBulan = [
+    "Jan", "Feb", "Mar", "Apr", "Mei", "Jun",
+    "Jul", "Agu", "Sep", "Okt", "Nov", "Des"
+  ];
+
+  const tahun = tanggalObj.getFullYear();
+  const bulan = namaBulan[tanggalObj.getMonth()];
+  const tanggal = String(tanggalObj.getDate()).padStart(2, '0');
+
+  const hasilFormat = `${tanggal} ${bulan} ${tahun}`;
+  return hasilFormat;
+}
+
+const hitungSelisihBulan = (tanggalAwal, tanggalAkhir) => {
+  const awal = new Date(tanggalAwal);
+  const akhir = new Date(tanggalAkhir);
+
+  const selisihTahun = akhir.getFullYear() - awal.getFullYear();
+  const selisihBulan = akhir.getMonth() - awal.getMonth();
+  const totalBulan = selisihTahun * 12 + selisihBulan;
+
+  const tahun = Math.floor(totalBulan / 12);
+  const bulan = totalBulan % 12;
+
+  let hasil = '';
+
+  if (tahun > 0) {
+    hasil += `${tahun} tahun `;
+  }
+
+  if (bulan > 0) {
+    hasil += `${bulan} bulan`;
+  }
+
+  if(bulan == 0 ){
+    hasil += '0 bulan'
+  }
+  return hasil.trim();
+}
 </script>
