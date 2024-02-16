@@ -21,7 +21,7 @@ export const useContractStore = defineStore('contract',{
             var headers = new Headers();
             headers.append("token",localStorage.getItem('access_token') ?? 'rbkmzydqknor0t5q236n01j38');
 
-            const contract = await $fetch(`${this.API_URL}/master-contract/read?contract_name=&page=&page_size=`, {
+            const contract = await $fetch(`${this.API_URL}/master-contract/read?page=&page_size=`, {
                 method : 'GET',
                 headers: headers,
             })

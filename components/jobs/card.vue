@@ -1,6 +1,6 @@
 <template>
     <div v-for="job in jobs" :key="job?.id" class="col-span-12 lg:col-span-6">
-        <NuxtLink :to="`/lowongan/${job?.id}`" activeClass="activeCard" class="block bg-white p-6 rounded-3xl hover:ring-4 hover:ring-orange-700/20 border border-white hover:border hover:border-primary">
+        <NuxtLink :to="`/lowongan/${job?.id}`" class="block bg-white flex flex-col justify-between h-full p-6 rounded-3xl hover:ring-4 hover:ring-orange-700/20 border border-white hover:border hover:border-primary">
             <div class="flex items-start justify-between">
                 <NuxtImg
                     :src="`${job?.logo ?? '/image/logo-ish.png'}`"
@@ -9,11 +9,11 @@
                     height=""
                     class="h-[3em] mb-3 object-fit-contain"
                 />
-                <PartialsFavbtn :job="job" />
+                <PartialsFavbtn @click="jobStore.makeFavorite(job?.id)" :job="job" />
             </div>
-            <h2 class="text-base">{{ job?.job_title }}</h2>
-            <p class="text-slate-500 text-sm mb-3">{{ job?.job_number }}</p>
-            <ul class="text-slate-600">
+            <h2 class="text-base capitalize mb-1">{{ job?.job_title.toLowerCase() }}</h2>
+            <p class="text-slate-500 text-sm mb-3 uppercase">{{ job?.job_company.toLowerCase() }}</p>
+            <ul class="text-slate-600 mt-auto">
                 <li class="flex items-center gap-3 text-sm">
                     <div class="w-[20px]">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
@@ -21,7 +21,7 @@
                         </svg>
                     </div>
                     <!-- Location -->
-                    <span>{{ job?.sap_area }}</span>
+                    <span class="capitalize">{{ job?.job_location.toLowerCase() }}</span>
                 </li>
                 <li class="flex items-center gap-3 text-sm">
                     <div class="w-[20px]">
@@ -31,7 +31,7 @@
                         </svg>
                     </div>
                     <!-- Salary -->
-                    <span>up to {{ job?.salary ?? 'IDR 20.000.000' }}</span>
+                    <span>IDR {{ job?.salary_start ?? '~' }} s/d {{ job?.salary_end ?? '~' }}</span>
                 </li>
                 <li class="flex items-center gap-3 text-sm">
                     <div class="w-[20px]">
@@ -49,7 +49,7 @@
                             <path d="M12.0039 6V12.005L16.2434 16.245" stroke="#A6A6A6" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
                     </div>
-                    <span>{{ job?.datePosted ?? '2 hari yang lalu' }}</span>
+                    <span>terbit {{ job?.job_start }}</span>
                 </li>
             </ul>
         </NuxtLink>

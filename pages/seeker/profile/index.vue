@@ -1,5 +1,5 @@
 <template>
-    <ModalLazyLoad v-if="!isReady"/>
+    <ModalLazyLoad v-if="!isReady" />
     <div v-if="isReady" class="container mx-auto p-8 px-0 md:px-8">
         <div class="grid grid-cols-12 gap-4">
             <div class="col-span-12">
@@ -19,8 +19,8 @@
                                 <path d="M15 5.9997L18 8.9997M13 19.9997H21M5 15.9997L4 19.9997L8 18.9997L19.586 7.4137C19.9609 7.03864 20.1716 6.53003 20.1716 5.9997C20.1716 5.46937 19.9609 4.96075 19.586 4.5857L19.414 4.4137C19.0389 4.03876 18.5303 3.82812 18 3.82812C17.4697 3.82813 16.9611 4.03876 16.586 4.4137L5 15.9997Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                             </svg>
                         </div>
-                        <NuxtImg :src="profile?.image ?? `https://ui-avatars.com/api/?name=${profile?.profile[0]?.fullname}`" height="100" width="100" class="block rounded-full border p-1" />
-                        <h2 class="text-xl font-medium">{{profile?.profile[0]?.fullname}}</h2>
+                        <NuxtImg :src="profile?.image ?? `https://ui-avatars.com/api/?name=${profile?.name}`" height="100" width="100" class="block rounded-full border p-1" />
+                        <h2 class="text-xl font-medium">{{profile?.name}}</h2>
                         <div>{{profile?.username}}</div>
                         <p class="text-sm text-gray-500">{{profile?.email}}</p>
                         <div class="flex items-center gap-3 my-3">
@@ -372,7 +372,7 @@
                     </div>
                 </div>
 
-                <div class="bg-white rounded-0 md:rounded-2xl p-6 mb-5">
+                <div v-if="experience in profile" class="bg-white rounded-0 md:rounded-2xl p-6 mb-5">
                     <div class="cursor-pointer flex items-center justify-between border-b pb-4">
                         <h3 class="font-medium">Pengalaman Kerja</h3>
                         <div @click="show.pengalaman = !show.pengalaman" class="flex items-center gap-2 text-sm p-2 px-4 text-slate-400 hover:text-slate-600 hover:bg-slate-100 rounded-lg">
@@ -422,7 +422,7 @@
                                 </div>
                             </div>
                         </div>
-                        <ol class="relative text-gray-500 border-s border-gray-200 dark:border-gray-700 dark:text-gray-400 ms-4">
+                        <ol v-if="profile?.experience" class="relative text-gray-500 border-s border-gray-200 dark:border-gray-700 dark:text-gray-400 ms-4">
                             <li v-for="(exp, index) in profile?.experience" :key="index" class="mb-7 ms-6">            
                                 <span class="absolute flex items-center justify-center w-10 h-10 bg-orange-100 text-primary rounded-full -start-5">
                                     {{exp?.last_position?.substring(0,1)}}
@@ -1055,10 +1055,10 @@ const profileForm = ref({
 const isReady = ref(false)
 const profile = ref(null)
 onMounted(async () => {
+    isReady.value = true;
     const getFull = await user.getFullProfile();
     profile.value = getFull;
-
-    isReady.value = true;
+    console.log(profile.value);
 })
 
 const formatTanggal = (inputTanggal) => {

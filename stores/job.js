@@ -28,13 +28,10 @@ export const useJobStore = defineStore('job',{
     },
     actions : {
         viewJob(id){
-            console.log(this.jobs);
-            this.selectedJob = this.jobs?.data?.find(job => job.id == id);  
-            console.log(this.selectedJob);
-            console.log(id);
+            this.selectedJob = this.jobs?.find(job => job.id == id);  
         },
 
-        async getJobById(id = "39550"){
+        async getJobById(id){
             var headers = new Headers();
             headers.append("token",localStorage.getItem('access_token') ?? 'rbkmzydqknor0t5q236n01j38');
 
@@ -42,22 +39,80 @@ export const useJobStore = defineStore('job',{
                 method : 'GET',
                 headers: headers,
             })
-            console.log(typeof(id)+': '+id);
-            console.log(job);
+
             this.selectedJob = job;
         },
         async getJobs(page_size = this.filter.page_size){
             var headers = new Headers();
-            headers.append("token",localStorage.getItem('access_token') ?? 'rbkmzydqknor0t5q236n01j38');
+            headers.append("token",localStorage.getItem('access_token'));
 
-            const job = await $fetch(`${this.API_URL}/joborder/read?page_size=${page_size}&page=${this.filter.page}`, {
+            const job = await $fetch(`${this.API_URL}/joborder/read?page_size=${page_size}&page=1`, {
                 method : 'GET',
-                headers: headers,
-            })
-            
-            this.jobs = job;
+                headers : headers,
+            });
+
+            console.log(job);
+            this.jobs = job?.data;
         },
         
+        async getApplies(){
+            var headers = new Headers();
+            headers.append("token",localStorage.getItem('access_token'));
+
+            const job = await $fetch(`${this.API_URL}/recruitment/applyhistory`, {
+                method : 'GET',
+                headers : headers,
+            });
+
+            console.log(job);
+            return job?.data;
+        },
+
+        async applyJob(id){
+            var headers = new Headers();
+            headers.append("token",localStorage.getItem('access_token'));
+            var formdata = new FormData();
+            formdata.append("joborder_id", `${id}`);
+
+            const apply = await $fetch(`${this.API_URL}/recruitment/applyjob`, {
+                method : 'POST',
+                headers : headers,
+                body: formdata,
+            });
+
+            console.log(apply);
+            return apply;
+        },
+
+        async getFavorites(){
+            var headers = new Headers();
+            headers.append("token",localStorage.getItem('access_token'));
+
+            const job = await $fetch(`${this.API_URL}/recruitment/list-favorite`, {
+                method : 'GET',
+                headers : headers,
+            });
+
+            console.log(job);
+            return job?.data;
+        },
+
+        async makeFavorite(favoriteId){
+            var headers = new Headers();
+            headers.append("token",localStorage.getItem('access_token'));
+            var formdata = new FormData();
+            formdata.append("joborder_id", `${favoriteId}`);
+
+            const favorite = await $fetch(`${this.API_URL}/recruitment/favorite-job`, {
+                method : 'POST',
+                headers : headers,
+                body: formdata,
+            });
+
+            console.log(favorite);
+            return favorite;
+        },
+
         updateFilter(column, value){
             this.filter[column] = value;
         },
@@ -66,6 +121,8 @@ export const useJobStore = defineStore('job',{
             this.filter.page_size += 12;
             this.getJobs();
         }
+
+
         
     },
     
