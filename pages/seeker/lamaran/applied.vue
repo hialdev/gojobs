@@ -3,21 +3,21 @@
     <div v-if="isReady" class="container mx-auto py-12 px-5">
         <h1 class="text-2xl font-medium mb-5">Dilamar</h1>
         <div class="grid grid-cols-12 gap-4">
-            <div v-for="job in job?.jobs?.data" :key="job?.id" class="col-span-12 md:col-span-6 lg:col-span-3">
-                <NuxtLink :to="`/lowongan/${job?.id}`" activeClass="activeCard" class="block bg-white p-6 rounded-3xl hover:ring-4 hover:ring-orange-700/20 border border-white hover:border hover:border-primary">
+            <div v-for="job in applies" :key="job?.joborder?.id" class="col-span-12 md:col-span-6 lg:col-span-3">
+                <NuxtLink :to="`/lowongan/${job?.joborder?.id}`" activeClass="activeCard" class="block bg-white flex flex-col justify-between h-full p-6 rounded-3xl hover:ring-4 hover:ring-orange-700/20 border border-white hover:border hover:border-primary">
                     <div class="flex items-start justify-between">
                         <NuxtImg
-                            :src="`${job?.logo ?? '/image/logo-ish.png'}`"
-                            alt=""
+                            :src="`${job?.joborder?.logo ?? '/image/logo-ish.png'}`"
+                            :alt="`image logo ${job?.joborder?.job_company} - ${job?.joborder?.job_title.toLowerCase()}`"
                             width=""
                             height=""
                             class="h-[3em] mb-3 object-fit-contain"
                         />
-                        <PartialsFavbtn :job="job" />
+                        <span class="px-2 p-1 text-xs rounded-lg bg-slate-100">{{ job?.status_name }}</span>
                     </div>
-                    <h2 class="text-base">{{ job?.job_title }}</h2>
-                    <p class="text-slate-500 text-sm mb-3">{{ job?.job_number }}</p>
-                    <ul class="text-slate-600">
+                    <h2 class="text-base capitalize mb-1">{{ job?.joborder?.job_title.toLowerCase() }}</h2>
+                    <p class="text-slate-500 text-sm mb-3 uppercase">{{ job?.joborder?.job_company.toLowerCase() }}</p>
+                    <ul class="text-slate-600 mt-auto">
                         <li class="flex items-center gap-3 text-sm">
                             <div class="w-[20px]">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
@@ -25,7 +25,7 @@
                                 </svg>
                             </div>
                             <!-- Location -->
-                            <span>{{ job?.sap_area }}</span>
+                            <span class="capitalize">{{ job?.joborder?.job_location.toLowerCase() }}</span>
                         </li>
                         <li class="flex items-center gap-3 text-sm">
                             <div class="w-[20px]">
@@ -35,7 +35,7 @@
                                 </svg>
                             </div>
                             <!-- Salary -->
-                            <span>up to {{ job?.salary ?? 'IDR 20.000.000' }}</span>
+                            <span>IDR {{ job?.joborder?.salary_start ?? '~' }} s/d {{ job?.joborder?.salary_end ?? '~' }}</span>
                         </li>
                         <li class="flex items-center gap-3 text-sm">
                             <div class="w-[20px]">
@@ -44,7 +44,7 @@
                                 </svg>
                             </div>
                             <!-- Type -->
-                            <span>{{ job?.job_contract }}</span>
+                            <span>{{ job?.joborder?.job_contract }}</span>
                         </li>
                         <li class="flex items-center gap-3 text-sm">
                             <div class="w-[20px]">
@@ -53,7 +53,7 @@
                                     <path d="M12.0039 6V12.005L16.2434 16.245" stroke="#A6A6A6" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                                 </svg>
                             </div>
-                            <span>{{ job?.datePosted ?? '2 hari yang lalu' }}</span>
+                            <span>dilamar pada {{ job?.created_time }}</span>
                         </li>
                     </ul>
                 </NuxtLink>
@@ -63,14 +63,27 @@
 </template>
 
 <script setup>
+import { useToast } from 'vue-toastification';
 definePageMeta({
     layout:'seeker'
 })
-const isReady = ref(false)
-const job = useJobStore();
 
-onMounted(() => {
-    job.getJobs(16);
+const toast = useToast();
+const isReady = ref(false);
+const job = useJobStore();
+const applies = ref([]);
+
+onMounted(async () => {
+    try {
+        const fetch = await job.getApplies();
+        if(fetch.success){
+            applies.value = fetch?.data;
+            toast.success(fetch.message);
+        }
+    } catch (error) {
+        toast.error(error)
+    }
+
     isReady.value = true;  
 })
 </script>

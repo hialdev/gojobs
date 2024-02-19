@@ -1,9 +1,9 @@
 <template>
     <div class="flex flex-row flex-wrap lg:items-center gap-3">
-        <PartialsSearch class="basis-full md:basis-1/3" :label="`Posisi / Jabatan`" />
-        <PartialsMultiselect class="basis-full z-[14] sm:flex-1" :label="`Lokasi`" :svgData="svgLocation" :options="cityOptions" />
-        <PartialsMultiselect class="flex-1 z-[12]" :label="`Tipe Pekerjaan`" :svgData="svgJenisKontrak" :options="contractOptions" />
-        <PartialsButton>Cari</PartialsButton>
+        <PartialsSearch @input="handleSearch" class="basis-full md:basis-1/3" :label="`Posisi / Jabatan`" />
+        <PartialsMultiselect @selected="handleLocation" class="basis-full z-[14] sm:flex-1" :label="`Lokasi`" :svgData="svgLocation" :options="cityOptions" />
+        <PartialsMultiselect @selected="handleContract" class="flex-1 z-[12]" :label="`Tipe Pekerjaan`" :svgData="svgJenisKontrak" :options="contractOptions" />
+        <PartialsButton @click="setFilter">Cari</PartialsButton>
     </div>
 </template>
 
@@ -16,12 +16,44 @@ const svgLocation = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="
                         </svg>`;
 const contract = useContractStore();
 const city = useCityStore();
+const job = useJobStore();
 const contractOptions = ref([]);
 const cityOptions = ref([]);
+const filter = ref({
+    title : '',
+    location : [],
+    contract : [],
+})
 
 onMounted(async () => {
     contractOptions.value = await contract.getOptions();
     cityOptions.value = await city.getOptions();
 })
 
+const handleSearch = (event) => {
+    filter.value.title = event.target?.value;
+}
+
+const handleLocation = (value) => {
+    filter.value.location = value.map(item => item.key);
+    console.log(filter.value);
+}
+
+const handleContract = (value) => {
+    filter.value.contract = value.map(item => item.value);
+    console.log(filter.value);
+}
+
+const setFilter = () => {
+    job.updateFilter('search', filter.value.title);
+    job.updateFilter('location', filter.value.location);
+    job.updateFilter('contract', filter.value.contract);
+    navigateTo('/lowongan');
+}
+
+const setNullFilter = () => {
+    job.updateFilter('search', '');
+    job.updateFilter('location', []);
+    job.updateFilter('contract', []);
+}
 </script>

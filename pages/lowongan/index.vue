@@ -6,12 +6,12 @@
                 <div class="flex items-start justify-between">
                     <NuxtImg
                         :src="`${job?.logo ?? '/image/logo-ish.png'}`"
-                        alt=""
+                        :alt="`image logo ${job?.job_company} - ${job?.job_title.toLowerCase()}`"
                         width=""
                         height=""
                         class="h-[3em] mb-3 object-fit-contain"
                     />
-                    <PartialsFavbtn @click="jobStore.makeFavorite(job?.id)" :job="job" />
+                    <PartialsFavbtn :job="job" />
                 </div>
                 <h2 class="text-base capitalize mb-1">{{ job?.job_title.toLowerCase() }}</h2>
                 <p class="text-slate-500 text-sm mb-3 uppercase">{{ job?.job_company.toLowerCase() }}</p>
@@ -70,6 +70,7 @@
 
 <script setup>
 import { useJobStore } from '#imports';
+
 definePageMeta({
     layout: 'lowongan',
 });
@@ -98,5 +99,4 @@ const showMore = () => {
         showLoad.value = false;
     },2000);
 }
-
 </script>

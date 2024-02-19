@@ -103,6 +103,7 @@ export default {
             } else {
                 this.selecteds.push(option);
             }
+            this.$emit('selected', this.selecteds);
         },
         handleDocumentClick(event) {
             const dropdownTrigger = this.$refs.dropdownTrigger;

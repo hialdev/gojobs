@@ -1,15 +1,15 @@
 <template>
     <div v-for="job in jobs" :key="job?.id" class="col-span-12 lg:col-span-6">
-        <NuxtLink :to="`/lowongan/${job?.id}`" class="block bg-white flex flex-col justify-between h-full p-6 rounded-3xl hover:ring-4 hover:ring-orange-700/20 border border-white hover:border hover:border-primary">
+        <NuxtLink :to="`/lowongan/${job?.id}`" activeClass="activeCard" class="block bg-white flex flex-col justify-between h-full p-6 rounded-3xl hover:ring-4 hover:ring-orange-700/20 border border-white hover:border hover:border-primary">
             <div class="flex items-start justify-between">
                 <NuxtImg
                     :src="`${job?.logo ?? '/image/logo-ish.png'}`"
-                    alt=""
+                    :alt="`image logo ${job?.job_company} - ${job?.job_title.toLowerCase()}`"
                     width=""
                     height=""
                     class="h-[3em] mb-3 object-fit-contain"
                 />
-                <PartialsFavbtn @click="jobStore.makeFavorite(job?.id)" :job="job" />
+                <PartialsFavbtn @click.prevent="beFavorite(job?.id)" :job="job" />
             </div>
             <h2 class="text-base capitalize mb-1">{{ job?.job_title.toLowerCase() }}</h2>
             <p class="text-slate-500 text-sm mb-3 uppercase">{{ job?.job_company.toLowerCase() }}</p>
@@ -57,9 +57,21 @@
 </template>
 
 <script setup>
+import { useToast } from 'vue-toastification';
+const toast = useToast()
+
 const props = defineProps({
     jobs : Object,
 })
+
+const beFavorite = async (id) => {
+    const fav = await jobStore.makeFavorite(id);
+    if(!fav.success){
+        toast.error(`${fav?.code} - ${fav?.message}`);
+    }else{
+        toast.success(`Success!! ${fav?.message}`);
+    }
+}
 
 </script>
 

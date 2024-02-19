@@ -10,8 +10,8 @@
                 <div class="mb-3 mt-6 px-5">
                     <NuxtImg :src="`${job?.selectedJob?.job_company_logo ?? '/image/logo-ish.png'}`" :alt="`logo ${job?.selectedJob?.company}`" class="h-[4em] mb-2" />
                     <div>
-                        <h2 class="text-lg">{{job?.selectedJob?.job_title}}</h2>
-                        <p class="text-base text-slate-500">{{job?.selectedJob?.job_company}}</p>
+                        <h2 class="text-lg capitalize">{{job?.selectedJob?.job_title.toLowerCase()}}</h2>
+                        <p class="text-sm text-slate-500">{{job?.selectedJob?.job_company}}</p>
                     </div>
                 </div>
                 <ul class="text-sm text-slate-600 px-5">
@@ -30,7 +30,7 @@
                                 <path d="M2.25 9H21.75M6 14.0625H8.25V15H6V14.0625Z" stroke="#A6A6A6" stroke-width="1.5" stroke-linejoin="round"/>
                             </svg>
                         </div>
-                        <span>{{ job?.selectedJob?.salary ?? 'up to IDR 20.000.000' }}</span>
+                        <span>IDR {{ job?.selectedJob?.salary_start ?? '~' }} s/d {{ job?.selectedJob?.salary_end ?? '~' }}</span>
                     </li>
                     <li class="flex items-center gap-3 text-sm">
                         <div class="w-[20px]">
@@ -75,11 +75,12 @@
             </div>
             <div class="col-span-12 sticky bottom-0 z-[100]">
                 <div class="flex items-center gap-3 bg-white p-5 rounded-3xl">
-                    <PartialsButton class="w-full text-center" @click="lamarHandle(job?.selectedJob?.id)">Lamar</PartialsButton>
-                    <PartialsButton class="bg-transparent border-primary" :primary="false">
+                    <PartialsButton v-if="job?.selectedJob?.is_applied == 0" class="w-full text-center" @click="lamarHandle(job?.selectedJob?.id)">Lamar</PartialsButton>
+                    <PartialsButton v-else class="w-full text-center cursor-base" :primary="false">Telah Dilamar</PartialsButton>
+                    <PartialsButton :class="[{'bg-white border-primary' :  job?.selectedJob?.is_favorite == 0}, {'bg-orange-400/30 hover:bg-orange-400/30 border-orange-600 hover:border-orange-600' : job?.selectedJob?.is_favorite == 1}]" :primary="false">
                         <div class="w-[24px] h-[24px] text-primary">
-                            <svg v-if="!job?.selectedJob?.favorite" xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30"><g fill="none"><path fill="currentColor" d="M19.071 13.142L13.414 18.8a2 2 0 0 1-2.828 0l-5.657-5.657A5 5 0 1 1 12 6.072a5 5 0 0 1 7.071 7.07" opacity=".16"/><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.071 13.142L13.414 18.8a2 2 0 0 1-2.828 0l-5.657-5.657a5 5 0 0 1 7.07-7.071a5 5 0 0 1 7.072 7.071"/></g></svg>
-                            <svg v-if="job?.selectedJob?.favorite" xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30"><path fill="currentColor" fill-rule="evenodd" d="M4.222 5.364A6.002 6.002 0 0 1 12 4.758a6.002 6.002 0 0 1 7.778 9.091l-5.657 5.657a3 3 0 0 1-4.242 0L4.222 13.85a6 6 0 0 1 0-8.485" clip-rule="evenodd"/></svg>
+                            <svg v-if="!job?.selectedJob?.is_favorite" xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30"><g fill="none"><path fill="currentColor" d="M19.071 13.142L13.414 18.8a2 2 0 0 1-2.828 0l-5.657-5.657A5 5 0 1 1 12 6.072a5 5 0 0 1 7.071 7.07" opacity=".16"/><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.071 13.142L13.414 18.8a2 2 0 0 1-2.828 0l-5.657-5.657a5 5 0 0 1 7.07-7.071a5 5 0 0 1 7.072 7.071"/></g></svg>
+                            <svg v-if="job?.selectedJob?.is_favorite" xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30"><path fill="currentColor" fill-rule="evenodd" d="M4.222 5.364A6.002 6.002 0 0 1 12 4.758a6.002 6.002 0 0 1 7.778 9.091l-5.657 5.657a3 3 0 0 1-4.242 0L4.222 13.85a6 6 0 0 1 0-8.485" clip-rule="evenodd"/></svg>
                         </div>
                     </PartialsButton>
                     <PartialsButton class="bg-transparent border-primary" :primary="false">
@@ -100,7 +101,9 @@
 </template>
 
 <script setup>
+import {useToast} from 'vue-toastification'
 
+const toast = useToast();
 const lamarSuccess = ref(false);
 const job = useJobStore();
 const { id } = useRoute().params;
@@ -111,9 +114,10 @@ const lamarHandle = async (id) => {
         lamarSuccess.value = true;
         setTimeout(() => {
             lamarSuccess.value = false;
+            job.getJobById(id);
         }, 3000);
     }else{
-        console.log("have been applied");
+        toast.error(`${apply?.message}`);
     }
 }
 
