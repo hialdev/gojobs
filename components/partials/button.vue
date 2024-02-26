@@ -17,7 +17,7 @@
             path:{
                 type: String,
                 default: '',
-            }
+            },
         },
         computed: {
             buttonClass() {

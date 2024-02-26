@@ -1,7 +1,7 @@
 <template>
     <ModalLazyLoad v-if="!isReady" />
     <div v-if="isReady" class="container mx-auto px-5 py-12">
-        <h1 class="text-3xl md:text-3xl mb-10">Hi,<span class="font-bold text-primary"> Name Surname</span></h1>
+        <h1 class="text-3xl md:text-3xl mb-10">Hi,<span class="font-medium text-primary"> {{profile?.name}}</span></h1>
         <div class="grid grid-cols-12 gap-5">
             <div class="col-span-6 md:col-span-4 lg:col-span-3">
                 <NuxtLink to="/seeker/lamaran/process" class="block p-6 bg-white rounded-2xl hover:ring-[4px] border border-white hover:border-primary hover:ring-orange-700/10">
@@ -36,21 +36,21 @@
                     <NuxtLink to="/lowongan" class="font-medium underline decoration-orange-500">See All</NuxtLink>
                 </div>
             </div>
-            <div v-for="job in job?.jobs?.data" :key="job?.id" class="col-span-12 md:col-span-6 lg:col-span-3">
-                <NuxtLink :to="`/lowongan/${job?.id}`" activeClass="activeCard" class="block bg-white p-6 rounded-3xl hover:ring-4 hover:ring-orange-700/20 border border-white hover:border hover:border-primary">
+            <div v-for="job in jobs" :key="job?.id" class="col-span-12 md:col-span-6 lg:col-span-3">
+                <NuxtLink :to="`/lowongan/${job?.id}`" class="block bg-white flex flex-col justify-between h-full p-6 rounded-3xl hover:ring-4 hover:ring-orange-700/20 border border-white hover:border hover:border-primary">
                     <div class="flex items-start justify-between">
                         <NuxtImg
                             :src="`${job?.logo ?? '/image/logo-ish.png'}`"
-                            alt=""
+                            :alt="`image logo ${job?.job_company} - ${job?.job_title.toLowerCase()}`"
                             width=""
                             height=""
                             class="h-[3em] mb-3 object-fit-contain"
                         />
                         <PartialsFavbtn :job="job" />
                     </div>
-                    <h2 class="text-base">{{ job?.job_title }}</h2>
-                    <p class="text-slate-500 text-sm mb-3">{{ job?.job_number }}</p>
-                    <ul class="text-slate-600">
+                    <h2 class="text-base capitalize mb-1 line-clamp-3" :title="job?.job_title">{{ job?.job_title.toLowerCase() }}</h2>
+                    <p class="text-slate-500 text-sm mb-3 uppercase">{{ job?.job_company.toLowerCase() }}</p>
+                    <ul class="text-slate-600 mt-auto">
                         <li class="flex items-center gap-3 text-sm">
                             <div class="w-[20px]">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
@@ -58,7 +58,7 @@
                                 </svg>
                             </div>
                             <!-- Location -->
-                            <span>{{ job?.sap_area }}</span>
+                            <span class="capitalize">{{ job?.job_location.toLowerCase() }}</span>
                         </li>
                         <li class="flex items-center gap-3 text-sm">
                             <div class="w-[20px]">
@@ -68,7 +68,7 @@
                                 </svg>
                             </div>
                             <!-- Salary -->
-                            <span>up to {{ job?.salary ?? 'IDR 20.000.000' }}</span>
+                            <span>IDR {{ job?.salary_start ?? '~' }} s/d {{ job?.salary_end ?? '~' }}</span>
                         </li>
                         <li class="flex items-center gap-3 text-sm">
                             <div class="w-[20px]">
@@ -86,7 +86,7 @@
                                     <path d="M12.0039 6V12.005L16.2434 16.245" stroke="#A6A6A6" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                                 </svg>
                             </div>
-                            <span>{{ job?.datePosted ?? '2 hari yang lalu' }}</span>
+                            <span>publish {{ daysAgo(job?.job_post_date) }}</span>
                         </li>
                     </ul>
                 </NuxtLink>
@@ -153,8 +153,14 @@ definePageMeta({
 })
 const isReady = ref(false);
 const job = useJobStore();
-onMounted(() => {
+const jobs = ref(null);
+const profile = ref(null);
+onMounted(async () => {
     isReady.value = true;
-    job.getJobs(8);
+    profile.value = JSON.parse(localStorage.getItem('profile'));
+    const fetch = await job.getJobSuggests();
+    if(fetch?.success){
+        jobs.value = fetch?.data;
+    }
 })
 </script>

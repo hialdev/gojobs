@@ -18,9 +18,15 @@
 
 <script>
 export default {
+    props:{
+        activeImage : {
+            type: String,
+            default : null
+        }
+    },
     data() {
         return {
-            imageUrl: '/image/placeholder-person.jpeg', // Default placeholder image
+            imageUrl: this.activeImage ?? '/image/placeholder-person.jpeg', // Default placeholder image
         };
     },
     methods: {
@@ -28,13 +34,14 @@ export default {
             const fileInput = event.target;
     
             if (fileInput.files && fileInput.files[0]) {
-            const reader = new FileReader();
-    
-            reader.onload = () => {
-                this.imageUrl = reader.result; // Set the preview image
-            };
-    
-            reader.readAsDataURL(fileInput.files[0]);
+                const reader = new FileReader();
+        
+                reader.onload = () => {
+                    this.imageUrl = reader.result; // Set the preview image
+                    this.$emit('changeimage', reader.result);
+                };
+        
+                reader.readAsDataURL(fileInput.files[0]);
             }
         },
     },

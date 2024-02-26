@@ -8,5 +8,18 @@
 definePageMeta({
     layout: 'lowongan-detail',
 });
+const store = useJobStore();
 
+onMounted(async () => {
+   await addToLastseens(store.selectedJob);
+})
+
+const addToLastseens = (job) => {
+    let items = JSON.parse(localStorage.getItem('lastseens')) || [];
+
+    if (!items.find(item => item?.id === job?.id)) {
+        items.push(job);
+        localStorage.setItem('lastseens', JSON.stringify(items));
+    }
+}
 </script>

@@ -13,7 +13,7 @@
                             height=""
                             class="h-[3em] mb-3 object-fit-contain"
                         />
-                        <span class="px-2 p-1 text-xs rounded-lg bg-slate-100">{{ job?.status_name }}</span>
+                        <span class="px-2 p-1 text-xs rounded-lg bg-slate-100">{{ job?.status == 0 ? 'applied' : '' }}</span>
                     </div>
                     <h2 class="text-base capitalize mb-1">{{ job?.joborder?.job_title.toLowerCase() }}</h2>
                     <p class="text-slate-500 text-sm mb-3 uppercase">{{ job?.joborder?.job_company.toLowerCase() }}</p>
@@ -53,7 +53,7 @@
                                     <path d="M12.0039 6V12.005L16.2434 16.245" stroke="#A6A6A6" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                                 </svg>
                             </div>
-                            <span>dilamar pada {{ job?.created_time }}</span>
+                            <span>dilamar {{ daysAgo(job?.created_time) }}</span>
                         </li>
                     </ul>
                 </NuxtLink>
@@ -64,6 +64,8 @@
 
 <script setup>
 import { useToast } from 'vue-toastification';
+import { daysAgo } from '~/utils/helper.js';
+
 definePageMeta({
     layout:'seeker'
 })
@@ -78,7 +80,6 @@ onMounted(async () => {
         const fetch = await job.getApplies();
         if(fetch.success){
             applies.value = fetch?.data;
-            toast.success(fetch.message);
         }
     } catch (error) {
         toast.error(error)

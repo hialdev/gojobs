@@ -70,6 +70,9 @@
 </template>
 
 <script setup>
+import { useToast } from 'vue-toastification';
+
+const toast = useToast();
 const store = useUserStore();
 const props = defineProps({
     isOpen: {
@@ -94,22 +97,30 @@ const hidePassword = () => {
     isShowPwd.value = false
 }
 const loginHandle = async () => {
-    const login = await store.login(loginForm.value.username, loginForm.value.password);
-    console.log(login);
-    if(login?.success){
-        const profile = await store.getProfile();
-        if(profile?.verify_status == 1){
-            localStorage.setItem('profile',JSON.stringify(profile));
-            setTimeout(() => {
-                navigateTo('/seeker/dashboard');
-            }, 1000);
+    try {
+        const login = await store.login(loginForm.value.username, loginForm.value.password);
+        console.log(login);
+        if(login?.success){
+            toast.success(`Selamat datang, ${login?.name}`)
+            const profile = await store.getProfile();
+            if(profile?.verify_status == 1){
+                localStorage.setItem('profile',JSON.stringify(profile));
+                toast.success('Profile diterapkan');
+                setTimeout(() => {
+                    navigateTo('/seeker/dashboard');
+                }, 1000);
+            }else{
+                setTimeout(() => {
+                    navigateTo('/auth/verifikasi');
+                }, 1000);
+            }
         }else{
-            setTimeout(() => {
-                navigateTo('/auth/verifikasi');
-            }, 1000);
+            toast.error(login?.message || 'Terjadi kesalahan saat login.');
         }
-    }else{
-        error.value = login;
+    } catch (e) {
+        error.value = { message: `Pastikan memasukan username dan password yang benar!` };
+        toast.error(e.message);
     }
 }
+
 </script>

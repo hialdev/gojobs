@@ -55,6 +55,9 @@ export default {
         showLabel:{
             type: Boolean,
             default: false,
+        },
+        modalValue:{
+            type: [String, Number, Object],
         }
     },
     data() {
@@ -76,6 +79,7 @@ export default {
         selectedItem(item){
             this.selectItem = item;
             this.isModalOpen = !this.isModalOpen;
+            this.$emit('update:modelValue', this.selectItem);
             this.$emit('selected', this.selectItem);
         },
         handleDocumentClick(event) {

@@ -75,7 +75,8 @@
             </div>
             <div class="col-span-12 sticky bottom-0 z-[100]">
                 <div class="flex items-center gap-3 bg-white p-5 rounded-3xl">
-                    <PartialsButton v-if="job?.selectedJob?.is_applied == 0" class="w-full text-center" @click="lamarHandle(job?.selectedJob?.id)">Lamar</PartialsButton>
+                    <PartialsButton v-if="job?.selectedJob?.job_status == 'Closed'" class="w-full text-center cursor-base" :primary="false">Job Closed</PartialsButton>
+                    <PartialsButton v-else-if="job?.selectedJob?.is_applied == 0" class="w-full text-center" @click="lamarHandle(job?.selectedJob?.id)">Lamar</PartialsButton>
                     <PartialsButton v-else class="w-full text-center cursor-base" :primary="false">Telah Dilamar</PartialsButton>
                     <PartialsButton :class="[{'bg-white border-primary' :  job?.selectedJob?.is_favorite == 0}, {'bg-orange-400/30 hover:bg-orange-400/30 border-orange-600 hover:border-orange-600' : job?.selectedJob?.is_favorite == 1}]" :primary="false">
                         <div class="w-[24px] h-[24px] text-primary">
