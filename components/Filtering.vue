@@ -37,23 +37,18 @@ const filteringStore = ref({
 onMounted(async () => {
     contractOptions.value = await contract.getOptions();
     cityOptions.value = await city.getOptions();
-    const filtering = localStorage.getItem('job_filtering');
-    filteringStore.value = filtering; 
 })
 
 const handleSearch = (event) => {
     filter.value.title = event.target?.value;
-    filteringStore.value.title = event.target?.value;
 }
 
 const handleLocation = (value) => {
     filter.value.location = value.map(item => item.key);
-    filteringStore.value.location = value.map((item) => ({key : item.key, value : item.value}));
 }
 
 const handleContract = (value) => {
     filter.value.contract = value.map(item => item.value);
-    filteringStore.value.contract = value.map((item) => ({key : item.key, value : item.value}));
 }
 
 const setFilter = () => {
