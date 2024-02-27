@@ -20,7 +20,7 @@
                                     <path d="M15 5.9997L18 8.9997M13 19.9997H21M5 15.9997L4 19.9997L8 18.9997L19.586 7.4137C19.9609 7.03864 20.1716 6.53003 20.1716 5.9997C20.1716 5.46937 19.9609 4.96075 19.586 4.5857L19.414 4.4137C19.0389 4.03876 18.5303 3.82812 18 3.82812C17.4697 3.82813 16.9611 4.03876 16.586 4.4137L5 15.9997Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                                 </svg>
                             </div>
-                            <NuxtImg :src="dataStore.profile.image" :activeImage="dataStore.profile.image" height="100" width="100" class="block rounded-full border p-1" />
+                            <img :src="`${dataStore.profile.image}`" alt="Image Buat CV" width="150" height="150" class="block rounded-full border p-1" />
                             <h2 class="text-xl font-medium">{{dataStore.profile.name}}</h2>
                             <div>{{dataStore?.profile?.role}}</div>
                             <div class="py-3 flex w-full items-center gap-x-3">
@@ -65,7 +65,7 @@
                             <div @click="saveData('editImageSosmed')" class="cursor-pointer absolute top-0 end-0 flex items-center justify-center text-slate-300 hover:text-primary">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"><path fill="currentColor" d="M21 7v12q0 .825-.587 1.413T19 21H5q-.825 0-1.412-.587T3 19V5q0-.825.588-1.412T5 3h12zm-9 11q1.25 0 2.125-.875T15 15q0-1.25-.875-2.125T12 12q-1.25 0-2.125.875T9 15q0 1.25.875 2.125T12 18m-6-8h9V6H6z"/></svg>
                             </div>
-                            <PartialsImage @changeimage="(value) => {dataStore.profile.image = value}" />
+                            <PartialsImage :activeImage="dataStore.profile.image" @changeimage="(value) => {dataStore.profile.image = value}" />
                             <span class="text-xs text-slate-500">Klik gambar untuk upload</span>
                             <PartialsInput v-model="dataStore.profile.name" :modelValue="dataStore.profile.name" :inputClass="`text-center border-b rounded-none focus:rounded-3xl focus:border-transparent mb-0 w-full block`" :placeholder="`Nama Lengkap`" />
                             <PartialsInput v-model="dataStore.profile.role" :modelValue="dataStore.profile.role" :inputClass="`text-center border-none focus:border-none focus:rounded-3xl rounded-none block mt-[-1em]`" :placeholder="`Role / Posisi`" />
@@ -361,7 +361,34 @@
                             </li>
                         </ul>
                     </div>
-                    
+                    <div class="mt-4 p-5 rounded-xl bg-white">
+                        <h3 class="font-medium pb-3 border-b mb-3">Dokumen</h3>
+                        <div class="mb-3">
+                            <div class="text-sm text-slate-500 mb-2">KTP</div>
+                            <PartialsInput :inputClass="`border border-slate-200`" :placeholder="`No KTP`" />
+                            <PartialsFile />
+                        </div>
+                        <div class="mb-3">
+                            <div class="text-sm text-slate-500 mb-2">NPWP</div>
+                            <PartialsInput :inputClass="`border border-slate-200`" :placeholder="`No NPWP`" />
+                            <PartialsFile />
+                        </div>
+                        <div class="mb-3">
+                            <div class="text-sm text-slate-500 mb-2">Transkrip Nilai</div>
+                            <PartialsInput :inputClass="`border border-slate-200`" :placeholder="`Transkrip Nilai`" />
+                            <PartialsFile />
+                        </div>
+                        <div class="mb-3">
+                            <div class="text-sm text-slate-500 mb-2">SIM A/B</div>
+                            <PartialsInput :inputClass="`border border-slate-200`" :placeholder="`SIM A/B`" />
+                            <PartialsFile />
+                        </div>
+                        <div class="mb-3">
+                            <div class="text-sm text-slate-500 mb-2">SIM C</div>
+                            <PartialsInput :inputClass="`border border-slate-200`" :placeholder="`SIM C`" />
+                            <PartialsFile />
+                        </div>
+                    </div>
                 </div>
                 <div class="col-span-12 lg:col-span-8">
                     <div class="bg-white w-full rounded-0 md:rounded-2xl p-6 mb-5">
