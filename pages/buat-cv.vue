@@ -361,34 +361,7 @@
                             </li>
                         </ul>
                     </div>
-                    <div class="mt-4 p-5 rounded-xl bg-white">
-                        <h3 class="font-medium pb-3 border-b mb-3">Dokumen</h3>
-                        <div class="mb-3">
-                            <div class="text-sm text-slate-500 mb-2">KTP</div>
-                            <PartialsInput :inputClass="`border border-slate-200`" :placeholder="`No KTP`" />
-                            <PartialsFile />
-                        </div>
-                        <div class="mb-3">
-                            <div class="text-sm text-slate-500 mb-2">NPWP</div>
-                            <PartialsInput :inputClass="`border border-slate-200`" :placeholder="`No NPWP`" />
-                            <PartialsFile />
-                        </div>
-                        <div class="mb-3">
-                            <div class="text-sm text-slate-500 mb-2">Transkrip Nilai</div>
-                            <PartialsInput :inputClass="`border border-slate-200`" :placeholder="`Transkrip Nilai`" />
-                            <PartialsFile />
-                        </div>
-                        <div class="mb-3">
-                            <div class="text-sm text-slate-500 mb-2">SIM A/B</div>
-                            <PartialsInput :inputClass="`border border-slate-200`" :placeholder="`SIM A/B`" />
-                            <PartialsFile />
-                        </div>
-                        <div class="mb-3">
-                            <div class="text-sm text-slate-500 mb-2">SIM C</div>
-                            <PartialsInput :inputClass="`border border-slate-200`" :placeholder="`SIM C`" />
-                            <PartialsFile />
-                        </div>
-                    </div>
+                    
                 </div>
                 <div class="col-span-12 lg:col-span-8">
                     <div class="bg-white w-full rounded-0 md:rounded-2xl p-6 mb-5">
