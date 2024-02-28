@@ -2,7 +2,10 @@
     <div class="flex flex-row flex-wrap lg:items-center gap-3">
         <PartialsSearch @input="handleSearch" class="basis-full md:basis-1/3" :label="`Posisi / Jabatan`" />
         <PartialsMultiselect @selected="handleLocation" class="basis-full z-[14] sm:flex-1" :label="`Lokasi`" :svgData="svgLocation" :options="cityOptions" />
-        <PartialsMultiselect @selected="handleContract" class="flex-1 z-[12]" :label="`Tipe Pekerjaan`" :svgData="svgJenisKontrak" :options="contractOptions" />
+        <PartialsMultiselect @selected="handleContract" class="flex-1 z-[12]" :label="`Kontrak`" :svgData="svgJenisKontrak" :options="contractOptions" />
+        <button @click="resetFilter" class="flex items-center justify-center p-2 text-slate-400 hover:text-primary">
+            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" d="M20 8c-1.403-2.96-4.463-5-8-5a9 9 0 1 0 0 18a9 9 0 0 0 9-9m0-9v6h-6"/></svg>
+        </button>
         <PartialsButton @click="setFilter">Cari</PartialsButton>
     </div>
 </template>
@@ -51,7 +54,7 @@ const setFilter = () => {
     navigateTo('/lowongan');
 }
 
-const setNullFilter = () => {
+const resetFilter = () => {
     job.updateFilter('search', '');
     job.updateFilter('location', []);
     job.updateFilter('contract', []);

@@ -49,7 +49,7 @@
                             <path d="M12.0039 6V12.005L16.2434 16.245" stroke="#A6A6A6" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
                     </div>
-                    <span>terbit {{ job?.job_start }}</span>
+                    <span>terbit {{ daysAgo(job?.job_post_date) }}</span>
                 </li>
             </ul>
         </NuxtLink>

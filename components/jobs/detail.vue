@@ -47,7 +47,7 @@
                                 <path d="M12.0039 6V12.005L16.2434 16.245" stroke="#A6A6A6" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                             </svg>
                         </div>
-                        <span>terbit {{ job?.selectedJob?.job_post_date ?? '2 hari yang lalu'}}</span>
+                        <span>terbit {{ daysAgo(job?.selectedJob?.job_post_date) }}</span>
                     </li>
                 </ul>
                 <div class="py-6 border-t-2 px-5">
@@ -75,7 +75,7 @@
             </div>
             <div class="col-span-12 sticky bottom-0 z-[100]">
                 <div class="flex items-center gap-3 bg-white p-5 rounded-3xl">
-                    <PartialsButton v-if="job?.selectedJob?.job_status == 'Closed'" class="w-full text-center cursor-base" :primary="false">Job Closed</PartialsButton>
+                    <PartialsButton v-if="!access" class="w-full text-center cursor-base" :primary="false">Masuk terlebih dahulu</PartialsButton>
                     <PartialsButton v-else-if="job?.selectedJob?.is_applied == 0" class="w-full text-center" @click="lamarHandle(job?.selectedJob?.id)">Lamar</PartialsButton>
                     <PartialsButton v-else class="w-full text-center cursor-base" :primary="false">Telah Dilamar</PartialsButton>
                     <PartialsButton :class="[{'bg-white border-primary' :  job?.selectedJob?.is_favorite == 0}, {'bg-orange-400/30 hover:bg-orange-400/30 border-orange-600 hover:border-orange-600' : job?.selectedJob?.is_favorite == 1}]" :primary="false">
@@ -108,6 +108,7 @@ const toast = useToast();
 const lamarSuccess = ref(false);
 const job = useJobStore();
 const { id } = useRoute().params;
+const access = ref(null);
 
 const lamarHandle = async (id) => {
     const apply = await job.applyJob(id)
@@ -128,6 +129,7 @@ const convertText = (text) => {
 
 onMounted(async () => {
     await job.getJobById(id);
+    access.value = localStorage.getItem('access_token');
 })
 
 </script>

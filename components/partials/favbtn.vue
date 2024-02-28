@@ -17,24 +17,28 @@ const isfav = ref(false);
 
 const jobStore = useJobStore();
 const beFavorite = async () => {
-    if(isfav.value == false){
-        try {
-            const fav = await jobStore.makeFavorite(props?.job?.id);
-            if(fav?.success){
-                toast.success(`Success!! ${fav?.message}`);
-                isfav.value = true;
+    if(localStorage.getItem('access_token')){
+        if(isfav.value == false){
+            try {
+                const fav = await jobStore.makeFavorite(props?.job?.id);
+                if(fav?.success){
+                    toast.success(`Success!! ${fav?.message}`);
+                    isfav.value = true;
+                }
+            } catch (error) {
+                toast.error(`${error}`);
             }
-        } catch (error) {
-            toast.error(`${error}`);
+        }else{
+            const fav = await jobStore.unFavorite(props?.job?.id);
+            if(!fav.success){
+                toast.error(`${fav?.code} - ${fav?.message}`);
+            }else{
+                toast.success(`Success!! ${fav?.message}`);
+                isfav.value = false;
+            }
         }
     }else{
-        const fav = await jobStore.unFavorite(props?.job?.id);
-        if(!fav.success){
-            toast.error(`${fav?.code} - ${fav?.message}`);
-        }else{
-            toast.success(`Success!! ${fav?.message}`);
-            isfav.value = false;
-        }
+        toast.warning('Ooopss... Silahkan masuk / daftar terlebih dahulu');
     }
 }
 
