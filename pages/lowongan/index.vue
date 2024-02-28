@@ -85,8 +85,8 @@ const filter = ref({
 })
 
 onMounted(
-    () => {
-        jobStore.getJobs();
+    async () => {
+        await jobStore.getJobs();
         isReady.value = true;
     }
     
