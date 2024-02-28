@@ -38,10 +38,10 @@ export const useJobStore = defineStore('job',{
         async getJobById(id){
             const access = localStorage.getItem('access_token');
             let url = '/joborder/detailpublic';
-            
+            var headers = new Headers();
+
             if(access){
                 url = '/joborder/detail';
-                var headers = new Headers();
                 headers.append("token",access);
             }
 
@@ -52,28 +52,23 @@ export const useJobStore = defineStore('job',{
 
             this.selectedJob = job;
         },
-        async getJobs(page_size = this.filter.page_size, location = this.filter.location, contract = this.filter.contract, title = this.filter.search){
-            const access = localStorage.getItem('access_token') ?? 'rbkmzydqknor0t5q236n01j38';
-            let url = '/joborder/read';
+
+        async getJobs(){
+            const access = localStorage.getItem('access_token');
+            let url = 'readpublic';
             var headers = new Headers();
-                headers.append("token",access ?? 'rbkmzydqknor0t5q236n01j38');
 
             if(access){
-                url = '/joborder/read';
-                var headers = new Headers();
+                url = 'read';
                 headers.append("token",access);
             }
-
-            let contractQuery = contract.map(c => '&job_contract[]=' + c).join('');
-            let locationQuery = location.map(loc => '&job_location[]=' + loc).join('');
-
-            const job = await $fetch(`${this.API_URL}${url}?${'job_name='+title}${contract?.length != 0 ? contractQuery : '' }${location?.length ? locationQuery : '' }&page_size=${page_size}&page=1`, {
+            const job = await $fetch(`${this.API_URL}/joborder/${url}?page_size=${this.filter.page_size}&page=1`, {
                 method : 'GET',
                 headers : headers,
             });
 
-            console.log(job);
             this.jobs = job?.data;
+            return job;
         },
 
         async getJobSuggests(){
