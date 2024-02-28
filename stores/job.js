@@ -17,7 +17,6 @@ export const useJobStore = defineStore('job',{
             location : [],
             contract : [],
             search : '',
-            status : null,
         },
         jobs: [],
         selectedJob : null,
@@ -38,68 +37,47 @@ export const useJobStore = defineStore('job',{
         async getJobById(id){
             const access = localStorage.getItem('access_token');
             let url = '/joborder/detailpublic';
-            var headers = new Headers();
-
+            
             if(access){
                 url = '/joborder/detail';
+                var headers = new Headers();
                 headers.append("token",access);
             }
 
-            const jobdetail = await $fetch(`${this.API_URL}${url}?id=${id}`, {
+            const job = await $fetch(`${this.API_URL}${url}?id=${id}`, {
                 method : 'GET',
                 headers: headers,
             })
 
-            this.selectedJob = jobdetail;
+            this.selectedJob = job;
         },
-
-        async getJobs(){
+        async getJobs(page_size = this.filter.page_size, location = this.filter.location, contract = this.filter.contract, title = this.filter.search){
             const access = localStorage.getItem('access_token');
-            var url = 'readpublic';
-            var headers = new Headers();
-
+            let url = '/joborder/readpublic';
+            
             if(access){
-                url = 'read';
+                url = '/joborder/read';
+                var headers = new Headers();
                 headers.append("token",access);
             }
-            const fetchjob = await $fetch(`${this.API_URL}/joborder/${url}?page_size=${this.filter.page_size}&page=1`, {
+
+            let contractQuery = contract.map(c => '&job_contract[]=' + c).join('');
+            let locationQuery = location.map(loc => '&job_location[]=' + loc).join('');
+
+            const job = await $fetch(`${this.API_URL}${url}?${title != '' ? 'job_name='+title : ''}${contract?.length != 0 ? contractQuery : '' }${location?.length ? locationQuery : '' }&page_size=${page_size}&page=1`, {
                 method : 'GET',
                 headers : headers,
             });
 
-            this.jobs = fetchjob?.data;
-            return fetchjob;
-        },
-
-        async getJobSuggests(){
-            var headers = new Headers();
-            headers.append("token",localStorage.getItem('access_token'));
-
-            const job = await $fetch(`${this.API_URL}/joborder/recommendation`, {
-                method : 'GET',
-                headers : headers,
-            });
-
-            return job;
+            console.log(job);
+            this.jobs = job?.data;
         },
         
-        async getJobsByStatus(status = this.filter.status, page_size = this.filter.page_size){
-            var headers = new Headers();
-            headers.append("token",localStorage.getItem('access_token'));
-            const statusQuery =  status != null && status != '' ? `&status=${status}` : '';
-            const jobStatus = await $fetch(`${this.API_URL}/recruitment/applyhistory?page_size=${page_size}&page=1${statusQuery}`, {
-                method : 'GET',
-                headers : headers,
-            });
-
-            return jobStatus;
-        },
-
-        async getApplies(page_size = 800){
+        async getApplies(){
             var headers = new Headers();
             headers.append("token",localStorage.getItem('access_token'));
 
-            const jobApplied = await $fetch(`${this.API_URL}/recruitment/applyhistory?page_size=${page_size}&page=1&status=0`, {
+            const jobApplied = await $fetch(`${this.API_URL}/recruitment/applyhistory`, {
                 method : 'GET',
                 headers : headers,
             });
@@ -110,34 +88,42 @@ export const useJobStore = defineStore('job',{
         async applyJob(id){
             var headers = new Headers();
             headers.append("token",localStorage.getItem('access_token'));
+            var formdata = new FormData();
+            formdata.append("joborder_id", `${id}`);
 
-            const apply = await $fetch(`${this.API_URL}/recruitment/applyjob?id=${id}`, {
+            const apply = await $fetch(`${this.API_URL}/recruitment/applyjob`, {
                 method : 'POST',
                 headers : headers,
+                body: formdata,
             });
+
             console.log(apply);
             return apply;
         },
 
-        async getFavorites(page_size = 12){
+        async getFavorites(){
             var headers = new Headers();
             headers.append("token",localStorage.getItem('access_token'));
 
-            const job = await $fetch(`${this.API_URL}/recruitment/list-favorite?page_size=${page_size}&page=1`, {
+            const job = await $fetch(`${this.API_URL}/recruitment/list-favorite`, {
                 method : 'GET',
                 headers : headers,
             });
 
-            return job;
+            console.log(job);
+            return job?.data;
         },
 
         async makeFavorite(favoriteId){
             var headers = new Headers();
             headers.append("token",localStorage.getItem('access_token'));
-           
-            const favorite = await $fetch(`${this.API_URL}/recruitment/favoritejob?id=${favoriteId}`, {
+            var formdata = new FormData();
+            formdata.append("joborder_id", `${favoriteId}`);
+
+            const favorite = await $fetch(`${this.API_URL}/recruitment/favorite-job`, {
                 method : 'POST',
                 headers : headers,
+                body: formdata,
             });
 
             return favorite;
@@ -146,10 +132,13 @@ export const useJobStore = defineStore('job',{
         async unFavorite(favoriteId){
             var headers = new Headers();
             headers.append("token",localStorage.getItem('access_token'));
+            var formdata = new FormData();
+            formdata.append("joborder_id", `${favoriteId}`);
 
-            const unfavorite = await $fetch(`${this.API_URL}/recruitment/unfavoritejob?id=${favoriteId}`, {
+            const unfavorite = await $fetch(`${this.API_URL}/recruitment/unfavorite-job?id=1`, {
                 method : 'POST',
                 headers : headers,
+                body: formdata,
             });
 
             return unfavorite;
@@ -157,7 +146,6 @@ export const useJobStore = defineStore('job',{
 
         updateFilter(column, value){
             this.filter[column] = value;
-            this.getJobs();
             console.log(this.filter);
         },
 
