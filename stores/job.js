@@ -65,7 +65,7 @@ export const useJobStore = defineStore('job',{
             let contractQuery = contract.map(c => '&job_contract[]=' + c).join('');
             let locationQuery = location.map(loc => '&job_location[]=' + loc).join('');
 
-            const job = await $fetch(`${this.API_URL}${url}?${title != '' ? 'job_name='+title : ''}${contract?.length != 0 ? contractQuery : '' }${location?.length ? locationQuery : '' }&page_size=${page_size}&page=1`, {
+            const job = await $fetch(`${this.API_URL}${url}?${'job_name='+title}${contract?.length != 0 ? contractQuery : '' }${location?.length ? locationQuery : '' }&page_size=${page_size}&page=1`, {
                 method : 'GET',
                 headers : headers,
             });
