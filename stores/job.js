@@ -53,10 +53,8 @@ export const useJobStore = defineStore('job',{
             this.selectedJob = job;
         },
         async getJobs(page_size = this.filter.page_size, location = this.filter.location, contract = this.filter.contract, title = this.filter.search){
-            const access = localStorage.getItem('access_token') ?? 'rbkmzydqknor0t5q236n01j38';
-            let url = '/joborder/read';
-            var headers = new Headers();
-                headers.append("token",access ?? 'rbkmzydqknor0t5q236n01j38');
+            const access = localStorage.getItem('access_token');
+            let url = '/joborder/readpublic';
 
             if(access){
                 url = '/joborder/read';
