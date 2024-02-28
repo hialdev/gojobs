@@ -76,21 +76,22 @@
             <div class="col-span-12 sticky bottom-0 z-[100]">
                 <div class="flex items-center gap-3 bg-white p-5 rounded-3xl">
                     <PartialsButton v-if="!access" class="w-full text-center cursor-base" :primary="false">Masuk terlebih dahulu</PartialsButton>
+                    <PartialsButton v-else-if="job?.selectedJob?.job_status == 2" class="w-full text-center cursor-base" :primary="false">Lowongan Terpenuhi</PartialsButton>
                     <PartialsButton v-else-if="job?.selectedJob?.is_applied == 0" class="w-full text-center" @click="lamarHandle(job?.selectedJob?.id)">Lamar</PartialsButton>
                     <PartialsButton v-else class="w-full text-center cursor-base" :primary="false">Telah Dilamar</PartialsButton>
-                    <PartialsButton :class="[{'bg-white border-primary' :  job?.selectedJob?.is_favorite == 0}, {'bg-orange-400/30 hover:bg-orange-400/30 border-orange-600 hover:border-orange-600' : job?.selectedJob?.is_favorite == 1}]" :primary="false">
+                    <button @click="beFavorite" class="p-2.5 rounded-3xl" :class="[{'bg-gray-100 hover:bg-orange-100 hover:border-orange-400' :  job?.selectedJob?.is_favorite == 0}, {'bg-orange-400/30 hover:bg-orange-300/60 border-orange-400 hover:border-orange-600' : job?.selectedJob?.is_favorite == 1}]">
                         <div class="w-[24px] h-[24px] text-primary">
                             <svg v-if="!job?.selectedJob?.is_favorite" xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30"><g fill="none"><path fill="currentColor" d="M19.071 13.142L13.414 18.8a2 2 0 0 1-2.828 0l-5.657-5.657A5 5 0 1 1 12 6.072a5 5 0 0 1 7.071 7.07" opacity=".16"/><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.071 13.142L13.414 18.8a2 2 0 0 1-2.828 0l-5.657-5.657a5 5 0 0 1 7.07-7.071a5 5 0 0 1 7.072 7.071"/></g></svg>
                             <svg v-if="job?.selectedJob?.is_favorite" xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30"><path fill="currentColor" fill-rule="evenodd" d="M4.222 5.364A6.002 6.002 0 0 1 12 4.758a6.002 6.002 0 0 1 7.778 9.091l-5.657 5.657a3 3 0 0 1-4.242 0L4.222 13.85a6 6 0 0 1 0-8.485" clip-rule="evenodd"/></svg>
                         </div>
-                    </PartialsButton>
-                    <PartialsButton class="bg-transparent border-primary" :primary="false">
+                    </button>
+                    <button class="p-2.5 rounded-3xl bg-slate-100 hover:bg-orange-100 hover:border-orange-100">
                         <div class="w-[24px] h-[24px]">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
                                 <path d="M18 22C17.1667 22 16.4583 21.7083 15.875 21.125C15.2917 20.5417 15 19.8333 15 19C15 18.8833 15.0083 18.7623 15.025 18.637C15.0417 18.5117 15.0667 18.3993 15.1 18.3L8.05 14.2C7.76667 14.45 7.45 14.646 7.1 14.788C6.75 14.93 6.38333 15.0007 6 15C5.16667 15 4.45833 14.7083 3.875 14.125C3.29167 13.5417 3 12.8333 3 12C3 11.1667 3.29167 10.4583 3.875 9.875C4.45833 9.29167 5.16667 9 6 9C6.38333 9 6.75 9.071 7.1 9.213C7.45 9.355 7.76667 9.55067 8.05 9.8L15.1 5.7C15.0667 5.6 15.0417 5.48767 15.025 5.363C15.0083 5.23833 15 5.11733 15 5C15 4.16667 15.2917 3.45833 15.875 2.875C16.4583 2.29167 17.1667 2 18 2C18.8333 2 19.5417 2.29167 20.125 2.875C20.7083 3.45833 21 4.16667 21 5C21 5.83333 20.7083 6.54167 20.125 7.125C19.5417 7.70833 18.8333 8 18 8C17.6167 8 17.25 7.92933 16.9 7.788C16.55 7.64667 16.2333 7.45067 15.95 7.2L8.9 11.3C8.93333 11.4 8.95833 11.5127 8.975 11.638C8.99167 11.7633 9 11.884 9 12C9 12.1167 8.99167 12.2377 8.975 12.363C8.95833 12.4883 8.93333 12.6007 8.9 12.7L15.95 16.8C16.2333 16.55 16.55 16.3543 16.9 16.213C17.25 16.0717 17.6167 16.0007 18 16C18.8333 16 19.5417 16.2917 20.125 16.875C20.7083 17.4583 21 18.1667 21 19C21 19.8333 20.7083 20.5417 20.125 21.125C19.5417 21.7083 18.8333 22 18 22Z" fill="#FA6900"/>
                             </svg>
                         </div>
-                    </PartialsButton>
+                    </button>
                 </div>
             </div>
         </div>
@@ -132,6 +133,31 @@ onMounted(async () => {
     access.value = localStorage.getItem('access_token');
 })
 
+const beFavorite = async () => {
+    if(localStorage.getItem('access_token')){
+        if(job?.selectedJob?.is_favorite == 0){
+            try {
+                const fav = await job.makeFavorite(id);
+                if(fav?.success){
+                    toast.success(`Success!! ${fav?.message}`);
+                    await job.getJobById(id);
+                }
+            } catch (error) {
+                toast.error(`${error}`);
+            }
+        }else{
+            const fav = await job.unFavorite(id);
+            if(!fav.success){
+                toast.error(`${fav?.code} - ${fav?.message}`);
+            }else{
+                toast.success(`Success!! ${fav?.message}`);
+                await job.getJobById(id);
+            }
+        }
+    }else{
+        toast.warning('Ooopss... Silahkan masuk / daftar terlebih dahulu');
+    }
+}
 </script>
 
 <style scoped>

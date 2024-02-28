@@ -112,6 +112,7 @@ export default {
             const modalElement = this.$refs.modalElement;
             if (!dropdownTrigger.contains(event.target) && !modalElement.contains(event.target)) {
                 this.isModalOpen = false;
+                this.searchQuery = "";
                 document.removeEventListener("click", this.handleDocumentClick);
             }
         },

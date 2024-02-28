@@ -10,7 +10,7 @@
                 <path d="M16.8927 16.92L19.9727 20M19.0837 11.581C19.0837 15.768 15.7007 19.162 11.5277 19.162C7.35566 19.162 3.97266 15.768 3.97266 11.582C3.97266 7.393 7.35566 4 11.5277 4C15.7007 4 19.0837 7.394 19.0837 11.581Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
         </div>
-        <input type="text" class="outline-0 border-0 min-w-[20em] w-full" :placeholder="label" @input="handleInput" />
+        <input type="text" class="outline-0 border-0 min-w-[20em] w-full" :placeholder="label" @input="handleInput" :value="modelValue"/>
     </div>
 </template>
 
@@ -25,9 +25,13 @@ export default{
             type: String,
             default: '',
         },
+        modelValue:{
+            type: [String, Number]
+        }
     },
     methods: {
         handleInput(event) {
+            this.$emit('update:modelValue', event.target.value);
             this.$emit('input', event.target.value);
         },
     },

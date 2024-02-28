@@ -3,7 +3,7 @@
         <h1 class="text-2xl font-medium mb-8">Tersimpan</h1>
         <div class="grid grid-cols-12 gap-4">
             <div v-for="job in favorites" :key="job?.joborder?.id" class="col-span-12 md:col-span-6 lg:col-span-3">
-                <NuxtLink :to="`/lowongan/${job?.joborder?.id}`" activeClass="activeCard" class="block bg-white flex flex-col justify-between h-full p-6 rounded-3xl hover:ring-4 hover:ring-orange-700/20 border border-white hover:border hover:border-primary">
+                <NuxtLink :to="`/lowongan/${job?.joborder?.id}`" activeClass="activeCard" class="block bg-white flex flex-col justify-between h-full p-6 rounded-3xl hover:ring-4 hover:ring-orange-700/20 border border-white hover:border hover:border-primary" :class="job?.joborder?.job_status == 1 || job?.joborder?.job_status == 'Open' ? '' : 'opacity-60'">
                     <div class="flex items-start justify-between">
                         <NuxtImg
                             :src="`${job?.joborder?.logo ?? '/image/logo-ish.png'}`"

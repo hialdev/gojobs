@@ -18,7 +18,7 @@ const isfav = ref(false);
 const jobStore = useJobStore();
 const beFavorite = async () => {
     if(localStorage.getItem('access_token')){
-        if(isfav.value == false){
+        if(props.job.is_favorite != 1){
             try {
                 const fav = await jobStore.makeFavorite(props?.job?.id);
                 if(fav?.success){

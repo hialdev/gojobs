@@ -3,7 +3,7 @@
     <div v-if="isReady" class="grid grid-cols-12 gap-4 items-stretch">
         <template v-if="jobStore?.jobs.length > 0">
             <div v-for="job in jobStore?.jobs" :key="job?.id" class="col-span-12 md:col-span-6 lg:col-span-3">
-                <NuxtLink :to="`/lowongan/${job?.id}`" class="block bg-white flex flex-col justify-between h-full p-6 rounded-3xl hover:ring-4 hover:ring-orange-700/20 border border-white hover:border hover:border-primary">
+                <NuxtLink :to="`/lowongan/${job?.id}`" class="block bg-white flex flex-col justify-between h-full p-6 rounded-3xl hover:ring-4 hover:ring-orange-700/20 border border-white hover:border hover:border-primary" :class="job?.job_status == 1 ? '' : 'opacity-60'">
                     <div class="flex items-start justify-between">
                         <NuxtImg
                             :src="`${job?.logo ?? '/image/logo-ish.png'}`"

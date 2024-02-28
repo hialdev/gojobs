@@ -1,8 +1,8 @@
 <template>
     <div class="flex flex-row flex-wrap lg:items-center gap-3">
-        <PartialsSearch @input="handleSearch" class="basis-full md:basis-1/3" :label="`Posisi / Jabatan`" />
-        <PartialsMultiselect @selected="handleLocation" class="basis-full z-[14] sm:flex-1" :label="`Lokasi`" :svgData="svgLocation" :options="cityOptions" />
-        <PartialsMultiselect @selected="handleContract" class="flex-1 z-[12]" :label="`Kontrak`" :svgData="svgJenisKontrak" :options="contractOptions" />
+        <PartialsSearch v-model="filter.title" class="basis-full md:basis-1/3" :label="`Posisi / Jabatan`" />
+        <PartialsMultiselect @selected="handleLocation" :selectedOptions="is_reset ? [] : filtering.location" class="basis-full z-[14] sm:flex-1" :label="`Lokasi`" :svgData="svgLocation" :options="cityOptions" />
+        <PartialsMultiselect @selected="handleContract" :selectedOptions="is_reset ? [] : filtering.contract" class="flex-1 z-[12]" :label="`Kontrak`" :svgData="svgJenisKontrak" :options="contractOptions" />
         <button @click="resetFilter" class="flex items-center justify-center p-2 text-slate-400 hover:text-primary">
             <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" d="M20 8c-1.403-2.96-4.463-5-8-5a9 9 0 1 0 0 18a9 9 0 0 0 9-9m0-9v6h-6"/></svg>
         </button>
@@ -22,41 +22,53 @@ const city = useCityStore();
 const job = useJobStore();
 const contractOptions = ref([]);
 const cityOptions = ref([]);
+const is_reset = ref(false);
 const filter = ref({
     title : '',
     location : [],
     contract : [],
 })
-
-onMounted(async () => {
-    contractOptions.value = await contract.getOptions();
-    cityOptions.value = await city.getOptions();
+const filtering = ref({
+    location : [],
+    contract : [],
 })
 
-const handleSearch = (event) => {
-    filter.value.title = event.target?.value;
-}
+onMounted(async () => {
+    const contractData = await contract.getOptions();
+    if (Array.isArray(contractData)) {
+        contractOptions.value = contractData.reverse();
+    }
+
+    const cityData = await city.getOptions();
+    if (Array.isArray(cityData)) {
+        cityOptions.value = cityData.reverse();
+    }
+});
+
 
 const handleLocation = (value) => {
     filter.value.location = value.map(item => item.key);
-    console.log(filter.value);
+    filtering.value.location = value.map((item) => ({key: item.key, value: item.value}));
 }
 
 const handleContract = (value) => {
     filter.value.contract = value.map(item => item.value);
-    console.log(filter.value);
+    filtering.value.contract = value.map((item) => ({key: item.key, value: item.value}));
 }
 
 const setFilter = () => {
     job.updateFilter('search', filter.value.title);
     job.updateFilter('location', filter.value.location);
     job.updateFilter('contract', filter.value.contract);
-    navigateTo('/lowongan');
 }
 
 const resetFilter = () => {
+    filtering.value.location = [];
+    filtering.value.contract = [];
+    is_reset.value = true;
     job.updateFilter('search', '');
     job.updateFilter('location', []);
     job.updateFilter('contract', []);
+    
 }
 </script>
