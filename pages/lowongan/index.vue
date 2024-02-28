@@ -94,7 +94,6 @@ const filter = ref({
 onMounted(async () => {
     const fetch = await jobStore.getJobs();
     if(fetch?.success){listJobs.value = fetch?.data;}
-    isReady.value = true;  
 })
 
 const showMore = () => {

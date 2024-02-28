@@ -45,30 +45,30 @@ export const useJobStore = defineStore('job',{
                 headers.append("token",access);
             }
 
-            const job = await $fetch(`${this.API_URL}${url}?id=${id}`, {
+            const jobdetail = await $fetch(`${this.API_URL}${url}?id=${id}`, {
                 method : 'GET',
                 headers: headers,
             })
 
-            this.selectedJob = job;
+            this.selectedJob = jobdetail;
         },
 
         async getJobs(){
             const access = localStorage.getItem('access_token');
-            let url = 'readpublic';
+            var url = 'readpublic';
             var headers = new Headers();
 
             if(access){
                 url = 'read';
                 headers.append("token",access);
             }
-            const job = await $fetch(`${this.API_URL}/joborder/${url}?page_size=${this.filter.page_size}&page=1`, {
+            const fetchjob = await $fetch(`${this.API_URL}/joborder/${url}?page_size=${this.filter.page_size}&page=1`, {
                 method : 'GET',
                 headers : headers,
             });
 
-            this.jobs = job?.data;
-            return job;
+            this.jobs = fetchjob?.data;
+            return fetchjob;
         },
 
         async getJobSuggests(){
