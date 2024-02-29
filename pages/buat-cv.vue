@@ -441,9 +441,9 @@
                                             <span>{{ formatDate(experience.start_date)}} - {{experience.still ? 'sekarang' : formatDate(experience.end_date)}}</span>|
                                             <span>
                                                 {{
-                                                    calculateDate(
+                                                    daysAgo(
                                                         experience.start_date,
-                                                        experience.still ? new Date().toISOString().split('T')[0] : experience.end_date
+                                                        experience.still ? new Date().toISOString() : experience.end_date
                                                     )
                                                 }}
                                             </span>
