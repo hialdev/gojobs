@@ -1,7 +1,7 @@
 <template>
     <div class="text-center relative">
         <!-- Preview image -->
-        <img :src="`${imageUrl}`" height="100" width="100" class="block rounded-full border p-1 mx-auto w-[100px] h-[100px] object-cover" />
+        <img :src="`${imageUrl == '' ? '/image/placeholder-person.jpeg' : imageUrl}`" height="100" width="100" class="block rounded-full border p-1 mx-auto w-[100px] h-[100px] object-cover" />
     
         <!-- Input file -->
         <input

@@ -20,7 +20,7 @@
                                     <path d="M15 5.9997L18 8.9997M13 19.9997H21M5 15.9997L4 19.9997L8 18.9997L19.586 7.4137C19.9609 7.03864 20.1716 6.53003 20.1716 5.9997C20.1716 5.46937 19.9609 4.96075 19.586 4.5857L19.414 4.4137C19.0389 4.03876 18.5303 3.82812 18 3.82812C17.4697 3.82813 16.9611 4.03876 16.586 4.4137L5 15.9997Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                                 </svg>
                             </div>
-                            <img :src="`${dataStore.profile.image}`" alt="Image Buat CV" width="150" height="150" class="block rounded-full border p-1" />
+                            <img :src="`${dataStore.profile.image == '' ? '/image/placeholder-person.jpeg' : dataStore.profile.image}`" alt="Image Buat CV" width="150" height="150" class="block rounded-full border p-1" />
                             <h2 class="text-xl font-medium">{{dataStore.profile.name}}</h2>
                             <div>{{dataStore?.profile?.role}}</div>
                             <div class="py-3 flex w-full items-center gap-x-3">
@@ -33,7 +33,7 @@
                                     <NuxtLink :to="`https://instagram.com/${dataStore?.profile?.sosmed?.ig}`" target="_blank" class="flex items-center p-2 rounded-xl text-red-600 bg-red-100">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 16 16"><path fill="currentColor" d="M8 0C5.829 0 5.556.01 4.703.048C3.85.088 3.269.222 2.76.42a3.917 3.917 0 0 0-1.417.923A3.927 3.927 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7C.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297c.04.852.174 1.433.372 1.942c.205.526.478.972.923 1.417c.444.445.89.719 1.416.923c.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.916 3.916 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417c.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.926 3.926 0 0 0-.923-1.417A3.911 3.911 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0h.003zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046c.78.035 1.204.166 1.486.275c.373.145.64.319.92.599c.28.28.453.546.598.92c.11.281.24.705.275 1.485c.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.47 2.47 0 0 1-.599.919c-.28.28-.546.453-.92.598c-.28.11-.704.24-1.485.276c-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.478 2.478 0 0 1-.92-.598a2.48 2.48 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485c-.038-.843-.046-1.096-.046-3.233c0-2.136.008-2.388.046-3.231c.036-.78.166-1.204.276-1.486c.145-.373.319-.64.599-.92c.28-.28.546-.453.92-.598c.282-.11.705-.24 1.485-.276c.738-.034 1.024-.044 2.515-.045v.002zm4.988 1.328a.96.96 0 1 0 0 1.92a.96.96 0 0 0 0-1.92zm-4.27 1.122a4.109 4.109 0 1 0 0 8.217a4.109 4.109 0 0 0 0-8.217zm0 1.441a2.667 2.667 0 1 1 0 5.334a2.667 2.667 0 0 1 0-5.334"/></svg>
                                     </NuxtLink>
-                                    <span class="text-sm">{{dataStore?.profile?.sosmed?.ig}}</span>
+                                    <span class="text-sm">{{dataStore?.profile?.sosmed?.ig == '' ? '-' : dataStore?.profile?.sosmed?.ig}}</span>
                                 </div>
                                 <div class="flex items-center gap-x-4">
                                     <NuxtLink :to="`https://twitter.com/${dataStore?.profile?.sosmed?.x}`" target="_blank" class="flex items-center p-2 rounded-xl text-orange-600 bg-orange-100">
@@ -41,7 +41,7 @@
                                             <path d="M18.7165 4.99967C18.0749 5.29134 17.3832 5.48301 16.6665 5.57467C17.3999 5.13301 17.9665 4.43301 18.2332 3.59134C17.5415 4.00801 16.7749 4.29967 15.9665 4.46634C15.3082 3.74967 14.3832 3.33301 13.3332 3.33301C11.3749 3.33301 9.77487 4.93301 9.77487 6.90801C9.77487 7.19134 9.8082 7.46634 9.86654 7.72468C6.89987 7.57468 4.2582 6.14967 2.49987 3.99134C2.19154 4.51634 2.01654 5.13301 2.01654 5.78301C2.01654 7.02467 2.64154 8.12467 3.6082 8.74967C3.01654 8.74967 2.46654 8.58301 1.9832 8.33301V8.35801C1.9832 10.0913 3.21654 11.5413 4.84987 11.8663C4.32548 12.0098 3.77495 12.0298 3.24154 11.9247C3.46788 12.6351 3.91115 13.2567 4.50905 13.7021C5.10695 14.1476 5.82941 14.3944 6.57487 14.408C5.31123 15.4084 3.74487 15.9491 2.1332 15.9413C1.84987 15.9413 1.56654 15.9247 1.2832 15.8913C2.86654 16.908 4.74987 17.4997 6.76654 17.4997C13.3332 17.4997 16.9415 12.0497 16.9415 7.32467C16.9415 7.16634 16.9415 7.01634 16.9332 6.85801C17.6332 6.35801 18.2332 5.72467 18.7165 4.99967Z" fill="#FFB400"/>
                                         </svg>
                                     </NuxtLink>
-                                    <span class="text-sm">{{dataStore?.profile?.sosmed?.x}}</span>
+                                    <span class="text-sm">{{dataStore?.profile?.sosmed?.x == '' ? '-' : dataStore?.profile?.sosmed?.x}}</span>
                                 </div>
                                 <div class="flex items-center gap-x-4">
                                     <NuxtLink :to="`https://facebook.com/${dataStore?.profile?.sosmed?.fb}`" target="_blank" class="flex items-center p-2 rounded-xl text-blue-600 bg-blue-100">
@@ -49,7 +49,7 @@
                                             <path d="M11.6673 11.2503H13.7507L14.584 7.91699H11.6673V6.25033C11.6673 5.39199 11.6673 4.58366 13.334 4.58366H14.584V1.78366C14.3123 1.74783 13.2865 1.66699 12.2032 1.66699C9.94065 1.66699 8.33398 3.04783 8.33398 5.58366V7.91699H5.83398V11.2503H8.33398V18.3337H11.6673V11.2503Z" fill="#277DA1"/>
                                         </svg>
                                     </NuxtLink>
-                                    <span class="text-sm">{{dataStore?.profile?.sosmed?.fb}}</span>
+                                    <span class="text-sm">{{dataStore?.profile?.sosmed?.fb == '' ? '-' : dataStore?.profile?.sosmed?.fb}}</span>
                                 </div>
                                 <div class="flex items-center gap-x-4">
                                     <NuxtLink :to="`https://linkedin.com/in/${dataStore?.profile?.sosmed?.in}`" target="_blank" class="flex items-center p-2 rounded-xl text-green-600 bg-green-100">
@@ -57,7 +57,7 @@
                                             <path d="M5.78255 4.16652C5.78233 4.60855 5.60652 5.03239 5.29381 5.34479C4.98109 5.6572 4.55708 5.83258 4.11505 5.83236C3.67302 5.83214 3.24919 5.65633 2.93678 5.34361C2.62438 5.0309 2.449 4.60688 2.44922 4.16486C2.44944 3.72283 2.62525 3.29899 2.93796 2.98659C3.25068 2.67419 3.67469 2.4988 4.11672 2.49902C4.55875 2.49924 4.98258 2.67505 5.29499 2.98777C5.60739 3.30049 5.78277 3.7245 5.78255 4.16652ZM5.83255 7.06652H2.49922V17.4999H5.83255V7.06652ZM11.0992 7.06652H7.78255V17.4999H11.0659V12.0249C11.0659 8.97486 15.0409 8.69152 15.0409 12.0249V17.4999H18.3326V10.8915C18.3326 5.74986 12.4492 5.94152 11.0659 8.46652L11.0992 7.06652Z" fill="#90BE6D"/>
                                         </svg>
                                     </NuxtLink> 
-                                    <span class="text-sm">{{dataStore?.profile?.sosmed?.in}}</span>
+                                    <span class="text-sm">{{dataStore?.profile?.sosmed?.in == '' ? '-' : dataStore?.profile?.sosmed?.in}}</span>
                                 </div>
                             </div>
                         </div>
@@ -124,19 +124,19 @@
                                         </clipPath>
                                     </defs>
                                 </svg>
-                                <span class="">{{dataStore.biodata.birth_place +', '+formatDate(dataStore.biodata.birth_date)}}</span>
+                                <span class="">{{dataStore.biodata.birth_place == '' ? '- ,' : dataStore.biodata.birth_place +','}} {{dataStore.biodata.birth_date == null ? 'YYYY - MM - DD' : formatDate(dataStore.biodata.birth_date)}}</span>
                             </li>
                             <li class="flex items-center gap-4 text-sm">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="21" viewBox="0 0 20 21" fill="none">
                                     <path d="M16.2495 2.375H13.1245C12.9587 2.375 12.7997 2.44085 12.6825 2.55806C12.5653 2.67527 12.4995 2.83424 12.4995 3C12.4995 3.16576 12.5653 3.32473 12.6825 3.44194C12.7997 3.55915 12.9587 3.625 13.1245 3.625H14.7409L12.776 5.58984C12.1991 5.05218 11.5032 4.65861 10.7451 4.44128C9.98698 4.22396 9.18823 4.18903 8.41406 4.33936C7.63989 4.4897 6.91226 4.82102 6.2906 5.30628C5.66894 5.79154 5.17088 6.41696 4.8371 7.13148C4.50332 7.84599 4.34329 8.62932 4.37007 9.4175C4.39686 10.2057 4.6097 10.9763 4.99122 11.6665C5.37273 12.3567 5.9121 12.9469 6.56527 13.3888C7.21844 13.8308 7.96688 14.1119 8.74947 14.2094V15.5H6.87447C6.70871 15.5 6.54974 15.5658 6.43253 15.6831C6.31532 15.8003 6.24947 15.9592 6.24947 16.125C6.24947 16.2908 6.31532 16.4497 6.43253 16.5669C6.54974 16.6842 6.70871 16.75 6.87447 16.75H8.74947V18.625C8.74947 18.7908 8.81532 18.9497 8.93253 19.0669C9.04974 19.1842 9.20871 19.25 9.37447 19.25C9.54023 19.25 9.6992 19.1842 9.81641 19.0669C9.93362 18.9497 9.99947 18.7908 9.99947 18.625V16.75H11.8745C12.0402 16.75 12.1992 16.6842 12.3164 16.5669C12.4336 16.4497 12.4995 16.2908 12.4995 16.125C12.4995 15.9592 12.4336 15.8003 12.3164 15.6831C12.1992 15.5658 12.0402 15.5 11.8745 15.5H9.99947V14.2094C10.8372 14.1047 11.6348 13.7894 12.3176 13.2928C13.0004 12.7963 13.5461 12.1347 13.9038 11.37C14.2615 10.6052 14.4195 9.76228 14.363 8.9199C14.3065 8.07753 14.0374 7.26324 13.5807 6.55313L15.6245 4.50859V6.125C15.6245 6.29076 15.6903 6.44973 15.8075 6.56694C15.9247 6.68415 16.0837 6.75 16.2495 6.75C16.4152 6.75 16.5742 6.68415 16.6914 6.56694C16.8086 6.44973 16.8745 6.29076 16.8745 6.125V3C16.8745 2.83424 16.8086 2.67527 16.6914 2.55806C16.5742 2.44085 16.4152 2.375 16.2495 2.375ZM9.37447 13C8.63279 13 7.90777 12.7801 7.29108 12.368C6.6744 11.956 6.19375 11.3703 5.90993 10.6851C5.6261 9.99984 5.55183 9.24584 5.69653 8.51841C5.84122 7.79098 6.19838 7.1228 6.72282 6.59835C7.24727 6.0739 7.91546 5.71675 8.64288 5.57206C9.37031 5.42736 10.1243 5.50162 10.8095 5.78545C11.4948 6.06928 12.0804 6.54993 12.4925 7.16661C12.9045 7.7833 13.1245 8.50832 13.1245 9.25C13.1234 10.2442 12.728 11.1975 12.025 11.9005C11.3219 12.6035 10.3687 12.999 9.37447 13Z" fill="#797979"/>
                                 </svg>
-                                <span class="">{{dataStore.biodata.gender}}</span>
+                                <span class="">{{dataStore.biodata.gender != '' ? dataStore.biodata.gender : '-'}}</span>
                             </li>
                             <li class="flex items-center gap-4 text-sm">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="21" viewBox="0 0 20 21" fill="none">
                                     <path d="M6.4 3.5C3.97 3.5 2 5.47 2 7.9C2 12.3 7.2 16.3 10 17.2304C12.8 16.3 18 12.3 18 7.9C18 5.47 16.03 3.5 13.6 3.5C12.112 3.5 10.796 4.2388 10 5.3696C9.59427 4.79168 9.05526 4.32004 8.42861 3.9946C7.80196 3.66915 7.10612 3.4995 6.4 3.5Z" stroke="#797979" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
                                 </svg>
-                                <span class="">{{dataStore.biodata.marritage_status}}</span>
+                                <span class="">{{dataStore.biodata.marritage_status != '' ? dataStore.biodata.marritage_status : '-'}}</span>
                             </li>
                             <li class="flex items-center gap-4 text-sm">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
@@ -157,17 +157,17 @@
                                         </clipPath>
                                     </defs>
                                 </svg>
-                                <span class="">{{dataStore.biodata.religion}}</span>
+                                <span class="">{{dataStore.biodata.religion != '' ? dataStore.biodata.religion : '-'}}</span>
                             </li>
                             <li class="flex items-center gap-4 text-sm">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
                                     <path d="M10 6.66667C9.34073 6.66667 8.69626 6.86216 8.1481 7.22844C7.59994 7.59471 7.17269 8.1153 6.9204 8.72439C6.66811 9.33348 6.6021 10.0037 6.73072 10.6503C6.85933 11.2969 7.1768 11.8908 7.64298 12.357C8.10915 12.8232 8.7031 13.1407 9.3497 13.2693C9.9963 13.3979 10.6665 13.3319 11.2756 13.0796C11.8847 12.8273 12.4053 12.4001 12.7716 11.8519C13.1378 11.3037 13.3333 10.6593 13.3333 10C13.3333 9.11595 12.9821 8.2681 12.357 7.64298C11.7319 7.01786 10.8841 6.66667 10 6.66667ZM10 12C9.60444 12 9.21776 11.8827 8.88886 11.6629C8.55996 11.4432 8.30362 11.1308 8.15224 10.7654C8.00087 10.3999 7.96126 9.99778 8.03843 9.60982C8.1156 9.22186 8.30608 8.86549 8.58579 8.58579C8.86549 8.30608 9.22186 8.1156 9.60982 8.03843C9.99778 7.96126 10.3999 8.00087 10.7654 8.15224C11.1308 8.30362 11.4432 8.55996 11.6629 8.88886C11.8827 9.21776 12 9.60444 12 10C12 10.5304 11.7893 11.0391 11.4142 11.4142C11.0391 11.7893 10.5304 12 10 12ZM19.3333 4H0.666667C0.489856 4 0.320286 4.07024 0.195262 4.19526C0.0702379 4.32029 0 4.48986 0 4.66667V15.3333C0 15.5101 0.0702379 15.6797 0.195262 15.8047C0.320286 15.9298 0.489856 16 0.666667 16H19.3333C19.5101 16 19.6797 15.9298 19.8047 15.8047C19.9298 15.6797 20 15.5101 20 15.3333V4.66667C20 4.48986 19.9298 4.32029 19.8047 4.19526C19.6797 4.07024 19.5101 4 19.3333 4ZM15.4708 14.6667H4.52917C4.30534 13.9097 3.89567 13.2207 3.33749 12.6625C2.7793 12.1043 2.09033 11.6947 1.33333 11.4708V8.52917C2.09033 8.30534 2.7793 7.89567 3.33749 7.33749C3.89567 6.7793 4.30534 6.09033 4.52917 5.33333H15.4708C15.6947 6.09033 16.1043 6.7793 16.6625 7.33749C17.2207 7.89567 17.9097 8.30534 18.6667 8.52917V11.4708C17.9097 11.6947 17.2207 12.1043 16.6625 12.6625C16.1043 13.2207 15.6947 13.9097 15.4708 14.6667ZM18.6667 7.11417C17.867 6.77033 17.2297 6.13297 16.8858 5.33333H18.6667V7.11417ZM3.11417 5.33333C2.77033 6.13297 2.13297 6.77033 1.33333 7.11417V5.33333H3.11417ZM1.33333 12.8858C2.13297 13.2297 2.77033 13.867 3.11417 14.6667H1.33333V12.8858ZM16.8858 14.6667C17.2297 13.867 17.867 13.2297 18.6667 12.8858V14.6667H16.8858Z" fill="#797979"/>
                                 </svg>
-                                <span class="">{{dataStore.biodata.expected_salary}}</span>
+                                <span class="">{{dataStore.biodata.expected_salary  != '' ? dataStore.biodata.expected_salary : '-'}}</span>
                             </li>
                             <li class="flex items-center gap-4 text-sm">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="text-slate-500" width="18" height="18" viewBox="0 0 24 24"><path fill="currentColor" d="M19 4h-1.45A3.08 3.08 0 0 0 17 3a3 3 0 0 0-2.25-1H9.27A3 3 0 0 0 7 3a3.08 3.08 0 0 0-.57 1H5a3 3 0 0 0-3 3v12a3 3 0 0 0 3 3h14a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3m-10.48.34A1 1 0 0 1 9.27 4h5.46a1 1 0 0 1 .75.34a1 1 0 0 1 .25.78l-.5 4a1 1 0 0 1-1 .88h-1.64l1.14-2.4a1 1 0 0 0-1.8-.86L10.37 10h-.6a1 1 0 0 1-1-.88l-.5-4a1 1 0 0 1 .25-.78M20 19a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h1.37l.42 3.37a3 3 0 0 0 3 2.63h4.46a3 3 0 0 0 3-2.63L17.63 6H19a1 1 0 0 1 1 1Zm-6-3h-4a1 1 0 0 0 0 2h4a1 1 0 0 0 0-2"/></svg>
-                                <span class="">{{dataStore.biodata.weight_body}}kg / {{dataStore.biodata.height_body}}cm</span>
+                                <span class="">{{dataStore.biodata.weight_body  != '' ? dataStore.biodata.weight_body : '-'}}kg / {{dataStore.biodata.height_body  != '' ? dataStore.biodata.height_body : '-'}}cm</span>
                             </li>
                         </ul>
                         <ul v-if="show.biodata" class="flex flex-col py-5 border-b">
@@ -273,7 +273,7 @@
                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="21" viewBox="0 0 20 21" fill="none">
                                     <path d="M17.3727 12.8795L13.6922 11.2303L13.682 11.2256C13.491 11.1439 13.2825 11.1111 13.0756 11.1302C12.8687 11.1493 12.6698 11.2197 12.4969 11.335C12.4765 11.3484 12.457 11.3631 12.4383 11.3787L10.5367 12.9998C9.33204 12.4147 8.08829 11.1803 7.50313 9.99125L9.12657 8.06078C9.14219 8.04125 9.15704 8.02172 9.1711 8.00062C9.28394 7.8282 9.35239 7.63056 9.37039 7.42529C9.38838 7.22002 9.35534 7.01348 9.27423 6.82406V6.81469L7.62032 3.12797C7.51309 2.88052 7.3287 2.67438 7.09468 2.54034C6.86067 2.4063 6.58958 2.35153 6.32188 2.38422C5.26326 2.52352 4.29155 3.04341 3.58824 3.84679C2.88492 4.65017 2.49809 5.6821 2.50001 6.74984C2.50001 12.953 7.54688 17.9998 13.75 17.9998C14.8177 18.0018 15.8497 17.6149 16.6531 16.9116C17.4564 16.2083 17.9763 15.2366 18.1156 14.178C18.1484 13.9104 18.0937 13.6393 17.9598 13.4053C17.8259 13.1713 17.62 12.9869 17.3727 12.8795ZM13.75 16.7498C11.0987 16.7469 8.55687 15.6924 6.68214 13.8177C4.8074 11.943 3.7529 9.40112 3.75001 6.74984C3.74707 5.98694 4.02192 5.24906 4.52324 4.67399C5.02456 4.09892 5.71806 3.72599 6.47423 3.62484C6.47392 3.62796 6.47392 3.6311 6.47423 3.63422L8.11485 7.30609L6.50001 9.2389C6.48362 9.25776 6.46873 9.27788 6.45548 9.29906C6.33791 9.47947 6.26894 9.68718 6.25525 9.90208C6.24157 10.117 6.28362 10.3318 6.37735 10.5256C7.08516 11.9733 8.54376 13.4209 10.007 14.128C10.2023 14.2208 10.4184 14.2614 10.634 14.2458C10.8497 14.2302 11.0576 14.1589 11.2375 14.0389C11.2576 14.0254 11.2769 14.0108 11.2953 13.9952L13.1945 12.3748L16.8664 14.0194H16.875C16.7751 14.7766 16.4027 15.4715 15.8275 15.9741C15.2524 16.4766 14.5138 16.7524 13.75 16.7498Z" fill="#797979"/>
                                 </svg>
-                                <span class="">{{dataStore.profile.phone}}</span>
+                                <span class="">{{dataStore.profile.phone == '' ? '-' : dataStore.profile.phone}}</span>
                             </li>
                             <li class="flex items-center gap-4 text-sm">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="21" viewBox="0 0 20 21" fill="none">
@@ -286,7 +286,7 @@
                                         </clipPath>
                                     </defs>
                                 </svg>
-                                <span class="">{{dataStore.profile.email}}</span>
+                                <span class="">{{dataStore.profile.email == '' ? '-' : dataStore.profile.email}}</span>
                             </li>
                             <li class="flex items-center gap-4 text-sm">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="21" viewBox="0 0 20 21" fill="none">
@@ -299,11 +299,11 @@
                                         </clipPath>
                                     </defs>
                                 </svg>
-                                <span class="">{{dataStore.profile.province}}</span>
+                                <span class="">{{dataStore.profile.province == '' ? '-' : dataStore.profile.province}}</span>
                             </li>
                             <li class="flex items-start gap-4 text-sm">
-                                <svg class="text-slate-600" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 15 15"><g fill="none" fill-rule="evenodd" stroke="currentColor" stroke-linecap="square" clip-rule="evenodd"><path d="M7.5 8.495a2 2 0 0 0 2-1.999a2 2 0 0 0-4 0a2 2 0 0 0 2 1.999Z"/><path d="M13.5 6.496c0 4.997-5 7.995-6 7.995s-6-2.998-6-7.995A5.999 5.999 0 0 1 7.5.5c3.313 0 6 2.685 6 5.996Z"/></g></svg>
-                                <span class="">{{dataStore.profile.address}}</span>
+                                <svg class="text-slate-600" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 15 15"><g fill="none" fill-rule="evenodd" stroke="currentColor" stroke-linecap="square" clip-rule="evenodd"><path d="M7.5 8.495a2 2 0 0 0 2-1.999a2 2 0 0 0-4 0a2 2 0 0 0 2 1.999Z"/><path d="M13.5 6.496c0 4.997-5 7.995-6 7.995s-6-2.998-6-7.995A5.999 5.999 0 0 1 7.5.5c3.313 0 6 2.685 6 5.996Z"/></g></svg>
+                                <span class="">{{dataStore.profile.address == '' ? '-' : dataStore.profile.address}}</span>
                             </li>
                         </ul>
                         <ul v-if="show.informasi" class="flex flex-col py-5">
@@ -441,9 +441,9 @@
                                             <span>{{ formatDate(experience.start_date)}} - {{experience.still ? 'sekarang' : formatDate(experience.end_date)}}</span>|
                                             <span>
                                                 {{
-                                                    daysAgo(
+                                                    calculateDate(
                                                         experience.start_date,
-                                                        experience.still ? new Date().toISOString() : experience.end_date
+                                                        experience.still ? new Date().toISOString().split('T')[0] : experience.end_date
                                                     )
                                                 }}
                                             </span>
@@ -644,7 +644,7 @@
                                         </clipPath>
                                     </defs>
                                 </svg>
-                                <span>Tambah</span>
+                                <span>Kelola</span>
                             </div>
                         </div>
                         <div class="pt-5">
@@ -946,6 +946,7 @@ const editSkills = ref({
 onMounted(async () => {
     const data = JSON.parse(localStorage.getItem('data_buat_cv'));
     if(data) dataStore.value = data;
+    console.log(dataStore.value);
 
     const fetch = await contractStore.getOptions();
     contractOptions.value = fetch;
@@ -954,6 +955,13 @@ onMounted(async () => {
     dataStore.value.educations = sortedData('educations').value;
     dataStore.value.organizations = sortedData('organizations').value;
 
+    if(dataStore.value.biodata?.birth_place == '') {show.value.biodata = true;}
+    if(dataStore.value.profile?.name == '') {show.value.editImageSosmed = true;}
+    if(dataStore.value.profile?.phone == '') {show.value.informasi = true;}
+    if(dataStore.value.experiences.length == 0) {show.value.pengalaman = true;}
+    if(dataStore.value.educations.length == 0) {show.value.pendidikan = true;}
+    if(dataStore.value.organizations.length == 0) {show.value.organisasi = true;}
+    if(dataStore.value.languages.length == 0) {show.value.bahasa = true;}
     isReady.value = true;
 })
 
