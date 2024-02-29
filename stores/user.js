@@ -172,8 +172,8 @@ export const useUserStore = defineStore('user',{
             if(fetchProfile.success){
                 this.detail.profile = {
                     image : fetchProfile.profile.photo,
-                    name : fetchProfile.profile.fullname,
-                    summary : fetchProfile.profile_detail.summary,
+                    name : fetchProfile.name,
+                    summary : fetchProfile.profile_detail?.summary ?? "",
                     email : fetchProfile.email,
                     phone : fetchProfile.mobile,
                     province : fetchProfile.profile.work_location,
@@ -193,13 +193,14 @@ export const useUserStore = defineStore('user',{
                     gender : fetchProfile.profile.gender,
                     marritage_status : fetchProfile.profile.marital_status,
                     religion : fetchProfile.profile.religion,
-                    expected_salary : fetchProfile.profile_detail.expect_salary,
+                    expected_salary : fetchProfile.profile_detail?.expect_salary ?? "",
                     weight_body : fetchProfile.profile.weight_body,
                     height_body : fetchProfile.profile.height_body,
                 };
             }
 
-            // console.log(`Detail : ${JSON.stringify(this.detail.profile)}`);
+            console.log(fetchProfile);
+            console.log(this.detail);
             return fetchProfile;
         },
 

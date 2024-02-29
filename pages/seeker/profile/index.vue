@@ -124,7 +124,7 @@
                                         </clipPath>
                                     </defs>
                                 </svg>
-                                <span class="">{{userStore?.detail?.biodata?.birth_place +', '+formatDate(userStore?.detail?.biodata?.birth_date)}}</span>
+                                <span class="">{{userStore?.detail?.biodata?.birth_place == '' ? '-' : userStore?.detail?.biodata?.birth_place }}, {{userStore.detail.biodata.birth_date == null ? 'YYYY - MM - DD' : formatDate(userStore.detail.biodata.birth_date)}}</span>
                             </li>
                             <li class="flex items-center gap-4 text-sm">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="21" viewBox="0 0 20 21" fill="none">
@@ -1027,7 +1027,15 @@ onMounted(async () => {
     const fetchLanguage = await languageStore.getLanguages();
     dataStore.value.languages = fetchLanguage?.data;
 
-    console.log(dataStore.value);
+    if(userStore.detail?.biodata?.birth_place == undefined) {show.value.biodata = true;}
+    if(userStore.detail?.profile?.name == '') {show.value.editImageSosmed = true;}
+    if(userStore.detail?.profile?.sosmed?.ig == '' || userStore.detail?.profile?.sosmed?.ig == undefined) {show.value.editImageSosmed = true;}
+    if(userStore.detail?.profile?.phone == '') {show.value.informasi = true;}
+    if(dataStore.value?.experiences?.length == 0 || dataStore.value?.experiences?.length == undefined) {show.value.pengalaman = true;}
+    if(dataStore.value?.educations?.length == 0) {show.value.pendidikan = true;}
+    if(dataStore.value?.organizations?.length == 0 || dataStore.value?.organizations?.length == undefined) {show.value.organisasi = true;}
+    if(dataStore.value?.languages?.length == 0 || dataStore.value?.languages?.length == undefined) {show.value.bahasa = true;}
+
     isReady.value = true;
 })
 
