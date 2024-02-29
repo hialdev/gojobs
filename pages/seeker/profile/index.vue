@@ -20,9 +20,9 @@
                                     <path d="M15 5.9997L18 8.9997M13 19.9997H21M5 15.9997L4 19.9997L8 18.9997L19.586 7.4137C19.9609 7.03864 20.1716 6.53003 20.1716 5.9997C20.1716 5.46937 19.9609 4.96075 19.586 4.5857L19.414 4.4137C19.0389 4.03876 18.5303 3.82812 18 3.82812C17.4697 3.82813 16.9611 4.03876 16.586 4.4137L5 15.9997Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                                 </svg>
                             </div>
-                            <img :src="`${dataStore.profile.image}`" alt="Image Buat CV" width="150" height="150" class="block rounded-full border p-1" />
-                            <h2 class="text-xl font-medium">{{dataStore.profile.name}}</h2>
-                            <div>{{dataStore?.profile?.role}}</div>
+                            <img :src="`https://ui-avatars.com/api/?name=${userStore?.detail?.profile?.name}`" alt="Image Buat CV" width="150" height="150" class="block rounded-full border p-1" />
+                            <h2 class="text-xl font-medium">{{userStore?.detail?.profile.name}}</h2>
+                            <div>{{userStore?.detail?.profile?.role}}</div>
                             <div class="py-3 flex w-full items-center gap-x-3">
                                 <hr class="bg-slate-100 h-[1px] w-full" />
                                 <h3 class="text-slate-400 text-sm whitespace-nowrap">Social Media</h3>
@@ -30,34 +30,34 @@
                             </div>
                             <div class="flex flex-col items-start justify-start w-full gap-3 my-3">
                                 <div class="flex items-center gap-x-4">
-                                    <NuxtLink :to="`https://instagram.com/${dataStore?.profile?.sosmed?.ig}`" target="_blank" class="flex items-center p-2 rounded-xl text-red-600 bg-red-100">
+                                    <NuxtLink :to="`https://instagram.com/${userStore?.detail?.profile?.sosmed?.ig}`" target="_blank" class="flex items-center p-2 rounded-xl text-red-600 bg-red-100">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 16 16"><path fill="currentColor" d="M8 0C5.829 0 5.556.01 4.703.048C3.85.088 3.269.222 2.76.42a3.917 3.917 0 0 0-1.417.923A3.927 3.927 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7C.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297c.04.852.174 1.433.372 1.942c.205.526.478.972.923 1.417c.444.445.89.719 1.416.923c.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.916 3.916 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417c.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.926 3.926 0 0 0-.923-1.417A3.911 3.911 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0h.003zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046c.78.035 1.204.166 1.486.275c.373.145.64.319.92.599c.28.28.453.546.598.92c.11.281.24.705.275 1.485c.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.47 2.47 0 0 1-.599.919c-.28.28-.546.453-.92.598c-.28.11-.704.24-1.485.276c-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.478 2.478 0 0 1-.92-.598a2.48 2.48 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485c-.038-.843-.046-1.096-.046-3.233c0-2.136.008-2.388.046-3.231c.036-.78.166-1.204.276-1.486c.145-.373.319-.64.599-.92c.28-.28.546-.453.92-.598c.282-.11.705-.24 1.485-.276c.738-.034 1.024-.044 2.515-.045v.002zm4.988 1.328a.96.96 0 1 0 0 1.92a.96.96 0 0 0 0-1.92zm-4.27 1.122a4.109 4.109 0 1 0 0 8.217a4.109 4.109 0 0 0 0-8.217zm0 1.441a2.667 2.667 0 1 1 0 5.334a2.667 2.667 0 0 1 0-5.334"/></svg>
                                     </NuxtLink>
-                                    <span class="text-sm">{{dataStore?.profile?.sosmed?.ig}}</span>
+                                    <span class="text-sm">{{userStore?.detail?.profile?.sosmed?.ig}}</span>
                                 </div>
                                 <div class="flex items-center gap-x-4">
-                                    <NuxtLink :to="`https://twitter.com/${dataStore?.profile?.sosmed?.x}`" target="_blank" class="flex items-center p-2 rounded-xl text-orange-600 bg-orange-100">
+                                    <NuxtLink :to="`https://twitter.com/${userStore?.detail?.profile?.sosmed?.x}`" target="_blank" class="flex items-center p-2 rounded-xl text-orange-600 bg-orange-100">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
                                             <path d="M18.7165 4.99967C18.0749 5.29134 17.3832 5.48301 16.6665 5.57467C17.3999 5.13301 17.9665 4.43301 18.2332 3.59134C17.5415 4.00801 16.7749 4.29967 15.9665 4.46634C15.3082 3.74967 14.3832 3.33301 13.3332 3.33301C11.3749 3.33301 9.77487 4.93301 9.77487 6.90801C9.77487 7.19134 9.8082 7.46634 9.86654 7.72468C6.89987 7.57468 4.2582 6.14967 2.49987 3.99134C2.19154 4.51634 2.01654 5.13301 2.01654 5.78301C2.01654 7.02467 2.64154 8.12467 3.6082 8.74967C3.01654 8.74967 2.46654 8.58301 1.9832 8.33301V8.35801C1.9832 10.0913 3.21654 11.5413 4.84987 11.8663C4.32548 12.0098 3.77495 12.0298 3.24154 11.9247C3.46788 12.6351 3.91115 13.2567 4.50905 13.7021C5.10695 14.1476 5.82941 14.3944 6.57487 14.408C5.31123 15.4084 3.74487 15.9491 2.1332 15.9413C1.84987 15.9413 1.56654 15.9247 1.2832 15.8913C2.86654 16.908 4.74987 17.4997 6.76654 17.4997C13.3332 17.4997 16.9415 12.0497 16.9415 7.32467C16.9415 7.16634 16.9415 7.01634 16.9332 6.85801C17.6332 6.35801 18.2332 5.72467 18.7165 4.99967Z" fill="#FFB400"/>
                                         </svg>
                                     </NuxtLink>
-                                    <span class="text-sm">{{dataStore?.profile?.sosmed?.x}}</span>
+                                    <span class="text-sm">{{userStore?.detail?.profile?.sosmed?.x}}</span>
                                 </div>
                                 <div class="flex items-center gap-x-4">
-                                    <NuxtLink :to="`https://facebook.com/${dataStore?.profile?.sosmed?.fb}`" target="_blank" class="flex items-center p-2 rounded-xl text-blue-600 bg-blue-100">
+                                    <NuxtLink :to="`https://facebook.com/${userStore?.detail?.profile?.sosmed?.fb}`" target="_blank" class="flex items-center p-2 rounded-xl text-blue-600 bg-blue-100">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
                                             <path d="M11.6673 11.2503H13.7507L14.584 7.91699H11.6673V6.25033C11.6673 5.39199 11.6673 4.58366 13.334 4.58366H14.584V1.78366C14.3123 1.74783 13.2865 1.66699 12.2032 1.66699C9.94065 1.66699 8.33398 3.04783 8.33398 5.58366V7.91699H5.83398V11.2503H8.33398V18.3337H11.6673V11.2503Z" fill="#277DA1"/>
                                         </svg>
                                     </NuxtLink>
-                                    <span class="text-sm">{{dataStore?.profile?.sosmed?.fb}}</span>
+                                    <span class="text-sm">{{userStore?.detail?.profile?.sosmed?.fb}}</span>
                                 </div>
                                 <div class="flex items-center gap-x-4">
-                                    <NuxtLink :to="`https://linkedin.com/in/${dataStore?.profile?.sosmed?.in}`" target="_blank" class="flex items-center p-2 rounded-xl text-green-600 bg-green-100">
+                                    <NuxtLink :to="`https://linkedin.com/in/${userStore?.detail?.profile?.sosmed?.in}`" target="_blank" class="flex items-center p-2 rounded-xl text-green-600 bg-green-100">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
                                             <path d="M5.78255 4.16652C5.78233 4.60855 5.60652 5.03239 5.29381 5.34479C4.98109 5.6572 4.55708 5.83258 4.11505 5.83236C3.67302 5.83214 3.24919 5.65633 2.93678 5.34361C2.62438 5.0309 2.449 4.60688 2.44922 4.16486C2.44944 3.72283 2.62525 3.29899 2.93796 2.98659C3.25068 2.67419 3.67469 2.4988 4.11672 2.49902C4.55875 2.49924 4.98258 2.67505 5.29499 2.98777C5.60739 3.30049 5.78277 3.7245 5.78255 4.16652ZM5.83255 7.06652H2.49922V17.4999H5.83255V7.06652ZM11.0992 7.06652H7.78255V17.4999H11.0659V12.0249C11.0659 8.97486 15.0409 8.69152 15.0409 12.0249V17.4999H18.3326V10.8915C18.3326 5.74986 12.4492 5.94152 11.0659 8.46652L11.0992 7.06652Z" fill="#90BE6D"/>
                                         </svg>
                                     </NuxtLink> 
-                                    <span class="text-sm">{{dataStore?.profile?.sosmed?.in}}</span>
+                                    <span class="text-sm">{{userStore?.detail?.profile?.sosmed?.in}}</span>
                                 </div>
                             </div>
                         </div>
@@ -124,19 +124,19 @@
                                         </clipPath>
                                     </defs>
                                 </svg>
-                                <span class="">{{dataStore.biodata.birth_place +', '+formatDate(dataStore.biodata.birth_date)}}</span>
+                                <span class="">{{userStore?.detail?.biodata?.birth_place +', '+formatDate(userStore?.detail?.biodata?.birth_date)}}</span>
                             </li>
                             <li class="flex items-center gap-4 text-sm">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="21" viewBox="0 0 20 21" fill="none">
                                     <path d="M16.2495 2.375H13.1245C12.9587 2.375 12.7997 2.44085 12.6825 2.55806C12.5653 2.67527 12.4995 2.83424 12.4995 3C12.4995 3.16576 12.5653 3.32473 12.6825 3.44194C12.7997 3.55915 12.9587 3.625 13.1245 3.625H14.7409L12.776 5.58984C12.1991 5.05218 11.5032 4.65861 10.7451 4.44128C9.98698 4.22396 9.18823 4.18903 8.41406 4.33936C7.63989 4.4897 6.91226 4.82102 6.2906 5.30628C5.66894 5.79154 5.17088 6.41696 4.8371 7.13148C4.50332 7.84599 4.34329 8.62932 4.37007 9.4175C4.39686 10.2057 4.6097 10.9763 4.99122 11.6665C5.37273 12.3567 5.9121 12.9469 6.56527 13.3888C7.21844 13.8308 7.96688 14.1119 8.74947 14.2094V15.5H6.87447C6.70871 15.5 6.54974 15.5658 6.43253 15.6831C6.31532 15.8003 6.24947 15.9592 6.24947 16.125C6.24947 16.2908 6.31532 16.4497 6.43253 16.5669C6.54974 16.6842 6.70871 16.75 6.87447 16.75H8.74947V18.625C8.74947 18.7908 8.81532 18.9497 8.93253 19.0669C9.04974 19.1842 9.20871 19.25 9.37447 19.25C9.54023 19.25 9.6992 19.1842 9.81641 19.0669C9.93362 18.9497 9.99947 18.7908 9.99947 18.625V16.75H11.8745C12.0402 16.75 12.1992 16.6842 12.3164 16.5669C12.4336 16.4497 12.4995 16.2908 12.4995 16.125C12.4995 15.9592 12.4336 15.8003 12.3164 15.6831C12.1992 15.5658 12.0402 15.5 11.8745 15.5H9.99947V14.2094C10.8372 14.1047 11.6348 13.7894 12.3176 13.2928C13.0004 12.7963 13.5461 12.1347 13.9038 11.37C14.2615 10.6052 14.4195 9.76228 14.363 8.9199C14.3065 8.07753 14.0374 7.26324 13.5807 6.55313L15.6245 4.50859V6.125C15.6245 6.29076 15.6903 6.44973 15.8075 6.56694C15.9247 6.68415 16.0837 6.75 16.2495 6.75C16.4152 6.75 16.5742 6.68415 16.6914 6.56694C16.8086 6.44973 16.8745 6.29076 16.8745 6.125V3C16.8745 2.83424 16.8086 2.67527 16.6914 2.55806C16.5742 2.44085 16.4152 2.375 16.2495 2.375ZM9.37447 13C8.63279 13 7.90777 12.7801 7.29108 12.368C6.6744 11.956 6.19375 11.3703 5.90993 10.6851C5.6261 9.99984 5.55183 9.24584 5.69653 8.51841C5.84122 7.79098 6.19838 7.1228 6.72282 6.59835C7.24727 6.0739 7.91546 5.71675 8.64288 5.57206C9.37031 5.42736 10.1243 5.50162 10.8095 5.78545C11.4948 6.06928 12.0804 6.54993 12.4925 7.16661C12.9045 7.7833 13.1245 8.50832 13.1245 9.25C13.1234 10.2442 12.728 11.1975 12.025 11.9005C11.3219 12.6035 10.3687 12.999 9.37447 13Z" fill="#797979"/>
                                 </svg>
-                                <span class="">{{dataStore.biodata.gender}}</span>
+                                <span class="">{{userStore?.detail?.biodata?.gender}}</span>
                             </li>
                             <li class="flex items-center gap-4 text-sm">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="21" viewBox="0 0 20 21" fill="none">
                                     <path d="M6.4 3.5C3.97 3.5 2 5.47 2 7.9C2 12.3 7.2 16.3 10 17.2304C12.8 16.3 18 12.3 18 7.9C18 5.47 16.03 3.5 13.6 3.5C12.112 3.5 10.796 4.2388 10 5.3696C9.59427 4.79168 9.05526 4.32004 8.42861 3.9946C7.80196 3.66915 7.10612 3.4995 6.4 3.5Z" stroke="#797979" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
                                 </svg>
-                                <span class="">{{dataStore.biodata.marritage_status}}</span>
+                                <span class="">{{userStore?.detail?.biodata?.marritage_status}}</span>
                             </li>
                             <li class="flex items-center gap-4 text-sm">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
@@ -157,17 +157,17 @@
                                         </clipPath>
                                     </defs>
                                 </svg>
-                                <span class="">{{dataStore.biodata.religion}}</span>
+                                <span class="">{{userStore?.detail?.biodata?.religion}}</span>
                             </li>
                             <li class="flex items-center gap-4 text-sm">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
                                     <path d="M10 6.66667C9.34073 6.66667 8.69626 6.86216 8.1481 7.22844C7.59994 7.59471 7.17269 8.1153 6.9204 8.72439C6.66811 9.33348 6.6021 10.0037 6.73072 10.6503C6.85933 11.2969 7.1768 11.8908 7.64298 12.357C8.10915 12.8232 8.7031 13.1407 9.3497 13.2693C9.9963 13.3979 10.6665 13.3319 11.2756 13.0796C11.8847 12.8273 12.4053 12.4001 12.7716 11.8519C13.1378 11.3037 13.3333 10.6593 13.3333 10C13.3333 9.11595 12.9821 8.2681 12.357 7.64298C11.7319 7.01786 10.8841 6.66667 10 6.66667ZM10 12C9.60444 12 9.21776 11.8827 8.88886 11.6629C8.55996 11.4432 8.30362 11.1308 8.15224 10.7654C8.00087 10.3999 7.96126 9.99778 8.03843 9.60982C8.1156 9.22186 8.30608 8.86549 8.58579 8.58579C8.86549 8.30608 9.22186 8.1156 9.60982 8.03843C9.99778 7.96126 10.3999 8.00087 10.7654 8.15224C11.1308 8.30362 11.4432 8.55996 11.6629 8.88886C11.8827 9.21776 12 9.60444 12 10C12 10.5304 11.7893 11.0391 11.4142 11.4142C11.0391 11.7893 10.5304 12 10 12ZM19.3333 4H0.666667C0.489856 4 0.320286 4.07024 0.195262 4.19526C0.0702379 4.32029 0 4.48986 0 4.66667V15.3333C0 15.5101 0.0702379 15.6797 0.195262 15.8047C0.320286 15.9298 0.489856 16 0.666667 16H19.3333C19.5101 16 19.6797 15.9298 19.8047 15.8047C19.9298 15.6797 20 15.5101 20 15.3333V4.66667C20 4.48986 19.9298 4.32029 19.8047 4.19526C19.6797 4.07024 19.5101 4 19.3333 4ZM15.4708 14.6667H4.52917C4.30534 13.9097 3.89567 13.2207 3.33749 12.6625C2.7793 12.1043 2.09033 11.6947 1.33333 11.4708V8.52917C2.09033 8.30534 2.7793 7.89567 3.33749 7.33749C3.89567 6.7793 4.30534 6.09033 4.52917 5.33333H15.4708C15.6947 6.09033 16.1043 6.7793 16.6625 7.33749C17.2207 7.89567 17.9097 8.30534 18.6667 8.52917V11.4708C17.9097 11.6947 17.2207 12.1043 16.6625 12.6625C16.1043 13.2207 15.6947 13.9097 15.4708 14.6667ZM18.6667 7.11417C17.867 6.77033 17.2297 6.13297 16.8858 5.33333H18.6667V7.11417ZM3.11417 5.33333C2.77033 6.13297 2.13297 6.77033 1.33333 7.11417V5.33333H3.11417ZM1.33333 12.8858C2.13297 13.2297 2.77033 13.867 3.11417 14.6667H1.33333V12.8858ZM16.8858 14.6667C17.2297 13.867 17.867 13.2297 18.6667 12.8858V14.6667H16.8858Z" fill="#797979"/>
                                 </svg>
-                                <span class="">{{dataStore.biodata.expected_salary}}</span>
+                                <span class="">{{userStore?.detail?.biodata?.expected_salary}}</span>
                             </li>
                             <li class="flex items-center gap-4 text-sm">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="text-slate-500" width="18" height="18" viewBox="0 0 24 24"><path fill="currentColor" d="M19 4h-1.45A3.08 3.08 0 0 0 17 3a3 3 0 0 0-2.25-1H9.27A3 3 0 0 0 7 3a3.08 3.08 0 0 0-.57 1H5a3 3 0 0 0-3 3v12a3 3 0 0 0 3 3h14a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3m-10.48.34A1 1 0 0 1 9.27 4h5.46a1 1 0 0 1 .75.34a1 1 0 0 1 .25.78l-.5 4a1 1 0 0 1-1 .88h-1.64l1.14-2.4a1 1 0 0 0-1.8-.86L10.37 10h-.6a1 1 0 0 1-1-.88l-.5-4a1 1 0 0 1 .25-.78M20 19a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h1.37l.42 3.37a3 3 0 0 0 3 2.63h4.46a3 3 0 0 0 3-2.63L17.63 6H19a1 1 0 0 1 1 1Zm-6-3h-4a1 1 0 0 0 0 2h4a1 1 0 0 0 0-2"/></svg>
-                                <span class="">{{dataStore.biodata.weight_body}}kg / {{dataStore.biodata.height_body}}cm</span>
+                                <span class="">{{userStore?.detail?.biodata?.weight_body}}kg / {{userStore?.detail?.biodata?.height_body}}cm</span>
                             </li>
                         </ul>
                         <ul v-if="show.biodata" class="flex flex-col py-5 border-b">
@@ -199,8 +199,8 @@
                                 </svg>
                                 <select v-model="dataStore.biodata.gender" name="" id="" class="border-b p-2 px-3 block w-full focus:outline-none">
                                     <option selected>-- Pilih Gender --</option>
-                                    <option value="Laki Laki">Laki Laki</option>
-                                    <option value="Perempuan">Perempuan</option>
+                                    <option value="male">Laki Laki</option>
+                                    <option value="female">Perempuan</option>
                                 </select>
                             </li>
                             <li class="flex items-center gap-4 text-sm">
@@ -209,8 +209,8 @@
                                 </svg>
                                 <select v-model="dataStore.biodata.marritage_status" name="" id="" class="border-b p-2 px-3 block w-full focus:outline-none">
                                     <option selected>-- Status Pernikahan --</option>
-                                    <option value="Menikah">Menikah</option>
-                                    <option value="Single">Single</option>
+                                    <option value="married">Married</option>
+                                    <option value="single">Single</option>
                                 </select>
                             </li>
                             <li class="flex items-center gap-4 text-sm">
@@ -234,8 +234,7 @@
                                 </svg>
                                 <select v-model="dataStore.biodata.religion" name="" id="" class="border-b p-2 px-3 block w-full focus:outline-none">
                                     <option selected>-- Agama --</option>
-                                    <option value="Islam">Islam</option>
-                                    <option value="Non Islam">Non Islam</option>
+                                    <option v-for="rlg in religion" :value="rlg?.religion.toLowerCase()">{{rlg.religion}}</option>
                                 </select>
                             </li>
                             <li class="flex items-center gap-4 text-sm">
@@ -273,7 +272,7 @@
                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="21" viewBox="0 0 20 21" fill="none">
                                     <path d="M17.3727 12.8795L13.6922 11.2303L13.682 11.2256C13.491 11.1439 13.2825 11.1111 13.0756 11.1302C12.8687 11.1493 12.6698 11.2197 12.4969 11.335C12.4765 11.3484 12.457 11.3631 12.4383 11.3787L10.5367 12.9998C9.33204 12.4147 8.08829 11.1803 7.50313 9.99125L9.12657 8.06078C9.14219 8.04125 9.15704 8.02172 9.1711 8.00062C9.28394 7.8282 9.35239 7.63056 9.37039 7.42529C9.38838 7.22002 9.35534 7.01348 9.27423 6.82406V6.81469L7.62032 3.12797C7.51309 2.88052 7.3287 2.67438 7.09468 2.54034C6.86067 2.4063 6.58958 2.35153 6.32188 2.38422C5.26326 2.52352 4.29155 3.04341 3.58824 3.84679C2.88492 4.65017 2.49809 5.6821 2.50001 6.74984C2.50001 12.953 7.54688 17.9998 13.75 17.9998C14.8177 18.0018 15.8497 17.6149 16.6531 16.9116C17.4564 16.2083 17.9763 15.2366 18.1156 14.178C18.1484 13.9104 18.0937 13.6393 17.9598 13.4053C17.8259 13.1713 17.62 12.9869 17.3727 12.8795ZM13.75 16.7498C11.0987 16.7469 8.55687 15.6924 6.68214 13.8177C4.8074 11.943 3.7529 9.40112 3.75001 6.74984C3.74707 5.98694 4.02192 5.24906 4.52324 4.67399C5.02456 4.09892 5.71806 3.72599 6.47423 3.62484C6.47392 3.62796 6.47392 3.6311 6.47423 3.63422L8.11485 7.30609L6.50001 9.2389C6.48362 9.25776 6.46873 9.27788 6.45548 9.29906C6.33791 9.47947 6.26894 9.68718 6.25525 9.90208C6.24157 10.117 6.28362 10.3318 6.37735 10.5256C7.08516 11.9733 8.54376 13.4209 10.007 14.128C10.2023 14.2208 10.4184 14.2614 10.634 14.2458C10.8497 14.2302 11.0576 14.1589 11.2375 14.0389C11.2576 14.0254 11.2769 14.0108 11.2953 13.9952L13.1945 12.3748L16.8664 14.0194H16.875C16.7751 14.7766 16.4027 15.4715 15.8275 15.9741C15.2524 16.4766 14.5138 16.7524 13.75 16.7498Z" fill="#797979"/>
                                 </svg>
-                                <span class="">{{dataStore.profile.phone}}</span>
+                                <span class="">{{userStore?.detail?.profile?.phone}}</span>
                             </li>
                             <li class="flex items-center gap-4 text-sm">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="21" viewBox="0 0 20 21" fill="none">
@@ -286,7 +285,7 @@
                                         </clipPath>
                                     </defs>
                                 </svg>
-                                <span class="">{{dataStore.profile.email}}</span>
+                                <span class="">{{userStore?.detail?.profile?.email}}</span>
                             </li>
                             <li class="flex items-center gap-4 text-sm">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="21" viewBox="0 0 20 21" fill="none">
@@ -299,11 +298,11 @@
                                         </clipPath>
                                     </defs>
                                 </svg>
-                                <span class="">{{dataStore.profile.province}}</span>
+                                <span class="">{{userStore?.detail?.profile?.province}}</span>
                             </li>
                             <li class="flex items-start gap-4 text-sm">
                                 <svg class="text-slate-600" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 15 15"><g fill="none" fill-rule="evenodd" stroke="currentColor" stroke-linecap="square" clip-rule="evenodd"><path d="M7.5 8.495a2 2 0 0 0 2-1.999a2 2 0 0 0-4 0a2 2 0 0 0 2 1.999Z"/><path d="M13.5 6.496c0 4.997-5 7.995-6 7.995s-6-2.998-6-7.995A5.999 5.999 0 0 1 7.5.5c3.313 0 6 2.685 6 5.996Z"/></g></svg>
-                                <span class="">{{dataStore.profile.address}}</span>
+                                <span class="">{{userStore?.detail?.profile?.address}}</span>
                             </li>
                         </ul>
                         <ul v-if="show.informasi" class="flex flex-col py-5">
@@ -317,7 +316,7 @@
                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="21" viewBox="0 0 20 21" fill="none">
                                     <path d="M17.3727 12.8795L13.6922 11.2303L13.682 11.2256C13.491 11.1439 13.2825 11.1111 13.0756 11.1302C12.8687 11.1493 12.6698 11.2197 12.4969 11.335C12.4765 11.3484 12.457 11.3631 12.4383 11.3787L10.5367 12.9998C9.33204 12.4147 8.08829 11.1803 7.50313 9.99125L9.12657 8.06078C9.14219 8.04125 9.15704 8.02172 9.1711 8.00062C9.28394 7.8282 9.35239 7.63056 9.37039 7.42529C9.38838 7.22002 9.35534 7.01348 9.27423 6.82406V6.81469L7.62032 3.12797C7.51309 2.88052 7.3287 2.67438 7.09468 2.54034C6.86067 2.4063 6.58958 2.35153 6.32188 2.38422C5.26326 2.52352 4.29155 3.04341 3.58824 3.84679C2.88492 4.65017 2.49809 5.6821 2.50001 6.74984C2.50001 12.953 7.54688 17.9998 13.75 17.9998C14.8177 18.0018 15.8497 17.6149 16.6531 16.9116C17.4564 16.2083 17.9763 15.2366 18.1156 14.178C18.1484 13.9104 18.0937 13.6393 17.9598 13.4053C17.8259 13.1713 17.62 12.9869 17.3727 12.8795ZM13.75 16.7498C11.0987 16.7469 8.55687 15.6924 6.68214 13.8177C4.8074 11.943 3.7529 9.40112 3.75001 6.74984C3.74707 5.98694 4.02192 5.24906 4.52324 4.67399C5.02456 4.09892 5.71806 3.72599 6.47423 3.62484C6.47392 3.62796 6.47392 3.6311 6.47423 3.63422L8.11485 7.30609L6.50001 9.2389C6.48362 9.25776 6.46873 9.27788 6.45548 9.29906C6.33791 9.47947 6.26894 9.68718 6.25525 9.90208C6.24157 10.117 6.28362 10.3318 6.37735 10.5256C7.08516 11.9733 8.54376 13.4209 10.007 14.128C10.2023 14.2208 10.4184 14.2614 10.634 14.2458C10.8497 14.2302 11.0576 14.1589 11.2375 14.0389C11.2576 14.0254 11.2769 14.0108 11.2953 13.9952L13.1945 12.3748L16.8664 14.0194H16.875C16.7751 14.7766 16.4027 15.4715 15.8275 15.9741C15.2524 16.4766 14.5138 16.7524 13.75 16.7498Z" fill="#797979"/>
                                 </svg>
-                                <input v-model="dataStore.profile.phone" type="number" class="p-2 px-3 border-b focus:outline-none block w-full" placeholder="No telp/Whatsapp" />
+                                <input :value="dataStore.profile.phone" type="number" class="p-2 px-3 border-b focus:outline-none block w-full" placeholder="No telp/Whatsapp" disabled/>
                             </li>
                             <li class="flex items-center gap-4 text-sm">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="21" viewBox="0 0 20 21" fill="none">
@@ -330,7 +329,7 @@
                                         </clipPath>
                                     </defs>
                                 </svg>
-                                <input v-model="dataStore.profile.email" type="email" class="p-2 px-3 border-b focus:outline-none block w-full" placeholder="Email" />
+                                <input :value="dataStore.profile.email" type="email" class="p-2 px-3 border-b focus:outline-none block w-full" placeholder="Email" disabled/>
                             </li>
                             <li class="flex items-center gap-4 text-sm">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="21" viewBox="0 0 20 21" fill="none">
@@ -389,7 +388,7 @@
                             </div>
                         </div>
                         <div class="text-sm pt-5 font-light">
-                            <textarea @input="show.ringkasan = false" v-model="dataStore.profile.summary" class="w-full rounded-lg border border-slate-200 text-sm p-2 px-4" name="" id="" cols="20" rows="6" :placeholder="`Jelaskan siapa diri anda, tips: ketertarikan, pengalaman, pencapaian, visi-misi`">{{ dataStore?.profile?.summary }}</textarea>
+                            <textarea @input="show.ringkasan = false" v-model="dataStore.profile.summary" class="w-full rounded-lg border border-slate-200 text-sm p-2 px-4" name="" id="" cols="20" rows="6" :placeholder="`Jelaskan siapa diri anda, tips: ketertarikan, pengalaman, pencapaian, visi-misi`">{{ userStore?.detail?.profile?.summary }}</textarea>
                         </div>
                     </div>
 
@@ -414,13 +413,13 @@
                         <div class="pt-5">
                             <div v-if="show.pengalaman" class="grid grid-cols-12 gap-x-5 py-3 mb-5">
                                 <div class="col-span-12 md:col-span-6">
-                                    <PartialsInput v-model="singleData.experience.position" :modelValue="singleData.experience.position" :inputClass="`border border-slate-200`" :placeholder="`Jabatan / Posisi`" :label="`Jabatan / Posisi`" />
+                                    <PartialsInput v-model="singleData.experience.last_position" :modelValue="singleData.experience.last_position" :inputClass="`border border-slate-200`" :placeholder="`Jabatan / Posisi`" :label="`Jabatan / Posisi`" />
                                 </div>
                                 <div class="col-span-12 md:col-span-6">
                                     <PartialsInput v-model="singleData.experience.company_name" :modelValue="singleData.experience.company_name" :inputClass="`border border-slate-200`" :placeholder="`Nama Perusahaan`" :label="`Nama Perusahaan`" />
                                 </div>
                                 <div class="col-span-12 md:col-span-6">
-                                    <PartialsInput v-model="singleData.experience.location" :modelValue="singleData.experience.location" :inputClass="`border border-slate-200`" :placeholder="`Lokasi kerja`" :label="`Lokasi kerja`" />
+                                    <PartialsInput v-model="singleData.experience.company_address" :modelValue="singleData.experience.company_address" :inputClass="`border border-slate-200`" :placeholder="`Lokasi kerja`" :label="`Lokasi kerja`" />
                                 </div>
                                 <div class="col-span-12 md:col-span-6">
                                     <div class="text-sm mb-2 block text-slate-500">Jenis Kontrak</div>
@@ -434,22 +433,22 @@
                                 </div>
                                 <div class="col-span-12 md:col-span-6">
                                     <PartialsInput v-model="singleData.experience.end_date" :modelValue="singleData.experience.end_date" :inputClass="`border border-slate-200`" :label="`Tgl Berakhir`" :typeInput="`date`" />
-                                    <div class="mb-5"><input v-model="singleData.experience.still" type="checkbox" class="form-checkbox rounded text-emerald-500 me-4 focus:ring-emerald-600" /><span class="text-sm">Saya masih kerja disini</span></div>
+                                    <div class="mb-5"><input v-model="singleData.experience.status" type="checkbox" class="form-checkbox rounded text-emerald-500 me-4 focus:ring-emerald-600" /><span class="text-sm">Saya masih kerja disini</span></div>
                                 </div>
                                 <div class="col-span-12">
                                     <label for="desc_experience" class="text-sm mb-3 block text-slate-500">Deksripsi Pengalaman</label>
-                                    <textarea v-model="singleData.experience.description" name="desc_experience" id="desc_experience" cols="30" rows="10" class="w-full rounded-lg border border-slate-200 text-sm p-2 px-4 focus:border-emerald-600 focus:ring-emerald-600"></textarea>
+                                    <textarea v-model="singleData.experience.job_description" name="desc_experience" id="desc_experience" cols="30" rows="10" class="w-full rounded-lg border border-slate-200 text-sm p-2 px-4 focus:border-emerald-600 focus:ring-emerald-600"></textarea>
                                 </div>
                                 <div class="col-span-12">
                                     <div class="flex items-center justify-end gap-3 mt-4">
-                                        <PartialsButton @click="show.pengalaman = false" :primary="false">Batal</PartialsButton>
+                                        <PartialsButton @click="cancelData('experience')" :primary="false">Batal</PartialsButton>
                                         <PartialsButton v-if="in_edit == null" @click="saveSingleData('experience')">Tambahkan</PartialsButton>
                                         <PartialsButton v-if="in_edit != null" @click="deleteData('experience')" class="bg-rose-500 text-white border-rose-500 hover:bg-rose-600 hover:border-rose-600">Hapus</PartialsButton>
                                         <PartialsButton v-if="in_edit != null" @click="updateData('experience')">Update</PartialsButton>
                                     </div>
                                 </div>
                             </div>
-                            <ol v-for="experience in dataStore.experiences" class="relative text-gray-500 border-s border-gray-200 dark:border-gray-700 dark:text-gray-400 ms-4">
+                            <ol v-for="experience in experienceStore.experiences" class="relative text-gray-500 border-s border-gray-200 dark:border-gray-700 dark:text-gray-400 ms-4">
                                 <li>
                                     <div @click="editData('experience', experience, experience.id)" class="absolute top-0 end-0 cursor-pointer flex items-center justify-center text-slate-300 hover:text-primary">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -459,18 +458,18 @@
                                 </li>
                                 <li class="mb-7 ms-6">            
                                     <span class="absolute flex items-center justify-center w-10 h-10 bg-orange-100 text-primary rounded-full -start-5">
-                                        {{experience.position.substring(0,1)}}
+                                        {{experience.last_position.substring(0,1)}}
                                     </span>
                                     <div class="ps-4">
-                                        <h4 class="text-sm md:text-base font-medium mb-1">{{experience.position}}</h4>
+                                        <h4 class="text-sm md:text-base font-medium mb-1">{{experience.last_position}}</h4>
                                         <div class="flex flex-wrap items-center gap-x-4 mb-3 text-xs md:text-sm">
                                             <span>{{experience.company_name}}</span>|
-                                            <span>{{ formatDate(experience.start_date)}} - {{experience.still ? 'sekarang' : formatDate(experience.end_date)}}</span>|
+                                            <span>{{ formatDate(experience.start_date)}} - {{experience.status ? 'sekarang' : formatDate(experience.end_date)}}</span>|
                                             <span>
                                                 {{
                                                     calculateDate(
                                                         experience.start_date,
-                                                        experience.still ? new Date().toISOString().split('T')[0] : experience.end_date
+                                                        experience.status ? new Date().toISOString().split('T')[0] : experience.end_date
                                                     )
                                                 }}
                                             </span>
@@ -481,7 +480,7 @@
                                                     <path d="M12 7.83398C12 8.36442 11.7893 8.87312 11.4142 9.2482C11.0391 9.62327 10.5304 9.83398 10 9.83398C9.46957 9.83398 8.96086 9.62327 8.58579 9.2482C8.21071 8.87312 8 8.36442 8 7.83398C8 7.30355 8.21071 6.79484 8.58579 6.41977C8.96086 6.0447 9.46957 5.83398 10 5.83398C10.5304 5.83398 11.0391 6.0447 11.4142 6.41977C11.7893 6.79484 12 7.30355 12 7.83398Z" fill="#797979"/>
                                                     <path d="M15.6243 7.39616C15.6243 10.5607 13.541 14.167 9.89518 18.3337C6.24935 14.167 4.16602 10.5607 4.16602 7.39616C4.16602 5.87669 4.76962 4.41945 5.84405 3.34503C6.91848 2.2706 8.37571 1.66699 9.89518 1.66699C11.4147 1.66699 12.8719 2.2706 13.9463 3.34503C15.0207 4.41945 15.6243 5.87669 15.6243 7.39616Z" stroke="#797979" stroke-linejoin="round"/>
                                                 </svg>
-                                                <span>{{experience.location}}</span>
+                                                <span>{{experience.company_address}}</span>
                                             </li>
                                             <li class="flex items-center gap-2">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
@@ -491,7 +490,7 @@
                                             </li>
                                         </ul>
                                         <div class="text-sm font-light">
-                                            {{experience.description}}
+                                            {{experience.job_description}}
                                         </div>
                                     </div>
                                 </li>
@@ -520,13 +519,13 @@
                         <div class="pt-5">
                             <div v-if="show.pendidikan" class="grid grid-cols-12 gap-x-5 py-3 mb-5">
                                 <div class="col-span-12 md:col-span-6">
-                                    <PartialsInput v-model="singleData.education.institute_name" :modelValue="singleData.education.institute_name" :inputClass="`border border-slate-200`" :placeholder="`Nama Kampus / Univ / Institute`" :label="`Nama Kampus / Univ / Institute`" />
+                                    <PartialsInput v-model="singleData.education.institutions" :modelValue="singleData.education.institutions" :inputClass="`border border-slate-200`" :placeholder="`Nama Kampus / Univ / Institute`" :label="`Nama Kampus / Univ / Institute`" />
                                 </div>
                                 <div class="col-span-12 md:col-span-6">
                                     <PartialsInput v-model="singleData.education.majoring" :modelValue="singleData.education.majoring" :inputClass="`border border-slate-200`" :placeholder="`Kejuruan / Program Studi`" :label="`Kejuruan / Program Studi`" />
                                 </div>
                                 <div class="col-span-12 md:col-span-6">
-                                    <PartialsInput v-model="singleData.education.location" :modelValue="singleData.education.location" :inputClass="`border border-slate-200`" :placeholder="`Lokasi`" :label="`Lokasi`" />
+                                    <PartialsInput v-model="singleData.education.city_name" :modelValue="singleData.education.city_name" :inputClass="`border border-slate-200`" :placeholder="`Lokasi`" :label="`Lokasi`" />
                                 </div>
                                 <div class="col-span-12 md:col-span-6">
                                     <PartialsInput v-model="singleData.education.gpa" :modelValue="singleData.education.gpa" :inputClass="`border border-slate-200`" :placeholder="`Nilai Akhir (IPK/UN/UASBN)`" :label="`Nilai Akhir`" :typeInput="`number`" />
@@ -536,11 +535,11 @@
                                 </div>
                                 <div class="col-span-12 md:col-span-6">
                                     <PartialsInput v-model="singleData.education.end_date" :modelValue="singleData.education.end_date" :inputClass="`border border-slate-200`" :label="`Tgl Berakhir`" :typeInput="`date`" />
-                                    <div class="mb-5"><input v-model="singleData.education.still" type="checkbox" class="form-checkbox rounded text-emerald-500 focus:ring-emerald-500 me-4" /><span class="text-sm">Saya masih aktif disini</span></div>
+                                    <div class="mb-5"><input v-model="singleData.education.status" type="checkbox" class="form-checkbox rounded text-emerald-500 focus:ring-emerald-500 me-4" /><span class="text-sm">Saya masih aktif disini</span></div>
                                 </div>
                                 <div class="col-span-12">
                                     <div class="flex items-center justify-end gap-3 mt-4">
-                                        <PartialsButton @click="show.pendidikan = false" :primary="false">Batal</PartialsButton>
+                                        <PartialsButton @click="cancelData('education')" :primary="false">Batal</PartialsButton>
                                         <PartialsButton v-if="in_edit == null" @click="saveSingleData('education')">Tambahkan</PartialsButton>
                                         <PartialsButton v-if="in_edit != null" @click="deleteData('education')" class="bg-rose-500 text-white border-rose-500 hover:bg-rose-600 hover:border-rose-600">Hapus</PartialsButton>
                                         <PartialsButton v-if="in_edit != null" @click="updateData('education')">Update</PartialsButton>
@@ -548,7 +547,7 @@
                                 </div>
                             </div>
 
-                            <ol v-for="edu in dataStore.educations" class="relative text-gray-500 border-s border-gray-200 dark:border-gray-700 dark:text-gray-400 ms-4">
+                            <ol v-for="edu in educationStore.educations" class="relative text-gray-500 border-s border-gray-200 dark:border-gray-700 dark:text-gray-400 ms-4">
                                 <li>
                                     <div @click="editData('education', edu, edu.id)" class="absolute top-0 end-0 cursor-pointer flex items-center justify-center text-slate-300 hover:text-primary">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -558,13 +557,13 @@
                                 </li>                  
                                 <li class="mb-7 ms-6">            
                                     <span class="absolute flex items-center justify-center w-10 h-10 bg-orange-100 text-primary rounded-full -start-5">
-                                        {{ edu.institute_name.substring(0,1) }}
+                                        {{ edu.institutions.substring(0,1) }}
                                     </span>
                                     <div class="ps-4">
-                                        <h4 class="text-sm md:text-base mb-1 font-medium">{{ edu.institute_name }}</h4>
+                                        <h4 class="text-sm md:text-base mb-1 font-medium">{{ edu.institutions }}</h4>
                                         <div class="flex items-center gap-4 mb-3 text-xs flex-wrap md:text-sm">
-                                            <span>{{ formatDate(edu.start_date) }} - {{ edu.still ? 'sekarang' : formatDate(edu.end_date) }}</span> |
-                                            <span>{{ edu.location }}</span>
+                                            <span>{{ formatDate(edu.start_date) }} - {{ edu.status ? 'sekarang' : formatDate(edu.end_date) }}</span> |
+                                            <span>{{ edu.city_name }}</span>
                                         </div>
                                         <div class="flex items-center gap-7 text-xs md:text-sm mb-4">
                                             <div class="font-medium">
@@ -602,10 +601,13 @@
                         </div>
                         <div class="pt-5">
                             <div v-if="show.organisasi" class="grid grid-cols-12 gap-x-5 py-3 mb-5">
-                                <div class="col-span-12 md:col-span-6">
-                                    <PartialsInput v-model="singleData.organization.institute_name" :modelValue="singleData.organization.institute_name" :inputClass="`border border-slate-200`" :placeholder="`Nama Lembaga / Organisasi`" :label="`Nama Lembaga / Organisasi`" />
+                                <div class="col-span-12 md:col-span-4">
+                                    <PartialsInput v-model="singleData.organization.organization_name" :modelValue="singleData.organization.organization_name" :inputClass="`border border-slate-200`" :placeholder="`Nama Lembaga / Organisasi`" :label="`Nama Lembaga / Organisasi`" />
                                 </div>
-                                <div class="col-span-12 md:col-span-6">
+                                <div class="col-span-12 md:col-span-4">
+                                    <PartialsInput v-model="singleData.organization.organization_address" :modelValue="singleData.organization.organization_address" :inputClass="`border border-slate-200`" :placeholder="`Lokasi`" :label="`Lokasi`" />
+                                </div>
+                                <div class="col-span-12 md:col-span-4">
                                     <PartialsInput v-model="singleData.organization.position" :modelValue="singleData.organization.position" :inputClass="`border border-slate-200`" :placeholder="`Peran / Posisi`" :label="`Peran / Posisi`" />
                                 </div>
                                 <div class="col-span-12 md:col-span-6">
@@ -613,11 +615,10 @@
                                 </div>
                                 <div class="col-span-12 md:col-span-6">
                                     <PartialsInput v-model="singleData.organization.end_date" :modelValue="singleData.organization.end_date" :inputClass="`border border-slate-200`" :label="`Tgl Berakhir`" :typeInput="`date`" />
-                                    <div class="mb-5"><input v-model="singleData.organization.still" type="checkbox" class="form-checkbox rounded text-emerald-500 focus:ring-emerald-500 me-4" /><span class="text-sm">Saya masih aktif disini</span></div>
                                 </div>
                                 <div class="col-span-12">
                                     <div class="flex items-center justify-end gap-3 mt-4">
-                                        <PartialsButton @click="show.organisasi = false" :primary="false">Batal</PartialsButton>
+                                        <PartialsButton @click="cancelData('organization')" :primary="false">Batal</PartialsButton>
                                         <PartialsButton v-if="in_edit == null" @click="saveSingleData('organization')">Tambahkan</PartialsButton>
                                         <PartialsButton v-if="in_edit != null" @click="deleteData('organization')" class="bg-rose-500 text-white border-rose-500 hover:bg-rose-600 hover:border-rose-600">Hapus</PartialsButton>
                                         <PartialsButton v-if="in_edit != null" @click="updateData('organization')">Update</PartialsButton>
@@ -625,7 +626,7 @@
                                 </div>
                             </div>
 
-                            <ol v-for="org in dataStore.organizations" class="relative text-gray-500 border-s border-gray-200 dark:border-gray-700 dark:text-gray-400 ms-4">
+                            <ol v-for="org in organizationStore.organizations" class="relative text-gray-500 border-s border-gray-200 dark:border-gray-700 dark:text-gray-400 ms-4">
                                 <li>
                                     <div @click="editData('organization', org, org.id)" class="absolute top-0 end-0 cursor-pointer flex items-center justify-center text-slate-300 hover:text-primary">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -635,14 +636,14 @@
                                 </li>                  
                                 <li class="mb-7 ms-6">            
                                     <span class="absolute flex items-center justify-center w-10 h-10 bg-orange-100 text-primary rounded-full -start-5">
-                                        {{ org.institute_name.substring(0,1) }}
+                                        {{ org.organization_name.substring(0,1) }}
                                     </span>
                                     <div class="ps-4">
-                                        <h4 class="text-sm md:text-base mb-1 font-medium">{{ org.institute_name}}</h4>
+                                        <h4 class="text-sm md:text-base mb-1 font-medium">{{ org.organization_name}} <span class="text-xs font-light"> - {{ org.organization_address }}</span></h4>
                                         <div class="flex items-center gap-x-4 text-sm text-slate-500 mb-4">
                                             <div class="flex items-center gap-3 flex-1">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 48 48"><g fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="4"><path d="M24 44c11.046 0 20-8.954 20-20S35.046 4 24 4S4 12.954 4 24s8.954 20 20 20Z"/><path stroke-linecap="round" d="M24.008 12v12.01l8.479 8.48"/></g></svg>
-                                                {{ formatDate(org.start_date) }} - {{ org.still ? 'sekarang' : formatDate(org.end_date) }}
+                                                {{ org.duration }}
                                             </div>
                                             <div class="flex items-center gap-3 flex-1">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 36 36"><circle cx="16.86" cy="9.73" r="6.46" fill="currentColor"/><path fill="currentColor" d="M21 28h7v1.4h-7z"/><path fill="currentColor" d="M15 30v3a1 1 0 0 0 1 1h17a1 1 0 0 0 1-1V23a1 1 0 0 0-1-1h-7v-1.47a1 1 0 0 0-2 0V22h-2v-3.58a32.12 32.12 0 0 0-5.14-.42a26 26 0 0 0-11 2.39a3.28 3.28 0 0 0-1.88 3V30Zm17 2H17v-8h7v.42a1 1 0 0 0 2 0V24h6Z"/></svg>
@@ -774,38 +775,38 @@
                         <div class="pt-5">
                             <div v-if="show.bahasa" class="grid grid-cols-12 gap-x-5 py-3 mb-5">
                                 <div class="col-span-12">
-                                    <PartialsInput v-model="singleData.language.language_name" :modelValue="singleData.language.language_name" :inputClass="`border border-slate-200`" :placeholder="`Bahasa`" :label="`Bahasa`" />
+                                    <PartialsInput v-model="singleData.language.language" :modelValue="singleData.language.language" :inputClass="`border border-slate-200`" :placeholder="`Bahasa`" :label="`Bahasa`" />
                                 </div>
                                 <div class="col-span-12 lg:col-span-4">
                                     <div class="text-sm mb-2 block text-slate-500">Membaca</div>
-                                    <select v-model="singleData.language.read" name="" id="" class="border border-slate-200 rounded-lg p-2 px-3 block w-full focus:border-emerald-600 focus:ring-emerald-600 text-sm">
+                                    <select v-model="singleData.language.reading" name="" id="" class="border border-slate-200 rounded-lg p-2 px-3 block w-full focus:border-emerald-600 focus:ring-emerald-600 text-sm">
                                         <option selected>-- Lvl. Membaca --</option>
-                                        <option value="1">Kurang</option>
-                                        <option value="2">Baik</option>
-                                        <option value="3">Lancar</option>
+                                        <option value="0">Kurang</option>
+                                        <option value="1">Baik</option>
+                                        <option value="2">Lancar</option>
                                     </select>
                                 </div>
                                 <div class="col-span-12 lg:col-span-4">
                                     <div class="text-sm mb-2 block text-slate-500">Menulis</div>
-                                    <select v-model="singleData.language.write" name="" id="" class="border border-slate-200 rounded-lg p-2 px-3 block w-full focus:border-emerald-600 focus:ring-emerald-600 text-sm">
+                                    <select v-model="singleData.language.writing" name="" id="" class="border border-slate-200 rounded-lg p-2 px-3 block w-full focus:border-emerald-600 focus:ring-emerald-600 text-sm">
                                         <option selected>-- Lvl. Menulis --</option>
-                                        <option value="1">Kurang</option>
-                                        <option value="2">Baik</option>
-                                        <option value="3">Lancar</option>
+                                        <option value="0">Kurang</option>
+                                        <option value="1">Baik</option>
+                                        <option value="2">Lancar</option>
                                     </select>
                                 </div>
                                 <div class="col-span-12 lg:col-span-4">
                                     <div class="text-sm mb-2 block text-slate-500">Berbicara</div>
-                                    <select v-model="singleData.language.talk" name="" id="" class="border border-slate-200 rounded-lg p-2 px-3 block w-full focus:border-emerald-600 focus:ring-emerald-600 text-sm">
+                                    <select v-model="singleData.language.speaking" name="" id="" class="border border-slate-200 rounded-lg p-2 px-3 block w-full focus:border-emerald-600 focus:ring-emerald-600 text-sm">
                                         <option selected>-- Lvl. Berbicara --</option>
-                                        <option value="1">Kurang</option>
-                                        <option value="2">Baik</option>
-                                        <option value="3">Lancar</option>
+                                        <option value="0">Kurang</option>
+                                        <option value="1">Baik</option>
+                                        <option value="2">Lancar</option>
                                     </select>
                                 </div>
                                 <div class="col-span-12">
                                     <div class="flex items-center justify-end gap-3 mt-4">
-                                        <PartialsButton @click="show.bahasa = false" :primary="false">Batal</PartialsButton>
+                                        <PartialsButton @click="cancelData('language')" :primary="false">Batal</PartialsButton>
                                         <PartialsButton v-if="in_edit == null" @click="saveSingleData('language')">Tambahkan</PartialsButton>
                                         <PartialsButton v-if="in_edit != null" @click="deleteData('language')" class="bg-rose-500 text-white border-rose-500 hover:bg-rose-600 hover:border-rose-600">Hapus</PartialsButton>
                                         <PartialsButton v-if="in_edit != null" @click="updateData('language')">Update</PartialsButton>
@@ -814,7 +815,7 @@
                             </div>
 
                             <div class="grid grid-cols-12 gap-5">
-                                <div v-for="lang in dataStore?.languages" class="col-span-6">
+                                <div v-for="lang in languageStore?.languages" class="col-span-6">
                                     <div class="relative">
                                         <div @click="editData('language', lang, lang.id)" class="absolute top-0 end-0 cursor-pointer flex items-center justify-center text-slate-300 hover:text-primary">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -822,25 +823,25 @@
                                             </svg>
                                         </div>
                                         <div class="flex flex-col gap-3">
-                                            <div class="font-medium text-sm">{{ lang.language_name }}</div>
+                                            <div class="font-medium text-sm">{{ lang.language }}</div>
                                             <table class="w-full rounded-xl overflow-hidden">
                                                 <tr>
                                                     <th class="text-start p-2 px-4 font-medium text-xs bg-slate-50 border-b">Membaca</th>
-                                                    <td v-if="lang.read == 1" class="p-2 px-4 text-sm">Kurang</td>
-                                                    <td v-if="lang.read == 2" class="p-2 px-4 text-sm">Baik</td>
-                                                    <td v-if="lang.read == 3" class="p-2 px-4 text-sm">Lancar</td>
+                                                    <td v-if="lang.inging == 0" class="p-2 px-4 text-sm">Kurang</td>
+                                                    <td v-if="lang.reading == 1" class="p-2 px-4 text-sm">Baik</td>
+                                                    <td v-if="lang.reading == 2" class="p-2 px-4 text-sm">Lancar</td>
                                                 </tr>
                                                 <tr>
                                                     <th class="text-start p-2 px-4 font-medium text-xs bg-slate-50 border-b">Menulis</th>
-                                                    <td v-if="lang.write == 1" class="p-2 px-4 text-sm">Kurang</td>
-                                                    <td v-if="lang.write == 2" class="p-2 px-4 text-sm">Baik</td>
-                                                    <td v-if="lang.write == 3" class="p-2 px-4 text-sm">Lancar</td>
+                                                    <td v-if="lang.writing == 0" class="p-2 px-4 text-sm">Kurang</td>
+                                                    <td v-if="lang.writing == 1" class="p-2 px-4 text-sm">Baik</td>
+                                                    <td v-if="lang.writing == 2" class="p-2 px-4 text-sm">Lancar</td>
                                                 </tr>
                                                 <tr>
                                                     <th class="text-start p-2 px-4 font-medium text-xs bg-slate-50 border-b">Berbicara</th>
-                                                    <td v-if="lang.talk == 1" class="p-2 px-4 text-sm">Kurang</td>
-                                                    <td v-if="lang.talk == 2" class="p-2 px-4 text-sm">Baik</td>
-                                                    <td v-if="lang.talk == 3" class="p-2 px-4 text-sm">Lancar</td>
+                                                    <td v-if="lang.speaking == 0" class="p-2 px-4 text-sm">Kurang</td>
+                                                    <td v-if="lang.speaking == 1" class="p-2 px-4 text-sm">Baik</td>
+                                                    <td v-if="lang.speaking == 2" class="p-2 px-4 text-sm">Lancar</td>
                                                 </tr>
                                             </table>
                                         </div>
@@ -870,8 +871,15 @@ const isReady = ref(false)
 const toast = useToast();
 const in_edit = ref(null);
 
+const userStore = useUserStore();
 const contractStore = useContractStore();
 const skillStore = useSkillStore();
+const experienceStore = useExperienceStore();
+const educationStore = useEducationStore();
+const organizationStore = useOrganizationStore();
+const languageStore = useLanguageStore();
+const medsosStore = useMedsosStore();
+
 const contractOptions = ref(null);
 
 const show = ref({
@@ -898,6 +906,7 @@ const dataStore = ref({
         address :  '',
         role: '',
         sosmed : {
+            id : null,
             ig : '',
             fb: '',
             x: '',
@@ -924,48 +933,74 @@ const dataStore = ref({
 
 const singleData = ref({
     experience : {
-        id : '',
-        position : '',
+        last_position : '',
         company_name : '',
         type_contract : '',
-        location : '',
+        company_address : '',
         start_date : '',
         end_date : '',
-        description : "",
-        still : false,
+        job_description : "",
+        status : false,
     },
     education : {
-        id : '',
-        institute_name : '',
+        institutions : '',
         majoring : '',
         gpa : '',
-        location : '',
+        city_name : '',
         start_date : '',
         end_date : '',
-        still : false,
+        status : false,
     },
     organization : {
-        id : '',
-        institute_name : '',
+        organization_name : '',
+        organization_address : '',
         position : '',
         start_date : '',
         end_date : '',
-        description : "",
-        still : false,
     },
     skill : {
         softskill : '',
         hardskill : '',
     },
     language : {
-        id : '',
-        language_name : '',
-        write : 0,
-        read : 0,
-        talk : 0,
+        language : '',
+        writing : 0,
+        reading : 0,
+        speaking : 0,
     }
 })
-
+const religion = [
+    {
+        "id": 1,
+        "religion": "Islam",
+        "status": "Active"
+    },
+    {
+        "id": 2,
+        "religion": "Catholic",
+        "status": "Active"
+    },
+    {
+        "id": 3,
+        "religion": "Protestant",
+        "status": "Active"
+    },
+    {
+        "id": 4,
+        "religion": "Hindu",
+        "status": "Active"
+    },
+    {
+        "id": 5,
+        "religion": "Buddha",
+        "status": "Active"
+    },
+    {
+        "id": 6,
+        "religion": "Other",
+        "status": "Active"
+    }
+]
 const editSkills = ref({
     soft_skills : [],
     hard_skills : [],
@@ -974,15 +1009,40 @@ onMounted(async () => {
     const data = JSON.parse(localStorage.getItem('data_buat_cv'));
     if(data) dataStore.value = data;
 
+    const fetchProfile = await userStore.getFullProfile();
+    dataStore.value = userStore?.detail;
+
     const fetch = await contractStore.getOptions();
     contractOptions.value = fetch;
-    
-    dataStore.value.experiences = sortedData('experiences').value;
-    dataStore.value.educations = sortedData('educations').value;
-    dataStore.value.organizations = sortedData('organizations').value;
 
+    const fetchExperience = await experienceStore.getExperiences();
+    dataStore.value.experiences = fetchExperience?.data;
+
+    const fetchOrganization = await organizationStore.getOrganizations();
+    dataStore.value.organizations = fetchOrganization?.data;
+
+    const fetchEducation = await educationStore.getEducations();
+    dataStore.value.educations = fetchEducation?.data;
+
+    const fetchLanguage = await languageStore.getLanguages();
+    dataStore.value.languages = fetchLanguage?.data;
+
+    console.log(dataStore.value);
     isReady.value = true;
 })
+
+const parseDateRange = (dateRangeString) => {
+    const [startDateString, endDateString] = dateRangeString.split(' - ');
+    const startDate = parseDateString(startDateString);
+    const endDate = parseDateString(endDateString);
+    return { startDate, endDate };
+}
+
+const parseDateString = (dateString) => {
+    const [day, month, year] = dateString.split(' ');
+    const months = { Jan: '01', Feb: '02', Mar: '03', Apr: '04', May: '05', Jun: '06', Jul: '07', Aug: '08', Sep: '09', Oct: '10', Nov: '11', Dec: '12' };
+    return `${year}-${months[month]}-${day}`;
+}
 
 const selectSoftSkill = (value) => {
     dataStore.value.soft_skills = value.map((soft) => ({ id: soft.key, name: soft.value }));
@@ -1010,16 +1070,27 @@ const editSkill = () => {
     show.value.skill = true;
 }
 
-const sortedData = (type) => {
-    return computed(() => {
-        return dataStore.value[type].slice().sort((a, b) => {
-            return new Date(b.start_date) - new Date(a.start_date);
-        });
-    });
-};
+const cancelData = (section) => {
+    resetValue();
+    in_edit.value = null;
+    if(section == 'experience'){
+        show.value.pengalaman = false;
+    }else if(section == 'organization'){
+        show.value.organisasi = false;
+    }else if(section == 'skill'){
+        show.value.skill = false;
+    }else if(section == 'language'){
+        show.value.bahasa = false;
+    }else if(section == 'education'){
+        show.value.pendidikan = false;
+    }
+}
+const saveData = async (section = '') => {
+    const updateProfile = await userStore.updateProfile(dataStore.value.profile.phone, dataStore.value.profile.name, dataStore.value.profile.role, dataStore.value.profile.summary, dataStore.value.biodata.gender, dataStore.value.biodata.birth_date, dataStore.value.biodata.birth_place, dataStore.value.biodata.religion, dataStore.value.biodata.marritage_status, dataStore.value.biodata.height_body, dataStore.value.biodata.weight_body, dataStore.value.profile.province, dataStore.value.profile.address, dataStore.value.profile.photo, dataStore.value.profile.sosmed.ig, dataStore.value.profile.sosmed.fb,dataStore.value.profile.sosmed.x, dataStore.value.profile.sosmed.in);
+    console.log(updateProfile);
 
-const saveData = (section = '') => {
     localStorage.setItem('data_buat_cv', JSON.stringify(dataStore.value));
+
     if(section == 'ringkasan') {
         show.value[section] = true;
     }else{
@@ -1032,39 +1103,40 @@ const saveSingleData = (section) => {
     const created_at = new Date().toISOString();
 
     if (section === 'experience') {
-        singleData.value.experience.id = `${singleData.value.experience.company_name.replace(/\s+/g, '-')}-${created_at}`;
-        dataStore.value.experiences.push(singleData.value.experience);
+        const sde = singleData.value.experience;
+        const addExperience = experienceStore.addExperience(sde.last_position, sde.company_name, sde.company_address, sde.start_date, sde.end_date, sde.status, sde.type_contract, sde.job_description);
         show.value.pengalaman = false;
     } else if (section === 'education') {
-        singleData.value.education.id = `${singleData.value.education.institute_name.replace(/\s+/g, '-')}-${created_at}`;
-        dataStore.value.educations.push(singleData.value.education);
+        const sde = singleData.value.education;
+        const addEducation = educationStore.addEducation(sde.institutions, sde.city_name, sde.majoring, sde.start_date, sde.end_date, sde.status, sde.gpa, "");
         show.value.pendidikan = false;
     } else if (section === 'organization') {
-        singleData.value.organization.id = `${singleData.value.organization.institute_name.replace(/\s+/g, '-')}-${created_at}`;
-        dataStore.value.organizations.push(singleData.value.organization);
+        const sde = singleData.value.organization;
+        const addOrganization = organizationStore.addOrganization(sde.position, sde.organization_name, sde.organization_address, `${formatDate(sde.start_date)} - ${formatDate(sde.end_date)}`);
         show.value.organisasi = false;
     } else if (section === 'skill') {
         singleData.value.skill.id = `${singleData.value.skill.name.replace(/\s+/g, '-')}-${created_at}`;
         dataStore.value.skills.push(singleData.value.skill);
         show.value.skill = false;
     } else if (section === 'language') {
-        singleData.value.language.id = `${singleData.value.language.language_name.replace(/\s+/g, '-')}-${created_at}`;
-        dataStore.value.languages.push(singleData.value.language);
+        const sde = singleData.value.language;
+        const addLanguage = languageStore.addLanguage(sde.language, sde.reading, sde.writing, sde.speaking);
         show.value.bahasa = false;
     }
     resetValue();
-    localStorage.setItem('data_buat_cv', JSON.stringify(dataStore.value));
-
-    toast.success(`berhasil menambah ${section}`)
+    toast.success('Berhasil menambah '+ sections[section]);
 };
 
 const editData = (section, data, id) => {
-    singleData.value[section].id = id;
-    singleData.value[section] = data;
     in_edit.value = id;
+    singleData.value[section] = data;
     if(section == 'experience'){
         show.value.pengalaman = true;
     }else if(section == 'organization'){
+        const { startDate, endDate } = parseDateRange(data.duration);
+        singleData.value[section].start_date = startDate;
+        singleData.value[section].end_date = endDate;
+
         show.value.organisasi = true;
     }else if(section == 'skill'){
         show.value.skill = true;
@@ -1084,27 +1156,30 @@ const deleteData = (section) => {
         education: 'educations',
     };
 
-    const sectionIndex = dataStore.value[sections[section]].findIndex(item => item.id === in_edit.value);
-    if (sectionIndex !== -1) {
-        dataStore.value[sections[section]].splice(sectionIndex, 1);
-        in_edit.value = null;
-        if(section == 'experience'){
-            show.value.pengalaman = false;
-        }else if(section == 'organization'){
-            show.value.organisasi = false;
-        }else if(section == 'skill'){
-            show.value.skill = false;
-        }else if(section == 'language'){
-            show.value.bahasa = false;
-        }else if(section == 'education'){
-            show.value.pendidikan = false;
-        }
-        resetValue();
-        localStorage.setItem('data_buat_cv', JSON.stringify(dataStore.value));
-        toast.success(`Berhasil menghapus ${section}`);
-    } else {
-        toast.error(`Tidak dapat menemukan ${section} dengan ID ${in_edit.value}`);
+    if(section == 'experience'){
+        const sde = singleData.value.experience;
+        const delExperience = experienceStore.delExperience(in_edit.value);
+        show.value.pengalaman = false;
+    }else if(section == 'organization'){
+        const sde = singleData.value.organization;
+        const delOrganization = organizationStore.delOrganization(in_edit.value);
+        show.value.organisasi = false;
+    }else if(section == 'skill'){
+        show.value.skill = false;
+    }else if(section == 'language'){
+        const sde = singleData.value.language;
+        const delLanguage = languageStore.delLanguage(in_edit.value);
+        show.value.bahasa = false;
+    }else if(section == 'education'){
+        const sde = singleData.value.education;
+        const delEducation = educationStore.delEducation(in_edit.value);
+        show.value.pendidikan = false;
     }
+
+    in_edit.value = null;
+    resetValue();
+    toast.success('Berhasil menghapus '+ sections[section]);
+
 };
 
 const updateData = (section) => {
@@ -1115,28 +1190,31 @@ const updateData = (section) => {
         language: 'languages',
         education: 'educations',
     };
-
-    const sectionIndex = dataStore.value[sections[section]].findIndex(item => item.id === in_edit.value);
-    if (sectionIndex !== -1) {
-        dataStore.value[sections[section]][sectionIndex] = singleData.value[section];
-        in_edit.value = null;
-        if(section == 'experience'){
-            show.value.pengalaman = false;
-        }else if(section == 'organization'){
-            show.value.organisasi = false;
-        }else if(section == 'skill'){
-            show.value.skill = false;
-        }else if(section == 'language'){
-            show.value.bahasa = false;
-        }else if(section == 'education'){
-            show.value.pendidikan = false;
-        }
-        resetValue();
-        localStorage.setItem('data_buat_cv', JSON.stringify(dataStore.value));
-        toast.success(`berhasil mengubah ${section}`);
-    } else {
-        toast.error(`Tidak dapat menemukan ${section} dengan ID ${in_edit.value}`);
+    
+    if(section == 'experience'){
+        const sde = singleData.value.experience;
+        const updateExperience = experienceStore.updateExperience(in_edit.value, sde.last_position, sde.company_name, sde.company_address, sde.start_date, sde.end_date, sde.status, sde.type_contract, sde.job_description);
+        show.value.pengalaman = false;
+    }else if(section == 'organization'){
+        const sde = singleData.value.organization;
+        const updateOrganization = organizationStore.updateOrganization(in_edit.value, sde.position, sde.organization_name, sde.organization_address, `${formatDate(sde.start_date)} - ${formatDate(sde.end_date)}`);
+        show.value.organisasi = false;
+    }else if(section == 'skill'){
+        show.value.skill = false;
+    }else if(section == 'language'){
+        const sde = singleData.value.language;
+        const updateLanguage = languageStore.updateLanguage(in_edit.value, sde.language, sde.reading, sde.writing, sde.speaking);
+        show.value.bahasa = false;
+    }else if(section == 'education'){
+        const sde = singleData.value.education;
+        const updateEducation = educationStore.updateEducation(in_edit.value, sde.institutions, sde.city_name, sde.majoring, sde.start_date, sde.end_date, sde.status, sde.gpa, sde.institute_name, "");
+        show.value.pendidikan = false;
     }
+
+    in_edit.value = null;
+    resetValue();
+    toast.success('Berhasil memperbarui '+ sections[section]);
+
 };
 
 
