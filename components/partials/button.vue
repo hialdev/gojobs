@@ -1,5 +1,5 @@
 <template>
-    <button v-if="path === ''" :class="[buttonClass, $parent.buttonClass]">
+    <button :type="is_submit ? 'submit' : 'button'" v-if="path === ''" :class="[buttonClass, $parent.buttonClass]">
         <slot />
     </button>
     <NuxtLink v-else :to="path" :class="[buttonClass, $parent.buttonClass]">
@@ -18,6 +18,10 @@
                 type: String,
                 default: '',
             },
+            is_submit:{
+                type: Boolean,
+                default: false,
+            }
         },
         computed: {
             buttonClass() {

@@ -230,19 +230,26 @@ export const useUserStore = defineStore('user',{
             return detail
         },
 
-        async updateProfile(phone = this.profile.phone, fullname = this.detail?.profile?.name, role = this.detail?.profile?.role, summary = this.detail?.profile?.summary, gender = this.detail?.biodata?.gender, birth_date = this.detail?.biodata?.birth_date, birth_place = this.detail?.biodata?.birth_place, religion = this.detail?.biodata?.religion, marital_status = this.detail?.biodata?.marritage_status, height_body = this.detail?.biodata?.height_body, weight_body = this.detail?.biodata?.weight_body, province = this.detail?.profile?.province, address = this.detail?.profile?.address, photo = this.detail?.profile?.image, ig = this.profile.sosmed.ig, fb = this.profile.sosmed.fb, x = this.profile.sosmed.x, linkedin = this.profile.sosmed.in, identity_number = '', kk_number = '', jamsostek_number = '', bpjs_number = '', npwp_number = '', drivinglicencecar_number = '', drivinglicencemotorcycle_number = ''){
+        async updateProfile(phone = this.detail?.profile?.phone, fullname = this.detail?.profile?.name, role = this.detail?.profile?.role, summary = this.detail?.profile?.summary, gender = this.detail?.biodata?.gender, birth_date = this.detail?.biodata?.birth_date, birth_place = this.detail?.biodata?.birth_place, religion = this.detail?.biodata?.religion, marital_status = this.detail?.biodata?.marritage_status, height_body = this.detail?.biodata?.height_body, weight_body = this.detail?.biodata?.weight_body, province = this.detail?.profile?.province, address = this.detail?.profile?.address, photo = this.detail?.profile?.image, ig = this.detail?.profile?.sosmed?.ig, fb = this.detail?.profile?.sosmed?.fb, x = this.detail?.profile?.sosmed?.x, linkedin = this.detail?.profile?.sosmed?.in, identity_number = '', kk_number = '', jamsostek_number = '', bpjs_number = '', npwp_number = '', drivinglicencecar_number = '', drivinglicencemotorcycle_number = ''){
             var headers = new Headers();
             headers.append("token", localStorage.getItem('access_token'));
 
             const formdata = new FormData();
             formdata.append("fullname", fullname);
+            formdata.append("nickname", fullname);
             formdata.append("gender", gender);
             formdata.append("birth_date", birth_date);
             formdata.append("birth_place", birth_place);
+            formdata.append("phone", phone);
+            formdata.append("address", address);
             formdata.append("nationality", "Indonesia");
+            formdata.append("postal_code", "54321");
             formdata.append("blood_type", "O");
             formdata.append("religion", religion);
             formdata.append("marital_status", marital_status);
+            formdata.append("wedding_date", "null");
+            formdata.append("domicile_status", "rent");
+            formdata.append("domicile_statusdescription", "null");
             formdata.append("identity_number", identity_number);
             formdata.append("kk_number", kk_number);
             formdata.append("jamsostek_number", jamsostek_number);
@@ -252,31 +259,35 @@ export const useUserStore = defineStore('user',{
             formdata.append("drivinglicencemotorcycle_number", drivinglicencemotorcycle_number);
             formdata.append("city_id", "1");
             formdata.append("province_id", "1");
-            formdata.append("address", address);
-            formdata.append("postal_code", "54321");
             formdata.append("is_sameforktp", "");
             formdata.append("province_idktp", "1");
             formdata.append("city_idktp", "1");
             formdata.append("postal_codektp", "54321");
-            formdata.append("height_body", height_body);
-            formdata.append("weight_body", weight_body);
+            formdata.append("height_body", height_body ?? 0);
+            formdata.append("weight_body", weight_body ?? 0);
             formdata.append("work_location", province);
             formdata.append("work_type", role);
             formdata.append("summary", summary);
             formdata.append("photo", photo);
-            formdata.append("phone", phone);
 
             const user_id = JSON.parse(localStorage.getItem('profile')).userid;
-            const updateProfile = await $fetch(`${this.API_URL}/biodata-profile/update?id=${user_id}`, {
+            let updateProfile = await $fetch(`${this.API_URL}/biodata-profile/update?id=${user_id}`, {
                 method : 'POST',
                 headers: headers,
                 body: formdata,
             })
 
-            if(updateProfile.success){
+            if(updateProfile?.success){
                 const medsos = useMedsosStore();
                 const update = await medsos.updateMedsos(this.detail.profile.sosmed.id, ig, x, fb, linkedin, "https://devtektif.com")
+            }else if(updateProfile?.code == true){
+                updateProfile = await $fetch(`${this.API_URL}/biodata-profile/create`, {
+                    method : 'POST',
+                    headers: headers,
+                    body: formdata,
+                })
             }
+
             this.getFullProfile();
 
             return updateProfile

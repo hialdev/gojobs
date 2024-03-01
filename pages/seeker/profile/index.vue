@@ -6,7 +6,7 @@
                 <div class="col-span-12">
                     <div class="flex flex-wrap items-center justify-end gap-4 my-5 px-5">
                         <span class="flex-initial w-full md:flex-auto md:w-auto text-slate-600 text-xs text-right md:text-left"></span>
-                        <PartialsButton @click="saveData" class="border-2 border-primary text-sm" :primary="false">Simpan</PartialsButton>
+                        <PartialsButton :is_submit="true" @click="saveData" class="border-2 border-primary text-sm" :primary="false">Simpan</PartialsButton>
                         <PartialsButton @click="downloadHandle" class="flex gap-5 items-center justify-between px-5 rounded-lg text-sm">Download CV
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2M7 11l5 5l5-5m-5-7v12"/></svg>
                         </PartialsButton>
@@ -189,15 +189,15 @@
                                     </defs>
                                 </svg>
                                 <div class="w-full">
-                                    <input type="text" class="p-2 px-3 border-b focus:outline-none block w-full" v-model="dataStore.biodata.birth_place" placeholder="Tempat Lahir" />
-                                    <input type="date" class="p-2 px-3 border-b focus:outline-none block w-full" v-model="dataStore.biodata.birth_date" placeholder="Tgl Lahir" />
+                                    <input type="text" class="p-2 px-3 border-b focus:outline-none block w-full" v-model="dataStore.biodata.birth_place" placeholder="Tempat Lahir" required/>
+                                    <input type="date" class="p-2 px-3 border-b focus:outline-none block w-full" v-model="dataStore.biodata.birth_date" placeholder="Tgl Lahir" required/>
                                 </div>
                             </li>
                             <li class="flex items-center gap-4 text-sm">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="21" viewBox="0 0 20 21" fill="none">
                                     <path d="M16.2495 2.375H13.1245C12.9587 2.375 12.7997 2.44085 12.6825 2.55806C12.5653 2.67527 12.4995 2.83424 12.4995 3C12.4995 3.16576 12.5653 3.32473 12.6825 3.44194C12.7997 3.55915 12.9587 3.625 13.1245 3.625H14.7409L12.776 5.58984C12.1991 5.05218 11.5032 4.65861 10.7451 4.44128C9.98698 4.22396 9.18823 4.18903 8.41406 4.33936C7.63989 4.4897 6.91226 4.82102 6.2906 5.30628C5.66894 5.79154 5.17088 6.41696 4.8371 7.13148C4.50332 7.84599 4.34329 8.62932 4.37007 9.4175C4.39686 10.2057 4.6097 10.9763 4.99122 11.6665C5.37273 12.3567 5.9121 12.9469 6.56527 13.3888C7.21844 13.8308 7.96688 14.1119 8.74947 14.2094V15.5H6.87447C6.70871 15.5 6.54974 15.5658 6.43253 15.6831C6.31532 15.8003 6.24947 15.9592 6.24947 16.125C6.24947 16.2908 6.31532 16.4497 6.43253 16.5669C6.54974 16.6842 6.70871 16.75 6.87447 16.75H8.74947V18.625C8.74947 18.7908 8.81532 18.9497 8.93253 19.0669C9.04974 19.1842 9.20871 19.25 9.37447 19.25C9.54023 19.25 9.6992 19.1842 9.81641 19.0669C9.93362 18.9497 9.99947 18.7908 9.99947 18.625V16.75H11.8745C12.0402 16.75 12.1992 16.6842 12.3164 16.5669C12.4336 16.4497 12.4995 16.2908 12.4995 16.125C12.4995 15.9592 12.4336 15.8003 12.3164 15.6831C12.1992 15.5658 12.0402 15.5 11.8745 15.5H9.99947V14.2094C10.8372 14.1047 11.6348 13.7894 12.3176 13.2928C13.0004 12.7963 13.5461 12.1347 13.9038 11.37C14.2615 10.6052 14.4195 9.76228 14.363 8.9199C14.3065 8.07753 14.0374 7.26324 13.5807 6.55313L15.6245 4.50859V6.125C15.6245 6.29076 15.6903 6.44973 15.8075 6.56694C15.9247 6.68415 16.0837 6.75 16.2495 6.75C16.4152 6.75 16.5742 6.68415 16.6914 6.56694C16.8086 6.44973 16.8745 6.29076 16.8745 6.125V3C16.8745 2.83424 16.8086 2.67527 16.6914 2.55806C16.5742 2.44085 16.4152 2.375 16.2495 2.375ZM9.37447 13C8.63279 13 7.90777 12.7801 7.29108 12.368C6.6744 11.956 6.19375 11.3703 5.90993 10.6851C5.6261 9.99984 5.55183 9.24584 5.69653 8.51841C5.84122 7.79098 6.19838 7.1228 6.72282 6.59835C7.24727 6.0739 7.91546 5.71675 8.64288 5.57206C9.37031 5.42736 10.1243 5.50162 10.8095 5.78545C11.4948 6.06928 12.0804 6.54993 12.4925 7.16661C12.9045 7.7833 13.1245 8.50832 13.1245 9.25C13.1234 10.2442 12.728 11.1975 12.025 11.9005C11.3219 12.6035 10.3687 12.999 9.37447 13Z" fill="#797979"/>
                                 </svg>
-                                <select v-model="dataStore.biodata.gender" name="" id="" class="border-b p-2 px-3 block w-full focus:outline-none">
+                                <select v-model="dataStore.biodata.gender" name="" id="" class="border-b p-2 px-3 block w-full focus:outline-none" required>
                                     <option selected>-- Pilih Gender --</option>
                                     <option value="male">Laki Laki</option>
                                     <option value="female">Perempuan</option>
@@ -207,7 +207,7 @@
                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="21" viewBox="0 0 20 21" fill="none">
                                     <path d="M6.4 3.5C3.97 3.5 2 5.47 2 7.9C2 12.3 7.2 16.3 10 17.2304C12.8 16.3 18 12.3 18 7.9C18 5.47 16.03 3.5 13.6 3.5C12.112 3.5 10.796 4.2388 10 5.3696C9.59427 4.79168 9.05526 4.32004 8.42861 3.9946C7.80196 3.66915 7.10612 3.4995 6.4 3.5Z" stroke="#797979" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
                                 </svg>
-                                <select v-model="dataStore.biodata.marritage_status" name="" id="" class="border-b p-2 px-3 block w-full focus:outline-none">
+                                <select v-model="dataStore.biodata.marritage_status" name="" id="" class="border-b p-2 px-3 block w-full focus:outline-none" required>
                                     <option selected>-- Status Pernikahan --</option>
                                     <option value="married">Married</option>
                                     <option value="single">Single</option>
@@ -232,7 +232,7 @@
                                         </clipPath>
                                     </defs>
                                 </svg>
-                                <select v-model="dataStore.biodata.religion" name="" id="" class="border-b p-2 px-3 block w-full focus:outline-none">
+                                <select v-model="dataStore.biodata.religion" name="" id="" class="border-b p-2 px-3 block w-full focus:outline-none" required>
                                     <option selected>-- Agama --</option>
                                     <option v-for="rlg in religion" :value="rlg?.religion.toLowerCase()">{{rlg.religion}}</option>
                                 </select>
@@ -241,7 +241,7 @@
                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
                                     <path d="M10 6.66667C9.34073 6.66667 8.69626 6.86216 8.1481 7.22844C7.59994 7.59471 7.17269 8.1153 6.9204 8.72439C6.66811 9.33348 6.6021 10.0037 6.73072 10.6503C6.85933 11.2969 7.1768 11.8908 7.64298 12.357C8.10915 12.8232 8.7031 13.1407 9.3497 13.2693C9.9963 13.3979 10.6665 13.3319 11.2756 13.0796C11.8847 12.8273 12.4053 12.4001 12.7716 11.8519C13.1378 11.3037 13.3333 10.6593 13.3333 10C13.3333 9.11595 12.9821 8.2681 12.357 7.64298C11.7319 7.01786 10.8841 6.66667 10 6.66667ZM10 12C9.60444 12 9.21776 11.8827 8.88886 11.6629C8.55996 11.4432 8.30362 11.1308 8.15224 10.7654C8.00087 10.3999 7.96126 9.99778 8.03843 9.60982C8.1156 9.22186 8.30608 8.86549 8.58579 8.58579C8.86549 8.30608 9.22186 8.1156 9.60982 8.03843C9.99778 7.96126 10.3999 8.00087 10.7654 8.15224C11.1308 8.30362 11.4432 8.55996 11.6629 8.88886C11.8827 9.21776 12 9.60444 12 10C12 10.5304 11.7893 11.0391 11.4142 11.4142C11.0391 11.7893 10.5304 12 10 12ZM19.3333 4H0.666667C0.489856 4 0.320286 4.07024 0.195262 4.19526C0.0702379 4.32029 0 4.48986 0 4.66667V15.3333C0 15.5101 0.0702379 15.6797 0.195262 15.8047C0.320286 15.9298 0.489856 16 0.666667 16H19.3333C19.5101 16 19.6797 15.9298 19.8047 15.8047C19.9298 15.6797 20 15.5101 20 15.3333V4.66667C20 4.48986 19.9298 4.32029 19.8047 4.19526C19.6797 4.07024 19.5101 4 19.3333 4ZM15.4708 14.6667H4.52917C4.30534 13.9097 3.89567 13.2207 3.33749 12.6625C2.7793 12.1043 2.09033 11.6947 1.33333 11.4708V8.52917C2.09033 8.30534 2.7793 7.89567 3.33749 7.33749C3.89567 6.7793 4.30534 6.09033 4.52917 5.33333H15.4708C15.6947 6.09033 16.1043 6.7793 16.6625 7.33749C17.2207 7.89567 17.9097 8.30534 18.6667 8.52917V11.4708C17.9097 11.6947 17.2207 12.1043 16.6625 12.6625C16.1043 13.2207 15.6947 13.9097 15.4708 14.6667ZM18.6667 7.11417C17.867 6.77033 17.2297 6.13297 16.8858 5.33333H18.6667V7.11417ZM3.11417 5.33333C2.77033 6.13297 2.13297 6.77033 1.33333 7.11417V5.33333H3.11417ZM1.33333 12.8858C2.13297 13.2297 2.77033 13.867 3.11417 14.6667H1.33333V12.8858ZM16.8858 14.6667C17.2297 13.867 17.867 13.2297 18.6667 12.8858V14.6667H16.8858Z" fill="#797979"/>
                                 </svg>
-                                <input v-model="dataStore.biodata.expected_salary" type="number" class="p-2 px-3 border-b focus:outline-none block w-full" placeholder="expetasi gaji (Rupiah)" />
+                                <input v-model="dataStore.biodata.expected_salary" type="number" class="p-2 px-3 border-b focus:outline-none block w-full" placeholder="expetasi gaji (Rupiah)" requred/>
                             </li>
                             <li class="flex items-center gap-4 text-sm">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="text-slate-500" width="18" height="18" viewBox="0 0 24 24"><path fill="currentColor" d="M19 4h-1.45A3.08 3.08 0 0 0 17 3a3 3 0 0 0-2.25-1H9.27A3 3 0 0 0 7 3a3.08 3.08 0 0 0-.57 1H5a3 3 0 0 0-3 3v12a3 3 0 0 0 3 3h14a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3m-10.48.34A1 1 0 0 1 9.27 4h5.46a1 1 0 0 1 .75.34a1 1 0 0 1 .25.78l-.5 4a1 1 0 0 1-1 .88h-1.64l1.14-2.4a1 1 0 0 0-1.8-.86L10.37 10h-.6a1 1 0 0 1-1-.88l-.5-4a1 1 0 0 1 .25-.78M20 19a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h1.37l.42 3.37a3 3 0 0 0 3 2.63h4.46a3 3 0 0 0 3-2.63L17.63 6H19a1 1 0 0 1 1 1Zm-6-3h-4a1 1 0 0 0 0 2h4a1 1 0 0 0 0-2"/></svg>
@@ -1039,6 +1039,31 @@ onMounted(async () => {
     isReady.value = true;
 })
 
+const isRequiredDataFilled = () => {
+    const dt = dataStore.value;
+    const profileRequired = ['name', 'summary', 'province', 'address', 'role'];
+    const biodataRequired = ['birth_place', 'birth_date', 'gender', 'marritage_status', 'religion', 'expected_salary', 'weight_body', 'height_body'];
+    let nullRequireds = [];
+
+    profileRequired.forEach((pr) => {
+        if (dt.profile[pr] === '' || dt.profile[pr] === null) {
+            nullRequireds.push(pr);
+        }
+    });
+
+    biodataRequired.forEach((pr) => {
+        if (dt.biodata[pr] === '' || dt.biodata[pr] === null) {
+            nullRequireds.push(pr);
+        }
+    });
+
+    if (nullRequireds.length > 0) {
+        return nullRequireds;
+    }else{
+        return false;
+    }
+};
+
 const parseDateRange = (dateRangeString) => {
     const [startDateString, endDateString] = dateRangeString.split(' - ');
     const startDate = parseDateString(startDateString);
@@ -1094,6 +1119,17 @@ const cancelData = (section) => {
     }
 }
 const saveData = async (section = '') => {
+    const check = isRequiredDataFilled()
+    if(check){
+        let message = 'Harus mengisi data : ';
+        check.forEach((item) => {
+            message += `${item}, `;
+        });
+        message = message.slice(0, -2);
+        toast.error(message);
+        return;
+    }
+    
     const updateProfile = await userStore.updateProfile(dataStore.value.profile.phone, dataStore.value.profile.name, dataStore.value.profile.role, dataStore.value.profile.summary, dataStore.value.biodata.gender, dataStore.value.biodata.birth_date, dataStore.value.biodata.birth_place, dataStore.value.biodata.religion, dataStore.value.biodata.marritage_status, dataStore.value.biodata.height_body, dataStore.value.biodata.weight_body, dataStore.value.profile.province, dataStore.value.profile.address, dataStore.value.profile.photo, dataStore.value.profile.sosmed.ig, dataStore.value.profile.sosmed.fb,dataStore.value.profile.sosmed.x, dataStore.value.profile.sosmed.in);
     console.log(updateProfile);
 

@@ -19,63 +19,18 @@
                             Notifikasi
                         </div>
                         <div>
-                            <NuxtLink to="" class="flex py-3 px-4 border-b hover:bg-gray-100">
-                                <div class="flex-shrink-0">
+                            <NuxtLink v-for="notif in notifStore.notifications?.slice(0,5)" :key="notif?.id" :to="`/seeker/notification?read=${notif?.id}`" class="flex py-3 px-4 border-b hover:bg-orange-100" :class="notif.is_read == 0 ? 'bg-orange-100/50' : 'bg-white'">
+                                <!-- <div class="flex-shrink-0">
                                     <NuxtImg class="w-11 h-11" src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/bonnie-green.png" alt="Bonnie Green avatar"/>
-                                </div>
+                                </div> -->
                                 <div class="pl-3 w-full">
                                     <div class="text-gray-500 font-normal ">
-                                        <div class="text-sm text-gray-600 mb-1.5">PT. Argo Berjaya Nusantara</div>
-                                        <div class="text-xs mb-1.5">Tidak lanjut dengan lamaranmu untuk posisi Design Graphic</div>
+                                        <div class="text-sm text-gray-600 mb-1.5">{{notif?.type_name}}</div>
+                                        <div class="text-xs mb-1.5">{{notif.subject}}</div>
                                     </div>
                                     <div class="text-xs text-gray-400 flex items-center gap-2">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M5.636 18.364A9 9 0 1 0 3 12.004V14"/><path d="m1 12l2 2l2-2m6-4v5h5"/></g></svg>
-                                        beberapa detik yang lalu
-                                    </div>
-                                </div>
-                            </NuxtLink>
-                            <NuxtLink to="" class="flex py-3 px-4 border-b hover:bg-gray-100">
-                                <div class="flex-shrink-0">
-                                    <NuxtImg class="w-11 h-11" src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/bonnie-green.png" alt="Bonnie Green avatar"/>
-                                </div>
-                                <div class="pl-3 w-full">
-                                    <div class="text-gray-500 font-normal ">
-                                        <div class="text-sm text-gray-600 mb-1.5">PT. Argo Berjaya Nusantara</div>
-                                        <div class="text-xs mb-1.5">Tidak lanjut dengan lamaranmu untuk posisi Design Graphic</div>
-                                    </div>
-                                    <div class="text-xs text-gray-400 flex items-center gap-2">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M5.636 18.364A9 9 0 1 0 3 12.004V14"/><path d="m1 12l2 2l2-2m6-4v5h5"/></g></svg>
-                                        beberapa detik yang lalu
-                                    </div>
-                                </div>
-                            </NuxtLink>
-                            <NuxtLink to="" class="flex py-3 px-4 border-b hover:bg-gray-100">
-                                <div class="flex-shrink-0">
-                                    <NuxtImg class="w-11 h-11" src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/bonnie-green.png" alt="Bonnie Green avatar"/>
-                                </div>
-                                <div class="pl-3 w-full">
-                                    <div class="text-gray-500 font-normal ">
-                                        <div class="text-sm text-gray-600 mb-1.5">PT. Argo Berjaya Nusantara</div>
-                                        <div class="text-xs mb-1.5">Tidak lanjut dengan lamaranmu untuk posisi Design Graphic</div>
-                                    </div>
-                                    <div class="text-xs text-gray-400 flex items-center gap-2">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M5.636 18.364A9 9 0 1 0 3 12.004V14"/><path d="m1 12l2 2l2-2m6-4v5h5"/></g></svg>
-                                        beberapa detik yang lalu
-                                    </div>
-                                </div>
-                            </NuxtLink>
-                            <NuxtLink to="" class="flex py-3 px-4 border-b hover:bg-gray-100">
-                                <div class="flex-shrink-0">
-                                    <NuxtImg class="w-11 h-11" src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/bonnie-green.png" alt="Bonnie Green avatar"/>
-                                </div>
-                                <div class="pl-3 w-full">
-                                    <div class="text-gray-500 font-normal ">
-                                        <div class="text-sm text-gray-600 mb-1.5">PT. Argo Berjaya Nusantara</div>
-                                        <div class="text-xs mb-1.5">Tidak lanjut dengan lamaranmu untuk posisi Design Graphic</div>
-                                    </div>
-                                    <div class="text-xs text-gray-400 flex items-center gap-2">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M5.636 18.364A9 9 0 1 0 3 12.004V14"/><path d="m1 12l2 2l2-2m6-4v5h5"/></g></svg>
-                                        beberapa detik yang lalu
+                                        {{daysAgo(notif?.created_time)}}
                                     </div>
                                 </div>
                             </NuxtLink>
@@ -192,6 +147,8 @@ const logoutModal = ref(false);
 const isReady = ref(false);
 const profile = ref(null);
 const store = useUserStore();
+const notifStore = useNotificationStore();
+
 const logoutModalOn = () => {
     logoutModal.value = true;
 }
@@ -209,8 +166,10 @@ const logoutHandle = async () => {
     }
 }
 
-onMounted(() => {
-    isReady.value = true;
+onMounted(async () => {
+    const fetch = await notifStore.getNotifications();
+
     profile.value = JSON.parse(localStorage.getItem('profile'));
+    isReady.value = true;
 })
 </script>
