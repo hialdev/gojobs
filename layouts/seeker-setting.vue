@@ -52,23 +52,20 @@
 <script setup>
 
 const openSetting = ref(false)
+
 const toggleSetting = () => {
     openSetting.value = !openSetting.value;
 }
 
-// Function to check the screen size and set openSetting accordingly
 const checkScreenSize = () => {
-    // Update openSetting based on screen size (lg or larger)
     openSetting.value = window.matchMedia('(min-width: 1024px)').matches;
 };
 
-// Attach the checkScreenSize function to the window resize event
 onMounted(() => {
-    checkScreenSize(); // Call it initially to set the correct value
+    checkScreenSize();
     window.addEventListener('resize', checkScreenSize);
 });
 
-// Don't forget to remove the event listener when the component is destroyed
 onUnmounted(() => {
     window.removeEventListener('resize', checkScreenSize);
 });

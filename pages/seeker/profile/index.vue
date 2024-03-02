@@ -124,7 +124,7 @@
                                         </clipPath>
                                     </defs>
                                 </svg>
-                                <span class="">{{userStore?.detail?.biodata?.birth_place == '' ? '-' : userStore?.detail?.biodata?.birth_place }}, {{userStore.detail.biodata.birth_date == null ? 'YYYY - MM - DD' : formatDate(userStore.detail.biodata.birth_date)}}</span>
+                                <span class="">{{userStore?.detail?.biodata?.birth_place == '' ? '-' : dataNormal?.biodata?.birth_place }}, {{userStore.detail.biodata.birth_date == null ? 'YYYY - MM - DD' : formatDate(userStore.detail.biodata.birth_date)}}</span>
                             </li>
                             <li class="flex items-center gap-4 text-sm">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="21" viewBox="0 0 20 21" fill="none">
@@ -189,7 +189,7 @@
                                     </defs>
                                 </svg>
                                 <div class="w-full">
-                                    <input type="text" class="p-2 px-3 border-b focus:outline-none block w-full" v-model="dataStore.biodata.birth_place" placeholder="Tempat Lahir" required/>
+                                    <PartialsSelect :options="cityOptions" :customClass="`p-2 px-3 border-b focus:outline-none block w-full rounded-none`" @selected="(value) => {dataStore.biodata.birth_place = value?.key}" :label="`Tempat Lahir`"/>
                                     <input type="date" class="p-2 px-3 border-b focus:outline-none block w-full" v-model="dataStore.biodata.birth_date" placeholder="Tgl Lahir" required/>
                                 </div>
                             </li>
@@ -298,7 +298,7 @@
                                         </clipPath>
                                     </defs>
                                 </svg>
-                                <span class="">{{userStore?.detail?.profile?.province}}</span>
+                                <span class="">{{dataNormal?.profile?.city}}</span>
                             </li>
                             <li class="flex items-start gap-4 text-sm">
                                 <svg class="text-slate-600" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 15 15"><g fill="none" fill-rule="evenodd" stroke="currentColor" stroke-linecap="square" clip-rule="evenodd"><path d="M7.5 8.495a2 2 0 0 0 2-1.999a2 2 0 0 0-4 0a2 2 0 0 0 2 1.999Z"/><path d="M13.5 6.496c0 4.997-5 7.995-6 7.995s-6-2.998-6-7.995A5.999 5.999 0 0 1 7.5.5c3.313 0 6 2.685 6 5.996Z"/></g></svg>
@@ -342,11 +342,11 @@
                                         </clipPath>
                                     </defs>
                                 </svg>
-                                <input v-model="dataStore.profile.province" type="text" class="p-2 px-3 border-b focus:outline-none block w-full" placeholder="Provinsi" />
+                                <PartialsSelect :options="cityOptions" class="w-full" :customClass="`p-2 px-3 border-b focus:outline-none block w-full rounded-none`" @selected="(value) => {dataStore.profile.city = value?.key}" :label="`Kota Tinggal`"/>
                             </li>
                             <li class="flex items-start gap-4 text-sm">
                                 <svg class="text-slate-600" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 15 15"><g fill="none" fill-rule="evenodd" stroke="currentColor" stroke-linecap="square" clip-rule="evenodd"><path d="M7.5 8.495a2 2 0 0 0 2-1.999a2 2 0 0 0-4 0a2 2 0 0 0 2 1.999Z"/><path d="M13.5 6.496c0 4.997-5 7.995-6 7.995s-6-2.998-6-7.995A5.999 5.999 0 0 1 7.5.5c3.313 0 6 2.685 6 5.996Z"/></g></svg>
-                                <textarea v-model="dataStore.profile.address" class="p-2 px-3 border-b focus:outline-none block w-full" placeholder="Alamat lengkap domisili" ></textarea>
+                                <textarea v-model="dataStore.profile.address" class="p-2 px-3 border-b focus:outline-none block w-full" placeholder="Alamat lengkap tinggal" ></textarea>
                             </li>
                         </ul>
                     </div>
@@ -872,6 +872,7 @@ const toast = useToast();
 const in_edit = ref(null);
 
 const userStore = useUserStore();
+const cityStore = useCityStore();
 const contractStore = useContractStore();
 const skillStore = useSkillStore();
 const experienceStore = useExperienceStore();
@@ -881,6 +882,8 @@ const languageStore = useLanguageStore();
 const medsosStore = useMedsosStore();
 
 const contractOptions = ref(null);
+const cityOptions = ref([]);
+const religionOptions = ref([]);
 
 const show = ref({
     editImageSosmed : false,
@@ -903,6 +906,7 @@ const dataStore = ref({
         email : '',
         phone : '',
         province : '',
+        city : '',
         address :  '',
         role: '',
         sosmed : {
@@ -931,6 +935,15 @@ const dataStore = ref({
     languages : [],
 })
 
+const dataNormal = ref({
+    biodata:{
+        birth_place : '',
+    },
+    profile : {
+        province : '',
+        city : '',
+    }
+})
 const singleData = ref({
     experience : {
         last_position : '',
@@ -1006,11 +1019,20 @@ const editSkills = ref({
     hard_skills : [],
 })
 onMounted(async () => {
+    cityOptions.value = await cityStore.getOptionsMaster();
+
     const data = JSON.parse(localStorage.getItem('data_buat_cv'));
     if(data) dataStore.value = data;
 
     const fetchProfile = await userStore.getFullProfile();
     dataStore.value = userStore?.detail;
+    
+    if(dataStore.value.biodata.birth_place != ''){
+        dataNormal.value.biodata.birth_place = await cityStore.getCityById(dataStore.value.biodata.birth_place);
+    }
+    if(dataStore.value.profile.city != ''){
+        dataNormal.value.profile.city = await cityStore.getCityById(dataStore.value.profile.city);
+    }
 
     const fetch = await contractStore.getOptions();
     contractOptions.value = fetch;
@@ -1041,7 +1063,7 @@ onMounted(async () => {
 
 const isRequiredDataFilled = () => {
     const dt = dataStore.value;
-    const profileRequired = ['name', 'summary', 'province', 'address', 'role'];
+    const profileRequired = ['name', 'summary', 'city', 'address', 'role'];
     const biodataRequired = ['birth_place', 'birth_date', 'gender', 'marritage_status', 'religion', 'expected_salary', 'weight_body', 'height_body'];
     let nullRequireds = [];
 
@@ -1130,7 +1152,7 @@ const saveData = async (section = '') => {
         return;
     }
     
-    const updateProfile = await userStore.updateProfile(dataStore.value.profile.phone, dataStore.value.profile.name, dataStore.value.profile.role, dataStore.value.profile.summary, dataStore.value.biodata.gender, dataStore.value.biodata.birth_date, dataStore.value.biodata.birth_place, dataStore.value.biodata.religion, dataStore.value.biodata.marritage_status, dataStore.value.biodata.height_body, dataStore.value.biodata.weight_body, dataStore.value.profile.province, dataStore.value.profile.address, dataStore.value.profile.photo, dataStore.value.profile.sosmed.ig, dataStore.value.profile.sosmed.fb,dataStore.value.profile.sosmed.x, dataStore.value.profile.sosmed.in);
+    const updateProfile = await userStore.updateProfile(dataStore.value.profile.phone, dataStore.value.profile.name, dataStore.value.profile.role, dataStore.value.profile.summary, dataStore.value.biodata.gender, dataStore.value.biodata.birth_date, dataStore.value.biodata.birth_place, dataStore.value.biodata.religion, dataStore.value.biodata.marritage_status, dataStore.value.biodata.height_body, dataStore.value.biodata.weight_body, dataStore.value.profile.city, dataStore.value.profile.address, dataStore.value.profile.photo, dataStore.value.profile.sosmed.ig, dataStore.value.profile.sosmed.fb,dataStore.value.profile.sosmed.x, dataStore.value.profile.sosmed.in);
     console.log(updateProfile);
 
     localStorage.setItem('data_buat_cv', JSON.stringify(dataStore.value));

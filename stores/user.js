@@ -169,6 +169,8 @@ export const useUserStore = defineStore('user',{
                 headers: headers,
             })
             
+            const medsos = useMedsosStore();
+            const fetchSosmed = await medsos.getMedsos();
             if(fetchProfile.success){
                 this.detail.profile = {
                     image : fetchProfile.profile.photo,
@@ -176,15 +178,16 @@ export const useUserStore = defineStore('user',{
                     summary : fetchProfile.profile_detail?.summary ?? "",
                     email : fetchProfile.email,
                     phone : fetchProfile.mobile,
+                    city : fetchProfile.profile.city_id,
                     province : fetchProfile.profile.work_location,
                     address :  fetchProfile.profile.address,
                     role: fetchProfile.profile.work_type,
                     sosmed : {
-                        id : fetchProfile.mediasocial.id,
-                        ig : fetchProfile.mediasocial.instagram,
-                        fb: fetchProfile.mediasocial.facebook,
-                        x: fetchProfile.mediasocial.twitter,
-                        in: fetchProfile.mediasocial.linkedin,
+                        id : fetchSosmed?.data?.id ?? '',
+                        ig : fetchSosmed?.data?.instagram ?? '',
+                        fb: fetchSosmed?.data?.facebook ?? '',
+                        x: fetchSosmed?.data?.twitter ?? '',
+                        in: fetchSosmed?.data?.linkedin ?? '',
                     },
                 };
                 this.detail.biodata = {
@@ -230,7 +233,7 @@ export const useUserStore = defineStore('user',{
             return detail
         },
 
-        async updateProfile(phone = this.detail?.profile?.phone, fullname = this.detail?.profile?.name, role = this.detail?.profile?.role, summary = this.detail?.profile?.summary, gender = this.detail?.biodata?.gender, birth_date = this.detail?.biodata?.birth_date, birth_place = this.detail?.biodata?.birth_place, religion = this.detail?.biodata?.religion, marital_status = this.detail?.biodata?.marritage_status, height_body = this.detail?.biodata?.height_body, weight_body = this.detail?.biodata?.weight_body, province = this.detail?.profile?.province, address = this.detail?.profile?.address, photo = this.detail?.profile?.image, ig = this.detail?.profile?.sosmed?.ig, fb = this.detail?.profile?.sosmed?.fb, x = this.detail?.profile?.sosmed?.x, linkedin = this.detail?.profile?.sosmed?.in, identity_number = '', kk_number = '', jamsostek_number = '', bpjs_number = '', npwp_number = '', drivinglicencecar_number = '', drivinglicencemotorcycle_number = ''){
+        async updateProfile(phone = this.detail?.profile?.phone, fullname = this.detail?.profile?.name, role = this.detail?.profile?.role, summary = this.detail?.profile?.summary, gender = this.detail?.biodata?.gender, birth_date = this.detail?.biodata?.birth_date, birth_place = this.detail?.biodata?.birth_place, religion = this.detail?.biodata?.religion, marital_status = this.detail?.biodata?.marritage_status, height_body = this.detail?.biodata?.height_body, weight_body = this.detail?.biodata?.weight_body, city = this.detail?.profile?.city, address = this.detail?.profile?.address, photo = this.detail?.profile?.image, ig = this.detail?.profile?.sosmed?.ig, fb = this.detail?.profile?.sosmed?.fb, x = this.detail?.profile?.sosmed?.x, linkedin = this.detail?.profile?.sosmed?.in, identity_number = '', kk_number = '', jamsostek_number = '', bpjs_number = '', npwp_number = '', drivinglicencecar_number = '', drivinglicencemotorcycle_number = ''){
             var headers = new Headers();
             headers.append("token", localStorage.getItem('access_token'));
 
@@ -257,7 +260,7 @@ export const useUserStore = defineStore('user',{
             formdata.append("npwp_number", npwp_number);
             formdata.append("drivinglicencecar_number", drivinglicencecar_number);
             formdata.append("drivinglicencemotorcycle_number", drivinglicencemotorcycle_number);
-            formdata.append("city_id", "1");
+            formdata.append("city_id", city);
             formdata.append("province_id", "1");
             formdata.append("is_sameforktp", "");
             formdata.append("province_idktp", "1");
@@ -265,7 +268,7 @@ export const useUserStore = defineStore('user',{
             formdata.append("postal_codektp", "54321");
             formdata.append("height_body", height_body ?? 0);
             formdata.append("weight_body", weight_body ?? 0);
-            formdata.append("work_location", province);
+            formdata.append("work_location", "Jakarta");
             formdata.append("work_type", role);
             formdata.append("summary", summary);
             formdata.append("photo", photo);
@@ -277,15 +280,20 @@ export const useUserStore = defineStore('user',{
                 body: formdata,
             })
 
+            const medsos = useMedsosStore();
             if(updateProfile?.success){
-                const medsos = useMedsosStore();
-                const update = await medsos.updateMedsos(this.detail.profile.sosmed.id, ig, x, fb, linkedin, "https://devtektif.com")
+                const update = await medsos.updateMedsos(this.detail?.profile?.sosmed?.id, ig, x, fb, linkedin, "https://devtektif.com")
+                if(!update?.success){
+                    const createSosmed = await medsos.addMedsos(ig, x, fb, linkedin, "https://devtektif.com")
+                    console.log(createSosmed)
+                }
             }else if(updateProfile?.code == true){
                 updateProfile = await $fetch(`${this.API_URL}/biodata-profile/create`, {
                     method : 'POST',
                     headers: headers,
                     body: formdata,
-                })
+                });
+                
             }
 
             this.getFullProfile();

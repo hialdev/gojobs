@@ -6,6 +6,7 @@
             </div>
             <div class="grid grid-cols-12 gap-5">
                 <div class="col-span-12 md:col-span-6 py-6">
+                    <PartialsInput :typeInput="`number`" v-model="dataStore.phone" :modelValue="dataStore.phone" :inputClass="`border rounded-xl`" :placeholder="`Nomor Telepon`" />
                     <PartialsInput :typeInput="`password`" :inputClass="`border rounded-xl`" :placeholder="`Konfirmasi Kata sandi baru`" />
                     <PartialsButton class="min-w-[10em] px-8">Perbarui Nomor</PartialsButton>
                 </div>
@@ -25,5 +26,15 @@
 <script setup>
 definePageMeta({
     layout:'seeker-setting',
+})
+
+const dataStore = ref({
+    phone : null,
+})
+
+onMounted(() => {
+    const profile = JSON.parse(localStorage.getItem('profile'));
+    dataStore.value.phone = profile?.mobile;
+    console.log(dataStore.value);
 })
 </script>
