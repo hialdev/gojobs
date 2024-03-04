@@ -290,7 +290,7 @@ export const useUserStore = defineStore('user',{
                 headers: headers,
                 body: formdata,
             });
-            if(!updateProfile.success || !updateProfile){
+            if(updateProfile.success == false || !updateProfile){
                 updateProfile = await $fetch(`${this.API_URL}/biodata-profile/update?id=${user_id}`, {
                     method : 'POST',
                     headers: headers,
