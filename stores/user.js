@@ -108,8 +108,7 @@ export const useUserStore = defineStore('user',{
             var headers = new Headers();
             headers.append("token", localStorage.getItem('access_token'));
 
-            const user_id = JSON.parse(localStorage.getItem('profile')).userid;
-            const verif = await $fetch(`${this.API_URL}/auth/verify?user_id=${user_id}&verify_code=${code_token}`, {
+            const verif = await $fetch(`${this.API_URL}/auth/verify?verify_code=${code_token}`, {
                 method : 'POST',
                 headers: headers,
             })
@@ -135,9 +134,19 @@ export const useUserStore = defineStore('user',{
         async resendCode(){
             var headers = new Headers();
             headers.append("token", localStorage.getItem('access_token'));
-            const user_id = JSON.parse(localStorage.getItem('profile')).userid;
-            const resend = await $fetch(`${this.API_URL}/auth/resendtoken?user_id=${user_id}`, {
-                method : 'GET',
+            const resend = await $fetch(`${this.API_URL}/auth/resend-token`, {
+                method : 'POST',
+                headers: headers,
+            })
+
+            return resend;
+        },
+
+        async deactive(){
+            var headers = new Headers();
+            headers.append("token", localStorage.getItem('access_token'));
+            const resend = await $fetch(`${this.API_URL}/auth/deactive`, {
+                method : 'POST',
                 headers: headers,
             })
 
@@ -274,26 +283,31 @@ export const useUserStore = defineStore('user',{
             formdata.append("photo", photo);
 
             const user_id = JSON.parse(localStorage.getItem('profile')).userid;
-            let updateProfile = await $fetch(`${this.API_URL}/biodata-profile/update?id=${user_id}`, {
+            let updateProfile = null ;
+
+            updateProfile = await $fetch(`${this.API_URL}/biodata-profile/create`, {
                 method : 'POST',
                 headers: headers,
                 body: formdata,
-            })
+            });
+            if(!updateProfile.success || !updateProfile){
+                updateProfile = await $fetch(`${this.API_URL}/biodata-profile/update?id=${user_id}`, {
+                    method : 'POST',
+                    headers: headers,
+                    body: formdata,
+                })
+                console.log('Update')
+            }
 
+            console.log(updateProfile);
             const medsos = useMedsosStore();
-            if(updateProfile?.success){
+            if(updateProfile?.success && updateProfile?.message != 'Data not found'){
                 const update = await medsos.updateMedsos(this.detail?.profile?.sosmed?.id, ig, x, fb, linkedin, "https://devtektif.com")
                 if(!update?.success){
                     const createSosmed = await medsos.addMedsos(ig, x, fb, linkedin, "https://devtektif.com")
                     console.log(createSosmed)
                 }
-            }else if(updateProfile?.code == true){
-                updateProfile = await $fetch(`${this.API_URL}/biodata-profile/create`, {
-                    method : 'POST',
-                    headers: headers,
-                    body: formdata,
-                });
-                
+                console.log('Medsos')
             }
 
             this.getFullProfile();

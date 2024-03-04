@@ -5,12 +5,12 @@
             <p class="text-slate-500 text-sm">Isi dengan kode token yang telah dikirimkan ke : <strong>{{profile?.email ?? route?.query?.email}}</strong></p>
         </div>
         <div class="grid grid-cols-12 gap-3 px-7 mb-7">
-            <input v-model="token.satu" name="token_1" type="text" maxlength="1"  class="no-arrow block text-center col-span-2 text-2xl text-slate-600 border-b-2 focus:outline-0 focus:border-b-2 focus:border-b-primary" />
-            <input v-model="token.dua" name="token_2" type="text" maxlength="1"  class="no-arrow block text-center col-span-2 text-2xl text-slate-600 border-b-2 focus:outline-0 focus:border-b-2 focus:border-b-primary" />
-            <input v-model="token.tiga" name="token_3" type="text" maxlength="1"  class="no-arrow block text-center col-span-2 text-2xl text-slate-600 border-b-2 focus:outline-0 focus:border-b-2 focus:border-b-primary" />
-            <input v-model="token.empat" name="token_4" type="text" maxlength="1"  class="no-arrow block text-center col-span-2 text-2xl text-slate-600 border-b-2 focus:outline-0 focus:border-b-2 focus:border-b-primary" />
-            <input v-model="token.lima" name="token_5" type="text" maxlength="1"  class="no-arrow block text-center col-span-2 text-2xl text-slate-600 border-b-2 focus:outline-0 focus:border-b-2 focus:border-b-primary" />
-            <input v-model="token.enam" name="token_6" type="text" maxlength="1"  class="no-arrow block text-center col-span-2 text-2xl text-slate-600 border-b-2 focus:outline-0 focus:border-b-2 focus:border-b-primary" />
+            <input ref="input1" v-model="token.satu" @input="onInput(1)" type="text" maxlength="1"  class="no-arrow block text-center col-span-2 text-2xl text-slate-600 border-b-2 focus:outline-0 focus:border-b-2 focus:border-b-primary" />
+            <input ref="input2" v-model="token.dua" @input="onInput(2)" type="text" maxlength="1"  class="no-arrow block text-center col-span-2 text-2xl text-slate-600 border-b-2 focus:outline-0 focus:border-b-2 focus:border-b-primary" />
+            <input ref="input3" v-model="token.tiga" @input="onInput(3)" type="text" maxlength="1"  class="no-arrow block text-center col-span-2 text-2xl text-slate-600 border-b-2 focus:outline-0 focus:border-b-2 focus:border-b-primary" />
+            <input ref="input4" v-model="token.empat" @input="onInput(4)" type="text" maxlength="1"  class="no-arrow block text-center col-span-2 text-2xl text-slate-600 border-b-2 focus:outline-0 focus:border-b-2 focus:border-b-primary" />
+            <input ref="input5" v-model="token.lima" @input="onInput(5)" type="text" maxlength="1"  class="no-arrow block text-center col-span-2 text-2xl text-slate-600 border-b-2 focus:outline-0 focus:border-b-2 focus:border-b-primary" />
+            <input ref="input6" v-model="token.enam" @input="onInput(6)" type="text" maxlength="1"  class="no-arrow block text-center col-span-2 text-2xl text-slate-600 border-b-2 focus:outline-0 focus:border-b-2 focus:border-b-primary" />
         </div>
         <div v-if="error" class="flex items-center p-4 mb-4 text-sm text-yellow-800 border border-yellow-300 rounded-2xl bg-yellow-50" role="alert">
             <svg class="flex-shrink-0 inline w-4 h-4 me-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
@@ -41,6 +41,7 @@
 </template>
 
 <script setup>
+import { useToast } from 'vue-toastification';
 const route = useRoute();
 
 const user = useUserStore();
@@ -55,6 +56,32 @@ const token = ref({
     lima : '',
     enam : '',
 })
+
+const inputs = [
+    'input1',
+    'input2',
+    'input3',
+    'input4',
+    'input5',
+    'input6',
+];
+const toast = useToast();
+const instance = getCurrentInstance();
+const onInput = (index) => {
+    const numtostring = {
+        1 : 'satu',
+        2 : 'dua',
+        3 : 'tiga',
+        4 : 'empat',
+        5 : 'lima',
+        6 : 'enam',
+    }
+    if (token.value[numtostring[index]] != '') {
+        instance.refs[inputs[index]].focus();
+    }else{
+        instance.refs[inputs[index - 2]].focus();
+    }
+}
 
 let verifSuccess = ref(false);
 const resendCode = async () => {
@@ -79,26 +106,32 @@ const resendResetCode = async () => {
         error.value = getResend;
     }
 }
+
 const resetHandle = () => {
     navigateTo(`/auth/ubah-sandi`)
 }
+
 const verifHandle = async () => {
     const fulltoken = token.value.satu+token.value.dua+token.value.tiga+token.value.empat+token.value.lima+token.value.enam;
     const verif = await user.verify(fulltoken);
     if(verif.success){
+        const profile = await store.getProfile();
+        localStorage.setItem('profile',JSON.stringify(profile));
+        toast.success('Profile diterapkan');
         verifSuccess.value = true;
     }else{
         error.value = verif;
     }
 }
-onMounted(() => {
-    profile.value = JSON.parse(localStorage.getItem('profile'));
+onMounted(async () => {
+    const fetch = await user.getProfile();
+    profile.value = fetch;
     console.log(profile.value);
 }),
 watch(verifSuccess, (newValue) => {
     if (newValue) {
         setTimeout(() => {
-            useRouter().push(`/personalization`);
+            useRouter().push(`/welcoming`);
         }, 3000);
     }
 });

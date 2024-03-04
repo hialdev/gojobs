@@ -61,7 +61,8 @@
 <script setup>
 import { useToast } from 'vue-toastification';
 definePageMeta({
-    layout:'seeker'
+    layout:'seeker',
+    middleware: ["auth"]
 })
 const toast = useToast();
 const filter = ref({

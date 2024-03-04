@@ -44,6 +44,10 @@
 </template>
 
 <script setup>
+definePageMeta({
+    middleware: ["auth"]
+})
+
 import { useToast } from 'vue-toastification';
 
 let selectedNotif = ref(null);

@@ -2,7 +2,7 @@
     <div>
         <div class="flex items-center justify-center min-h-[40em]">
             <div class="bg-white p-10 rounded-2xl max-w-[35em]">
-                <h1 class="text-xl font-medium">Hey, Beritahu kami seperti apa pekerjaan yang kamu minati!</h1>
+                <!-- <h1 class="text-xl font-medium">Hey, Beritahu kami seperti apa pekerjaan yang kamu minati!</h1>
                 <form class="flex flex-col mt-5 gap-5">
                     <PartialsMultiselect class="z-[14] border-2 rounded-2xl" :label="`Kategori`" :svgData="svgIndustry" :options="industries" />
                     <PartialsMultiselect class="z-[12] border-2 rounded-2xl" :label="`Lokasi Kerja`" :svgData="svgLocation" :options="cityOptions" />
@@ -10,7 +10,11 @@
                     <div class="flex justify-center">
                         <PartialsButton :path="`/seeker/dashboard`" class="text-center px-6 min-w-[15em]">Tetapkan</PartialsButton>
                     </div>
-                </form>
+                </form> -->
+
+                <h1 class="text-xl font-medium">Selamat! anda kini dapat melamar pekerjaan di Gojobs.id</h1>
+                <p class="text-slate-500">Silahkan lengkapi profile anda sebelum melamar pekerjaan, isi dengan data yang benar dan sesuai. Terimakasih!</p>
+                <PartialsButton :path="`/seeker/profile`" class="text-center px-6 min-w-[15em]">Lengkapi Profile</PartialsButton>
             </div>
         </div>
     </div>
@@ -19,6 +23,7 @@
 <script setup>
 definePageMeta({
     layout: 'simple',
+    middleware: ["auth"]
 })
 const svgLocation = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                             <path d="M14 9C14 9.53043 13.7893 10.0391 13.4142 10.4142C13.0391 10.7893 12.5304 11 12 11C11.4696 11 10.9609 10.7893 10.5858 10.4142C10.2107 10.0391 10 9.53043 10 9C10 8.46957 10.2107 7.96086 10.5858 7.58579C10.9609 7.21071 11.4696 7 12 7C12.5304 7 13.0391 7.21071 13.4142 7.58579C13.7893 7.96086 14 8.46957 14 9Z" fill="currentColor"/>

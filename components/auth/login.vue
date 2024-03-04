@@ -50,7 +50,7 @@
                     <span>atau</span>
                     <hr class="w-full" />
                 </div>
-                <button class="flex items-center gap-4 bg-blue-500 p-2 pe-5 max-w-[16em] mx-auto rounded-3xl">
+                <!-- <button class="flex items-center gap-4 bg-blue-500 p-2 pe-5 max-w-[16em] mx-auto rounded-3xl">
                     <div class="bg-white flex items-center p-1 justify-center w-[30px] rounded-3xl">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="none">
                             <path d="M18.1711 8.36727H17.4998V8.33268H9.99984V11.666H14.7094C14.0223 13.6064 12.1761 14.9993 9.99984 14.9993C7.23859 14.9993 4.99984 12.7606 4.99984 9.99935C4.99984 7.2381 7.23859 4.99935 9.99984 4.99935C11.2744 4.99935 12.434 5.48018 13.3169 6.2656L15.674 3.90852C14.1857 2.52143 12.1948 1.66602 9.99984 1.66602C5.39775 1.66602 1.6665 5.39727 1.6665 9.99935C1.6665 14.6014 5.39775 18.3327 9.99984 18.3327C14.6019 18.3327 18.3332 14.6014 18.3332 9.99935C18.3332 9.4406 18.2757 8.89518 18.1711 8.36727Z" fill="#FFC107"/>
@@ -60,7 +60,7 @@
                         </svg>
                     </div>
                     <span class="text-white text-sm md:text-normal">Masuk dengan Google</span>
-                </button>
+                </button> -->
                 <div class="text-center text-sm md:text-normal text-gray-800 mt-6">
                     Belum mempunyai akun gojobs? <NuxtLink to="/auth/daftar" class="text-primary underline">Daftar</NuxtLink>
                 </div>

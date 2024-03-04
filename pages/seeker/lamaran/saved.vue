@@ -63,7 +63,8 @@
 
 <script setup>
 definePageMeta({
-    layout:'seeker'
+    layout:'seeker',
+    middleware: ["auth"]
 })
 
 const job = useJobStore();

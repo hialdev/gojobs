@@ -9,6 +9,7 @@
             </div>
             <div class="col-span-6 lg:col-span-4 ms-auto">
                 <PartialsButton @click="openLoginDialog" class="text-sm lg:text-normal whitespace-nowrap" :primary="true">Masuk</PartialsButton>
+                <PartialsButton v-if="isLogged" :path="`/seeker/dashboard`" class="text-sm lg:text-normal whitespace-nowrap">Dashboard</PartialsButton>
             </div>
         </div>
 
@@ -51,6 +52,10 @@ export default {
             type:Boolean,
             default:false,
         },
+        isLogged : {
+            type: Boolean,
+            default: false,
+        }
     },
     methods:{
         openLoginDialog() {

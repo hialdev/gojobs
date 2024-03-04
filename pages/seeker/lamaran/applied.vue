@@ -67,7 +67,8 @@ import { useToast } from 'vue-toastification';
 import { daysAgo } from '~/utils/helper.js';
 
 definePageMeta({
-    layout:'seeker'
+    layout:'seeker',
+    middleware: ["auth"]
 })
 
 const toast = useToast();

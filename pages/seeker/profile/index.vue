@@ -298,7 +298,7 @@
                                         </clipPath>
                                     </defs>
                                 </svg>
-                                <span class="">{{dataNormal?.profile?.city}}</span>
+                                <span class="">{{userStore?.detail?.profile?.city != null ? dataNormal?.profile?.city : '-'}}</span>
                             </li>
                             <li class="flex items-start gap-4 text-sm">
                                 <svg class="text-slate-600" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 15 15"><g fill="none" fill-rule="evenodd" stroke="currentColor" stroke-linecap="square" clip-rule="evenodd"><path d="M7.5 8.495a2 2 0 0 0 2-1.999a2 2 0 0 0-4 0a2 2 0 0 0 2 1.999Z"/><path d="M13.5 6.496c0 4.997-5 7.995-6 7.995s-6-2.998-6-7.995A5.999 5.999 0 0 1 7.5.5c3.313 0 6 2.685 6 5.996Z"/></g></svg>
@@ -863,7 +863,8 @@
 import { useToast } from 'vue-toastification'
 
 definePageMeta({
-    layout:'default'
+    layout:'default',
+    middleware: ["auth"]
 });
 
 const openLogin = ref(false)
@@ -1021,17 +1022,17 @@ const editSkills = ref({
 onMounted(async () => {
     cityOptions.value = await cityStore.getOptionsMaster();
 
-    const data = JSON.parse(localStorage.getItem('data_buat_cv'));
-    if(data) dataStore.value = data;
+    // const data = JSON.parse(localStorage.getItem('data_buat_cv'));
+    // if(data) dataStore.value = data;
 
     const fetchProfile = await userStore.getFullProfile();
     dataStore.value = userStore?.detail;
     
     if(dataStore.value.biodata.birth_place != ''){
-        dataNormal.value.biodata.birth_place = await cityStore.getCityById(dataStore.value.biodata.birth_place);
+        dataNormal.value.biodata.birth_place = await cityStore.getCityById(dataStore.value.biodata.birth_place ?? '');
     }
     if(dataStore.value.profile.city != ''){
-        dataNormal.value.profile.city = await cityStore.getCityById(dataStore.value.profile.city);
+        dataNormal.value.profile.city = await cityStore.getCityById(dataStore.value.profile.city ?? '');
     }
 
     const fetch = await contractStore.getOptions();
@@ -1066,15 +1067,15 @@ const isRequiredDataFilled = () => {
     const profileRequired = ['name', 'summary', 'city', 'address', 'role'];
     const biodataRequired = ['birth_place', 'birth_date', 'gender', 'marritage_status', 'religion', 'expected_salary', 'weight_body', 'height_body'];
     let nullRequireds = [];
-
+    console.log(dt);
     profileRequired.forEach((pr) => {
-        if (dt.profile[pr] === '' || dt.profile[pr] === null) {
+        if (dt.profile[pr] == '' || dt.profile[pr] == null  || dt.profile[pr] == undefined) {
             nullRequireds.push(pr);
         }
     });
 
     biodataRequired.forEach((pr) => {
-        if (dt.biodata[pr] === '' || dt.biodata[pr] === null) {
+        if (dt.biodata[pr] == '' || dt.biodata[pr] == null || dt.biodata[pr] == undefined) {
             nullRequireds.push(pr);
         }
     });

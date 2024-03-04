@@ -47,7 +47,7 @@ export const useCityStore = defineStore('city',{
             return options;
         },
 
-        async getCityById(id){
+        async getCityById(id = ''){
             var headers = new Headers();
             headers.append("token",localStorage.getItem('access_token') ?? 'rbkmzydqknor0t5q236n01j38');
 

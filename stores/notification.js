@@ -44,6 +44,19 @@ export const useNotificationStore = defineStore('notification',{
             return read;
         },
 
+        async updateNotification(id){
+            var headers = new Headers();
+            headers.append("token",localStorage.getItem('access_token'));
+
+            const read = await $fetch(`${this.API_URL}/user/notification-read?id=${id}`, {
+                method : 'GET',
+                headers: headers,
+            })
+            
+            await this.getNotifications();
+            return read;
+        },
+
         updateFilter(column, value){
             this.filter[column] = value;
         },

@@ -1,6 +1,6 @@
 <template>
     <div>
-        <AppHeader :isBlended="isBlended" :isFixed="isFixed" />
+        <AppHeader :isBlended="isBlended" :isFixed="isFixed" :isLogged="isLogged" />
         <slot />
     </div>
 </template>
@@ -11,6 +11,7 @@ export default {
         return {
             isBlended: true,
             isFixed: true,
+            isLogged: process.client ? localStorage.getItem('login') : false,
         };
     },
     mounted() {

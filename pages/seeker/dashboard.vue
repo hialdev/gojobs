@@ -121,7 +121,7 @@
                                 <span v-for="index in 10" :key="index" class="bg-slate-100 p-2 flex-auto rounded-2xl"></span>
                             </div>
                             <div class="absolute top-0 right-0 left-0 flex items-center gap-2">
-                                <span v-for="index in 10" :key="index" class="p-2 flex-auto rounded-2xl" :class="{ 'bg-orange-200': index <= 3 }"></span>
+                                <span v-for="index in 10" :key="index" class="p-2 flex-auto rounded-2xl" :class="{ 'bg-orange-200': index <= compleation.percentage/10 }"></span>
                             </div>
                             <div class="absolute top-0 right-0 left-0 mt-[-0.7em] flex items-center justify-between">
                                 <div class="flex items-center justify-center p-2 border-2 border-primary rounded-3xl bg-primary text-white">
@@ -134,8 +134,8 @@
                                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M14.285 2.142a3 3 0 0 0-4.57 0l-.042.05a1 1 0 0 1-.842.348l-.065-.005a3 3 0 0 0-3.23 3.231l.004.065a1 1 0 0 1-.348.842l-.05.042a3 3 0 0 0 0 4.57l.05.042a1 1 0 0 1 .348.842l-.005.065A3.002 3.002 0 0 0 8 15.429V22a1 1 0 0 0 1.555.832L12 21.202l2.445 1.63A1 1 0 0 0 16 22v-6.57a3.002 3.002 0 0 0 2.465-3.196l-.005-.065a1 1 0 0 1 .348-.842l.05-.042a3 3 0 0 0 0-4.57l-.05-.042a1 1 0 0 1-.348-.842l.005-.065a3 3 0 0 0-3.231-3.23l-.065.004a1 1 0 0 1-.842-.348l-.042-.05ZM10 20.132V16.15a3.002 3.002 0 0 0 4 0v3.98l-1.445-.963a1 1 0 0 0-1.11 0L10 20.131Zm4.707-11.425a1 1 0 0 0-1.414-1.414L11 9.586l-.293-.293a1 1 0 0 0-1.414 1.414l1 1a1 1 0 0 0 1.414 0l3-3Z" clip-rule="evenodd"/></svg>
                                 </div>
                             </div>
-                            <div class="my-6 font-medium">kelengkapan profilmu <span class="text-primary">35%</span></div>
-                            <p class="text-slate-500 mb-6 text-sm">Lengkapi profil Anda dengan detail yang tepat. Semakin lengkap profil Anda, semakin mudah bagi Anda untuk menemukan dan melamar posisi impian Anda</p>
+                            <div class="my-6 font-medium">kelengkapan profilmu <span class="text-primary">{{compleation.percentage}}%</span></div>
+                            <p class="text-slate-500 mb-6 text-sm">Lengkapi profil Anda pada   </p>
                             <PartialsButton :path="`/seeker/profile`" class="px-5 text-center min-w-[15em] mb-0 text-sm">Lengkapi Profile</PartialsButton>
                         </div>
                     </div>
@@ -149,18 +149,25 @@
 
 <script setup>
 definePageMeta({
-    layout: 'seeker'
+    layout: 'seeker',
+    middleware: ["auth"]
 })
 const isReady = ref(false);
 const job = useJobStore();
+const user = useUserStore();
 const jobs = ref(null);
 const profile = ref(null);
+const compleation = ref(null);
+
 onMounted(async () => {
-    isReady.value = true;
     profile.value = JSON.parse(localStorage.getItem('profile'));
     const fetch = await job.getJobSuggests();
     if(fetch?.success){
         jobs.value = fetch?.data;
     }
+    const percentage = await user.getCompleation();
+    compleation.value = percentage;
+    
+    isReady.value = true;
 })
 </script>
