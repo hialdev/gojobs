@@ -32,6 +32,14 @@ export const useCityStore = defineStore('city',{
             return options;
         },
 
+        getCityProvinces(province_id = ''){
+            const filtereds = this.other_citys.filter(city => city.province_id == province_id);
+
+            let options = filtereds?.map(ct => ({ key: ct.id, value : ct.city_name}));
+            console.log(options);
+            return options;
+        },
+
         async getOptionsMaster(){
             var headers = new Headers();
             headers.append("token",localStorage.getItem('access_token') ?? 'rbkmzydqknor0t5q236n01j38');
@@ -47,15 +55,41 @@ export const useCityStore = defineStore('city',{
             return options;
         },
 
-        async getCityById(id = ''){
+        async getProvinceOptions(){
             var headers = new Headers();
             headers.append("token",localStorage.getItem('access_token') ?? 'rbkmzydqknor0t5q236n01j38');
 
-            const city = await $fetch(`${this.API_URL}/master-city/read?id=${id}&city_name=&page=&page_size=`, {
+            const province = await $fetch(`${this.API_URL}/master-province/read?page_size=999`, {
                 method : 'GET',
                 headers: headers,
             })
 
+            console.log(province);
+            let options = province?.data.map(item => ({ key: item.id, value : item.province_name}));
+            return options;
+        },
+
+        async getProvinceById(id = ''){
+            var headers = new Headers();
+            headers.append("token",localStorage.getItem('access_token') ?? 'rbkmzydqknor0t5q236n01j38');
+
+            const province = await $fetch(`${this.API_URL}/master-province/read?id=${id}`, {
+                method : 'GET',
+                headers: headers,
+            })
+
+            return province?.data[0]?.province_name;
+        },
+
+        async getCityById(id = ''){
+            var headers = new Headers();
+            headers.append("token",localStorage.getItem('access_token') ?? 'rbkmzydqknor0t5q236n01j38');
+
+            const city = await $fetch(`${this.API_URL}/master-city/read?id=${id}`, {
+                method : 'GET',
+                headers: headers,
+            })
+            console.log(city);
             return city?.data[0]?.city_name;
         },
 

@@ -9,12 +9,12 @@
                         <h1 class="text-white text-5xl mt-5 lg:mt-0 lg:text-8xl font-semibold">Yuk Lamar di GoJobs! <br /><span class="font-normal text-4xl lg:text-5xl">#Teman Cari Kerja</span></h1>
                     </div>
                     <div class="col-span-12 lg:col-span-6">
-                        <PartialsSearch class="mb-4" :label="`Cari posisi / Jabatan`" />
+                        <PartialsSearch v-model="filter.title" :modelValue="filter.title" class="mb-4" :label="`Cari posisi / Jabatan`" />
                         <div class="grid grid-cols-2 gap-4 mb-4">
-                            <PartialsSelect :options="industries" :label="'Kategori'" />
-                            <PartialsSelect :options="cityOptions" :label="'Lokasi'" />
+                            <PartialsSelect @selected="(value) => {filter.location.push(value.key)}" :options="cityOptions" :label="'Lokasi'" />
+                            <PartialsSelect @selected="(value) => {filter.contract.push(value.key)}" :options="contractOptions" :label="'Tipe Kontrak'" />
                         </div>
-                        <PartialsButton>Cari Lowongan</PartialsButton>
+                        <PartialsButton @click="findJob">Cari Lowongan</PartialsButton>
                         <NuxtLink to="/lowongan" class="mt-12 text-normal lowercase text-white flex items-center gap-4">lihat semua lowongan <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 16 16"><path fill="currentColor" fill-rule="evenodd" d="M10.159 10.72a.75.75 0 1 0 1.06 1.06l3.25-3.25L15 8l-.53-.53l-3.25-3.25a.75.75 0 0 0-1.061 1.06l1.97 1.97H1.75a.75.75 0 1 0 0 1.5h10.379l-1.97 1.97Z" clip-rule="evenodd"/></svg></NuxtLink>
                     </div>
                 </div>
@@ -232,26 +232,7 @@ import { useContractStore, useCityStore } from '#imports';
 
 const isReady = ref(false);
 const modules = ref([Autoplay]);
-const countries = ref([
-  { key: 'tg', value: 'Tangerang' },
-  { key: 'de', value: 'Depok' },
-  { key: 'js', value: 'Jakarta Selatan' },
-  { key: 'jb', value: 'Jakarta Barat' },
-  { key: 'bg', value: 'Bogor' },
-  { key: 'sr', value: 'Serang' },
-  { key: 'cb', value: 'Cirebon' },
-]);
 
-const industries = [
-    { key: 'sls', value: 'Penjualan' },
-    { key: 'it', value: 'Teknologi Informasi' },
-    { key: 'ab', value: 'Administrasi Bisnis' },
-    { key: 'com', value: 'Teknologi Komunikasi' },
-    { key: 'mar', value: 'Pemasaran' },
-    { key: 'wrh', value: 'Warehouse' },
-    { key: 'rpr', value: 'Instalasi & Perbaikan' },
-    { key: 'srv', value: 'Pelayanan' },
-]
 const industriesList = [
     {
         title: "Penjualan",
@@ -527,14 +508,29 @@ const testimonials = [
 ]
 
 const city = useCityStore();
+const job = useJobStore();
 const contract = useContractStore();
 
 const cityOptions = ref([]);
 const contractOptions = ref([]);
 
+const filter = ref({
+    title: '',
+    location: [],
+    contract: [],
+})
+
 onMounted(async () => {
-  isReady.value = true;
-  contractOptions.value = await contract.getOptions();
-  cityOptions.value = await city.getOptions();
+    contractOptions.value = await contract.getOptions();
+    cityOptions.value = await city.getOptions();
+    isReady.value = true;
 });
+
+const findJob = () => {
+    job.updateFilter('search', filter.value.title);
+    job.updateFilter('location', filter.value.location);
+    job.updateFilter('contract', filter.value.contract);
+    localStorage.setItem('filtering', JSON.stringify(filter.value));
+    navigateTo('/lowongan');
+}
 </script>

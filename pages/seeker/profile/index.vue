@@ -36,10 +36,8 @@
                                     <span class="text-sm">{{userStore?.detail?.profile?.sosmed?.ig}}</span>
                                 </div>
                                 <div class="flex items-center gap-x-4">
-                                    <NuxtLink :to="`https://twitter.com/${userStore?.detail?.profile?.sosmed?.x}`" target="_blank" class="flex items-center p-2 rounded-xl text-orange-600 bg-orange-100">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
-                                            <path d="M18.7165 4.99967C18.0749 5.29134 17.3832 5.48301 16.6665 5.57467C17.3999 5.13301 17.9665 4.43301 18.2332 3.59134C17.5415 4.00801 16.7749 4.29967 15.9665 4.46634C15.3082 3.74967 14.3832 3.33301 13.3332 3.33301C11.3749 3.33301 9.77487 4.93301 9.77487 6.90801C9.77487 7.19134 9.8082 7.46634 9.86654 7.72468C6.89987 7.57468 4.2582 6.14967 2.49987 3.99134C2.19154 4.51634 2.01654 5.13301 2.01654 5.78301C2.01654 7.02467 2.64154 8.12467 3.6082 8.74967C3.01654 8.74967 2.46654 8.58301 1.9832 8.33301V8.35801C1.9832 10.0913 3.21654 11.5413 4.84987 11.8663C4.32548 12.0098 3.77495 12.0298 3.24154 11.9247C3.46788 12.6351 3.91115 13.2567 4.50905 13.7021C5.10695 14.1476 5.82941 14.3944 6.57487 14.408C5.31123 15.4084 3.74487 15.9491 2.1332 15.9413C1.84987 15.9413 1.56654 15.9247 1.2832 15.8913C2.86654 16.908 4.74987 17.4997 6.76654 17.4997C13.3332 17.4997 16.9415 12.0497 16.9415 7.32467C16.9415 7.16634 16.9415 7.01634 16.9332 6.85801C17.6332 6.35801 18.2332 5.72467 18.7165 4.99967Z" fill="#FFB400"/>
-                                        </svg>
+                                    <NuxtLink :to="`https://twitter.com/${userStore?.detail?.profile?.sosmed?.x}`" target="_blank" class="flex items-center p-2 rounded-xl text-gray-600 bg-gray-100">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path fill="currentColor" d="M18.205 2.25h3.308l-7.227 8.26l8.502 11.24H16.13l-5.214-6.817L4.95 21.75H1.64l7.73-8.835L1.215 2.25H8.04l4.713 6.231zm-1.161 17.52h1.833L7.045 4.126H5.078z"/></svg>
                                     </NuxtLink>
                                     <span class="text-sm">{{userStore?.detail?.profile?.sosmed?.x}}</span>
                                 </div>
@@ -59,6 +57,12 @@
                                     </NuxtLink> 
                                     <span class="text-sm">{{userStore?.detail?.profile?.sosmed?.in}}</span>
                                 </div>
+                                <div class="flex items-center gap-x-4">
+                                    <NuxtLink :to="`${userStore?.detail?.profile?.sosmed?.others}`" target="_blank" class="flex items-center p-2 rounded-xl text-slate-600 bg-slate-100">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 16 16"><path fill="currentColor" fill-rule="evenodd" d="M3.47 6.53a.75.75 0 0 1 1.06 1.061l-.727.727a2.743 2.743 0 0 0 3.879 3.879l.727-.727a.75.75 0 0 1 1.06 1.06l-.726.727a4.243 4.243 0 0 1-6-6zm8 1.879a.75.75 0 0 0 1.06 1.06l.727-.726a4.243 4.243 0 0 0-6-6l-.727.727a.75.75 0 0 0 1.061 1.06l.727-.727a2.743 2.743 0 0 1 3.879 3.879zm-.94-1.879a.75.75 0 1 0-1.06-1.06l-4 4a.75.75 0 1 0 1.06 1.06z" clip-rule="evenodd"/></svg>
+                                    </NuxtLink> 
+                                    <span class="text-sm">{{userStore?.detail?.profile?.sosmed?.others}}</span>
+                                </div>
                             </div>
                         </div>
                         <div v-if="show.editImageSosmed" class="flex flex-col items-center md:gap-1 border-b pb-5 relative">
@@ -75,31 +79,35 @@
                                     <div class="flex items-center justify-center p-2 rounded-xl text-red-600 bg-red-100">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 16 16"><path fill="currentColor" d="M8 0C5.829 0 5.556.01 4.703.048C3.85.088 3.269.222 2.76.42a3.917 3.917 0 0 0-1.417.923A3.927 3.927 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7C.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297c.04.852.174 1.433.372 1.942c.205.526.478.972.923 1.417c.444.445.89.719 1.416.923c.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.916 3.916 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417c.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.926 3.926 0 0 0-.923-1.417A3.911 3.911 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0h.003zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046c.78.035 1.204.166 1.486.275c.373.145.64.319.92.599c.28.28.453.546.598.92c.11.281.24.705.275 1.485c.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.47 2.47 0 0 1-.599.919c-.28.28-.546.453-.92.598c-.28.11-.704.24-1.485.276c-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.478 2.478 0 0 1-.92-.598a2.48 2.48 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485c-.038-.843-.046-1.096-.046-3.233c0-2.136.008-2.388.046-3.231c.036-.78.166-1.204.276-1.486c.145-.373.319-.64.599-.92c.28-.28.546-.453.92-.598c.282-.11.705-.24 1.485-.276c.738-.034 1.024-.044 2.515-.045v.002zm4.988 1.328a.96.96 0 1 0 0 1.92a.96.96 0 0 0 0-1.92zm-4.27 1.122a4.109 4.109 0 1 0 0 8.217a4.109 4.109 0 0 0 0-8.217zm0 1.441a2.667 2.667 0 1 1 0 5.334a2.667 2.667 0 0 1 0-5.334"/></svg>
                                     </div>
-                                    <input v-model="dataStore.profile.sosmed.ig" type="text" class="p-2 text-sm px-3 border-b focus:outline-none block w-full" placeholder="username" />
+                                    <input v-model="dataStore.profile.sosmed.ig" type="text" class="p-2 text-sm px-3 border-b focus:outline-none block w-full" placeholder="username instagram" />
                                 </div>
                                 <div class="flex items-center gap-4">
-                                    <div class="flex items-center justify-center p-2 rounded-xl text-orange-600 bg-orange-100">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
-                                            <path d="M18.7165 4.99967C18.0749 5.29134 17.3832 5.48301 16.6665 5.57467C17.3999 5.13301 17.9665 4.43301 18.2332 3.59134C17.5415 4.00801 16.7749 4.29967 15.9665 4.46634C15.3082 3.74967 14.3832 3.33301 13.3332 3.33301C11.3749 3.33301 9.77487 4.93301 9.77487 6.90801C9.77487 7.19134 9.8082 7.46634 9.86654 7.72468C6.89987 7.57468 4.2582 6.14967 2.49987 3.99134C2.19154 4.51634 2.01654 5.13301 2.01654 5.78301C2.01654 7.02467 2.64154 8.12467 3.6082 8.74967C3.01654 8.74967 2.46654 8.58301 1.9832 8.33301V8.35801C1.9832 10.0913 3.21654 11.5413 4.84987 11.8663C4.32548 12.0098 3.77495 12.0298 3.24154 11.9247C3.46788 12.6351 3.91115 13.2567 4.50905 13.7021C5.10695 14.1476 5.82941 14.3944 6.57487 14.408C5.31123 15.4084 3.74487 15.9491 2.1332 15.9413C1.84987 15.9413 1.56654 15.9247 1.2832 15.8913C2.86654 16.908 4.74987 17.4997 6.76654 17.4997C13.3332 17.4997 16.9415 12.0497 16.9415 7.32467C16.9415 7.16634 16.9415 7.01634 16.9332 6.85801C17.6332 6.35801 18.2332 5.72467 18.7165 4.99967Z" fill="#FFB400"/>
-                                        </svg>
+                                    <div class="flex items-center justify-center p-2 rounded-xl text-gray-600 bg-gray-100">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path fill="currentColor" d="M18.205 2.25h3.308l-7.227 8.26l8.502 11.24H16.13l-5.214-6.817L4.95 21.75H1.64l7.73-8.835L1.215 2.25H8.04l4.713 6.231zm-1.161 17.52h1.833L7.045 4.126H5.078z"/></svg>
                                     </div>
-                                    <input v-model="dataStore.profile.sosmed.x" type="text" class="p-2 text-sm px-3 border-b focus:outline-none block w-full" placeholder="username" />
+                                    <input v-model="dataStore.profile.sosmed.x" type="text" class="p-2 text-sm px-3 border-b focus:outline-none block w-full" placeholder="username twitter" />
                                 </div>
                                 <div class="flex items-center gap-4">
-                                    <div class="flex items-center justify-center p-2 rounded-xl text-blue-600 bg-blue-100">
+                                    <div class="flex items-center justify-center p-2 rounded-xl text-sky-600 bg-sky-100">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
-                                            <path d="M11.6673 11.2503H13.7507L14.584 7.91699H11.6673V6.25033C11.6673 5.39199 11.6673 4.58366 13.334 4.58366H14.584V1.78366C14.3123 1.74783 13.2865 1.66699 12.2032 1.66699C9.94065 1.66699 8.33398 3.04783 8.33398 5.58366V7.91699H5.83398V11.2503H8.33398V18.3337H11.6673V11.2503Z" fill="#277DA1"/>
+                                            <path d="M11.6673 11.2503H13.7507L14.584 7.91699H11.6673V6.25033C11.6673 5.39199 11.6673 4.58366 13.334 4.58366H14.584V1.78366C14.3123 1.74783 13.2865 1.66699 12.2032 1.66699C9.94065 1.66699 8.33398 3.04783 8.33398 5.58366V7.91699H5.83398V11.2503H8.33398V18.3337H11.6673V11.2503Z" fill="currentColor"/>
                                         </svg>
                                     </div>
-                                    <input v-model="dataStore.profile.sosmed.fb" type="text" class="p-2 text-sm px-3 border-b focus:outline-none block w-full" placeholder="username" />
+                                    <input v-model="dataStore.profile.sosmed.fb" type="text" class="p-2 text-sm px-3 border-b focus:outline-none block w-full" placeholder="username facebook" />
                                 </div>
                                 <div class="flex items-center gap-4">
                                     <div class="flex items-center justify-center p-2 rounded-xl text-green-600 bg-green-100">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
-                                            <path d="M5.78255 4.16652C5.78233 4.60855 5.60652 5.03239 5.29381 5.34479C4.98109 5.6572 4.55708 5.83258 4.11505 5.83236C3.67302 5.83214 3.24919 5.65633 2.93678 5.34361C2.62438 5.0309 2.449 4.60688 2.44922 4.16486C2.44944 3.72283 2.62525 3.29899 2.93796 2.98659C3.25068 2.67419 3.67469 2.4988 4.11672 2.49902C4.55875 2.49924 4.98258 2.67505 5.29499 2.98777C5.60739 3.30049 5.78277 3.7245 5.78255 4.16652ZM5.83255 7.06652H2.49922V17.4999H5.83255V7.06652ZM11.0992 7.06652H7.78255V17.4999H11.0659V12.0249C11.0659 8.97486 15.0409 8.69152 15.0409 12.0249V17.4999H18.3326V10.8915C18.3326 5.74986 12.4492 5.94152 11.0659 8.46652L11.0992 7.06652Z" fill="#90BE6D"/>
+                                            <path d="M5.78255 4.16652C5.78233 4.60855 5.60652 5.03239 5.29381 5.34479C4.98109 5.6572 4.55708 5.83258 4.11505 5.83236C3.67302 5.83214 3.24919 5.65633 2.93678 5.34361C2.62438 5.0309 2.449 4.60688 2.44922 4.16486C2.44944 3.72283 2.62525 3.29899 2.93796 2.98659C3.25068 2.67419 3.67469 2.4988 4.11672 2.49902C4.55875 2.49924 4.98258 2.67505 5.29499 2.98777C5.60739 3.30049 5.78277 3.7245 5.78255 4.16652ZM5.83255 7.06652H2.49922V17.4999H5.83255V7.06652ZM11.0992 7.06652H7.78255V17.4999H11.0659V12.0249C11.0659 8.97486 15.0409 8.69152 15.0409 12.0249V17.4999H18.3326V10.8915C18.3326 5.74986 12.4492 5.94152 11.0659 8.46652L11.0992 7.06652Z" fill="currentColor"/>
                                         </svg>
                                     </div>
-                                    <input v-model="dataStore.profile.sosmed.in" type="text" class="p-2 text-sm px-3 border-b focus:outline-none block w-full" placeholder="username" />
+                                    <input v-model="dataStore.profile.sosmed.in" type="text" class="p-2 text-sm px-3 border-b focus:outline-none block w-full" placeholder="username linkedin" />
+                                </div>
+                                <div class="flex items-center gap-4">
+                                    <div class="flex items-center justify-center p-2 rounded-xl text-slate-600 bg-slate-100">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 16 16"><path fill="currentColor" fill-rule="evenodd" d="M3.47 6.53a.75.75 0 0 1 1.06 1.061l-.727.727a2.743 2.743 0 0 0 3.879 3.879l.727-.727a.75.75 0 0 1 1.06 1.06l-.726.727a4.243 4.243 0 0 1-6-6zm8 1.879a.75.75 0 0 0 1.06 1.06l.727-.726a4.243 4.243 0 0 0-6-6l-.727.727a.75.75 0 0 0 1.061 1.06l.727-.727a2.743 2.743 0 0 1 3.879 3.879zm-.94-1.879a.75.75 0 1 0-1.06-1.06l-4 4a.75.75 0 1 0 1.06 1.06z" clip-rule="evenodd"/></svg>
+                                    </div>
+                                    <input v-model="dataStore.profile.sosmed.others" type="text" class="p-2 text-sm px-3 border-b focus:outline-none block w-full" placeholder="Link / Tautan pribadi lainnya (https://)" />
                                 </div>
                             </div>
                         </div>
@@ -189,7 +197,7 @@
                                     </defs>
                                 </svg>
                                 <div class="w-full">
-                                    <PartialsSelect :options="cityOptions" :customClass="`p-2 px-3 border-b focus:outline-none block w-full rounded-none`" @selected="(value) => {dataStore.biodata.birth_place = value?.key}" :label="`Tempat Lahir`"/>
+                                    <PartialsSelect :selectedData="dataStore.biodata.birth_place" :options="options.citys" :customClass="`p-2 px-3 border-b focus:outline-none block w-full rounded-none`" @selected="(value) => {dataStore.biodata.birth_place = value?.key}" :label="`Tempat Lahir`"/>
                                     <input type="date" class="p-2 px-3 border-b focus:outline-none block w-full" v-model="dataStore.biodata.birth_date" placeholder="Tgl Lahir" required/>
                                 </div>
                             </li>
@@ -234,7 +242,7 @@
                                 </svg>
                                 <select v-model="dataStore.biodata.religion" name="" id="" class="border-b p-2 px-3 block w-full focus:outline-none" required>
                                     <option selected>-- Agama --</option>
-                                    <option v-for="rlg in religion" :value="rlg?.religion.toLowerCase()">{{rlg.religion}}</option>
+                                    <option v-for="rlg in options.religions" :value="rlg?.key">{{rlg.value}}</option>
                                 </select>
                             </li>
                             <li class="flex items-center gap-4 text-sm">
@@ -288,21 +296,28 @@
                                 <span class="">{{userStore?.detail?.profile?.email}}</span>
                             </li>
                             <li class="flex items-center gap-4 text-sm">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="21" viewBox="0 0 20 21" fill="none">
-                                    <g clip-path="url(#clip0_441_1570)">
-                                        <path d="M5.41602 8.83301H3.74935V14.6663H5.41602V8.83301ZM10.416 8.83301H8.74935V14.6663H10.416V8.83301ZM17.4993 16.333H1.66602V17.9997H17.4993V16.333ZM15.416 8.83301H13.7493V14.6663H15.416V8.83301ZM9.58268 3.21634L13.9243 5.49967H5.24102L9.58268 3.21634ZM9.58268 1.33301L1.66602 5.49967V7.16634H17.4993V5.49967L9.58268 1.33301Z" fill="#797979"/>
-                                    </g>
-                                    <defs>
-                                        <clipPath id="clip0_441_1570">
-                                        <rect width="20" height="20" fill="white" transform="translate(0 0.5)"/>
-                                        </clipPath>
-                                    </defs>
-                                </svg>
+                                <div>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 22V12c0-1.886 0-2.828.586-3.414C4.172 8 5.114 8 7 8c1.886 0 2.828 0 3.414.586C11 9.172 11 10.114 11 12"/><path d="M17 22v-6c0-1.886 0-2.828-.586-3.414C15.828 12 14.886 12 13 12h-2c-1.886 0-2.828 0-3.414.586C7 13.172 7 14.114 7 16v6"/><path d="M21 22V7.772c0-1.34 0-2.011-.356-2.525c-.356-.514-.984-.75-2.24-1.22c-2.455-.921-3.682-1.381-4.543-.785C13 3.84 13 5.15 13 7.772V12"/><path stroke-linecap="round" d="M4 8V6.5c0-.943 0-1.414.293-1.707C4.586 4.5 5.057 4.5 6 4.5h2c.943 0 1.414 0 1.707.293C10 5.086 10 5.557 10 6.5V8M7 4V2m15 20H2m8-7h4m-4 3h4"/></g></svg>
+                                </div>
+                                <span class="">{{userStore?.detail?.profile?.province != null ? dataNormal?.profile?.province : '-'}}</span>
+                            </li>
+                            <li class="flex items-center gap-4 text-sm">
+                                <div>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 48 48"><g fill="none"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="4" d="M4 42h40"/><rect width="8" height="16" x="8" y="26" stroke="currentColor" stroke-linejoin="round" stroke-width="4" rx="2"/><path stroke="currentColor" stroke-linecap="square" stroke-linejoin="round" stroke-width="4" d="M12 34h1"/><rect width="24" height="38" x="16" y="4" stroke="currentColor" stroke-linejoin="round" stroke-width="4" rx="2"/><path fill="currentColor" d="M22 10h4v4h-4zm8 0h4v4h-4zm-8 7h4v4h-4zm8 0h4v4h-4zm0 7h4v4h-4zm0 7h4v4h-4z"/></g></svg>
+                                </div>
                                 <span class="">{{userStore?.detail?.profile?.city != null ? dataNormal?.profile?.city : '-'}}</span>
                             </li>
                             <li class="flex items-start gap-4 text-sm">
-                                <svg class="text-slate-600" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 15 15"><g fill="none" fill-rule="evenodd" stroke="currentColor" stroke-linecap="square" clip-rule="evenodd"><path d="M7.5 8.495a2 2 0 0 0 2-1.999a2 2 0 0 0-4 0a2 2 0 0 0 2 1.999Z"/><path d="M13.5 6.496c0 4.997-5 7.995-6 7.995s-6-2.998-6-7.995A5.999 5.999 0 0 1 7.5.5c3.313 0 6 2.685 6 5.996Z"/></g></svg>
+                                <div>
+                                    <svg class="text-slate-600" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 15 15"><g fill="none" fill-rule="evenodd" stroke="currentColor" stroke-linecap="square" clip-rule="evenodd"><path d="M7.5 8.495a2 2 0 0 0 2-1.999a2 2 0 0 0-4 0a2 2 0 0 0 2 1.999Z"/><path d="M13.5 6.496c0 4.997-5 7.995-6 7.995s-6-2.998-6-7.995A5.999 5.999 0 0 1 7.5.5c3.313 0 6 2.685 6 5.996Z"/></g></svg>
+                                </div>
                                 <span class="">{{userStore?.detail?.profile?.address}}</span>
+                            </li>
+                            <li class="flex items-center gap-4 text-sm">
+                                <div>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 16 16"><path fill="currentColor" d="M15.5 14.69h-1.25V7.78a.62.62 0 0 0-.25-.47L8.4 2.7a.65.65 0 0 0-.81 0L2 7.31a.62.62 0 0 0-.22.47v6.91H.5V7.78a1.87 1.87 0 0 1 .68-1.44l5.62-4.6a1.88 1.88 0 0 1 2.39 0l5.63 4.6a1.87 1.87 0 0 1 .68 1.44z"/><path fill="currentColor" d="M11.05 12.11H9.8A1.72 1.72 0 0 0 8 10.49a1.72 1.72 0 0 0-1.8 1.62H5a3 3 0 0 1 3-2.87a3 3 0 0 1 3.05 2.87m-6.1 0H6.2v2.58H4.95zm4.85 0h1.25v2.58H9.8z"/></svg>
+                                </div>
+                                <span class="">{{userStore?.detail?.profile?.postal_code}}</span>
                             </li>
                         </ul>
                         <ul v-if="show.informasi" class="flex flex-col py-5">
@@ -332,21 +347,28 @@
                                 <input :value="dataStore.profile.email" type="email" class="p-2 px-3 border-b focus:outline-none block w-full" placeholder="Email" disabled/>
                             </li>
                             <li class="flex items-center gap-4 text-sm">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="21" viewBox="0 0 20 21" fill="none">
-                                    <g clip-path="url(#clip0_441_1570)">
-                                        <path d="M5.41602 8.83301H3.74935V14.6663H5.41602V8.83301ZM10.416 8.83301H8.74935V14.6663H10.416V8.83301ZM17.4993 16.333H1.66602V17.9997H17.4993V16.333ZM15.416 8.83301H13.7493V14.6663H15.416V8.83301ZM9.58268 3.21634L13.9243 5.49967H5.24102L9.58268 3.21634ZM9.58268 1.33301L1.66602 5.49967V7.16634H17.4993V5.49967L9.58268 1.33301Z" fill="#797979"/>
-                                    </g>
-                                    <defs>
-                                        <clipPath id="clip0_441_1570">
-                                        <rect width="20" height="20" fill="white" transform="translate(0 0.5)"/>
-                                        </clipPath>
-                                    </defs>
-                                </svg>
-                                <PartialsSelect :options="cityOptions" class="w-full" :customClass="`p-2 px-3 border-b focus:outline-none block w-full rounded-none`" @selected="(value) => {dataStore.profile.city = value?.key}" :label="`Kota Tinggal`"/>
+                                <div class="text-slate-600">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 22V12c0-1.886 0-2.828.586-3.414C4.172 8 5.114 8 7 8c1.886 0 2.828 0 3.414.586C11 9.172 11 10.114 11 12"/><path d="M17 22v-6c0-1.886 0-2.828-.586-3.414C15.828 12 14.886 12 13 12h-2c-1.886 0-2.828 0-3.414.586C7 13.172 7 14.114 7 16v6"/><path d="M21 22V7.772c0-1.34 0-2.011-.356-2.525c-.356-.514-.984-.75-2.24-1.22c-2.455-.921-3.682-1.381-4.543-.785C13 3.84 13 5.15 13 7.772V12"/><path stroke-linecap="round" d="M4 8V6.5c0-.943 0-1.414.293-1.707C4.586 4.5 5.057 4.5 6 4.5h2c.943 0 1.414 0 1.707.293C10 5.086 10 5.557 10 6.5V8M7 4V2m15 20H2m8-7h4m-4 3h4"/></g></svg>
+                                </div>
+                                <PartialsSelect @selected="handleSelectedProvince" :options="options.provinces" class="flex-1 relative z-[12]" :customClass="`rounded-none p-2 px-3 border-b focus:outline-none block w-full`" :label="`Provinsi`" />
+                            </li>
+                            <li class="flex items-center gap-4 text-sm">
+                                <div class="text-slate-600">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 48 48"><g fill="none"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="4" d="M4 42h40"/><rect width="8" height="16" x="8" y="26" stroke="currentColor" stroke-linejoin="round" stroke-width="4" rx="2"/><path stroke="currentColor" stroke-linecap="square" stroke-linejoin="round" stroke-width="4" d="M12 34h1"/><rect width="24" height="38" x="16" y="4" stroke="currentColor" stroke-linejoin="round" stroke-width="4" rx="2"/><path fill="currentColor" d="M22 10h4v4h-4zm8 0h4v4h-4zm-8 7h4v4h-4zm8 0h4v4h-4zm0 7h4v4h-4zm0 7h4v4h-4z"/></g></svg>
+                                </div>
+                                <PartialsSelect @selected="(value) => {dataStore.profile.city = value.key}" :options="options.filteredCitys" class="flex-1 relative z-10" :customClass="`rounded-none p-2 px-3 border-b focus:outline-none block w-full`" :label="`Kota`" />
                             </li>
                             <li class="flex items-start gap-4 text-sm">
-                                <svg class="text-slate-600" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 15 15"><g fill="none" fill-rule="evenodd" stroke="currentColor" stroke-linecap="square" clip-rule="evenodd"><path d="M7.5 8.495a2 2 0 0 0 2-1.999a2 2 0 0 0-4 0a2 2 0 0 0 2 1.999Z"/><path d="M13.5 6.496c0 4.997-5 7.995-6 7.995s-6-2.998-6-7.995A5.999 5.999 0 0 1 7.5.5c3.313 0 6 2.685 6 5.996Z"/></g></svg>
-                                <textarea v-model="dataStore.profile.address" class="p-2 px-3 border-b focus:outline-none block w-full" placeholder="Alamat lengkap tinggal" ></textarea>
+                                <div class="text-slate-600">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 15 15"><g fill="none" fill-rule="evenodd" stroke="currentColor" stroke-linecap="square" clip-rule="evenodd"><path d="M7.5 8.495a2 2 0 0 0 2-1.999a2 2 0 0 0-4 0a2 2 0 0 0 2 1.999Z"/><path d="M13.5 6.496c0 4.997-5 7.995-6 7.995s-6-2.998-6-7.995A5.999 5.999 0 0 1 7.5.5c3.313 0 6 2.685 6 5.996Z"/></g></svg>
+                                </div>
+                                <textarea v-model="dataStore.profile.address" class="p-2 px-3 border-b focus:outline-none block w-full" placeholder="Alamat lengkap domisili" ></textarea>
+                            </li>
+                            <li class="flex items-start gap-4 text-sm">
+                                <div class="text-slate-600">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 16 16"><path fill="currentColor" d="M15.5 14.69h-1.25V7.78a.62.62 0 0 0-.25-.47L8.4 2.7a.65.65 0 0 0-.81 0L2 7.31a.62.62 0 0 0-.22.47v6.91H.5V7.78a1.87 1.87 0 0 1 .68-1.44l5.62-4.6a1.88 1.88 0 0 1 2.39 0l5.63 4.6a1.87 1.87 0 0 1 .68 1.44z"/><path fill="currentColor" d="M11.05 12.11H9.8A1.72 1.72 0 0 0 8 10.49a1.72 1.72 0 0 0-1.8 1.62H5a3 3 0 0 1 3-2.87a3 3 0 0 1 3.05 2.87m-6.1 0H6.2v2.58H4.95zm4.85 0h1.25v2.58H9.8z"/></svg>
+                                </div>
+                                <input type="number" v-model="dataStore.profile.postal_code" class="p-2 px-3 m-0 border-b focus:outline-none block w-full" placeholder="Kode Pos" />
                             </li>
                         </ul>
                     </div>
@@ -422,18 +444,15 @@
                                     <PartialsInput v-model="singleData.experience.company_address" :modelValue="singleData.experience.company_address" :inputClass="`border border-slate-200`" :placeholder="`Lokasi kerja`" :label="`Lokasi kerja`" />
                                 </div>
                                 <div class="col-span-12 md:col-span-6">
-                                    <div class="text-sm mb-2 block text-slate-500">Jenis Kontrak</div>
-                                    <select v-model="singleData.experience.type_contract" name="" id="" class="border border-slate-200 rounded-lg p-2 px-3 block w-full focus:border-emerald-600 focus:ring-emerald-600 text-sm">
-                                        <option selected >-- Jenis Kontrak --</option>
-                                        <option v-for="tc in contractOptions" :value="tc?.value">{{tc?.value}}</option>
-                                    </select>
+                                    <div class="text-xs mb-2 block">Tipe Kontrak</div>
+                                    <PartialsSelect class="text-sm" :customClass="`text-sm border rounded-3xl`" :selectedData="singleData.experience.type_contract" @selected="(value) => {singleData.experience.type_contract = value.key}" :options="options.contracts" :label="`Tipe Kontrak`"></PartialsSelect>
                                 </div>
                                 <div class="col-span-12 md:col-span-6">
                                     <PartialsInput v-model="singleData.experience.start_date" :modelValue="singleData.experience.start_date" :inputClass="`border border-slate-200`" :label="`Tgl Mulai Kerja`" :typeInput="`date`" />
                                 </div>
                                 <div class="col-span-12 md:col-span-6">
                                     <PartialsInput v-model="singleData.experience.end_date" :modelValue="singleData.experience.end_date" :inputClass="`border border-slate-200`" :label="`Tgl Berakhir`" :typeInput="`date`" />
-                                    <div class="mb-5"><input v-model="singleData.experience.status" type="checkbox" class="form-checkbox rounded text-emerald-500 me-4 focus:ring-emerald-600" /><span class="text-sm">Saya masih kerja disini</span></div>
+                                    <div class="mb-5"><input type="checkbox" v-model="singleData.experience.status" class="form-checkbox rounded text-emerald-500 me-4 focus:ring-emerald-600" /><span class="text-sm">Saya masih kerja disini</span></div>
                                 </div>
                                 <div class="col-span-12">
                                     <label for="desc_experience" class="text-sm mb-3 block text-slate-500">Deksripsi Pengalaman</label>
@@ -677,23 +696,13 @@
                         </div>
                         <div class="pt-5">
                             <div v-if="show.skill" class="grid grid-cols-12 gap-x-5 py-3 mb-5">
-                                <div class="col-span-6">
+                                <div class="col-span-12">
                                     <div class="z-10">
-                                        <h6 class="mb-3 text-sm">Soft Skills</h6>
-                                        <PartialsMultiselect @selected="selectSoftSkill" :options="skillStore.soft_skills" :selected-options="editSkills.soft_skills" class="z-10 border text-sm border-slate-200 rounded-3xl mb-3" :placeholder="`Softskill`" :label="`Softskills`" />
+                                        <h6 class="mb-3 text-sm">Pilih Skills</h6>
+                                        <PartialsMultiselect @selected="selectSkill" :svgData="``" :options="options.skills" class="z-10 border text-sm border-slate-200 rounded-3xl mb-3" :placeholder="`Softskill`" :label="`Softskills`" />
                                         <div class="flex items-end gap-2">
                                             <PartialsInput v-model="singleData.skill.softskill" :modelValue="singleData.skill.softskill" class="flex-1" :inputClass="`border text-sm border-slate-200`" :placeholder="`Tambah Softskill`" :label="`Tambah Softskill`" />
                                             <PartialsButton @click="handleAddSkill('soft')" class="mb-3">+</PartialsButton>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-span-6">
-                                    <div class="z-10">
-                                        <h6 class="mb-3 text-sm">Hard Skills</h6>
-                                        <PartialsMultiselect @selected="selectHardSkill" :options="skillStore.hard_skills" :selected-options="editSkills.hard_skills" class="z-10 border text-sm border-slate-200 rounded-3xl mb-3" :placeholder="`pilih hard skills`" :label="`hardskills`" />
-                                        <div class="flex items-end gap-2">
-                                            <PartialsInput v-model="singleData.skill.hardskill" :modelValue="singleData.skill.hardskill" class="flex-1" :inputClass="`border text-sm border-slate-200`" :placeholder="`Tambah hard skill`" :label="`Tambah hard skill`" />
-                                            <PartialsButton @click="handleAddSkill('hard')" class="mb-3">+</PartialsButton>
                                         </div>
                                     </div>
                                 </div>
@@ -878,13 +887,22 @@ const contractStore = useContractStore();
 const skillStore = useSkillStore();
 const experienceStore = useExperienceStore();
 const educationStore = useEducationStore();
+const religionStore = useReligionStore();
 const organizationStore = useOrganizationStore();
 const languageStore = useLanguageStore();
 const medsosStore = useMedsosStore();
 
-const contractOptions = ref(null);
-const cityOptions = ref([]);
-const religionOptions = ref([]);
+const options = ref({
+    contracts : [],
+    citys : [],
+    filteredCitys : [],
+    provinces : [],
+    religions : [],
+    skills : [],
+})
+const selected = ref({
+    province_id : null,
+})
 
 const show = ref({
     editImageSosmed : false,
@@ -906,16 +924,18 @@ const dataStore = ref({
         summary : '',
         email : '',
         phone : '',
-        province : '',
         city : '',
+        province : '',
+        postal_code : '',
         address :  '',
         role: '',
         sosmed : {
-            id : null,
+            id : '',
             ig : '',
             fb: '',
             x: '',
             in: '',
+            others: '',
         },
     },
     biodata : {
@@ -931,8 +951,7 @@ const dataStore = ref({
     experiences : [],
     educations : [],
     organizations : [],
-    soft_skills : [],
-    hard_skills : [],
+    skills : [],
     languages : [],
 })
 
@@ -973,8 +992,7 @@ const singleData = ref({
         end_date : '',
     },
     skill : {
-        softskill : '',
-        hardskill : '',
+        skill_name : '',
     },
     language : {
         language : '',
@@ -983,44 +1001,12 @@ const singleData = ref({
         speaking : 0,
     }
 })
-const religion = [
-    {
-        "id": 1,
-        "religion": "Islam",
-        "status": "Active"
-    },
-    {
-        "id": 2,
-        "religion": "Catholic",
-        "status": "Active"
-    },
-    {
-        "id": 3,
-        "religion": "Protestant",
-        "status": "Active"
-    },
-    {
-        "id": 4,
-        "religion": "Hindu",
-        "status": "Active"
-    },
-    {
-        "id": 5,
-        "religion": "Buddha",
-        "status": "Active"
-    },
-    {
-        "id": 6,
-        "religion": "Other",
-        "status": "Active"
-    }
-]
-const editSkills = ref({
-    soft_skills : [],
-    hard_skills : [],
-})
+
 onMounted(async () => {
-    cityOptions.value = await cityStore.getOptionsMaster();
+    options.value.citys = await cityStore.getOptionsMaster();
+    options.value.provinces = await cityStore.getProvinceOptions();
+    options.value.religions = await religionStore.getOptions();
+    options.value.skills = await skillStore.getOptions();
 
     // const data = JSON.parse(localStorage.getItem('data_buat_cv'));
     // if(data) dataStore.value = data;
@@ -1028,15 +1014,19 @@ onMounted(async () => {
     const fetchProfile = await userStore.getFullProfile();
     dataStore.value = userStore?.detail;
     
+    console.log(dataStore.value);
     if(dataStore.value.biodata.birth_place != ''){
-        dataNormal.value.biodata.birth_place = await cityStore.getCityById(dataStore.value.biodata.birth_place ?? '');
+        dataNormal.value.biodata.birth_place = await cityStore.getCityById(dataStore.value.biodata.birth_place);
+    }
+    if(dataStore.value.profile.province != ''){
+        dataNormal.value.profile.province = await cityStore.getProvinceById(dataStore.value.profile.province);
     }
     if(dataStore.value.profile.city != ''){
-        dataNormal.value.profile.city = await cityStore.getCityById(dataStore.value.profile.city ?? '');
+        dataNormal.value.profile.city = await cityStore.getCityById(dataStore.value.profile.city);
     }
 
     const fetch = await contractStore.getOptions();
-    contractOptions.value = fetch;
+    options.value.contracts = fetch;
 
     const fetchExperience = await experienceStore.getExperiences();
     dataStore.value.experiences = fetchExperience?.data;
@@ -1061,6 +1051,14 @@ onMounted(async () => {
 
     isReady.value = true;
 })
+
+
+// Filtering
+const handleSelectedProvince = (value) => {
+    options.value.filteredCitys = cityStore.getCityProvinces(value.key);
+    dataStore.value.profile.province = value.key;
+}
+// ------
 
 const isRequiredDataFilled = () => {
     const dt = dataStore.value;
@@ -1100,32 +1098,23 @@ const parseDateString = (dateString) => {
     return `${year}-${months[month]}-${day}`;
 }
 
-const selectSoftSkill = (value) => {
-    dataStore.value.soft_skills = value.map((soft) => ({ id: soft.key, name: soft.value }));
+// Skill Handle
+const selectSkill = (value) => {
+    dataStore.value.skills = value.map((soft) => ({ id: soft.key, name: soft.value }));
 }
 
-const selectHardSkill = (value) => {
-    dataStore.value.hard_skills = value.map((hard) => ({ id: hard.key, name: hard.value }));
-}
-
-const handleAddSkill = (type) => {
-    if(type == 'soft'){
-        skillStore.addSkill('soft', singleData.value.skill.softskill);
-        toast.success('Berhasil menambah softskill : '+singleData.value.skill.softskill);
-        singleData.value.skill.softskill = '';
-    }else if(type == 'hard'){
-        skillStore.addSkill('hard', singleData.value.skill.hardskill);
-        toast.success('Berhasil menambah hardskill : '+singleData.value.skill.hardskill);
-        singleData.value.skill.hardskill = '';
-    }
+const handleAddSkill = () => {
+        skillStore.addSkill(singleData.value.skill.skill_name);
+        toast.success('Berhasil menambah softskill : '+singleData.value.skill.skill_name);
 }
 
 const editSkill = () => {
-    editSkills.value.soft_skills = dataStore.value.soft_skills.map((item) => ({key: item.id, value: item.name}))
-    editSkills.value.hard_skills = dataStore.value.hard_skills.map((item) => ({key: item.id, value: item.name}))
+    editSkills.value.skills = dataStore.value.skills.map((item) => ({key: item.id, value: item.name}))
     show.value.skill = true;
 }
+// ------
 
+// Action Data CRUD
 const cancelData = (section) => {
     resetValue();
     in_edit.value = null;
@@ -1152,8 +1141,32 @@ const saveData = async (section = '') => {
         toast.error(message);
         return;
     }
-    
-    const updateProfile = await userStore.updateProfile(dataStore.value.profile.phone, dataStore.value.profile.name, dataStore.value.profile.role, dataStore.value.profile.summary, dataStore.value.biodata.gender, dataStore.value.biodata.birth_date, dataStore.value.biodata.birth_place, dataStore.value.biodata.religion, dataStore.value.biodata.marritage_status, dataStore.value.biodata.height_body, dataStore.value.biodata.weight_body, dataStore.value.profile.city, dataStore.value.profile.address, dataStore.value.profile.photo, dataStore.value.profile.sosmed.ig, dataStore.value.profile.sosmed.fb,dataStore.value.profile.sosmed.x, dataStore.value.profile.sosmed.in);
+
+    const ds = dataStore.value;
+    const updateProfile = await userStore.updateProfile(
+        ds?.profile?.phone,
+        ds?.profile?.name,
+        ds?.profile?.role,
+        ds?.profile?.summary,
+        ds?.biodata?.gender,
+        ds?.biodata?.birth_date,
+        ds?.biodata?.birth_place,
+        ds?.biodata?.religion,
+        ds?.biodata?.marritage_status,
+        ds?.biodata?.height_body,
+        ds?.biodata?.weight_body,
+        ds?.profile?.province,
+        ds?.profile?.city,
+        ds?.profile?.address,
+        ds?.profile?.postal_code,
+        ds?.biodata?.expected_salary,
+        ds?.profile?.image,
+        ds?.profile?.sosmed?.ig,
+        ds?.profile?.sosmed?.fb,
+        ds?.profile?.sosmed?.x,
+        ds?.profile?.sosmed?.in,
+        ds?.profile?.sosmed?.others
+    );
     console.log(updateProfile);
 
     localStorage.setItem('data_buat_cv', JSON.stringify(dataStore.value));
@@ -1283,8 +1296,7 @@ const updateData = (section) => {
     toast.success('Berhasil memperbarui '+ sections[section]);
 
 };
-
-
+// -----------
 const resetValue = () => {
     singleData.value = 
     {
@@ -1327,6 +1339,7 @@ const resetValue = () => {
         },
     }
 }
+
 const downloadHandle = () => {
     const login = localStorage.getItem('login')
     if(login != 'true'){

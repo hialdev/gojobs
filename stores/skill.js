@@ -4,98 +4,95 @@ import { useGeneralStore } from '@/stores/general';
 export const useSkillStore = defineStore('skill',{
     state : () => ({
         API_URL : useGeneralStore().API_URL,
-        soft_skills: [
-            { key: 1, value: 'Communication' },
-            { key: 2, value: 'Teamwork' },
-            { key: 3, value: 'Adaptability' },
-            { key: 4, value: 'Problem Solving' },
-            { key: 5, value: 'Creativity' },
-            { key: 6, value: 'Time Management' },
-            { key: 7, value: 'Leadership' },
-            { key: 8, value: 'Critical Thinking' },
-            { key: 9, value: 'Interpersonal Skills' },
-            { key: 10, value: 'Emotional Intelligence' },
-            { key: 11, value: 'Flexibility' },
-            { key: 12, value: 'Negotiation' },
-            { key: 13, value: 'Conflict Resolution' },
-            { key: 14, value: 'Decision Making' },
-            { key: 15, value: 'Stress Management' },
-            { key: 16, value: 'Attention to Detail' },
-            { key: 17, value: 'Presentation Skills' },
-            { key: 18, value: 'Organizational Skills' },
-            { key: 19, value: 'Multitasking' },
-            { key: 20, value: 'Problem Analysis' },
-            { key: 21, value: 'Data Analysis' },
-            { key: 22, value: 'Coding' },
-            { key: 23, value: 'Project Management' },
-            { key: 24, value: 'Research' },
-            { key: 25, value: 'Technical Writing' },
-            { key: 26, value: 'Statistical Analysis' },
-            { key: 27, value: 'Mathematics' },
-            { key: 28, value: 'Database Management' },
-            { key: 29, value: 'Network Security' },
-            { key: 30, value: 'Cloud Computing' },
-            { key: 31, value: 'Accounting' },
-            { key: 32, value: 'Marketing' },
-            { key: 33, value: 'Sales' },
-            { key: 34, value: 'Customer Service' },
-            { key: 35, value: 'Financial Analysis' },
-            { key: 36, value: 'Business Development' },
-            { key: 37, value: 'Risk Management' },
-            { key: 38, value: 'Logistics' },
-            { key: 39, value: 'Supply Chain Management' },
-            { key: 40, value: 'Quality Control' },
-        ],
-        hard_skills: [
-            { key: 1, value: 'Accounting' },
-            { key: 2, value: 'Marketing' },
-            { key: 3, value: 'Sales' },
-            { key: 4, value: 'Customer Service' },
-            { key: 5, value: 'Financial Analysis' },
-            { key: 6, value: 'Business Development' },
-            { key: 7, value: 'Risk Management' },
-            { key: 8, value: 'Logistics' },
-            { key: 9, value: 'Supply Chain Management' },
-            { key: 10, value: 'Quality Control' },
-            { key: 11, value: 'Strategic Planning' },
-            { key: 12, value: 'Market Research' },
-            { key: 13, value: 'Product Management' },
-            { key: 14, value: 'Project Management' },
-            { key: 15, value: 'Data Analysis' },
-            { key: 16, value: 'Coding' },
-            { key: 17, value: 'Web Development' },
-            { key: 18, value: 'Database Management' },
-            { key: 19, value: 'Network Security' },
-            { key: 20, value: 'Cloud Computing' },
-            { key: 21, value: 'Technical Support' },
-            { key: 22, value: 'Troubleshooting' },
-            { key: 23, value: 'System Administration' },
-            { key: 24, value: 'Software Testing' },
-            { key: 25, value: 'UI/UX Design' },
-            { key: 26, value: 'Graphic Design' },
-            { key: 27, value: 'Video Editing' },
-            { key: 28, value: 'Photography' },
-            { key: 29, value: 'Content Writing' },
-            { key: 30, value: 'Copywriting' },
-            { key: 31, value: 'Editing and Proofreading' },
-            { key: 32, value: 'Social Media Management' },
-            { key: 33, value: 'SEO' },
-            { key: 34, value: 'SEM' },
-            { key: 35, value: 'Digital Marketing' },
-            { key: 36, value: 'Public Relations' },
-            { key: 37, value: 'Event Planning' },
-            { key: 38, value: 'Budgeting' },
-            { key: 39, value: 'Financial Planning' },
-            { key: 40, value: 'Investment Management' },
-        ],
+        skills : [],
     }),
     actions : {
-        addSkill(skillType, newSkill) {
-            if (skillType === 'soft') {
-                this.soft_skills.push({ key: this.soft_skills.length + 1, value: newSkill });
-            } else if (skillType === 'hard') {
-                this.hard_skills.push({ key: this.hard_skills.length + 1, value: newSkill });
-            }
+        async getSkills(){
+            var headers = new Headers();
+            headers.append("token",localStorage.getItem('access_token') ?? 'rbkmzydqknor0t5q236n01j38');
+
+            const skill = await $fetch(`${this.API_URL}/master-skill/read?id=&status_name=&page=&page_size=`, {
+                method : 'GET',
+                headers: headers,
+            })
+            
+            return skill;
         },
+
+        async getOptions(){
+            var headers = new Headers();
+            headers.append("token",localStorage.getItem('access_token') ?? 'rbkmzydqknor0t5q236n01j38');
+
+            const skill = await $fetch(`${this.API_URL}/master-skill/read?id=&status_name=&page=&page_size=`, {
+                method : 'GET',
+                headers: headers,
+            })
+            
+            let options = skill?.data.map(item => ({ key: item.id, value : item.skill_name}));
+            
+            if(skill?.success){
+                this.skills = skill?.data;
+            }
+
+            return options;
+        },
+
+        async getSkillById(id = ''){
+            var headers = new Headers();
+            headers.append("token",localStorage.getItem('access_token') ?? 'rbkmzydqknor0t5q236n01j38');
+
+            const skill = await $fetch(`${this.API_URL}/master-skill/read?id=${id}&status_name=&page=&page_size=`, {
+                method : 'GET',
+                headers: headers,
+            })
+               
+            return skill;
+        },
+
+        async addSkill(){
+            var headers = new Headers(name);
+            headers.append("token",localStorage.getItem('access_token') ?? 'rbkmzydqknor0t5q236n01j38');
+            const formdata = new FormData();
+            formdata.append("skill_name", `${name}`);
+
+            const skill = await $fetch(`${this.API_URL}/master-skill/create`, {
+                method : 'POST',
+                headers: headers,
+                body: formdata,
+            })
+            
+            this.getOptions();
+            return skill;
+        },
+
+        async updateSkill(id, name){
+            var headers = new Headers(name);
+            headers.append("token",localStorage.getItem('access_token') ?? 'rbkmzydqknor0t5q236n01j38');
+            const formdata = new FormData();
+            formdata.append("skill_name", `${name}`);
+
+            const skill = await $fetch(`${this.API_URL}/master-skill/update?id=${id}`, {
+                method : 'POST',
+                headers: headers,
+                body: formdata,
+            })
+            
+            this.getOptions();
+            return skill;
+        },
+
+        async delSkill(id){
+            var headers = new Headers();
+            headers.append("token",localStorage.getItem('access_token') ?? 'rbkmzydqknor0t5q236n01j38');
+
+            const skill = await $fetch(`${this.API_URL}/master-skill/delete?id=${id}`, {
+                method : 'DELETE',
+                headers: headers,
+            })
+            
+            this.getOptions();
+            return skill;
+        },
+
     },
 });

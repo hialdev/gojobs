@@ -14,7 +14,7 @@
 
                 <h1 class="text-xl font-medium">Selamat! anda kini dapat melamar pekerjaan di Gojobs.id</h1>
                 <p class="text-slate-500">Silahkan lengkapi profile anda sebelum melamar pekerjaan, isi dengan data yang benar dan sesuai. Terimakasih!</p>
-                <PartialsButton :path="`/seeker/profile`" class="text-center px-6 min-w-[15em]">Lengkapi Profile</PartialsButton>
+                <PartialsButton :path="`/seeker/profile/create`" class="text-center px-6 min-w-[15em]">Lengkapi Profile</PartialsButton>
             </div>
         </div>
     </div>

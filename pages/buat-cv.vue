@@ -945,7 +945,7 @@ const editSkills = ref({
 })
 onMounted(async () => {
     const data = JSON.parse(localStorage.getItem('data_buat_cv'));
-    if(data) dataStore.value = data;
+    if(data?.biodata && data?.experiences && data?.educations && data?.organizations && data?.skills) dataStore.value = data;
     console.log(dataStore.value);
 
     const fetch = await contractStore.getOptions();
@@ -994,7 +994,7 @@ const editSkill = () => {
 const sortedData = (type) => {
     return computed(() => {
         return dataStore.value[type].slice().sort((a, b) => {
-            return new Date(b.start_date) - new Date(a.start_date);
+            return new Date(b?.start_date) - new Date(a?.start_date);
         });
     });
 };

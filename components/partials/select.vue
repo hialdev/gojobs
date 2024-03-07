@@ -56,8 +56,9 @@ export default {
             type: Boolean,
             default: false,
         },
-        modalValue:{
-            type: [String, Number, Object],
+        selectedData:{
+            type: [String, Number],
+            default: null,
         }
     },
     data() {
@@ -79,7 +80,6 @@ export default {
         selectedItem(item){
             this.selectItem = item;
             this.isModalOpen = !this.isModalOpen;
-            this.$emit('update:modelValue', this.selectItem);
             this.$emit('selected', this.selectItem);
         },
         handleDocumentClick(event) {
@@ -102,5 +102,15 @@ export default {
             return filtered;
         },
     },
+    watch: {
+        selectedData: {
+            immediate: true,
+            handler(newVal) {
+                if (newVal) {
+                    this.selectItem = this.options.find(option => option.key === newVal);
+                }
+            }
+        }
+    }
 };
 </script>

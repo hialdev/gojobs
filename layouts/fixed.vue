@@ -11,7 +11,7 @@ export default {
         return {
             isBlended: true,
             isFixed: true,
-            isLogged: process.client ? localStorage.getItem('login') : false,
+            isLogged: process.client ? localStorage.getItem('access_token') : false,
         };
     },
     mounted() {

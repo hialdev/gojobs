@@ -131,7 +131,7 @@ onMounted(async () => {
 watch(verifSuccess, (newValue) => {
     if (newValue) {
         setTimeout(() => {
-            useRouter().push(`/welcoming`);
+            useRouter().push(`/dashboard`);
         }, 3000);
     }
 });

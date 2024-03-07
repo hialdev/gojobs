@@ -4,12 +4,12 @@
             @click="toggleModal"
             ref="dropdownTrigger"
         >
-            <div v-if="svgData" class="w-[20px] text-slate-500">
+            <div class="w-[20px] text-slate-500">
                 <div v-html="svgData"></div>
             </div>
             <div class="me-auto text-slate-500">
                 <div v-if="selecteds.length > 0" class="flex items-center gap-1">
-                    <div v-for="selected in selecteds.slice(0, 2)" :key="selected?.key" class="bg-orange-100 text-primary whitespace-nowrap rounded-3xl px-2 lowercase truncate w-[6em]">
+                    <div v-for="selected in selecteds.slice(0, 2)" :key="selected?.key" class="bg-orange-100 text-primary rounded-3xl px-2 lowercase">
                         {{ selected?.value }}
                     </div>
                     <div v-if="selecteds.length > 2" class="bg-orange-100 text-primary rounded-3xl px-2">
@@ -37,7 +37,7 @@
                     >
                         <div class="cursor-pointer flex items-center justify-between gap-3">
 
-                            <span class="lowercase whitespace-nowrap">{{ option?.value }}</span>
+                            <span class="lowercase">{{ option?.value }}</span>
                             <div :class="{'text-primary':selecteds.includes(option), 'text-slate-300':!selecteds.includes(option)}" class="w-[20px]">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" fill="none">
                                     <mask id="mask0_218_260" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="2" y="2" width="44" height="44">
@@ -59,33 +59,35 @@
 
 <script>
 export default {
-    props: {
-        label: {
+    props:{
+        label:{
             type: String,
             default: "Pilih",
         },
-        options: {
+        options:{
             type: Array,
-            default: () => [{ key: "1", value: "Tidak ada pilihan" }],
+            default: () => [
+                { key: "1", value: "Tidak ada pilihan" },
+            ],
         },
         svgData: {
             type: String,
             required: true,
         },
-        modalClass: {
+        modalClass:{
             type: String,
-            default: '',
+            default: ''
         },
-        selectedOptions: {
-            type: Array,
-            default: () => [],
-        },
+        selectedOptions:{
+            type: [Number, String, Object],
+            default: ''
+        }
     },
     data() {
         return {
             isModalOpen: false,
             selectItem: null,
-            selecteds: this.selectedOptions,
+            selecteds:[],
             searchQuery: "",
         };
     },
@@ -112,7 +114,6 @@ export default {
             const modalElement = this.$refs.modalElement;
             if (!dropdownTrigger.contains(event.target) && !modalElement.contains(event.target)) {
                 this.isModalOpen = false;
-                this.searchQuery = "";
                 document.removeEventListener("click", this.handleDocumentClick);
             }
         },
@@ -127,6 +128,16 @@ export default {
             );
             return filtered;
         },
+    },
+    watch: {
+        selectedOptions: {
+            immediate: true,
+            handler(newVal) {
+                if (newVal) {
+                    this.selecteds = this.options.filter(option => newVal.includes(option.key));
+                }
+            }
+        }
     },
 };
 </script>
