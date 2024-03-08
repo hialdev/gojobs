@@ -1,7 +1,7 @@
 <template>
     <div v-if="!isReady" class="bg-gray-100 p-5 rounded-3xl"></div>
     <div v-if="isReady" class="flex flex-row flex-wrap lg:items-center gap-3">
-        <PartialsSearch v-model="filtering.title" class="basis-full md:basis-1/3" :label="`Posisi / Jabatan`" />
+        <PartialsSearch v-model="filtering?.title" class="basis-full md:basis-1/3" :label="`Posisi / Jabatan`" />
         <PartialsMultiselect :selectedOptions="filtering?.location" @selected="handleLocation" class="basis-full z-[14] sm:flex-1" :label="`Lokasi`" :svgData="svgLocation" :options="cityOptions" />
         <PartialsMultiselect :selectedOptions="filtering?.contract" @selected="handleContract" class="flex-1 z-[12]" :label="`Kontrak`" :svgData="svgJenisKontrak" :options="contractOptions" />
         <button @click="resetFilter" class="flex items-center justify-center p-2 text-slate-400 hover:text-primary">
