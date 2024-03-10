@@ -308,7 +308,7 @@ export const useUserStore = defineStore('user',{
             formdata.append("is_sameforktp", "");
             formdata.append("province_idktp", "1");
             formdata.append("city_idktp", city);
-            formdata.append("postal_codektp", "54321");
+            formdata.append("postal_codektp", postal_code);
             formdata.append("height_body", height_body ?? 0);
             formdata.append("weight_body", weight_body ?? 0);
             formdata.append("work_location", "Jakarta");
@@ -403,7 +403,7 @@ export const useUserStore = defineStore('user',{
             formdata.append("is_sameforktp", "");
             formdata.append("province_idktp", "1");
             formdata.append("city_idktp", city);
-            formdata.append("postal_codektp", "54321");
+            formdata.append("postal_codektp", postal_code);
             formdata.append("height_body", height_body ?? 0);
             formdata.append("weight_body", weight_body ?? 0);
             formdata.append("work_location", "Jakarta");

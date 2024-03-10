@@ -1,7 +1,7 @@
 <template>
     <div v-if="!isReady" class="bg-gray-100 p-5 rounded-3xl"></div>
     <div v-if="isReady" class="flex flex-row flex-wrap lg:items-center gap-3">
-        <PartialsSearch v-model="filtering?.title" class="basis-full md:basis-1/3" :label="`Posisi / Jabatan`" />
+        <PartialsSearch v-model="filtering.title" class="basis-full md:basis-1/3" :label="`Posisi / Jabatan`" />
         <PartialsMultiselect :selectedOptions="filtering?.location" @selected="handleLocation" class="basis-full z-[14] sm:flex-1" :label="`Lokasi`" :svgData="svgLocation" :options="cityOptions" />
         <PartialsMultiselect :selectedOptions="filtering?.contract" @selected="handleContract" class="flex-1 z-[12]" :label="`Kontrak`" :svgData="svgJenisKontrak" :options="contractOptions" />
         <button @click="resetFilter" class="flex items-center justify-center p-2 text-slate-400 hover:text-primary">
@@ -37,10 +37,15 @@ const filtering = ref({
 const isReady = ref(false);
 
 onMounted(async () => {
-    filtering.value = JSON.parse(localStorage.getItem('filtering'));
-    filter.value.title = filtering?.title;
-    filter.value.location = filtering?.location;
-    filter.value.contract = filtering?.contract;
+    const filterData = JSON.parse(localStorage.getItem('filtering'));
+    filtering.value.title = filterData?.title ?? '';
+    filtering.value.location = filterData?.location ?? [];
+    filtering.value.contract = filterData?.contract ?? [];
+
+    if(filtering.value != null){
+        setFilter();
+    }
+
     const contractData = await contract.getOptions();
     if (Array.isArray(contractData)) {
         contractOptions.value = contractData.reverse();
@@ -55,21 +60,22 @@ onMounted(async () => {
 
 
 const handleLocation = (value) => {
-    filter.value.location = value.map(item => item.key);
+    filtering.value.location = value.map(item => item.key);
 }
 
 const handleContract = (value) => {
-    filter.value.contract = value.map(item => item.value);
+    filtering.value.contract = value.map(item => item.value);
 }
 
 const setFilter = () => {
-    job.updateFilter('search', filter.value.title);
-    job.updateFilter('location', filter.value.location);
-    job.updateFilter('contract', filter.value.contract);
-    localStorage.setItem('filtering', JSON.stringify(filter.value));
+    job.updateFilter('search', filtering?.value?.title);
+    job.updateFilter('location', filtering?.value?.location ?? []);
+    job.updateFilter('contract', filtering?.value?.contract ?? []);
+    localStorage.setItem('filtering', JSON.stringify(filtering.value));
 }
 
 const resetFilter = () => {
+    filtering.value.title = '';
     filtering.value.location = [];
     filtering.value.contract = [];
     is_reset.value = true;

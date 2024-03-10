@@ -9,7 +9,7 @@
             </div>
             <div class="me-auto text-slate-500">
                 <div v-if="selecteds.length > 0" class="flex items-center gap-1">
-                    <div v-for="selected in selecteds.slice(0, 2)" :key="selected?.key" class="bg-orange-100 text-primary rounded-3xl px-2 lowercase">
+                    <div v-for="selected in selecteds.slice(0, 2)" :key="selected?.key" class="whitespace-nowrap text-ellipsis overflow-hidden w-auto max-w-[5em] bg-orange-100 text-primary rounded-3xl px-2 lowercase">
                         {{ selected?.value }}
                     </div>
                     <div v-if="selecteds.length > 2" class="bg-orange-100 text-primary rounded-3xl px-2">
