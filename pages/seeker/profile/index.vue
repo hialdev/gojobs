@@ -4,21 +4,8 @@
         <div class="container mx-auto p-8 px-0 md:px-8">
             <div class="grid grid-cols-12 gap-4">
                 <div class="col-span-12">
-                    <div class="flex flex-wrap items-center justify-end gap-4 my-5 px-5 lg:px-0">
-                        <div class="flex items-center gap-x-3">
-                            <div @click="() => {page.fam = false; page.cv = true;}" class="hover:outline hover:outline-orange-500/30 cursor-pointer flex items-center gap-2 p-3 px-4 rounded-xl text-slate-500 hover:bg-orange-50" :class="[{'bg-orange-500 text-white hover:bg-orange-600' : page.cv}, {' bg-white' : !page.cv}]">
-                                <div>
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 14 14"><g fill="none" stroke="currentColor" stroke-linecap="round"><path stroke-linejoin="round" d="M4.098 3.65a1.15 1.15 0 1 0 2.3 0a1.15 1.15 0 0 0-2.3 0"/><path stroke-linejoin="round" d="M3.5 5.94a2.22 2.22 0 0 1 .746-.834c.306-.2.652-.304 1.003-.304c.351 0 .697.104 1.003.304c.307.199.563.486.746.834"/><path stroke-linejoin="round" d="M12.5 12.5a1 1 0 0 1-1 1h-9a1 1 0 0 1-1-1v-11a1 1 0 0 1 1-1H9L12.5 4z"/><path d="M3.5 8.5h7m-7 2.5h4"/></g></svg>
-                                </div>
-                                <span class="text-sm">Biodata / CV</span>
-                            </div>
-                            <div @click="() => { page.cv = false;page.fam = true;}" class="hover:outline hover:outline-orange-500/30 cursor-pointer flex items-center gap-2 p-3 px-4 rounded-xl text-slate-500 hover:bg-orange-50" :class="[{'bg-orange-500 text-white hover:bg-orange-600' : page.fam}, {'' : !page.fam}]">
-                                <div>
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 48 48"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="4"><path d="M10 19s-5.143 2-6 9m34-9s5.143 2 6 9m-26-9s4.8 1.167 6 7m6-7s-4.8 1.167-6 7m-4 8s-4.2.75-6 6m14-6s4.2.75 6 6"/><circle cx="24" cy="31" r="5" stroke-linejoin="round"/><circle cx="34" cy="14" r="6" stroke-linejoin="round"/><circle cx="14" cy="14" r="6" stroke-linejoin="round"/></g></svg>
-                                </div>
-                                <span class="text-sm">Family Contact</span>
-                            </div>
-                        </div>
+                    <div class="relative flex flex-wrap items-center justify-end gap-4 my-5 px-5 lg:px-0">
+                        
                         <PartialsButton :is_submit="true" @click="saveData" class="ms-auto border-2 border-primary text-sm" :primary="false">Simpan</PartialsButton>
                         <PartialsButton @click="downloadHandle" class="flex gap-5 items-center justify-between px-5 rounded-lg text-sm">Download CV
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2M7 11l5 5l5-5m-5-7v12"/></svg>
@@ -26,6 +13,20 @@
                     </div>
                 </div>
                 <div class="col-span-12 lg:col-span-4">
+                    <div class="sticky text-xs md:text-sm top-0 mb-4 z-10 md:relative flex items-center gap-x-3 bg-white p-2 justify-center md:justify-start md:bg-transparent md:rounded-none">
+                        <div @click="() => {page.fam = false; page.cv = true;}" class="hover:outline hover:outline-orange-500/30 cursor-pointer flex items-center gap-2 p-3 px-4 rounded-xl text-slate-500 hover:bg-orange-50" :class="[{'bg-orange-500 text-white hover:bg-orange-600' : page.cv}, {'' : !page.cv}]">
+                            <div>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 14 14"><g fill="none" stroke="currentColor" stroke-linecap="round"><path stroke-linejoin="round" d="M4.098 3.65a1.15 1.15 0 1 0 2.3 0a1.15 1.15 0 0 0-2.3 0"/><path stroke-linejoin="round" d="M3.5 5.94a2.22 2.22 0 0 1 .746-.834c.306-.2.652-.304 1.003-.304c.351 0 .697.104 1.003.304c.307.199.563.486.746.834"/><path stroke-linejoin="round" d="M12.5 12.5a1 1 0 0 1-1 1h-9a1 1 0 0 1-1-1v-11a1 1 0 0 1 1-1H9L12.5 4z"/><path d="M3.5 8.5h7m-7 2.5h4"/></g></svg>
+                            </div>
+                            <span class="text-xs md:text-sm">Biodata / CV</span>
+                        </div>
+                        <div @click="() => { page.cv = false;page.fam = true;}" class="hover:outline hover:outline-orange-500/30 cursor-pointer flex items-center gap-2 p-3 px-4 rounded-xl text-slate-500 hover:bg-orange-50" :class="[{'bg-orange-500 text-white hover:bg-orange-600' : page.fam}, {'' : !page.fam}]">
+                            <div>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 48 48"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="4"><path d="M10 19s-5.143 2-6 9m34-9s5.143 2 6 9m-26-9s4.8 1.167 6 7m6-7s-4.8 1.167-6 7m-4 8s-4.2.75-6 6m14-6s4.2.75 6 6"/><circle cx="24" cy="31" r="5" stroke-linejoin="round"/><circle cx="34" cy="14" r="6" stroke-linejoin="round"/><circle cx="14" cy="14" r="6" stroke-linejoin="round"/></g></svg>
+                            </div>
+                            <span class="text-xs md:text-sm">Family Contact</span>
+                        </div>
+                    </div>
                     <div class="bg-white rounded-none md:rounded-2xl p-6">
                         <div v-if="!show.editImageSosmed" class="flex flex-col items-center gap-1 border-b pb-5 relative">
                             <div @click="show.editImageSosmed = true" class="cursor-pointer absolute top-0 end-0 flex items-center justify-center text-slate-300 hover:text-primary">
