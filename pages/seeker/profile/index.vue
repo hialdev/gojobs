@@ -915,16 +915,16 @@
                                 <div class="col-span-12">
                                     <div class="flex items-center justify-end gap-3 mt-4">
                                         <PartialsButton @click="cancelData('family')" :primary="false">Batal</PartialsButton>
-                                        <PartialsButton v-if="in_edit == null" @click="saveSingleData('family')">Tambahkan</PartialsButton>
-                                        <PartialsButton v-if="in_edit != null" @click="deleteData('family')" class="bg-rose-500 text-white border-rose-500 hover:bg-rose-600 hover:border-rose-600">Hapus</PartialsButton>
-                                        <PartialsButton v-if="in_edit != null" @click="updateData('family')">Update</PartialsButton>
+                                        <PartialsButton v-if="in_edit == null" @click="saveFamcontact">Tambahkan</PartialsButton>
+                                        <PartialsButton v-if="in_edit != null" @click="delFamcontact" class="bg-rose-500 text-white border-rose-500 hover:bg-rose-600 hover:border-rose-600">Hapus</PartialsButton>
+                                        <PartialsButton v-if="in_edit != null" @click="updateFamcontact">Update</PartialsButton>
                                     </div>
                                 </div>
                             </div>
 
-                            <!-- <ol v-for="fam in famStore.allData" class="relative text-gray-500 border-s border-gray-200 dark:border-gray-700 dark:text-gray-400 ms-4">
+                            <ol v-for="(fam, index) in famStore.familys" class="relative text-gray-500 border-s border-gray-200 dark:border-gray-700 dark:text-gray-400 ms-4">
                                 <li>
-                                    <div @click="editData('family', fam, org.id)" class="absolute top-0 end-0 cursor-pointer flex items-center justify-center text-slate-300 hover:text-primary">
+                                    <div @click="editFamcontact(index)" class="absolute top-0 end-0 cursor-pointer flex items-center justify-center text-slate-300 hover:text-primary">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                                             <path d="M15 5.9997L18 8.9997M13 19.9997H21M5 15.9997L4 19.9997L8 18.9997L19.586 7.4137C19.9609 7.03864 20.1716 6.53003 20.1716 5.9997C20.1716 5.46937 19.9609 4.96075 19.586 4.5857L19.414 4.4137C19.0389 4.03876 18.5303 3.82812 18 3.82812C17.4697 3.82813 16.9611 4.03876 16.586 4.4137L5 15.9997Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                                         </svg>
@@ -932,24 +932,20 @@
                                 </li>                  
                                 <li class="mb-7 ms-6">            
                                     <span class="absolute flex items-center justify-center w-10 h-10 bg-orange-100 text-primary rounded-full -start-5">
-                                        {{ org.organization_name.substring(0,1) }}
+                                        {{ fam.fullname.substring(0,1) }}
                                     </span>
                                     <div class="ps-4">
-                                        <h4 class="text-sm md:text-base mb-1 font-medium">{{ org.organization_name}} <span class="text-xs font-light"> - {{ org.organization_address }}</span></h4>
+                                        <h4 class="text-sm md:text-base mb-1 font-medium">{{ fam.relationship}} <span class="text-xs font-light"> - {{ fam.company_description }}</span></h4>
                                         <div class="flex items-center gap-x-4 text-sm text-slate-500 mb-4">
                                             <div class="flex items-center gap-3 flex-1">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 48 48"><g fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="4"><path d="M24 44c11.046 0 20-8.954 20-20S35.046 4 24 4S4 12.954 4 24s8.954 20 20 20Z"/><path stroke-linecap="round" d="M24.008 12v12.01l8.479 8.48"/></g></svg>
-                                                {{ org.duration }}
-                                            </div>
-                                            <div class="flex items-center gap-3 flex-1">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 36 36"><circle cx="16.86" cy="9.73" r="6.46" fill="currentColor"/><path fill="currentColor" d="M21 28h7v1.4h-7z"/><path fill="currentColor" d="M15 30v3a1 1 0 0 0 1 1h17a1 1 0 0 0 1-1V23a1 1 0 0 0-1-1h-7v-1.47a1 1 0 0 0-2 0V22h-2v-3.58a32.12 32.12 0 0 0-5.14-.42a26 26 0 0 0-11 2.39a3.28 3.28 0 0 0-1.88 3V30Zm17 2H17v-8h7v.42a1 1 0 0 0 2 0V24h6Z"/></svg>
-                                                {{ org.position }}
+                                                {{ fam.job_title }} | {{ fam.company_name }}
                                             </div>
                                         </div>
                                     </div>
                                 </li>
                                 
-                            </ol> -->
+                            </ol>
                         </div>
                     </div>
                 </div>
@@ -1166,7 +1162,11 @@ onMounted(async () => {
     dataStore.value.educations = fetchEducation?.data;
 
     const fetchSkill = await skillStore.getSkills();
-    dataStore.value.skills = fetchSkill?.data.map(skill => skill.id);
+    if(fetchSkill.message != "Data not found"){
+        dataStore.value.skills = fetchSkill?.data.map(skill => skill.id);
+    }else{
+        dataStore.value.skills = [];
+    }
 
     const fetchLanguage = await languageStore.getLanguages();
     dataStore.value.languages = fetchLanguage?.data;
@@ -1277,6 +1277,70 @@ const saveSkills = async () => {
 }
 // ------
 
+// ---- Family & Emergency Contact
+const saveFamcontact = async () => {
+    const sde = singleData.value.family;
+    const addFamily = await famStore.addFamily(
+        sde.fullname,
+        sde.gender,
+        sde.birth_place,
+        sde.birth_date,
+        sde.last_education,
+        sde.job_title,
+        sde.company_name,
+        sde.relationship,
+        sde.description,
+    );
+    if(addFamily.success){
+        toast.success(addLanguage?.message);
+        const addContact = await famStore.addContact(
+            sde.fullname,
+            sde.phone,
+            sde.address,
+            sde.relationship,
+            sde.province_id,
+            sde.city_id,
+            sde.postal_code,
+        );
+        if(addContact.success){
+            toast.success(addContact.message);
+        }else{
+            toast.error(addContact.message);
+        }
+        show.value.family = false;
+    }else{
+        toast.error(addLanguage?.message);
+    }
+}
+
+const editFamcontact = (index) => {
+    singleData.value.family_contact = {
+        fullname : famStore.familys[index].fullname,
+        gender : famStore.familys[index].gender,
+        birth_place : famStore.familys[index].birth_place,
+        birth_date : famStore.familys[index].birth_date,
+        last_education : famStore.familys[index].last_education,
+        job_title : famStore.familys[index].job_title,
+        company_name : famStore.familys[index].company_name,
+        relationship : famStore.familys[index].relationship,
+        description : famStore.familys[index].description,
+        phone : famStore.contacts[index].phone,
+        province_id : famStore.contacts[index].province_id,
+        city_id : famStore.contacts[index].city_id,
+        address : famStore.contacts[index].address,
+        postal_code : famStore.contacts[index].postal_code,
+    }
+    show.value.family = true;
+}
+
+const updateFamcontact = () => {
+
+}
+
+const delFamcontact = () => {
+
+}
+
 // Action Data CRUD
 const cancelData = (section) => {
     resetValue();
@@ -1289,6 +1353,8 @@ const cancelData = (section) => {
         show.value.bahasa = false;
     }else if(section == 'education'){
         show.value.pendidikan = false;
+    }else if(section == 'family'){
+        show.value.family = false;
     }
 }
 const saveData = async (section = '') => {
@@ -1388,6 +1454,8 @@ const saveSingleData = async (section) => {
         }else{
             toast.error(addLanguage?.message);
         }
+    }else if (section === 'family') {
+        
     }
     resetValue();
 };
@@ -1429,8 +1497,6 @@ const deleteData = (section) => {
         const sde = singleData.value.organization;
         const delOrganization = organizationStore.delOrganization(in_edit.value);
         show.value.organisasi = false;
-    }else if(section == 'skill'){
-        show.value.skill = false;
     }else if(section == 'language'){
         const sde = singleData.value.language;
         const delLanguage = languageStore.delLanguage(in_edit.value);
