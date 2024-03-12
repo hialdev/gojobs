@@ -1,15 +1,15 @@
 <template>
     <ModalLazyLoad v-if="!isReady" />
 
-    <div v-if="isReady" class="bg-slate-50 p-5 min-h-screen flex flex-col items-center justify-start">
-        <div class="flex items-center text-sm ps-[5.2em] md:ps-0 gap-x-4 w-full justify-center overflow-auto">
+    <div v-if="isReady" class="bg-slate-50 py-5 lg:p-5 min-h-screen flex flex-col items-center justify-start">
+        <div class="flex items-center text-sm md:ps-0 gap-x-4 w-full justify-center overflow-auto">
             <div @click="openBox('biodata')" class="p-2 px-4 border-b cursor-pointer whitespace-nowrap" :class="[{'border-slate-300' : show.biodata},{'border-orange-600 text-orange-500' : show?.biodata == true}]">Biodata</div>
             <div @click="openBox('informasi')" class="p-2 px-4 border-b cursor-pointer whitespace-nowrap" :class="[{'border-slate-300' : show.informasi},{'border-orange-600 text-orange-500' : show?.informasi == true}]">Tentang Anda</div>
         </div>
         
         <!-- Biodata -->
         <div v-if="show.biodata">
-            <div class="bg-white p-5 rounded-xl grid grid-cols-12 items-start gap-9">
+            <div class="bg-white p-5 rounded-xl grid grid-cols-12 items-start gap-y-9">
                 <div class="col-span-12 md:col-span-6 text-center flex flex-col gap-2">
                     <PartialsImage :activeImage="dataStore.profile.image" @changeimage="(value) => {dataStore.profile.image = value}" />
                     <span class="text-xs text-slate-500">Klik gambar untuk upload</span>
@@ -145,7 +145,7 @@
 
         <!-- Summary & Alamat -->
         <div v-if="show.informasi">
-            <div class="bg-white p-5 rounded-xl grid grid-cols-12 items-start gap-9">
+            <div class="bg-white p-5 rounded-xl grid grid-cols-12 items-start gap-y-9">
                 <div class="col-span-12 md:col-span-6 pt-5 font-light">
                     <h3 class="font-medium mb-3">Ringkasan</h3>
                     <textarea v-model="dataStore.profile.summary" class="text-sm w-full rounded-lg border border-slate-200 text-sm p-2 px-4" name="" id="" cols="20" rows="6" :placeholder="`Jelaskan siapa diri anda, tips: ketertarikan, pengalaman, pencapaian, visi-misi`">{{ dataStore?.profile?.summary }}</textarea>
@@ -181,9 +181,9 @@
                 </ul>
             </div>
             <p class="text-xs text-slate-600 text-center w-full max-w-[40em] mx-auto mt-2">Pastikan data telah diisi dengan benar, lalu klik buat profile dibawah ini. Anda akan diarahkan ke halaman My Profile untuk mengisi profile lebih lanjut (Pendidikan, Pengalaman, Organisasi, Keterampilan, dan Bahasa).</p>
-            <div class="sticky z-[14] bottom-2 flex items-center justify-center gap-x-5 my-5">
-                <button @click="openBox('biodata')" class="hover:outline-2 hover:outline-slate-600 flex items-center gap-3 rounded-lg text-sm bg-slate-200 text-slate-600 p-2 px-4"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 512 512"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32" d="m112 160l-64 64l64 64"/><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32" d="M64 224h294c58.76 0 106 49.33 106 108v20"/></svg> Sebelumnya</button>
-                <button @click="createProfile" class="hover:bg-orange-600 flex items-center gap-3 rounded-lg text-orange-100 text-sm bg-orange-500 p-2 px-4">Buat Profile <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path fill="currentColor" d="M8 12h8v-2H8zm0-4h8V6H8zm11.95 12.475L15.9 15.2q-.425-.575-1.05-.887T13.5 14H4V4q0-.825.588-1.412T6 2h12q.825 0 1.413.588T20 4v16q0 .125-.012.238t-.038.237M6 22q-.825 0-1.412-.587T4 20v-4h9.5q.25 0 .463.113t.362.312l4.2 5.5q-.125.05-.262.063T18 22z"/></svg></button>
+            <div class="sticky z-[14] bottom-2 flex items-center justify-center gap-x-2 px-2 md:px-5 my-5">
+                <button @click="openBox('biodata')" class="hover:outline-2 hover:outline-slate-600 flex items-center gap-3 rounded-lg text-sm bg-slate-200 text-slate-600 p-2 px-4 text-sm whitespace-nowrap"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 512 512"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32" d="m112 160l-64 64l64 64"/><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32" d="M64 224h294c58.76 0 106 49.33 106 108v20"/></svg> Sebelumnya</button>
+                <button @click="createProfile" class="hover:bg-orange-600 flex items-center gap-3 rounded-lg text-orange-100 text-sm bg-orange-500 p-2 px-4 text-sm whitespace-nowrap">Buat Profile <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path fill="currentColor" d="M8 12h8v-2H8zm0-4h8V6H8zm11.95 12.475L15.9 15.2q-.425-.575-1.05-.887T13.5 14H4V4q0-.825.588-1.412T6 2h12q.825 0 1.413.588T20 4v16q0 .125-.012.238t-.038.237M6 22q-.825 0-1.412-.587T4 20v-4h9.5q.25 0 .463.113t.362.312l4.2 5.5q-.125.05-.262.063T18 22z"/></svg></button>
             </div>
         </div>
 

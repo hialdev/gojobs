@@ -32,6 +32,12 @@ export const useSkillStore = defineStore('skill',{
             return skill;
         },
 
+        getLocalSkills(idArray = []){
+            const localSkills = this.skills.filter(item => idArray.includes(item.id));
+
+            return localSkills;
+        },
+
         async getOptions(){
             var headers = new Headers();
             headers.append("token",localStorage.getItem('access_token') ?? 'rbkmzydqknor0t5q236n01j38');

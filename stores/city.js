@@ -12,6 +12,7 @@ export const useCityStore = defineStore('city',{
         token : token.value,
         API_URL : useGeneralStore().API_URL,
         citys: [],
+        provinces: [],
         other_citys: [],
     }),
     getters : {
@@ -64,7 +65,7 @@ export const useCityStore = defineStore('city',{
                 headers: headers,
             })
 
-            console.log(province);
+            this.provinces = province?.data;
             let options = province?.data.map(item => ({ key: item.id, value : item.province_name}));
             return options;
         },
@@ -79,6 +80,19 @@ export const useCityStore = defineStore('city',{
             })
 
             return province?.data[0]?.province_name;
+        },
+
+        getProvinceName(id = ''){
+            this.getProvinceOptions();
+            const province = this.provinces.find(opt => opt.id == id);
+            return province ? province?.province_name : 'undefined';
+        },
+
+        getCityName(id = ''){
+            this.getOptionsMaster();
+
+            const city = this.other_citys.find(opt => opt.id == id);
+            return city ? city?.city_name : 'undefined';
         },
 
         async getCityById(id = ''){

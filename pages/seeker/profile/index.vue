@@ -459,7 +459,7 @@
                                 </div>
                                 <div class="col-span-12 md:col-span-6">
                                     <div class="text-xs mb-2 block">Tipe Kontrak</div>
-                                    <PartialsSelect class="text-sm" :customClass="`text-sm border rounded-3xl`" :selectedData="singleData.experience.type_contract" @selected="(value) => {singleData.experience.type_contract = value.key}" :options="options.contracts" :label="`Tipe Kontrak`"></PartialsSelect>
+                                    <PartialsSelect class="text-sm mb-3" :customClass="`text-sm border rounded-3xl`" :selectedData="singleData.experience.type_contract" @selected="(value) => {singleData.experience.type_contract = value.key}" :options="options.contracts" :label="`Tipe Kontrak`"></PartialsSelect>
                                 </div>
                                 <div class="col-span-12 md:col-span-6">
                                     <PartialsInput v-model="singleData.experience.start_date" :modelValue="singleData.experience.start_date" :inputClass="`border border-slate-200`" :label="`Tgl Mulai Kerja`" :typeInput="`date`" />
@@ -935,12 +935,79 @@
                                         {{ fam.fullname.substring(0,1) }}
                                     </span>
                                     <div class="ps-4">
-                                        <h4 class="text-sm md:text-base mb-1 font-medium">{{ fam.relationship}} <span class="text-xs font-light"> - {{ fam.company_description }}</span></h4>
-                                        <div class="flex items-center gap-x-4 text-sm text-slate-500 mb-4">
-                                            <div class="flex items-center gap-3 flex-1">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 36 36"><circle cx="16.86" cy="9.73" r="6.46" fill="currentColor"/><path fill="currentColor" d="M21 28h7v1.4h-7z"/><path fill="currentColor" d="M15 30v3a1 1 0 0 0 1 1h17a1 1 0 0 0 1-1V23a1 1 0 0 0-1-1h-7v-1.47a1 1 0 0 0-2 0V22h-2v-3.58a32.12 32.12 0 0 0-5.14-.42a26 26 0 0 0-11 2.39a3.28 3.28 0 0 0-1.88 3V30Zm17 2H17v-8h7v.42a1 1 0 0 0 2 0V24h6Z"/></svg>
-                                                {{ fam.job_title }} | {{ fam.company_name }}
+                                        <h4 class="text-sm md:text-base mb-1 font-medium">{{ fam.fullname}} <span class="text-xs font-light"> - {{ fam.relationship }}</span></h4>
+                                        <div class="grid grid-cols-12 gap-y-2 mb-3">
+                                            <div class="col-span-12 md:col-span-6 flex items-center gap-x-4 text-sm text-slate-500">
+                                                <div class="flex items-center gap-3 flex-1">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 36 36"><circle cx="16.86" cy="9.73" r="6.46" fill="currentColor"/><path fill="currentColor" d="M21 28h7v1.4h-7z"/><path fill="currentColor" d="M15 30v3a1 1 0 0 0 1 1h17a1 1 0 0 0 1-1V23a1 1 0 0 0-1-1h-7v-1.47a1 1 0 0 0-2 0V22h-2v-3.58a32.12 32.12 0 0 0-5.14-.42a26 26 0 0 0-11 2.39a3.28 3.28 0 0 0-1.88 3V30Zm17 2H17v-8h7v.42a1 1 0 0 0 2 0V24h6Z"/></svg>
+                                                    {{ fam.job_title }} at {{ fam.company_name }}
+                                                </div>
                                             </div>
+                                            <div class="col-span-12 md:col-span-6 flex items-center gap-4 text-sm">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="21" viewBox="0 0 20 21" fill="none">
+                                                    <path d="M16.2495 2.375H13.1245C12.9587 2.375 12.7997 2.44085 12.6825 2.55806C12.5653 2.67527 12.4995 2.83424 12.4995 3C12.4995 3.16576 12.5653 3.32473 12.6825 3.44194C12.7997 3.55915 12.9587 3.625 13.1245 3.625H14.7409L12.776 5.58984C12.1991 5.05218 11.5032 4.65861 10.7451 4.44128C9.98698 4.22396 9.18823 4.18903 8.41406 4.33936C7.63989 4.4897 6.91226 4.82102 6.2906 5.30628C5.66894 5.79154 5.17088 6.41696 4.8371 7.13148C4.50332 7.84599 4.34329 8.62932 4.37007 9.4175C4.39686 10.2057 4.6097 10.9763 4.99122 11.6665C5.37273 12.3567 5.9121 12.9469 6.56527 13.3888C7.21844 13.8308 7.96688 14.1119 8.74947 14.2094V15.5H6.87447C6.70871 15.5 6.54974 15.5658 6.43253 15.6831C6.31532 15.8003 6.24947 15.9592 6.24947 16.125C6.24947 16.2908 6.31532 16.4497 6.43253 16.5669C6.54974 16.6842 6.70871 16.75 6.87447 16.75H8.74947V18.625C8.74947 18.7908 8.81532 18.9497 8.93253 19.0669C9.04974 19.1842 9.20871 19.25 9.37447 19.25C9.54023 19.25 9.6992 19.1842 9.81641 19.0669C9.93362 18.9497 9.99947 18.7908 9.99947 18.625V16.75H11.8745C12.0402 16.75 12.1992 16.6842 12.3164 16.5669C12.4336 16.4497 12.4995 16.2908 12.4995 16.125C12.4995 15.9592 12.4336 15.8003 12.3164 15.6831C12.1992 15.5658 12.0402 15.5 11.8745 15.5H9.99947V14.2094C10.8372 14.1047 11.6348 13.7894 12.3176 13.2928C13.0004 12.7963 13.5461 12.1347 13.9038 11.37C14.2615 10.6052 14.4195 9.76228 14.363 8.9199C14.3065 8.07753 14.0374 7.26324 13.5807 6.55313L15.6245 4.50859V6.125C15.6245 6.29076 15.6903 6.44973 15.8075 6.56694C15.9247 6.68415 16.0837 6.75 16.2495 6.75C16.4152 6.75 16.5742 6.68415 16.6914 6.56694C16.8086 6.44973 16.8745 6.29076 16.8745 6.125V3C16.8745 2.83424 16.8086 2.67527 16.6914 2.55806C16.5742 2.44085 16.4152 2.375 16.2495 2.375ZM9.37447 13C8.63279 13 7.90777 12.7801 7.29108 12.368C6.6744 11.956 6.19375 11.3703 5.90993 10.6851C5.6261 9.99984 5.55183 9.24584 5.69653 8.51841C5.84122 7.79098 6.19838 7.1228 6.72282 6.59835C7.24727 6.0739 7.91546 5.71675 8.64288 5.57206C9.37031 5.42736 10.1243 5.50162 10.8095 5.78545C11.4948 6.06928 12.0804 6.54993 12.4925 7.16661C12.9045 7.7833 13.1245 8.50832 13.1245 9.25C13.1234 10.2442 12.728 11.1975 12.025 11.9005C11.3219 12.6035 10.3687 12.999 9.37447 13Z" fill="#797979"/>
+                                                </svg>
+                                                <span class="">{{fam.gender}}</span>
+                                            </div>
+                                            <div class="col-span-12 md:col-span-6 flex items-center gap-4 text-sm">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path fill="currentColor" d="M12 3L1 9l4 2.18v6L12 21l7-3.82v-6l2-1.09V17h2V9zm6.82 6L12 12.72L5.18 9L12 5.28zM17 16l-5 2.72L7 16v-3.73L12 15l5-2.73z"/></svg>
+                                                <span class="">{{educationStore.getLevelById(fam.last_education)}}</span>
+                                            </div>
+                                            <div class="col-span-12 md:col-span-6 flex items-center gap-4 text-sm">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="21" viewBox="0 0 20 21" fill="none">
+                                                    <g clip-path="url(#clip0_927_182)">
+                                                        <path d="M16.4844 9.33117H12.1875V5.58117H10.7812C11.2165 5.00008 11.4504 4.29287 11.4474 3.56684C11.4474 2.48715 10.9365 1.47266 10.1141 0.919336L9.76519 0.68457L9.41633 0.919336C8.59375 1.47273 8.08301 2.48719 8.08301 3.56684C8.08008 4.29288 8.31403 5.00008 8.74937 5.58113H7.1875V9.33113H3.51562C2.91495 9.33182 2.33908 9.57073 1.91434 9.99547C1.4896 10.4202 1.25068 10.9961 1.25 11.5968V18.6254C1.25037 18.9568 1.38219 19.2746 1.61653 19.5089C1.85087 19.7432 2.16859 19.8751 2.5 19.8754H17.5C17.8314 19.8751 18.1491 19.7432 18.3835 19.5089C18.6178 19.2746 18.7496 18.9568 18.75 18.6254V11.5968C18.7493 10.9961 18.5104 10.4203 18.0857 9.99551C17.6609 9.57077 17.085 9.33185 16.4844 9.33117ZM9.76519 2.27941C10.0382 2.61863 10.1974 3.07887 10.1974 3.56688C10.1974 4.05488 10.0382 4.51516 9.76519 4.85434C9.49219 4.51516 9.33301 4.05488 9.33301 3.56684C9.33301 3.07879 9.49219 2.61863 9.76519 2.27941ZM8.4375 6.83117H10.9375V9.33117H8.4375V6.83117ZM2.5 11.5968C2.50031 11.3275 2.60741 11.0694 2.79781 10.879C2.98821 10.6886 3.24636 10.5815 3.51562 10.5812H16.4844C16.7536 10.5815 17.0118 10.6886 17.2022 10.879C17.3926 11.0694 17.4997 11.3275 17.5 11.5968V12.8303L16.6562 13.2026C16.4912 13.2752 16.3129 13.3127 16.1326 13.3127C15.9524 13.3127 15.774 13.2752 15.609 13.2026L14.1406 12.5547L12.6719 13.2025C12.5069 13.2752 12.3285 13.3127 12.1482 13.3127C11.968 13.3127 11.7896 13.2752 11.6246 13.2025L10.1562 12.5546L8.6875 13.2025C8.52248 13.2751 8.34416 13.3126 8.16387 13.3126C7.98357 13.3126 7.80525 13.2751 7.64023 13.2025L6.17188 12.5547L4.7034 13.2025C4.53838 13.2751 4.36006 13.3126 4.17977 13.3126C3.99947 13.3126 3.82115 13.2751 3.65613 13.2025L2.5 12.6925V11.5968ZM17.5 18.6254H2.5V14.0588L3.15148 14.3462C3.47552 14.4888 3.82567 14.5624 4.17969 14.5624C4.53371 14.5624 4.88385 14.4888 5.20789 14.3462L6.17188 13.9209L7.1359 14.3462C7.45993 14.4888 7.81007 14.5624 8.16408 14.5624C8.51809 14.5624 8.86824 14.4888 9.19227 14.3462L10.1562 13.9209L11.1202 14.3462C11.4442 14.4888 11.7944 14.5624 12.1484 14.5624C12.5024 14.5624 12.8525 14.4888 13.1765 14.3462L14.1406 13.9209L15.1046 14.3462C15.4286 14.4888 15.7788 14.5624 16.1328 14.5624C16.4868 14.5624 16.8369 14.4888 17.1609 14.3462L17.5005 14.1964L17.5008 18.6254H17.5Z" fill="#797979"/>
+                                                    </g>
+                                                    <defs>
+                                                        <clipPath id="clip0_927_182">
+                                                        <rect width="20" height="20" fill="white" transform="translate(0 0.5)"/>
+                                                        </clipPath>
+                                                    </defs>
+                                                </svg>
+                                                <span class="">{{fam.birth_place}}, {{fam.birth_date == null ? 'YYYY - MM - DD' : formatDate(fam.birth_date)}}</span>
+                                            </div>
+                                            <div class="col-span-12">
+                                                <div class="flex gap-x-4 items-start">
+                                                    <div>
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 15V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10m6-6v.172a2 2 0 0 1-.586 1.414l-3.828 3.828a2 2 0 0 1-1.414.586H15m6-6h-4a2 2 0 0 0-2 2v4M7 7h10M7 11h10M7 15h4"/></svg>
+                                                    </div>
+                                                    <div class="text-slate-500 text-sm">{{fam.description}}</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="bg-slate-50 rounded-xl px-5 pt-4 pb-1">
+                                            <ul class="grid grid-cols-12 gap-y-3">
+                                                <li class="col-span-12 md:col-span-6 flex items-center gap-4 text-sm">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="21" viewBox="0 0 20 21" fill="none">
+                                                        <path d="M17.3727 12.8795L13.6922 11.2303L13.682 11.2256C13.491 11.1439 13.2825 11.1111 13.0756 11.1302C12.8687 11.1493 12.6698 11.2197 12.4969 11.335C12.4765 11.3484 12.457 11.3631 12.4383 11.3787L10.5367 12.9998C9.33204 12.4147 8.08829 11.1803 7.50313 9.99125L9.12657 8.06078C9.14219 8.04125 9.15704 8.02172 9.1711 8.00062C9.28394 7.8282 9.35239 7.63056 9.37039 7.42529C9.38838 7.22002 9.35534 7.01348 9.27423 6.82406V6.81469L7.62032 3.12797C7.51309 2.88052 7.3287 2.67438 7.09468 2.54034C6.86067 2.4063 6.58958 2.35153 6.32188 2.38422C5.26326 2.52352 4.29155 3.04341 3.58824 3.84679C2.88492 4.65017 2.49809 5.6821 2.50001 6.74984C2.50001 12.953 7.54688 17.9998 13.75 17.9998C14.8177 18.0018 15.8497 17.6149 16.6531 16.9116C17.4564 16.2083 17.9763 15.2366 18.1156 14.178C18.1484 13.9104 18.0937 13.6393 17.9598 13.4053C17.8259 13.1713 17.62 12.9869 17.3727 12.8795ZM13.75 16.7498C11.0987 16.7469 8.55687 15.6924 6.68214 13.8177C4.8074 11.943 3.7529 9.40112 3.75001 6.74984C3.74707 5.98694 4.02192 5.24906 4.52324 4.67399C5.02456 4.09892 5.71806 3.72599 6.47423 3.62484C6.47392 3.62796 6.47392 3.6311 6.47423 3.63422L8.11485 7.30609L6.50001 9.2389C6.48362 9.25776 6.46873 9.27788 6.45548 9.29906C6.33791 9.47947 6.26894 9.68718 6.25525 9.90208C6.24157 10.117 6.28362 10.3318 6.37735 10.5256C7.08516 11.9733 8.54376 13.4209 10.007 14.128C10.2023 14.2208 10.4184 14.2614 10.634 14.2458C10.8497 14.2302 11.0576 14.1589 11.2375 14.0389C11.2576 14.0254 11.2769 14.0108 11.2953 13.9952L13.1945 12.3748L16.8664 14.0194H16.875C16.7751 14.7766 16.4027 15.4715 15.8275 15.9741C15.2524 16.4766 14.5138 16.7524 13.75 16.7498Z" fill="#797979"/>
+                                                    </svg>
+                                                    <span class="">{{dataStore.contacts[index].phone}}</span>
+                                                </li>
+                                                <li class="col-span-12 md:col-span-6 flex items-center gap-4 text-sm">
+                                                    <div>
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 22V12c0-1.886 0-2.828.586-3.414C4.172 8 5.114 8 7 8c1.886 0 2.828 0 3.414.586C11 9.172 11 10.114 11 12"/><path d="M17 22v-6c0-1.886 0-2.828-.586-3.414C15.828 12 14.886 12 13 12h-2c-1.886 0-2.828 0-3.414.586C7 13.172 7 14.114 7 16v6"/><path d="M21 22V7.772c0-1.34 0-2.011-.356-2.525c-.356-.514-.984-.75-2.24-1.22c-2.455-.921-3.682-1.381-4.543-.785C13 3.84 13 5.15 13 7.772V12"/><path stroke-linecap="round" d="M4 8V6.5c0-.943 0-1.414.293-1.707C4.586 4.5 5.057 4.5 6 4.5h2c.943 0 1.414 0 1.707.293C10 5.086 10 5.557 10 6.5V8M7 4V2m15 20H2m8-7h4m-4 3h4"/></g></svg>
+                                                    </div>
+                                                    <span class="">{{dataStore.contacts[index].province_name}}</span>
+                                                </li>
+                                                <li class="col-span-12 md:col-span-6 flex items-center gap-4 text-sm">
+                                                    <div>
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 48 48"><g fill="none"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="4" d="M4 42h40"/><rect width="8" height="16" x="8" y="26" stroke="currentColor" stroke-linejoin="round" stroke-width="4" rx="2"/><path stroke="currentColor" stroke-linecap="square" stroke-linejoin="round" stroke-width="4" d="M12 34h1"/><rect width="24" height="38" x="16" y="4" stroke="currentColor" stroke-linejoin="round" stroke-width="4" rx="2"/><path fill="currentColor" d="M22 10h4v4h-4zm8 0h4v4h-4zm-8 7h4v4h-4zm8 0h4v4h-4zm0 7h4v4h-4zm0 7h4v4h-4z"/></g></svg>
+                                                    </div>
+                                                    <span class="">{{dataStore.contacts[index].city_name}}</span>
+                                                </li>
+                                                <li class="col-span-12 md:col-span-6 flex items-start gap-4 text-sm">
+                                                    <div>
+                                                        <svg class="text-slate-600" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 15 15"><g fill="none" fill-rule="evenodd" stroke="currentColor" stroke-linecap="square" clip-rule="evenodd"><path d="M7.5 8.495a2 2 0 0 0 2-1.999a2 2 0 0 0-4 0a2 2 0 0 0 2 1.999Z"/><path d="M13.5 6.496c0 4.997-5 7.995-6 7.995s-6-2.998-6-7.995A5.999 5.999 0 0 1 7.5.5c3.313 0 6 2.685 6 5.996Z"/></g></svg>
+                                                    </div>
+                                                    <span class="">{{dataStore.contacts[index].address}}</span>
+                                                </li>
+                                                <li class="col-span-12 md:col-span-6 flex items-center gap-4 text-sm">
+                                                    <div>
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 16 16"><path fill="currentColor" d="M15.5 14.69h-1.25V7.78a.62.62 0 0 0-.25-.47L8.4 2.7a.65.65 0 0 0-.81 0L2 7.31a.62.62 0 0 0-.22.47v6.91H.5V7.78a1.87 1.87 0 0 1 .68-1.44l5.62-4.6a1.88 1.88 0 0 1 2.39 0l5.63 4.6a1.87 1.87 0 0 1 .68 1.44z"/><path fill="currentColor" d="M11.05 12.11H9.8A1.72 1.72 0 0 0 8 10.49a1.72 1.72 0 0 0-1.8 1.62H5a3 3 0 0 1 3-2.87a3 3 0 0 1 3.05 2.87m-6.1 0H6.2v2.58H4.95zm4.85 0h1.25v2.58H9.8z"/></svg>
+                                                    </div>
+                                                    <span class="">{{dataStore.contacts[index].postal_code}}</span>
+                                                </li>
+                                            </ul>
                                         </div>
                                     </div>
                                 </li>
@@ -973,11 +1040,11 @@ const in_edit = ref(null);
 const userStore = useUserStore();
 const cityStore = useCityStore();
 const contractStore = useContractStore();
+const religionStore = useReligionStore();
 const skillStore = useSkillStore();
 const experienceStore = useExperienceStore();
 const educationStore = useEducationStore();
 const famStore = useFamcontactStore();
-const religionStore = useReligionStore();
 const organizationStore = useOrganizationStore();
 const languageStore = useLanguageStore();
 const medsosStore = useMedsosStore();
@@ -1049,6 +1116,8 @@ const dataStore = ref({
     educations : [],
     organizations : [],
     skills : [],
+    familys: [],
+    contacts: [],
     languages : [],
 })
 
@@ -1059,7 +1128,7 @@ const dataNormal = ref({
     profile : {
         province : '',
         city : '',
-    }
+    },
 })
 const singleData = ref({
     experience : {
@@ -1167,6 +1236,12 @@ onMounted(async () => {
     }else{
         dataStore.value.skills = [];
     }
+
+    const familysFetch = await famStore.getFamilys();
+    dataStore.value.familys = familysFetch.data;
+
+    const contactsFetch = await famStore.getContacts();
+    dataStore.value.contacts = contactsFetch.data;
 
     const fetchLanguage = await languageStore.getLanguages();
     dataStore.value.languages = fetchLanguage?.data;
@@ -1279,20 +1354,21 @@ const saveSkills = async () => {
 
 // ---- Family & Emergency Contact
 const saveFamcontact = async () => {
-    const sde = singleData.value.family;
+
+    const sde = singleData.value?.family_contact;
+
     const addFamily = await famStore.addFamily(
-        sde.fullname,
-        sde.gender,
-        sde.birth_place,
-        sde.birth_date,
-        sde.last_education,
-        sde.job_title,
-        sde.company_name,
-        sde.relationship,
-        sde.description,
+        sde?.fullname,
+        sde?.gender,
+        sde?.birth_place,
+        sde?.birth_date,
+        sde?.last_education,
+        sde?.job_title,
+        sde?.company_name,
+        sde?.relationship,
+        sde?.description,
     );
     if(addFamily.success){
-        toast.success(addLanguage?.message);
         const addContact = await famStore.addContact(
             sde.fullname,
             sde.phone,
@@ -1307,38 +1383,89 @@ const saveFamcontact = async () => {
         }else{
             toast.error(addContact.message);
         }
+        toast.success(addFamily?.message);
         show.value.family = false;
     }else{
-        toast.error(addLanguage?.message);
+        toast.error(addFamily?.message);
     }
 }
 
-const editFamcontact = (index) => {
+const editFamcontact = async (i) => {
     singleData.value.family_contact = {
-        fullname : famStore.familys[index].fullname,
-        gender : famStore.familys[index].gender,
-        birth_place : famStore.familys[index].birth_place,
-        birth_date : famStore.familys[index].birth_date,
-        last_education : famStore.familys[index].last_education,
-        job_title : famStore.familys[index].job_title,
-        company_name : famStore.familys[index].company_name,
-        relationship : famStore.familys[index].relationship,
-        description : famStore.familys[index].description,
-        phone : famStore.contacts[index].phone,
-        province_id : famStore.contacts[index].province_id,
-        city_id : famStore.contacts[index].city_id,
-        address : famStore.contacts[index].address,
-        postal_code : famStore.contacts[index].postal_code,
+        fullname : dataStore.value.familys[i].fullname,
+        gender : dataStore.value.familys[i].gender,
+        birth_place : dataStore.value.familys[i].birth_place,
+        birth_date : dataStore.value.familys[i].birth_date,
+        last_education : dataStore.value.familys[i].last_education,
+        job_title : dataStore.value.familys[i].job_title,
+        company_name : dataStore.value.familys[i].company_name,
+        relationship : dataStore.value.familys[i].relationship,
+        description : dataStore.value.familys[i].description,
+        phone : dataStore.value?.contacts[i].phone,
+        province_id : dataStore.value?.contacts[i].province_id,
+        city_id : dataStore.value?.contacts[i].city_id,
+        address : dataStore.value?.contacts[i].address,
+        postal_code : dataStore.value?.contacts[i].postal_code,
     }
+    in_edit.value = dataStore.value.familys[i].id;
     show.value.family = true;
 }
 
-const updateFamcontact = () => {
+const updateFamcontact = async () => {
+    const sde = singleData.value?.family_contact;
+    const i = dataStore.value.familys.findIndex(fam => fam.id == in_edit.value);
+    const fam_id = dataStore.value.familys[i].id;
+    const con_id = dataStore.value.contacts[i].id;
 
+    const updateFamily = await famStore.updateFamily(
+        fam_id,
+        sde?.fullname,
+        sde?.gender,
+        sde?.birth_place,
+        sde?.birth_date,
+        sde?.last_education,
+        sde?.job_title,
+        sde?.company_name,
+        sde?.relationship,
+        sde?.description,
+    );
+    if(updateFamily.success){
+        const updateContact = await famStore.updateContact(
+            con_id,
+            sde.fullname,
+            sde.phone,
+            sde.address,
+            sde.relationship,
+            sde.province_id,
+            sde.city_id,
+            sde.postal_code,
+        );
+        if(updateContact.success){
+            toast.success(updateContact.message);
+        }else{
+            toast.error(updateContact.message);
+        }
+        toast.success(updateFamily?.message);
+        show.value.family = false;
+    }else{
+        toast.error(updateFamily?.message);
+    }
 }
 
-const delFamcontact = () => {
+const delFamcontact = async () => {
+    const i = dataStore.value.familys.findIndex(fam => fam.id == in_edit.value);
+    const fam_id = dataStore.value.familys[i].id;
+    const con_id = dataStore.value.contacts[i].id;
 
+    const delFamily = await famStore.delFamily(fam_id);
+    const delContact = await famStore.delContact(con_id);
+    if(delFamily.success && delContact.success){
+        toast.success(delFamily?.message);
+        toast.success(delContact?.message);
+    }else{
+        toast.error(delFamily?.message);
+        toast.error(delContact?.message);
+    }
 }
 
 // Action Data CRUD

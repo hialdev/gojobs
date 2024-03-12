@@ -34,7 +34,7 @@
                         <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M5.636 18.364A9 9 0 1 0 3 12.004V14"/><path d="m1 12l2 2l2-2m6-4v5h5"/></g></svg>
                         {{daysAgo(selectedNotif.created_time)}}
                     </div>
-                    <div v-if="selectedNotif?.body" class="bg-slate-50 text-slate-500 text-sm p-6 rounded-xl">
+                    <div v-if="selectedNotif?.body" class="bg-slate-50 text-slate-500 text-sm rounded-xl overflow-hidden">
                         <div v-html="selectedNotif?.body" ></div>
                     </div>
                 </div>

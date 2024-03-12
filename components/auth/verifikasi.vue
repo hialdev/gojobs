@@ -115,7 +115,7 @@ const verifHandle = async () => {
     const fulltoken = token.value.satu+token.value.dua+token.value.tiga+token.value.empat+token.value.lima+token.value.enam;
     const verif = await user.verify(fulltoken);
     if(verif.success){
-        const profile = await store.getProfile();
+        const profile = await user.getProfile();
         localStorage.setItem('profile',JSON.stringify(profile));
         toast.success('Profile diterapkan');
         verifSuccess.value = true;
@@ -131,7 +131,7 @@ onMounted(async () => {
 watch(verifSuccess, (newValue) => {
     if (newValue) {
         setTimeout(() => {
-            useRouter().push(`/dashboard`);
+            useRouter().push(`/seeker/profile/create`);
         }, 3000);
     }
 });

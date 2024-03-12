@@ -1,5 +1,5 @@
 <template>
-    <div class="container mx-auto py-10">
+    <div class="container mx-auto py-10 px-5">
         <h1 class="text-2xl font-medium mb-8">Tersimpan</h1>
         <div class="grid grid-cols-12 gap-4">
             <div v-for="job in favorites" :key="job?.joborder?.id" class="col-span-12 md:col-span-6 lg:col-span-3">
@@ -57,6 +57,7 @@
                 </NuxtLink>
             </div>
         </div>
+        <StateEmpty v-if="favorites.length == 0 || favorites == null" />
     </div>
 
 </template>

@@ -50,8 +50,8 @@
                 </div>
             </template>
             <template v-else>
-                <div class="col-span-12 flex items-center w-full p-12 justify-center opacity-50 text-xl">
-                    Tidak ada data
+                <div class="col-span-12 flex items-center w-full justify-center text-xl">
+                    <StateEmpty />
                 </div>
             </template>
         </div>

@@ -58,7 +58,9 @@
                     </ul>
                 </NuxtLink>
             </div>
+            
         </div>
+        <StateEmpty v-if="applies?.length == 0 || applies == null" />
     </div>
 </template>
 
