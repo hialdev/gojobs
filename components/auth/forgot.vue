@@ -1,7 +1,7 @@
 <template>
-    <div class="bg-white p-6 py-9 rounded-3xl w-full max-w-[30em] relative overflow-hidden my-2 shadow-xl">
+    <div class="bg-white p-6 py-9 rounded-3xl w-full max-w-[30em] relative overflow-hidden my-2">
         <div class="text-center mb-6">
-            <h3 class="text-3xl mb-2 uppercase font-medium text-primary">Lupa Password</h3>
+            <h3 class="text-3xl mb-2 capitalize font-medium text-primary">Lupa Password</h3>
             <p class="text-slate-500 text-sm">Jangan khawatir! Masukkan email Anda di bawah ini dan kami akan membantu Anda mengatur ulang password Anda.</p>
         </div>
         <input v-model="email" type="email" class="p-3 px-4 mb-4 rounded-xl border-2 block w-full focus:outline-primary" placeholder="Email akun">
@@ -39,7 +39,7 @@ const resetHandle = async () => {
         forgot.value = reset;
         setTimeout(() => {
             navigateTo(`/auth/verifikasi?forgot=true&email=${email.value}`);
-        }, 2000);
+        }, 1300);
     }else{
         error.value = reset;
     }

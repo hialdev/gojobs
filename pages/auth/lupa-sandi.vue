@@ -1,5 +1,5 @@
 <template>
-    <div class="flex items-center justify-center min-h-[40em]">
+    <div class="flex items-center justify-center px-5 min-h-[83vh]">
         <auth-forgot />
     </div>
 </template>

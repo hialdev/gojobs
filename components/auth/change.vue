@@ -1,11 +1,12 @@
 <template>
-    <div class="bg-white p-6 py-9 rounded-3xl w-full max-w-[30em] relative overflow-hidden my-2 shadow-xl">
+    <div class="bg-white p-6 py-9 rounded-3xl w-full max-w-[30em] relative overflow-hidden my-2">
         <div class="text-center mb-6">
-            <h3 class="text-3xl mb-2 uppercase font-medium text-primary">Ubah kata sandi</h3>
+            <h3 class="text-3xl mb-2 capitalize font-medium text-primary">Buat Password Baru</h3>
+            <p class="text-slate-500 text-sm">Berhasil memverifikasi! silahkan tentukan Password Baru anda untuk email <span class="font-medium">{{ dataStore.email }}</span></p>
         </div>
-        <input type="text" class="p-3 px-4 rounded-xl border-2 mb-3 block w-full focus:outline-primary" placeholder="email">
+        <input v-model="dataStore.username" type="text" class="w-full text-sm block focus:outline-0 border-2 hover:border-2 p-3 px-4 rounded-xl hover:border-primary mb-3" placeholder="username">
         <div class="flex items-center gap-2 border-2 hover:border-2 p-3 px-4 rounded-xl hover:border-primary mb-3">
-            <input :type="isShowPwd ? 'text' : 'password'" class="w-full block focus:outline-0" placeholder="password">
+            <input v-model="dataStore.password" :type="isShowPwd ? 'text' : 'password'" class="w-full text-sm block focus:outline-0" placeholder="password">
             <div v-if="isShowPwd" @click="isShowPwd = false" class="w-[20px] cursor-pointer text-primary">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="17.34" viewBox="0 0 576 512"><path fill="currentColor" d="M288 32c-80.8 0-145.5 36.8-192.6 80.6C48.6 156 17.3 208 2.5 243.7c-3.3 7.9-3.3 16.7 0 24.6C17.3 304 48.6 356 95.4 399.4C142.5 443.2 207.2 480 288 480s145.5-36.8 192.6-80.6c46.8-43.5 78.1-95.4 93-131.1c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C433.5 68.8 368.8 32 288 32zM144 256a144 144 0 1 1 288 0a144 144 0 1 1-288 0zm144-64c0 35.3-28.7 64-64 64c-7.1 0-13.9-1.2-20.3-3.3c-5.5-1.8-11.9 1.6-11.7 7.4c.3 6.9 1.3 13.8 3.2 20.7c13.7 51.2 66.4 81.6 117.6 67.9s81.6-66.4 67.9-117.6c-11.1-41.5-47.8-69.4-88.6-71.1c-5.8-.2-9.2 6.1-7.4 11.7c2.1 6.4 3.3 13.2 3.3 20.3z"/></svg>
             </div>
@@ -17,7 +18,7 @@
             </div>
         </div>
         <div class="flex items-center gap-2 border-2 hover:border-2 p-3 px-4 rounded-xl hover:border-primary mb-3">
-            <input :type="isShowPwd ? 'text' : 'password'" class="w-full block focus:outline-0" placeholder="konfirmasi password">
+            <input v-model="dataStore.cpassword" :type="isShowPwd ? 'text' : 'password'" class="w-full block text-sm focus:outline-0" placeholder="konfirmasi password">
             <div v-if="isShowPwd" @click="isShowPwd = false" class="w-[20px] cursor-pointer text-primary">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="17.34" viewBox="0 0 576 512"><path fill="currentColor" d="M288 32c-80.8 0-145.5 36.8-192.6 80.6C48.6 156 17.3 208 2.5 243.7c-3.3 7.9-3.3 16.7 0 24.6C17.3 304 48.6 356 95.4 399.4C142.5 443.2 207.2 480 288 480s145.5-36.8 192.6-80.6c46.8-43.5 78.1-95.4 93-131.1c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C433.5 68.8 368.8 32 288 32zM144 256a144 144 0 1 1 288 0a144 144 0 1 1-288 0zm144-64c0 35.3-28.7 64-64 64c-7.1 0-13.9-1.2-20.3-3.3c-5.5-1.8-11.9 1.6-11.7 7.4c.3 6.9 1.3 13.8 3.2 20.7c13.7 51.2 66.4 81.6 117.6 67.9s81.6-66.4 67.9-117.6c-11.1-41.5-47.8-69.4-88.6-71.1c-5.8-.2-9.2 6.1-7.4 11.7c2.1 6.4 3.3 13.2 3.3 20.3z"/></svg>
             </div>
@@ -28,16 +29,17 @@
                 </svg>
             </div>
         </div>
-        <div class="flex items-center p-4 mb-4 text-sm text-yellow-800 border border-yellow-300 rounded-2xl bg-yellow-50" role="alert">
+        <p class="text-xs mb-3 text-slate-500"><span class="text-rose-600">*</span> Password harus berisi kombinasi huruf biasa, Kapital dan Angka!</p>
+        <div v-if="error" class="flex items-center p-4 mb-4 text-sm text-yellow-800 border border-yellow-300 rounded-2xl bg-yellow-50" role="alert">
             <svg class="flex-shrink-0 inline w-4 h-4 me-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
                 <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
             </svg>
             <span class="sr-only">Info</span>
             <div>
-                <span class="font-medium">Warning alert!</span> Change a few things up and try submitting again.
+                <span class="font-medium">Ooopsss!</span> {{error}}
             </div>
         </div>
-        <div @click="changePwd" class="flex justify-center">
+        <div @click="resetPwd" class="flex justify-center">
             <PartialsButton class="px-6 min-w-[15em] text-center">Perbarui Kata Sandi</PartialsButton>
         </div>
         
@@ -48,11 +50,31 @@
 <script setup>
 const isShowPwd = ref(false);
 const isSuccess = ref(false);
-const changePwd = () => {
-    isSuccess.value = true;
-    setTimeout(() => {
-        navigateTo('/');
-    }, 2500);
-}
+const error = ref('');
+const user = useUserStore();
+const route = useRoute();
+const dataStore = ref({
+    token : '',
+    email : '',
+    username : '',
+    password : '',
+    cpassword : '',
+})
+onMounted(() => {
+    dataStore.value.token = route?.query?.token ?? '';
+    dataStore.value.email = route?.query?.email ?? '';
+})
 
+const resetPwd = async () => {
+    const reset = await user.resetPassword(dataStore.value.email, dataStore.value.username, dataStore.value.token,dataStore.value.password,dataStore.value.cpassword);
+    if(reset.success){
+        isSuccess.value = true;
+        setTimeout(() => {
+            navigateTo('/');
+        }, 1500);
+    }else{
+        error.value = reset.message;
+    }
+
+}
 </script>

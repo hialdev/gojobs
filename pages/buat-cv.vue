@@ -700,7 +700,7 @@
                                 </li>                  
                                 <li class="mb-7 me-6">            
                                     <div class="flex items-center gap-2 flex-wrap">
-                                        <span v-for="skill in mySkills" :key="skill.id" class="block p-1 px-2 rounded-lg bg-primary text-white text-xs lowercase">{{ skill.skill_name }}</span>
+                                        <span v-for="skill in dataStore.skills" :key="skill.id" class="block p-1 px-2 rounded-lg bg-primary text-white text-xs lowercase">{{ skill.skill_name }}</span>
                                     </div>
                                 </li>
                                 
@@ -1029,10 +1029,10 @@ const editSkill = () => {
 
 const saveSkills = async () => {
     const localSkills = skillStore.getLocalSkills(singleData?.value?.skills);
-    dataStore.value.skills = localSkills.map(item => ({id: item.key, skill_name: item.value}));
+    dataStore.value.skills = localSkills;
     show.value.skill = false;
     toast.success('Menyimpan Keterampilan');
-    this.saveData();
+    saveData();
 }
 // ------
 

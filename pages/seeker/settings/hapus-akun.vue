@@ -9,8 +9,8 @@
                     Hapus akun dan semua informasi Anda yang telah tersimpan. Hal ini tidak dapat dibatalkan.
                 </div>
                 <div class="col-span-12 md:col-span-6">
-                    <PartialsInput :typeInput="`password`" :inputClass="`border rounded-xl`" :placeholder="`Kata Sandi`" />
-                    <PartialsButton @click="hapusClicked" class="min-w-[10em] px-8">Hapus Akun</PartialsButton>
+                    <PartialsInput v-model="password" :modelValue="password" :typeInput="`password`" :inputClass="`border rounded-xl`" :placeholder="`Kata Sandi`" />
+                    <PartialsButton @click="hapusClicked" class="min-w-[10em] px-8" :primary="buttonize">Hapus Akun</PartialsButton>
                 </div>
                 <div class="col-span-12 md:col-span-6">
                     <div class="bg-red-50 flex items-start gap-3 p-5 rounded-lg">
@@ -33,14 +33,20 @@
 </template>
 
 <script setup>
+import { useToast } from 'vue-toastification';
+
 definePageMeta({
     layout:'seeker-setting',
 })
 
+const toast = useToast();
+const password = ref(null);
 let pressed = ref(false)
 
 const hapusClicked = ()=>{
-    pressed.value = true;
+    if(password.value.length > 3){
+        pressed.value = true;
+    }
 }
 
 const cancelHandle = ()=>{
@@ -48,8 +54,19 @@ const cancelHandle = ()=>{
     console.log('Cancel button clicked, Now :'+pressed.value);
 }
 
-const hapusHandle = ()=>{
-    console.log('Hapus button clicked, Now :'+pressed.value);
-    pressed.value = false;
+const hapusHandle = async ()=>{
+    const deactive = await user.deactive(password.value);
+    if(deactive.success){
+        toast.success('Akun anda berhasil di nonaktifkan');
+        pressed.value = false;
+        const logout = await user.logout();
+        if(logout.success){
+            navigateTo('/');
+        }else{
+            toast.error(logout.message);
+        }
+    }else{
+        toast.error(deactive.message);
+    }
 }
 </script>

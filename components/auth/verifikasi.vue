@@ -1,7 +1,7 @@
 <template>
     <div class="bg-white p-6 py-12 rounded-3xl w-full max-w-[30em] relative overflow-hidden my-2">
         <div class="text-center mb-6">
-            <h3 class="text-3xl mb-2 uppercase font-medium text-primary">{{route?.query?.forgot == 'true' ? 'Konfirmasi Kode Reset' : 'Konfirmasi Kode'}}</h3>
+            <h3 class="text-3xl mb-2 capitalize font-medium text-primary">{{route?.query?.forgot == 'true' ? 'Konfirmasi Kode Reset' : 'Konfirmasi Kode'}}</h3>
             <p class="text-slate-500 text-sm">Isi dengan kode token yang telah dikirimkan ke : <strong>{{profile?.email ?? route?.query?.email}}</strong></p>
         </div>
         <div class="grid grid-cols-12 gap-3 px-7 mb-7">
@@ -108,7 +108,8 @@ const resendResetCode = async () => {
 }
 
 const resetHandle = () => {
-    navigateTo(`/auth/ubah-sandi`)
+    const fulltoken = token.value.satu+token.value.dua+token.value.tiga+token.value.empat+token.value.lima+token.value.enam;
+    navigateTo(`/auth/ubah-sandi?email=${route?.query?.email}&token=${fulltoken}`)
 }
 
 const verifHandle = async () => {
@@ -124,9 +125,11 @@ const verifHandle = async () => {
     }
 }
 onMounted(async () => {
-    const fetch = await user.getProfile();
-    profile.value = fetch;
-    console.log(profile.value);
+    if(!route?.query?.forgot){
+        const fetch = await user.getProfile();
+        profile.value = fetch;
+        console.log(profile.value);
+    }
 }),
 watch(verifSuccess, (newValue) => {
     if (newValue) {

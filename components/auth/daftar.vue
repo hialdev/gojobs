@@ -1,7 +1,7 @@
 <template>
     <div class="bg-white p-6 py-9 rounded-3xl w-full max-w-[50em] relative overflow-hidden my-2">
         <div class="text-center mb-6">
-            <h3 class="text-3xl mb-2 uppercase font-medium text-primary">Daftar</h3>
+            <h3 class="text-3xl mb-2 capitalize font-medium text-primary">Daftar</h3>
             <p class="text-slate-500 text-sm">Daftar GRATIS dan dapatkan pekerjaan yang sesuai dengan mudah kemudian lamar.</p>
         </div>
         <div class="grid grid-cols-12 gap-3">

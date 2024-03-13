@@ -1,5 +1,5 @@
 <template>
-    <div class="flex items-center justify-center fixed top-0 bottom-0 end-0 start-0">
+    <div class="bg-white flex items-center justify-center fixed top-0 bottom-0 end-0 start-0">
         <div class="animate-flicker">
             <PartialsLogo />
         </div>

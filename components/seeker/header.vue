@@ -169,7 +169,7 @@ const logoutHandle = async () => {
 onMounted(async () => {
     const fetch = await notifStore.getNotifications();
 
-    profile.value = JSON.parse(localStorage.getItem('profile'));
+    profile.value = await store.getProfile();
     isReady.value = true;
 })
 </script>

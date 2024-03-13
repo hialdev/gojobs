@@ -144,6 +144,64 @@ export const useUserStore = defineStore('user',{
             return resend;
         },
 
+        async resetPassword(email, username, token, password, cpassword){
+
+            const formdata = new FormData();
+            formdata.append("email", email);
+            formdata.append("username", username);
+            formdata.append("reset_token", token);
+            formdata.append("password", password);
+            formdata.append("confirm_password", cpassword);
+
+            const reset = await $fetch(`${this.API_URL}/auth/reset-password`, {
+                method : 'POST',
+                body: formdata,
+            })
+
+            return reset;
+        },
+
+        async changePassword(email, username, password, cpassword){
+            var headers = new Headers();
+            headers.append("token", localStorage.getItem('access_token'));
+
+            const formdata = new FormData();
+            formdata.append("email", email);
+            formdata.append("username", username);
+            formdata.append("password", password);
+            formdata.append("confirm_password", cpassword);
+
+            const change = await $fetch(`${this.API_URL}/auth/change-password`, {
+                method : 'POST',
+                headers: headers,
+                body: formdata,
+            })
+
+            return change;
+        },
+
+        async changeData(username, email, mobile, password, cpassword){
+            var headers = new Headers();
+            headers.append("token", localStorage.getItem('access_token'));
+
+            const formdata = new FormData();
+            formdata.append("username", username);
+            formdata.append("email", email);
+            formdata.append("mobile", mobile);
+            formdata.append("password", password);
+            formdata.append("confirm_password", cpassword);
+
+            const change = await $fetch(`${this.API_URL}/auth/change-accountdata`, {
+                method : 'POST',
+                headers: headers,
+                body: formdata,
+            })
+            if(change.success){
+                this.getFullProfile();
+            }
+            return change;
+        },
+
         async deactive(){
             var headers = new Headers();
             headers.append("token", localStorage.getItem('access_token'));
@@ -162,7 +220,7 @@ export const useUserStore = defineStore('user',{
             let formdata = new FormData();
             formdata.append("email", email );
 
-            const forgot = await $fetch(`${this.API_URL}/auth/forgotpassword`, {
+            const forgot = await $fetch(`${this.API_URL}/auth/forgot-password`, {
                 method : 'POST',
                 headers: headers,
                 body: formdata,
@@ -443,6 +501,102 @@ export const useUserStore = defineStore('user',{
             this.getFullProfile();
 
             return updateProfile;
+        },
+
+        async changeVisibility(status = "yes"){
+            var headers = new Headers();
+            headers.append("token", localStorage.getItem('access_token'));
+
+            const formdata = new FormData();
+            formdata.append("set_status", `${status}`);
+
+            const changeVisibility = await $fetch(`${this.API_URL}/user/set-visible`, {
+                method : 'POST',
+                headers: headers,
+                body: formdata,
+            });
+
+            return changeVisibility;
+        },
+
+        async changeNotifOther(status = "yes"){
+            var headers = new Headers();
+            headers.append("token", localStorage.getItem('access_token'));
+
+            const formdata = new FormData();
+            formdata.append("set_status", `${status}`);
+
+            const changeVisibility = await $fetch(`${this.API_URL}/user/notification-other`, {
+                method : 'POST',
+                headers: headers,
+                body: formdata,
+            });
+
+            return changeVisibility;
+        },
+
+        async changeNotifJob(status = "yes"){
+            var headers = new Headers();
+            headers.append("token", localStorage.getItem('access_token'));
+
+            const formdata = new FormData();
+            formdata.append("set_status", `${status}`);
+
+            const changeNotifJob = await $fetch(`${this.API_URL}/user/notification-job`, {
+                method : 'POST',
+                headers: headers,
+                body: formdata,
+            });
+
+            return changeNotifJob;
+        },
+
+        async changeNotifRecruit(status = "yes"){
+            var headers = new Headers();
+            headers.append("token", localStorage.getItem('access_token'));
+
+            const formdata = new FormData();
+            formdata.append("set_status", `${status}`);
+
+            const changeNotifRecruit = await $fetch(`${this.API_URL}/user/notification-recruitment`, {
+                method : 'POST',
+                headers: headers,
+                body: formdata,
+            });
+
+            return changeNotifRecruit;
+        },
+
+        async changeNotifAll(status = "yes"){
+            var headers = new Headers();
+            headers.append("token", localStorage.getItem('access_token'));
+
+            const formdata = new FormData();
+            formdata.append("set_status", `${status}`);
+
+            const changeNotifAll = await $fetch(`${this.API_URL}/user/notification-all`, {
+                method : 'POST',
+                headers: headers,
+                body: formdata,
+            });
+
+            return changeNotifAll;
+        },
+
+        async deactive(password){
+            var headers = new Headers();
+            headers.append("token", localStorage.getItem('access_token'));
+
+            const formdata = new FormData();
+            formdata.append("password", `${password}`);
+
+            const deactive = await $fetch(`${this.API_URL}/auth/deactive`, {
+                method : 'POST',
+                headers: headers,
+                body: formdata,
+            });
+
+            return deactive;
         }
     },
     

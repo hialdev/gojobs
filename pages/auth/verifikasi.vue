@@ -1,5 +1,5 @@
 <template>
-    <div class="flex items-center justify-center min-h-[40em]">
+    <div class="flex items-center justify-center min-h-[82vh]">
         <auth-verifikasi />
     </div>
 </template>
