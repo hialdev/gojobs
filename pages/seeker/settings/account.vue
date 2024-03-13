@@ -118,7 +118,7 @@ const dataStore = ref({
 
 const changeData = async () => {
     if(in_change.value == false){
-        if(dataStore.value.new_email != profile.value.email || dataStore.value.new_phone != profile.value.mobile){
+        if(dataStore.value.new_email != profile.value.email || dataStore.value.new_phone != profile.value.profile.phone){
             in_change.value = true;
         }
     }else{
