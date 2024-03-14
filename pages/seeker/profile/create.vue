@@ -181,9 +181,9 @@
 </template>
 
 <script setup>
-// definePageMeta({
-//     middleware: ['profile']
-// });
+definePageMeta({
+    middleware: ['profile']
+});
 
 import { useToast } from 'vue-toastification';
 const isReady = ref(false);
