@@ -9,7 +9,7 @@
                 <span class="whitespace-nowrap">{{selectItem ? selectItem?.value : label}}</span>
                 <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 1024 1024"><path fill="currentColor" d="M104.704 338.752a64 64 0 0 1 90.496 0l316.8 316.8l316.8-316.8a64 64 0 0 1 90.496 90.496L557.248 791.296a64 64 0 0 1-90.496 0L104.704 429.248a64 64 0 0 1 0-90.496z"/></svg>
             </div>
-            <div ref="modalElement" v-if="isModalOpen" :class="['modal absolute top-0 w-full mt-[25%] z-10',modalClass]">
+            <div ref="modalElement" v-if="isModalOpen" :class="['modal absolute top-0 w-full mt-[4.3em] z-10',modalClass]">
                 <ul 
                     class="p-3 bg-white rounded-xl max-h-[20em] overflow-auto"
                 >
@@ -107,7 +107,7 @@ export default {
             immediate: true,
             handler(newVal) {
                 if (newVal) {
-                    this.selectItem = this.options.find(option => option.key === newVal);
+                    this.selectItem = this.options.find(option => option.key == newVal || option.value == newVal);
                 }
             }
         }

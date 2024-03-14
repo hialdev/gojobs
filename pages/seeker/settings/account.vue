@@ -23,7 +23,7 @@
                         </div>
                         <div class="mb-2">
                             <div class="text-xs text-slate-500 mb-2">No. HP</div>
-                            {{profile?.mobile}}
+                            {{profile?.profile?.phone}}
                         </div>
                     </div>
                     <div class="col-span-12 md:col-span-6 py-6">

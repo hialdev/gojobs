@@ -1,5 +1,6 @@
 <template>
-    <div class="container mx-auto py-10 px-5">
+    <ModalLazyLoad v-if="!isReady" />
+    <div v-if="isReady" class="container mx-auto py-10 px-5">
         <h1 class="text-2xl font-medium mb-8">Terakhir Dilihat</h1>
         <div class="grid grid-cols-12 gap-4">
             <template v-for="job in jobs" :key="job?.id">
@@ -59,7 +60,9 @@
                     </NuxtLink>
                 </div>
             </template>
-            <StateEmpty v-if="jobs.length == 0 || jobs == null" />
+            <div class="col-span-12">
+                <StateEmpty v-if="jobs?.length == 0 || jobs == null || jobs[0] == null" />
+            </div>
         </div>
     </div>
 
@@ -72,6 +75,7 @@ definePageMeta({
 })
 
 const jobs = ref(null);
+const isReady = ref(false);
 
 onMounted(() => {
     if(localStorage.getItem('lastseens')){
@@ -79,6 +83,7 @@ onMounted(() => {
     }else{
         jobs.value = null;
     }
+    isReady.value = true;
 })
 
 </script>

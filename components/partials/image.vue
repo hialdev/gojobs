@@ -38,7 +38,7 @@ export default {
         
                 reader.onload = () => {
                     this.imageUrl = reader.result; // Set the preview image
-                    this.$emit('changeimage', reader.result);
+                    this.$emit('changeimage', fileInput.files[0]);
                 };
         
                 reader.readAsDataURL(fileInput.files[0]);

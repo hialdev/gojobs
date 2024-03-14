@@ -472,35 +472,39 @@ export const useUserStore = defineStore('user',{
             additional.append("summary", summary);
             additional.append("expect_salary", expect_salary);
 
-            const user_id = JSON.parse(localStorage.getItem('profile')).userid;
-            
-            const updateProfile = await $fetch(`${this.API_URL}/biodata-profile/update?id=${user_id}`, {
-                method : 'POST',
-                headers: headers,
-                body: formdata,
-            })
-
-            const getAdditional = await $fetch(`${this.API_URL}/biodata-detail/read`, {
-                method : 'GET',
-                headers: headers,
-            }) 
-
-            let updateAdditional = null;
-            if(getAdditional.success){
-                updateAdditional = await $fetch(`${this.API_URL}/biodata-detail/update?id=${getAdditional?.data?.id}`, {
+            const getProfile = await this.getProfileDetail();
+            if(getProfile.success){
+                const profile_id = getProfile.data.id;
+                const updateProfile = await $fetch(`${this.API_URL}/biodata-profile/update?id=${profile_id}`, {
                     method : 'POST',
                     headers: headers,
-                    body: additional,
+                    body: formdata,
+                })
+    
+                const getAdditional = await $fetch(`${this.API_URL}/biodata-detail/read`, {
+                    method : 'GET',
+                    headers: headers,
                 }) 
+    
+                let updateAdditional = null;
+                if(getAdditional.success){
+                    updateAdditional = await $fetch(`${this.API_URL}/biodata-detail/update?id=${getAdditional?.data?.id}`, {
+                        method : 'POST',
+                        headers: headers,
+                        body: additional,
+                    }) 
+                }
+    
+                const medsos = useMedsosStore();
+                const updateMedsos = await medsos.updateMedsos(this.detail?.profile?.sosmed?.id, ig, x, fb, linkedin, others)
+                console.log(updateMedsos)
+    
+                this.getFullProfile();
+    
+                return updateProfile;
+            }else{
+                return getProfile;
             }
-
-            const medsos = useMedsosStore();
-            const updateMedsos = await medsos.updateMedsos(this.detail?.profile?.sosmed?.id, ig, x, fb, linkedin, others)
-            console.log(updateMedsos)
-
-            this.getFullProfile();
-
-            return updateProfile;
         },
 
         async changeVisibility(status = "yes"){

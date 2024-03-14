@@ -1,3 +1,3 @@
 <script setup>
-navigateTo('/seeker/settings/detail');
+navigateTo('/seeker/settings/account');
 </script>

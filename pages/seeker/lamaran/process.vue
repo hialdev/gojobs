@@ -14,7 +14,7 @@
                 <div v-for="job in jobs" class="col-span-12">
                     <NuxtLink :to="job?.joborder?.job_status == 'Closed' ? `` : `/lowongan/${job?.joborder?.id}`" class="flex items-start gap-4 bg-white p-8 rounded-2xl flex-wrap" :class="job?.joborder?.job_status == 'Closed' ? `opacity-50` : ``">
                         <div class="flex-initial w-[6em]">
-                            <NuxtImg :src="`${job?.joborder?.job_company_logo ?? '/image/logo-ish.png'}`" :alt="`${job?.joborder?.job_company} Logo`" class="block w-full" />
+                            <NuxtImg :src="`${job?.joborder?.job_company_logo ?? '/image/logo-ish.png'}`" :alt="`${job?.joborder?.job_company} Logo`" class="block w-full max-w-[5em] object-contain" />
                         </div>
                         <div class="">
                             <h3 class="font-medium capitalize">{{job?.joborder?.job_title.toLowerCase()}}</h3>

@@ -10,7 +10,10 @@
                 </div>
             </div>
             <h3 class="text-base md:text-xl">{{job?.title}}</h3>
-            <p class="text-slate-500 text-sm mb-4">{{job?.company}}</p>
+            <p class="text-slate-500 text-sm mb-3 uppercase">
+                PT Infomedia Solusi Humanika
+                <!-- {{ job?.job_company.toLowerCase() }} -->
+            </p>
             <div class="font-medium">{{job?.location}}</div>
             <div class="font-medium">{{job?.salary}}</div>
             <div class="flex items-center gap-4 mt-4">

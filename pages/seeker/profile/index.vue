@@ -34,7 +34,7 @@
                                     <path d="M15 5.9997L18 8.9997M13 19.9997H21M5 15.9997L4 19.9997L8 18.9997L19.586 7.4137C19.9609 7.03864 20.1716 6.53003 20.1716 5.9997C20.1716 5.46937 19.9609 4.96075 19.586 4.5857L19.414 4.4137C19.0389 4.03876 18.5303 3.82812 18 3.82812C17.4697 3.82813 16.9611 4.03876 16.586 4.4137L5 15.9997Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                                 </svg>
                             </div>
-                            <img :src="`https://ui-avatars.com/api/?name=${userStore?.detail?.profile?.name}`" alt="Image Buat CV" width="150" height="150" class="block rounded-full border p-1" />
+                            <img :src="userStore?.detail?.profile?.image != null || userStore?.detail?.profile?.image != '' ? userStore?.detail?.profile?.image : `https://ui-avatars.com/api/?name=${userStore?.detail?.profile?.name}`" alt="Image Buat CV" width="150" height="150" class="block rounded-full border p-1" />
                             <h2 class="text-xl font-medium">{{userStore?.detail?.profile.name}}</h2>
                             <div>{{userStore?.detail?.profile?.role}}</div>
                             <div class="py-3 flex w-full items-center gap-x-3">
@@ -83,7 +83,7 @@
                             <div @click="saveData('editImageSosmed')" class="cursor-pointer absolute top-0 end-0 flex items-center justify-center text-slate-300 hover:text-primary">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"><path fill="currentColor" d="M21 7v12q0 .825-.587 1.413T19 21H5q-.825 0-1.412-.587T3 19V5q0-.825.588-1.412T5 3h12zm-9 11q1.25 0 2.125-.875T15 15q0-1.25-.875-2.125T12 12q-1.25 0-2.125.875T9 15q0 1.25.875 2.125T12 18m-6-8h9V6H6z"/></svg>
                             </div>
-                            <PartialsImage :activeImage="dataStore.profile.image" @changeimage="(value) => {dataStore.profile.image = value}" />
+                            <PartialsImage :activeImage="dataStore.profile.image" @changeimage="(value) => {dataStore.profile.image = value; console.log(value)}" />
                             <span class="text-xs text-slate-500">Klik gambar untuk upload</span>
                             <PartialsInput v-model="dataStore.profile.name" :modelValue="dataStore.profile.name" :inputClass="`text-center border-b rounded-none focus:rounded-3xl focus:border-transparent mb-0 w-full block`" :placeholder="`Nama Lengkap`" />
                             <PartialsInput v-model="dataStore.profile.role" :modelValue="dataStore.profile.role" :inputClass="`text-center border-none focus:border-none focus:rounded-3xl rounded-none block mt-[-1em]`" :placeholder="`Role / Posisi`" />
@@ -211,29 +211,21 @@
                                     </defs>
                                 </svg>
                                 <div class="w-full">
-                                    <PartialsSelect :selectedData="dataStore.biodata.birth_place" :options="options.citys" :customClass="`p-2 px-3 border-b focus:outline-none block w-full rounded-none`" @selected="(value) => {dataStore.biodata.birth_place = value?.key}" :label="`Tempat Lahir`"/>
+                                    <PartialsSelect :selectedData="dataStore.biodata.birth_place" :options="options.citys" :customClass="`p-2 px-3 border-b focus:outline-none block w-full rounded-none w-full`" class="relative z-[16]" @selected="(value) => {dataStore.biodata.birth_place = value?.key}" :label="`Tempat Lahir`"/>
                                     <input type="date" class="p-2 px-3 border-b focus:outline-none block w-full" v-model="dataStore.biodata.birth_date" placeholder="Tgl Lahir" required/>
                                 </div>
                             </li>
-                            <li class="flex items-center gap-4 text-sm">
+                            <li class="flex items-center gap-4 text-sm w-full">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="21" viewBox="0 0 20 21" fill="none">
                                     <path d="M16.2495 2.375H13.1245C12.9587 2.375 12.7997 2.44085 12.6825 2.55806C12.5653 2.67527 12.4995 2.83424 12.4995 3C12.4995 3.16576 12.5653 3.32473 12.6825 3.44194C12.7997 3.55915 12.9587 3.625 13.1245 3.625H14.7409L12.776 5.58984C12.1991 5.05218 11.5032 4.65861 10.7451 4.44128C9.98698 4.22396 9.18823 4.18903 8.41406 4.33936C7.63989 4.4897 6.91226 4.82102 6.2906 5.30628C5.66894 5.79154 5.17088 6.41696 4.8371 7.13148C4.50332 7.84599 4.34329 8.62932 4.37007 9.4175C4.39686 10.2057 4.6097 10.9763 4.99122 11.6665C5.37273 12.3567 5.9121 12.9469 6.56527 13.3888C7.21844 13.8308 7.96688 14.1119 8.74947 14.2094V15.5H6.87447C6.70871 15.5 6.54974 15.5658 6.43253 15.6831C6.31532 15.8003 6.24947 15.9592 6.24947 16.125C6.24947 16.2908 6.31532 16.4497 6.43253 16.5669C6.54974 16.6842 6.70871 16.75 6.87447 16.75H8.74947V18.625C8.74947 18.7908 8.81532 18.9497 8.93253 19.0669C9.04974 19.1842 9.20871 19.25 9.37447 19.25C9.54023 19.25 9.6992 19.1842 9.81641 19.0669C9.93362 18.9497 9.99947 18.7908 9.99947 18.625V16.75H11.8745C12.0402 16.75 12.1992 16.6842 12.3164 16.5669C12.4336 16.4497 12.4995 16.2908 12.4995 16.125C12.4995 15.9592 12.4336 15.8003 12.3164 15.6831C12.1992 15.5658 12.0402 15.5 11.8745 15.5H9.99947V14.2094C10.8372 14.1047 11.6348 13.7894 12.3176 13.2928C13.0004 12.7963 13.5461 12.1347 13.9038 11.37C14.2615 10.6052 14.4195 9.76228 14.363 8.9199C14.3065 8.07753 14.0374 7.26324 13.5807 6.55313L15.6245 4.50859V6.125C15.6245 6.29076 15.6903 6.44973 15.8075 6.56694C15.9247 6.68415 16.0837 6.75 16.2495 6.75C16.4152 6.75 16.5742 6.68415 16.6914 6.56694C16.8086 6.44973 16.8745 6.29076 16.8745 6.125V3C16.8745 2.83424 16.8086 2.67527 16.6914 2.55806C16.5742 2.44085 16.4152 2.375 16.2495 2.375ZM9.37447 13C8.63279 13 7.90777 12.7801 7.29108 12.368C6.6744 11.956 6.19375 11.3703 5.90993 10.6851C5.6261 9.99984 5.55183 9.24584 5.69653 8.51841C5.84122 7.79098 6.19838 7.1228 6.72282 6.59835C7.24727 6.0739 7.91546 5.71675 8.64288 5.57206C9.37031 5.42736 10.1243 5.50162 10.8095 5.78545C11.4948 6.06928 12.0804 6.54993 12.4925 7.16661C12.9045 7.7833 13.1245 8.50832 13.1245 9.25C13.1234 10.2442 12.728 11.1975 12.025 11.9005C11.3219 12.6035 10.3687 12.999 9.37447 13Z" fill="#797979"/>
                                 </svg>
-                                <select v-model="dataStore.biodata.gender" name="" id="" class="border-b p-2 px-3 block w-full focus:outline-none" required>
-                                    <option selected>-- Pilih Gender --</option>
-                                    <option value="male">Laki Laki</option>
-                                    <option value="female">Perempuan</option>
-                                </select>
+                                <PartialsSelect :selectedData="dataStore?.biodata?.gender" @selected="(value) => { dataStore.biodata.gender = value.key }" :options="[{key: 'male', value: 'Laki Laki'},{key: 'female', value: 'Perempuan'}]" class="flex-1 relative z-[14]" :customClass="`rounded-none p-2 px-3 border-b focus:outline-none block w-full`" :label="`Status Pernikahan`" />
                             </li>
                             <li class="flex items-center gap-4 text-sm">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="21" viewBox="0 0 20 21" fill="none">
                                     <path d="M6.4 3.5C3.97 3.5 2 5.47 2 7.9C2 12.3 7.2 16.3 10 17.2304C12.8 16.3 18 12.3 18 7.9C18 5.47 16.03 3.5 13.6 3.5C12.112 3.5 10.796 4.2388 10 5.3696C9.59427 4.79168 9.05526 4.32004 8.42861 3.9946C7.80196 3.66915 7.10612 3.4995 6.4 3.5Z" stroke="#797979" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
                                 </svg>
-                                <select v-model="dataStore.biodata.marritage_status" name="" id="" class="border-b p-2 px-3 block w-full focus:outline-none" required>
-                                    <option selected>-- Status Pernikahan --</option>
-                                    <option value="married">Married</option>
-                                    <option value="single">Single</option>
-                                </select>
+                                <PartialsSelect :selectedData="dataStore?.biodata?.marritage_status" @selected="(value) => { dataStore.biodata.marritage_status = value.key }" :options="[{key: 'single', value: 'Single'}, {key: 'married', value: 'Menikah'}]" class="flex-1 relative z-[13]" :customClass="`rounded-none p-2 px-3 border-b focus:outline-none block w-full`" :label="`Status Pernikahan`" />
                             </li>
                             <li class="flex items-center gap-4 text-sm">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
@@ -254,10 +246,7 @@
                                         </clipPath>
                                     </defs>
                                 </svg>
-                                <select v-model="dataStore.biodata.religion" name="" id="" class="border-b p-2 px-3 block w-full focus:outline-none" required>
-                                    <option selected>-- Agama --</option>
-                                    <option v-for="rlg in options.religions" :value="rlg?.key">{{rlg.value}}</option>
-                                </select>
+                                <PartialsSelect :selectedData="capitalize(dataStore.biodata.religion)" @selected="(value) => { dataStore.biodata.religion = value.key; }" :options="options.religions" class="flex-1 relative z-[12]" :customClass="`rounded-none p-2 px-3 border-b focus:outline-none block w-full`" :label="`Agama`" />
                             </li>
                             <li class="flex items-center gap-4 text-sm">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
@@ -1270,6 +1259,9 @@ const handleFamSelectedProvince = (value) => {
     singleData.value.family_contact.province_id = value.key;
 }
 // ------
+function capitalize(str) {
+  return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
+}
 
 const isRequiredDataFilled = () => {
     const dt = dataStore.value;

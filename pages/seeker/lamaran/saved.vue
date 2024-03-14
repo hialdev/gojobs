@@ -14,7 +14,10 @@
                         />
                     </div>
                     <h2 class="text-base capitalize mb-1">{{ job?.joborder?.job_title.toLowerCase() }}</h2>
-                    <p class="text-slate-500 text-sm mb-3 uppercase">{{ job?.joborder?.job_company.toLowerCase() }}</p>
+                    <p class="text-slate-500 text-sm mb-3 uppercase">
+                        PT Infomedia Solusi Humanika
+                        <!-- {{ job?.job_company.toLowerCase() }} -->
+                    </p>
                     <ul class="text-slate-600 mt-auto">
                         <li class="flex items-center gap-3 text-sm">
                             <div class="w-[20px]">

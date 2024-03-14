@@ -24,8 +24,8 @@
                 <div class="container mx-auto">
                     <div class="grid grid-cols-12 md:gap-6">
                         <div class="hidden lg:block col-span-3">
-                            <h5 class="text-xl font-medium">Pengaturan</h5>
                             <div class="flex flex-col items-start gap-2 p-4 mb-0 bg-white rounded-xl">
+                                <h5 class="text-lg font-medium border-b px-2 pb-4 w-full">Pengaturan Akun</h5>
                                 <NuxtLink to="/seeker/settings/account" activeClass="activeTab" class="cursor-pointer flex w-full items-center p-3 px-5 gap-5 text-slate-500 hover:bg-orange-50 hover:text-orange-600 rounded-xl">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 32 32"><path fill="currentColor" d="M16 16a7 7 0 1 0 0-14a7 7 0 0 0 0 14m-8.5 2A3.5 3.5 0 0 0 4 21.5v.5c0 2.393 1.523 4.417 3.685 5.793C9.859 29.177 12.802 30 16 30c3.198 0 6.14-.823 8.315-2.207C26.477 26.417 28 24.393 28 22v-.5a3.5 3.5 0 0 0-3.5-3.5z"/></svg>
                                     <span class="hidden md:block">Detail Akun</span>
