@@ -146,7 +146,7 @@
                                         </clipPath>
                                     </defs>
                                 </svg>
-                                <span class="">{{userStore?.detail?.biodata?.birth_place == '' ? '-' : dataNormal?.biodata?.birth_place }}, {{userStore.detail.biodata.birth_date == null ? 'YYYY - MM - DD' : formatDate(userStore.detail.biodata.birth_date)}}</span>
+                                <span class="">{{userStore?.detail?.biodata?.birth_place == '' ? '-' : userStore?.detail?.biodata?.birth_place }}, {{userStore.detail.biodata.birth_date == null ? 'YYYY - MM - DD' : formatDate(userStore.detail.biodata.birth_date)}}</span>
                             </li>
                             <li class="flex items-center gap-4 text-sm">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="21" viewBox="0 0 20 21" fill="none">
@@ -211,7 +211,7 @@
                                     </defs>
                                 </svg>
                                 <div class="w-full">
-                                    <PartialsSelect :required="true" :submitted="submit.biodata" :selectedData="dataStore.biodata.birth_place" :options="options.citys" :customClass="`p-2 px-3 border-b focus:outline-none block w-full rounded-none w-full`" class="relative z-[16]" @selected="(value) => {dataStore.biodata.birth_place = value?.key}" :label="`Tempat Lahir`"/>
+                                    <PartialsSelect :required="true" :submitted="submit.biodata" :selectedData="dataStore.biodata.birth_place" :options="options.citys" :customClass="`p-2 px-3 border-b focus:outline-none block w-full rounded-none w-full`" class="relative z-[16]" @selected="(value) => {dataStore.biodata.birth_place = value?.value}" :label="`Tempat Lahir`"/>
                                     <input type="date" class="p-2 px-3 border-b focus:outline-none block w-full" v-model="dataStore.biodata.birth_date" placeholder="Tgl Lahir" required/>
                                 </div>
                             </li>
@@ -219,7 +219,7 @@
                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="21" viewBox="0 0 20 21" fill="none">
                                     <path d="M16.2495 2.375H13.1245C12.9587 2.375 12.7997 2.44085 12.6825 2.55806C12.5653 2.67527 12.4995 2.83424 12.4995 3C12.4995 3.16576 12.5653 3.32473 12.6825 3.44194C12.7997 3.55915 12.9587 3.625 13.1245 3.625H14.7409L12.776 5.58984C12.1991 5.05218 11.5032 4.65861 10.7451 4.44128C9.98698 4.22396 9.18823 4.18903 8.41406 4.33936C7.63989 4.4897 6.91226 4.82102 6.2906 5.30628C5.66894 5.79154 5.17088 6.41696 4.8371 7.13148C4.50332 7.84599 4.34329 8.62932 4.37007 9.4175C4.39686 10.2057 4.6097 10.9763 4.99122 11.6665C5.37273 12.3567 5.9121 12.9469 6.56527 13.3888C7.21844 13.8308 7.96688 14.1119 8.74947 14.2094V15.5H6.87447C6.70871 15.5 6.54974 15.5658 6.43253 15.6831C6.31532 15.8003 6.24947 15.9592 6.24947 16.125C6.24947 16.2908 6.31532 16.4497 6.43253 16.5669C6.54974 16.6842 6.70871 16.75 6.87447 16.75H8.74947V18.625C8.74947 18.7908 8.81532 18.9497 8.93253 19.0669C9.04974 19.1842 9.20871 19.25 9.37447 19.25C9.54023 19.25 9.6992 19.1842 9.81641 19.0669C9.93362 18.9497 9.99947 18.7908 9.99947 18.625V16.75H11.8745C12.0402 16.75 12.1992 16.6842 12.3164 16.5669C12.4336 16.4497 12.4995 16.2908 12.4995 16.125C12.4995 15.9592 12.4336 15.8003 12.3164 15.6831C12.1992 15.5658 12.0402 15.5 11.8745 15.5H9.99947V14.2094C10.8372 14.1047 11.6348 13.7894 12.3176 13.2928C13.0004 12.7963 13.5461 12.1347 13.9038 11.37C14.2615 10.6052 14.4195 9.76228 14.363 8.9199C14.3065 8.07753 14.0374 7.26324 13.5807 6.55313L15.6245 4.50859V6.125C15.6245 6.29076 15.6903 6.44973 15.8075 6.56694C15.9247 6.68415 16.0837 6.75 16.2495 6.75C16.4152 6.75 16.5742 6.68415 16.6914 6.56694C16.8086 6.44973 16.8745 6.29076 16.8745 6.125V3C16.8745 2.83424 16.8086 2.67527 16.6914 2.55806C16.5742 2.44085 16.4152 2.375 16.2495 2.375ZM9.37447 13C8.63279 13 7.90777 12.7801 7.29108 12.368C6.6744 11.956 6.19375 11.3703 5.90993 10.6851C5.6261 9.99984 5.55183 9.24584 5.69653 8.51841C5.84122 7.79098 6.19838 7.1228 6.72282 6.59835C7.24727 6.0739 7.91546 5.71675 8.64288 5.57206C9.37031 5.42736 10.1243 5.50162 10.8095 5.78545C11.4948 6.06928 12.0804 6.54993 12.4925 7.16661C12.9045 7.7833 13.1245 8.50832 13.1245 9.25C13.1234 10.2442 12.728 11.1975 12.025 11.9005C11.3219 12.6035 10.3687 12.999 9.37447 13Z" fill="#797979"/>
                                 </svg>
-                                <PartialsSelect :required="true" :submitted="submit.biodata" :selectedData="dataStore?.biodata?.gender" @selected="(value) => { dataStore.biodata.gender = value.key }" :options="[{key: 'male', value: 'Laki Laki'},{key: 'female', value: 'Perempuan'}]" class="flex-1 relative z-[14]" :customClass="`rounded-none p-2 px-3 border-b focus:outline-none block w-full`" :label="`Status Pernikahan`" />
+                                <PartialsSelect :required="true" :submitted="submit.biodata" :selectedData="dataStore?.biodata?.gender" @selected="(value) => { dataStore.biodata.gender = value.key }" :options="[{key: 'male', value: 'Laki Laki'},{key: 'female', value: 'Perempuan'}]" class="flex-1 relative z-[14]" :customClass="`rounded-none p-2 px-3 border-b focus:outline-none block w-full`" :label="`Gender`" />
                             </li>
                             <li class="flex items-center gap-4 text-sm">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="21" viewBox="0 0 20 21" fill="none">
@@ -1196,9 +1196,7 @@ onMounted(async () => {
     dataStore.value = userStore?.detail;
     
     console.log(dataStore.value);
-    if(dataStore.value.biodata.birth_place != ''){
-        dataNormal.value.biodata.birth_place = await cityStore.getCityById(dataStore.value.biodata.birth_place);
-    }
+    
     if(dataStore.value.profile.province != ''){
         dataNormal.value.profile.province = await cityStore.getProvinceById(dataStore.value.profile.province);
     }

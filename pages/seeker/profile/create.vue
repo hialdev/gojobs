@@ -9,12 +9,12 @@
         
         <!-- Biodata -->
         <div v-if="show.biodata">
-            <div class="bg-white p-5 rounded-xl grid grid-cols-12 items-start gap-y-9">
+            <div class="bg-white p-5 rounded-xl grid grid-cols-12 items-start gap-y-9 gap-x-8">
                 <div class="col-span-12 md:col-span-6 text-center flex flex-col gap-2">
                     <PartialsImage :activeImage="dataStore.profile.image" @changeimage="(value) => {dataStore.profile.image = value}" />
                     <span class="text-xs text-slate-500">Klik gambar untuk upload</span>
-                    <PartialsInput v-model="dataStore.profile.name" :modelValue="dataStore.profile.name" :inputClass="`text-center border-b rounded-none focus:rounded-3xl focus:border-transparent mb-0 w-full block`" :placeholder="`Nama Lengkap`" />
-                    <PartialsInput v-model="dataStore.profile.role" :modelValue="dataStore.profile.role" :inputClass="`text-center border-b focus:border-none focus:rounded-3xl rounded-none block mt-[-1em]`" :placeholder="`Jabatan / Posisi saat ini`" />
+                    <PartialsInput :required="true" :submitted="submit" v-model="dataStore.profile.name" :modelValue="dataStore.profile.name" :inputClass="`text-center border-b rounded-none focus:rounded-3xl focus:border-transparent mb-0 w-full block`" :placeholder="`Nama Lengkap`" />
+                    <PartialsInput :required="true" :submitted="submit" v-model="dataStore.profile.role" :modelValue="dataStore.profile.role" :inputClass="`text-center border-b focus:border-none focus:rounded-3xl rounded-none block mt-[-1em]`" :placeholder="`Jabatan / Posisi saat ini`" />
                     <div class="flex w-full flex-col gap-3 my-3">
                         <div class="flex items-center gap-4">
                             <div class="flex items-center justify-center p-2 rounded-xl text-red-600 bg-red-100">
@@ -68,29 +68,21 @@
                             </defs>
                         </svg>
                         <div class="w-full">
-                            <PartialsSelect @selected="(value) => {dataStore.biodata.birth_place = value.key}" :customClass="`p-2 px-3 border-b focus:outline-none block w-full rounded-none`" :label="`Tempat Lahir`" :options="options.citys" />
-                            <input type="date" class="p-2 px-3 border-b focus:outline-none block w-full" v-model="dataStore.biodata.birth_date" placeholder="Tgl Lahir" />
+                            <PartialsSelect :required="true" :submitted="submit" @selected="(value) => {dataStore.biodata.birth_place = value.value}" :customClass="`p-2 px-3 border-b focus:outline-none block w-full rounded-none`" :label="`Tempat Lahir`" :options="options.citys" />
+                            <input type="date" class="p-2 px-3 border-b focus:outline-none block w-full" v-model="dataStore.biodata.birth_date" placeholder="Tgl Lahir" required/>
                         </div>
                     </li>
                     <li class="flex items-center gap-4 text-sm">
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="21" viewBox="0 0 20 21" fill="none">
                             <path d="M16.2495 2.375H13.1245C12.9587 2.375 12.7997 2.44085 12.6825 2.55806C12.5653 2.67527 12.4995 2.83424 12.4995 3C12.4995 3.16576 12.5653 3.32473 12.6825 3.44194C12.7997 3.55915 12.9587 3.625 13.1245 3.625H14.7409L12.776 5.58984C12.1991 5.05218 11.5032 4.65861 10.7451 4.44128C9.98698 4.22396 9.18823 4.18903 8.41406 4.33936C7.63989 4.4897 6.91226 4.82102 6.2906 5.30628C5.66894 5.79154 5.17088 6.41696 4.8371 7.13148C4.50332 7.84599 4.34329 8.62932 4.37007 9.4175C4.39686 10.2057 4.6097 10.9763 4.99122 11.6665C5.37273 12.3567 5.9121 12.9469 6.56527 13.3888C7.21844 13.8308 7.96688 14.1119 8.74947 14.2094V15.5H6.87447C6.70871 15.5 6.54974 15.5658 6.43253 15.6831C6.31532 15.8003 6.24947 15.9592 6.24947 16.125C6.24947 16.2908 6.31532 16.4497 6.43253 16.5669C6.54974 16.6842 6.70871 16.75 6.87447 16.75H8.74947V18.625C8.74947 18.7908 8.81532 18.9497 8.93253 19.0669C9.04974 19.1842 9.20871 19.25 9.37447 19.25C9.54023 19.25 9.6992 19.1842 9.81641 19.0669C9.93362 18.9497 9.99947 18.7908 9.99947 18.625V16.75H11.8745C12.0402 16.75 12.1992 16.6842 12.3164 16.5669C12.4336 16.4497 12.4995 16.2908 12.4995 16.125C12.4995 15.9592 12.4336 15.8003 12.3164 15.6831C12.1992 15.5658 12.0402 15.5 11.8745 15.5H9.99947V14.2094C10.8372 14.1047 11.6348 13.7894 12.3176 13.2928C13.0004 12.7963 13.5461 12.1347 13.9038 11.37C14.2615 10.6052 14.4195 9.76228 14.363 8.9199C14.3065 8.07753 14.0374 7.26324 13.5807 6.55313L15.6245 4.50859V6.125C15.6245 6.29076 15.6903 6.44973 15.8075 6.56694C15.9247 6.68415 16.0837 6.75 16.2495 6.75C16.4152 6.75 16.5742 6.68415 16.6914 6.56694C16.8086 6.44973 16.8745 6.29076 16.8745 6.125V3C16.8745 2.83424 16.8086 2.67527 16.6914 2.55806C16.5742 2.44085 16.4152 2.375 16.2495 2.375ZM9.37447 13C8.63279 13 7.90777 12.7801 7.29108 12.368C6.6744 11.956 6.19375 11.3703 5.90993 10.6851C5.6261 9.99984 5.55183 9.24584 5.69653 8.51841C5.84122 7.79098 6.19838 7.1228 6.72282 6.59835C7.24727 6.0739 7.91546 5.71675 8.64288 5.57206C9.37031 5.42736 10.1243 5.50162 10.8095 5.78545C11.4948 6.06928 12.0804 6.54993 12.4925 7.16661C12.9045 7.7833 13.1245 8.50832 13.1245 9.25C13.1234 10.2442 12.728 11.1975 12.025 11.9005C11.3219 12.6035 10.3687 12.999 9.37447 13Z" fill="#797979"/>
                         </svg>
-                        <select v-model="dataStore.biodata.gender" name="" id="" class="border-b p-2 px-3 block w-full focus:outline-none">
-                            <option selected>-- Pilih Gender --</option>
-                            <option value="male">Laki Laki</option>
-                            <option value="female">Perempuan</option>
-                        </select>
+                        <PartialsSelect :required="true" :submitted="submit" :selectedData="dataStore?.biodata?.gender" @selected="(value) => { dataStore.biodata.gender = value.key }" :options="[{key: 'male', value: 'Laki Laki'},{key: 'female', value: 'Perempuan'}]" class="flex-1 relative z-[14]" :customClass="`rounded-none p-2 px-3 border-b focus:outline-none block w-full`" :label="`Gender`" />
                     </li>
                     <li class="flex items-center gap-4 text-sm">
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="21" viewBox="0 0 20 21" fill="none">
                             <path d="M6.4 3.5C3.97 3.5 2 5.47 2 7.9C2 12.3 7.2 16.3 10 17.2304C12.8 16.3 18 12.3 18 7.9C18 5.47 16.03 3.5 13.6 3.5C12.112 3.5 10.796 4.2388 10 5.3696C9.59427 4.79168 9.05526 4.32004 8.42861 3.9946C7.80196 3.66915 7.10612 3.4995 6.4 3.5Z" stroke="#797979" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
-                        <select v-model="dataStore.biodata.marritage_status" name="" id="" class="border-b p-2 px-3 block w-full focus:outline-none">
-                            <option selected>-- Status Pernikahan --</option>
-                            <option value="Menikah">Menikah</option>
-                            <option value="Single">Single</option>
-                        </select>
+                        <PartialsSelect :required="true" :submitted="submit" :selectedData="dataStore?.biodata?.marritage_status" @selected="(value) => { dataStore.biodata.marritage_status = value.key }" :options="[{key: 'single', value: 'Single'}, {key: 'married', value: 'Menikah'}]" class="flex-1 relative z-[13]" :customClass="`rounded-none p-2 px-3 border-b focus:outline-none block w-full`" :label="`Status Pernikahan`" />
                     </li>
                     <li class="flex items-center gap-4 text-sm">
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
@@ -111,10 +103,7 @@
                                 </clipPath>
                             </defs>
                         </svg>
-                        <select v-model="dataStore.biodata.religion" name="" id="" class="border-b p-2 px-3 block w-full focus:outline-none">
-                            <option selected>-- Agama --</option>
-                            <option v-for="religion in options.religions" :value="religion?.key">{{religion?.value}}</option>
-                        </select>
+                        <PartialsSelect :required="true" :submitted="submit" :selectedData="capitalize(dataStore.biodata.religion)" @selected="(value) => { dataStore.biodata.religion = value.key; }" :options="options.religions" class="flex-1 relative z-[12]" :customClass="`rounded-none p-2 px-3 border-b focus:outline-none block w-full`" :label="`Agama`" />
                     </li>
                     <li class="flex items-center gap-4 text-sm">
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
@@ -145,7 +134,7 @@
 
         <!-- Summary & Alamat -->
         <div v-if="show.informasi">
-            <div class="bg-white p-5 rounded-xl grid grid-cols-12 items-start gap-y-9">
+            <div class="bg-white p-5 rounded-xl grid grid-cols-12 items-start gap-y-9 gap-x-8">
                 <div class="col-span-12 md:col-span-6 pt-5 font-light">
                     <h3 class="font-medium mb-3">Ringkasan</h3>
                     <textarea v-model="dataStore.profile.summary" class="text-sm w-full rounded-lg border border-slate-200 text-sm p-2 px-4" name="" id="" cols="20" rows="6" :placeholder="`Jelaskan siapa diri anda, tips: ketertarikan, pengalaman, pencapaian, visi-misi`">{{ dataStore?.profile?.summary }}</textarea>
@@ -158,13 +147,13 @@
                         <div class="text-slate-600">
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 22V12c0-1.886 0-2.828.586-3.414C4.172 8 5.114 8 7 8c1.886 0 2.828 0 3.414.586C11 9.172 11 10.114 11 12"/><path d="M17 22v-6c0-1.886 0-2.828-.586-3.414C15.828 12 14.886 12 13 12h-2c-1.886 0-2.828 0-3.414.586C7 13.172 7 14.114 7 16v6"/><path d="M21 22V7.772c0-1.34 0-2.011-.356-2.525c-.356-.514-.984-.75-2.24-1.22c-2.455-.921-3.682-1.381-4.543-.785C13 3.84 13 5.15 13 7.772V12"/><path stroke-linecap="round" d="M4 8V6.5c0-.943 0-1.414.293-1.707C4.586 4.5 5.057 4.5 6 4.5h2c.943 0 1.414 0 1.707.293C10 5.086 10 5.557 10 6.5V8M7 4V2m15 20H2m8-7h4m-4 3h4"/></g></svg>
                         </div>
-                        <PartialsSelect @selected="handleSelectedProvince" :options="options.provinces" class="flex-1 relative z-[12]" :customClass="`rounded-none p-2 px-3 border-b focus:outline-none block w-full`" :label="`Provinsi`" />
+                        <PartialsSelect :required="true" :submitted="submit" @selected="handleSelectedProvince" :options="options.provinces" class="flex-1 relative z-[12]" :customClass="`rounded-none p-2 px-3 border-b focus:outline-none block w-full`" :label="`Provinsi`" />
                     </li>
                     <li class="flex items-center gap-4 text-sm">
                         <div class="text-slate-600">
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 48 48"><g fill="none"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="4" d="M4 42h40"/><rect width="8" height="16" x="8" y="26" stroke="currentColor" stroke-linejoin="round" stroke-width="4" rx="2"/><path stroke="currentColor" stroke-linecap="square" stroke-linejoin="round" stroke-width="4" d="M12 34h1"/><rect width="24" height="38" x="16" y="4" stroke="currentColor" stroke-linejoin="round" stroke-width="4" rx="2"/><path fill="currentColor" d="M22 10h4v4h-4zm8 0h4v4h-4zm-8 7h4v4h-4zm8 0h4v4h-4zm0 7h4v4h-4zm0 7h4v4h-4z"/></g></svg>
                         </div>
-                        <PartialsSelect @selected="(value) => {dataStore.profile.city = value.key}" :options="options.filteredCitys" class="flex-1 relative z-10" :customClass="`rounded-none p-2 px-3 border-b focus:outline-none block w-full`" :label="`Kota`" />
+                        <PartialsSelect :required="true" :submitted="submit" @selected="(value) => {dataStore.profile.city = value.key}" :options="options.filteredCitys" class="flex-1 relative z-10" :customClass="`rounded-none p-2 px-3 border-b focus:outline-none block w-full`" :label="`Kota`" />
                     </li>
                     <li class="flex items-start gap-4 text-sm">
                         <div class="text-slate-600">
@@ -180,7 +169,7 @@
                     </li>
                 </ul>
             </div>
-            <p class="text-xs text-slate-600 text-center w-full max-w-[40em] mx-auto mt-2">Pastikan data telah diisi dengan benar, lalu klik buat profile dibawah ini. Anda akan diarahkan ke halaman My Profile untuk mengisi profile lebih lanjut (Pendidikan, Pengalaman, Organisasi, Keterampilan, dan Bahasa).</p>
+            <p class="text-xs text-slate-600 text-center w-full max-w-[40em] mx-auto mt-4">Pastikan data telah diisi dengan benar, lalu klik buat profile dibawah ini. Anda akan diarahkan ke halaman My Profile untuk mengisi profile lebih lanjut (Pendidikan, Pengalaman, Organisasi, Keterampilan, Bahasa dan Family Emergency Contact).</p>
             <div class="sticky z-[14] bottom-2 flex items-center justify-center gap-x-2 px-2 md:px-5 my-5">
                 <button @click="openBox('biodata')" class="hover:outline-2 hover:outline-slate-600 flex items-center gap-3 rounded-lg text-sm bg-slate-200 text-slate-600 p-2 px-4 text-sm whitespace-nowrap"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 512 512"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32" d="m112 160l-64 64l64 64"/><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32" d="M64 224h294c58.76 0 106 49.33 106 108v20"/></svg> Sebelumnya</button>
                 <button @click="createProfile" class="hover:bg-orange-600 flex items-center gap-3 rounded-lg text-orange-100 text-sm bg-orange-500 p-2 px-4 text-sm whitespace-nowrap">Buat Profile <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path fill="currentColor" d="M8 12h8v-2H8zm0-4h8V6H8zm11.95 12.475L15.9 15.2q-.425-.575-1.05-.887T13.5 14H4V4q0-.825.588-1.412T6 2h12q.825 0 1.413.588T20 4v16q0 .125-.012.238t-.038.237M6 22q-.825 0-1.412-.587T4 20v-4h9.5q.25 0 .463.113t.362.312l4.2 5.5q-.125.05-.262.063T18 22z"/></svg></button>
@@ -192,9 +181,9 @@
 </template>
 
 <script setup>
-definePageMeta({
-    middleware: ['profile']
-});
+// definePageMeta({
+//     middleware: ['profile']
+// });
 
 import { useToast } from 'vue-toastification';
 const isReady = ref(false);
@@ -241,6 +230,7 @@ const cityStore = useCityStore();
 const userStore = useUserStore();
 const religionStore = useReligionStore();
 
+const submit = ref(false);
 const options = ref({
     citys : [],
     filteredCitys : [],
@@ -275,6 +265,7 @@ const openBox = (section) => {
 }
 
 const createProfile = async () => {
+    submit.value = true;
     const ds = dataStore.value;
     console.log(ds);
     const addUser = await userStore.addProfile(
@@ -307,6 +298,11 @@ const createProfile = async () => {
     }else{
         toast.error(addUser?.message);
     }
+    submit.value = false;
+}
+
+function capitalize(str) {
+  return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
 }
 </script>
 
