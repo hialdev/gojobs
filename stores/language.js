@@ -26,12 +26,13 @@ export const useLanguageStore = defineStore('language',{
             return language;
         },
 
-        async addLanguage(lang, read, write, speak){
+        async addLanguage(lang, understand, read, write, speak){
             var headers = new Headers();
             headers.append("token",localStorage.getItem('access_token') ?? 'rbkmzydqknor0t5q236n01j38');
 
             const formdata = new FormData();
             formdata.append("language", lang);
+            formdata.append("understanding", understand);
             formdata.append("speaking", speak);
             formdata.append("writing", write);
             formdata.append("reading", read);

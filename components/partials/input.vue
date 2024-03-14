@@ -1,7 +1,7 @@
 <template>
     <div class="mb-3">
         <label v-if="label" class="text-xs mb-3 block">{{label}}</label>
-        <input :class="['block text-sm w-full bg-white rounded-3xl p-3 px-4 outline-transparent focus:outline-orange-500/20', inputClass, {'border-red-500': !modelValue && submitted}]"
+        <input :class="['block text-sm w-full bg-white rounded-3xl p-3 px-4 outline-transparent focus:outline-orange-500/20',{'border-rose-500': !modelValue && submitted && required}, inputClass]"
                ref="input"
                @input="handleInput" 
                :value="modelValue" 
@@ -48,10 +48,10 @@ export default {
             this.$emit('input', event.target.value);
         },
         validateInput() {
-            if (!this.modelValue && this.submitted) {
-                this.$refs.input.classList.add('border-red-500');
+            if (!this.modelValue && this.submitted && this.required) {
+                this.$refs.input.classList.add('border-rose-500');
             } else {
-                this.$refs.input.classList.remove('border-red-500');
+                this.$refs.input.classList.remove('border-rose-500');
             }
         }
     },

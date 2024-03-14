@@ -85,8 +85,8 @@
                             </div>
                             <PartialsImage :activeImage="dataStore.profile.image" @changeimage="(value) => {dataStore.profile.image = value; console.log(value)}" />
                             <span class="text-xs text-slate-500">Klik gambar untuk upload</span>
-                            <PartialsInput v-model="dataStore.profile.name" :modelValue="dataStore.profile.name" :inputClass="`text-center border-b rounded-none focus:rounded-3xl focus:border-transparent mb-0 w-full block`" :placeholder="`Nama Lengkap`" />
-                            <PartialsInput v-model="dataStore.profile.role" :modelValue="dataStore.profile.role" :inputClass="`text-center border-none focus:border-none focus:rounded-3xl rounded-none block mt-[-1em]`" :placeholder="`Role / Posisi`" />
+                            <PartialsInput :required="true" :submitted="submit.biodata" v-model="dataStore.profile.name" :modelValue="dataStore.profile.name" :inputClass="`text-center border-b rounded-none focus:rounded-3xl focus:border-transparent mb-0 w-full block`" :placeholder="`Nama Lengkap`" />
+                            <PartialsInput :required="true" :submitted="submit.biodata" v-model="dataStore.profile.role" :modelValue="dataStore.profile.role" :inputClass="`text-center border-none focus:border-none focus:rounded-3xl rounded-none block mt-[-1em]`" :placeholder="`Role / Posisi`" />
                             <div class="text-sm text-gray-500 text-start">Social Media</div>
                             <div class="flex w-full flex-col gap-3 my-3">
                                 <div class="flex items-center gap-4">
@@ -211,7 +211,7 @@
                                     </defs>
                                 </svg>
                                 <div class="w-full">
-                                    <PartialsSelect :selectedData="dataStore.biodata.birth_place" :options="options.citys" :customClass="`p-2 px-3 border-b focus:outline-none block w-full rounded-none w-full`" class="relative z-[16]" @selected="(value) => {dataStore.biodata.birth_place = value?.key}" :label="`Tempat Lahir`"/>
+                                    <PartialsSelect :required="true" :submitted="submit.biodata" :selectedData="dataStore.biodata.birth_place" :options="options.citys" :customClass="`p-2 px-3 border-b focus:outline-none block w-full rounded-none w-full`" class="relative z-[16]" @selected="(value) => {dataStore.biodata.birth_place = value?.key}" :label="`Tempat Lahir`"/>
                                     <input type="date" class="p-2 px-3 border-b focus:outline-none block w-full" v-model="dataStore.biodata.birth_date" placeholder="Tgl Lahir" required/>
                                 </div>
                             </li>
@@ -219,13 +219,13 @@
                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="21" viewBox="0 0 20 21" fill="none">
                                     <path d="M16.2495 2.375H13.1245C12.9587 2.375 12.7997 2.44085 12.6825 2.55806C12.5653 2.67527 12.4995 2.83424 12.4995 3C12.4995 3.16576 12.5653 3.32473 12.6825 3.44194C12.7997 3.55915 12.9587 3.625 13.1245 3.625H14.7409L12.776 5.58984C12.1991 5.05218 11.5032 4.65861 10.7451 4.44128C9.98698 4.22396 9.18823 4.18903 8.41406 4.33936C7.63989 4.4897 6.91226 4.82102 6.2906 5.30628C5.66894 5.79154 5.17088 6.41696 4.8371 7.13148C4.50332 7.84599 4.34329 8.62932 4.37007 9.4175C4.39686 10.2057 4.6097 10.9763 4.99122 11.6665C5.37273 12.3567 5.9121 12.9469 6.56527 13.3888C7.21844 13.8308 7.96688 14.1119 8.74947 14.2094V15.5H6.87447C6.70871 15.5 6.54974 15.5658 6.43253 15.6831C6.31532 15.8003 6.24947 15.9592 6.24947 16.125C6.24947 16.2908 6.31532 16.4497 6.43253 16.5669C6.54974 16.6842 6.70871 16.75 6.87447 16.75H8.74947V18.625C8.74947 18.7908 8.81532 18.9497 8.93253 19.0669C9.04974 19.1842 9.20871 19.25 9.37447 19.25C9.54023 19.25 9.6992 19.1842 9.81641 19.0669C9.93362 18.9497 9.99947 18.7908 9.99947 18.625V16.75H11.8745C12.0402 16.75 12.1992 16.6842 12.3164 16.5669C12.4336 16.4497 12.4995 16.2908 12.4995 16.125C12.4995 15.9592 12.4336 15.8003 12.3164 15.6831C12.1992 15.5658 12.0402 15.5 11.8745 15.5H9.99947V14.2094C10.8372 14.1047 11.6348 13.7894 12.3176 13.2928C13.0004 12.7963 13.5461 12.1347 13.9038 11.37C14.2615 10.6052 14.4195 9.76228 14.363 8.9199C14.3065 8.07753 14.0374 7.26324 13.5807 6.55313L15.6245 4.50859V6.125C15.6245 6.29076 15.6903 6.44973 15.8075 6.56694C15.9247 6.68415 16.0837 6.75 16.2495 6.75C16.4152 6.75 16.5742 6.68415 16.6914 6.56694C16.8086 6.44973 16.8745 6.29076 16.8745 6.125V3C16.8745 2.83424 16.8086 2.67527 16.6914 2.55806C16.5742 2.44085 16.4152 2.375 16.2495 2.375ZM9.37447 13C8.63279 13 7.90777 12.7801 7.29108 12.368C6.6744 11.956 6.19375 11.3703 5.90993 10.6851C5.6261 9.99984 5.55183 9.24584 5.69653 8.51841C5.84122 7.79098 6.19838 7.1228 6.72282 6.59835C7.24727 6.0739 7.91546 5.71675 8.64288 5.57206C9.37031 5.42736 10.1243 5.50162 10.8095 5.78545C11.4948 6.06928 12.0804 6.54993 12.4925 7.16661C12.9045 7.7833 13.1245 8.50832 13.1245 9.25C13.1234 10.2442 12.728 11.1975 12.025 11.9005C11.3219 12.6035 10.3687 12.999 9.37447 13Z" fill="#797979"/>
                                 </svg>
-                                <PartialsSelect :selectedData="dataStore?.biodata?.gender" @selected="(value) => { dataStore.biodata.gender = value.key }" :options="[{key: 'male', value: 'Laki Laki'},{key: 'female', value: 'Perempuan'}]" class="flex-1 relative z-[14]" :customClass="`rounded-none p-2 px-3 border-b focus:outline-none block w-full`" :label="`Status Pernikahan`" />
+                                <PartialsSelect :required="true" :submitted="submit.biodata" :selectedData="dataStore?.biodata?.gender" @selected="(value) => { dataStore.biodata.gender = value.key }" :options="[{key: 'male', value: 'Laki Laki'},{key: 'female', value: 'Perempuan'}]" class="flex-1 relative z-[14]" :customClass="`rounded-none p-2 px-3 border-b focus:outline-none block w-full`" :label="`Status Pernikahan`" />
                             </li>
                             <li class="flex items-center gap-4 text-sm">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="21" viewBox="0 0 20 21" fill="none">
                                     <path d="M6.4 3.5C3.97 3.5 2 5.47 2 7.9C2 12.3 7.2 16.3 10 17.2304C12.8 16.3 18 12.3 18 7.9C18 5.47 16.03 3.5 13.6 3.5C12.112 3.5 10.796 4.2388 10 5.3696C9.59427 4.79168 9.05526 4.32004 8.42861 3.9946C7.80196 3.66915 7.10612 3.4995 6.4 3.5Z" stroke="#797979" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
                                 </svg>
-                                <PartialsSelect :selectedData="dataStore?.biodata?.marritage_status" @selected="(value) => { dataStore.biodata.marritage_status = value.key }" :options="[{key: 'single', value: 'Single'}, {key: 'married', value: 'Menikah'}]" class="flex-1 relative z-[13]" :customClass="`rounded-none p-2 px-3 border-b focus:outline-none block w-full`" :label="`Status Pernikahan`" />
+                                <PartialsSelect :required="true" :submitted="submit.biodata" :selectedData="dataStore?.biodata?.marritage_status" @selected="(value) => { dataStore.biodata.marritage_status = value.key }" :options="[{key: 'single', value: 'Single'}, {key: 'married', value: 'Menikah'}]" class="flex-1 relative z-[13]" :customClass="`rounded-none p-2 px-3 border-b focus:outline-none block w-full`" :label="`Status Pernikahan`" />
                             </li>
                             <li class="flex items-center gap-4 text-sm">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
@@ -246,24 +246,24 @@
                                         </clipPath>
                                     </defs>
                                 </svg>
-                                <PartialsSelect :selectedData="capitalize(dataStore.biodata.religion)" @selected="(value) => { dataStore.biodata.religion = value.key; }" :options="options.religions" class="flex-1 relative z-[12]" :customClass="`rounded-none p-2 px-3 border-b focus:outline-none block w-full`" :label="`Agama`" />
+                                <PartialsSelect :required="true" :submitted="submit.biodata" :selectedData="capitalize(dataStore.biodata.religion)" @selected="(value) => { dataStore.biodata.religion = value.key; }" :options="options.religions" class="flex-1 relative z-[12]" :customClass="`rounded-none p-2 px-3 border-b focus:outline-none block w-full`" :label="`Agama`" />
                             </li>
                             <li class="flex items-center gap-4 text-sm">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
                                     <path d="M10 6.66667C9.34073 6.66667 8.69626 6.86216 8.1481 7.22844C7.59994 7.59471 7.17269 8.1153 6.9204 8.72439C6.66811 9.33348 6.6021 10.0037 6.73072 10.6503C6.85933 11.2969 7.1768 11.8908 7.64298 12.357C8.10915 12.8232 8.7031 13.1407 9.3497 13.2693C9.9963 13.3979 10.6665 13.3319 11.2756 13.0796C11.8847 12.8273 12.4053 12.4001 12.7716 11.8519C13.1378 11.3037 13.3333 10.6593 13.3333 10C13.3333 9.11595 12.9821 8.2681 12.357 7.64298C11.7319 7.01786 10.8841 6.66667 10 6.66667ZM10 12C9.60444 12 9.21776 11.8827 8.88886 11.6629C8.55996 11.4432 8.30362 11.1308 8.15224 10.7654C8.00087 10.3999 7.96126 9.99778 8.03843 9.60982C8.1156 9.22186 8.30608 8.86549 8.58579 8.58579C8.86549 8.30608 9.22186 8.1156 9.60982 8.03843C9.99778 7.96126 10.3999 8.00087 10.7654 8.15224C11.1308 8.30362 11.4432 8.55996 11.6629 8.88886C11.8827 9.21776 12 9.60444 12 10C12 10.5304 11.7893 11.0391 11.4142 11.4142C11.0391 11.7893 10.5304 12 10 12ZM19.3333 4H0.666667C0.489856 4 0.320286 4.07024 0.195262 4.19526C0.0702379 4.32029 0 4.48986 0 4.66667V15.3333C0 15.5101 0.0702379 15.6797 0.195262 15.8047C0.320286 15.9298 0.489856 16 0.666667 16H19.3333C19.5101 16 19.6797 15.9298 19.8047 15.8047C19.9298 15.6797 20 15.5101 20 15.3333V4.66667C20 4.48986 19.9298 4.32029 19.8047 4.19526C19.6797 4.07024 19.5101 4 19.3333 4ZM15.4708 14.6667H4.52917C4.30534 13.9097 3.89567 13.2207 3.33749 12.6625C2.7793 12.1043 2.09033 11.6947 1.33333 11.4708V8.52917C2.09033 8.30534 2.7793 7.89567 3.33749 7.33749C3.89567 6.7793 4.30534 6.09033 4.52917 5.33333H15.4708C15.6947 6.09033 16.1043 6.7793 16.6625 7.33749C17.2207 7.89567 17.9097 8.30534 18.6667 8.52917V11.4708C17.9097 11.6947 17.2207 12.1043 16.6625 12.6625C16.1043 13.2207 15.6947 13.9097 15.4708 14.6667ZM18.6667 7.11417C17.867 6.77033 17.2297 6.13297 16.8858 5.33333H18.6667V7.11417ZM3.11417 5.33333C2.77033 6.13297 2.13297 6.77033 1.33333 7.11417V5.33333H3.11417ZM1.33333 12.8858C2.13297 13.2297 2.77033 13.867 3.11417 14.6667H1.33333V12.8858ZM16.8858 14.6667C17.2297 13.867 17.867 13.2297 18.6667 12.8858V14.6667H16.8858Z" fill="#797979"/>
                                 </svg>
-                                <input v-model="dataStore.biodata.expected_salary" type="number" class="p-2 px-3 border-b focus:outline-none block w-full" placeholder="expetasi gaji (Rupiah)" requred/>
+                                <input v-model="dataStore.biodata.expected_salary" type="number" class="p-2 px-3 border-b focus:outline-none block w-full" placeholder="expetasi gaji (Rupiah)" required/>
                             </li>
                             <li class="flex items-center gap-4 text-sm">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="text-slate-500" width="18" height="18" viewBox="0 0 24 24"><path fill="currentColor" d="M19 4h-1.45A3.08 3.08 0 0 0 17 3a3 3 0 0 0-2.25-1H9.27A3 3 0 0 0 7 3a3.08 3.08 0 0 0-.57 1H5a3 3 0 0 0-3 3v12a3 3 0 0 0 3 3h14a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3m-10.48.34A1 1 0 0 1 9.27 4h5.46a1 1 0 0 1 .75.34a1 1 0 0 1 .25.78l-.5 4a1 1 0 0 1-1 .88h-1.64l1.14-2.4a1 1 0 0 0-1.8-.86L10.37 10h-.6a1 1 0 0 1-1-.88l-.5-4a1 1 0 0 1 .25-.78M20 19a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h1.37l.42 3.37a3 3 0 0 0 3 2.63h4.46a3 3 0 0 0 3-2.63L17.63 6H19a1 1 0 0 1 1 1Zm-6-3h-4a1 1 0 0 0 0 2h4a1 1 0 0 0 0-2"/></svg>
                                 <div class="flex items-center gap-4">
                                     <div class="flex items-center gap-2">
-                                        <input v-model="dataStore.biodata.weight_body" type="number" class="p-2 border-b focus:outline-none max-w-[5em]" placeholder="BB" />
+                                        <input required v-model="dataStore.biodata.weight_body" type="number" class="p-2 border-b focus:outline-none max-w-[5em]" placeholder="BB" />
                                         kg
                                     </div>
                                     /
                                     <div class="flex items-center gap-2">
-                                        <input v-model="dataStore.biodata.height_body" type="number" class="p-2 border-b focus:outline-none max-w-[5em]" placeholder="TB" />
+                                        <input required v-model="dataStore.biodata.height_body" type="number" class="p-2 border-b focus:outline-none max-w-[5em]" placeholder="TB" />
                                         cm
                                     </div>
                                 </div>
@@ -353,13 +353,13 @@
                                 <div class="text-slate-600">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 22V12c0-1.886 0-2.828.586-3.414C4.172 8 5.114 8 7 8c1.886 0 2.828 0 3.414.586C11 9.172 11 10.114 11 12"/><path d="M17 22v-6c0-1.886 0-2.828-.586-3.414C15.828 12 14.886 12 13 12h-2c-1.886 0-2.828 0-3.414.586C7 13.172 7 14.114 7 16v6"/><path d="M21 22V7.772c0-1.34 0-2.011-.356-2.525c-.356-.514-.984-.75-2.24-1.22c-2.455-.921-3.682-1.381-4.543-.785C13 3.84 13 5.15 13 7.772V12"/><path stroke-linecap="round" d="M4 8V6.5c0-.943 0-1.414.293-1.707C4.586 4.5 5.057 4.5 6 4.5h2c.943 0 1.414 0 1.707.293C10 5.086 10 5.557 10 6.5V8M7 4V2m15 20H2m8-7h4m-4 3h4"/></g></svg>
                                 </div>
-                                <PartialsSelect :selectedData="dataStore?.profile?.province" @selected="handleSelectedProvince" :options="options.provinces" class="flex-1 relative z-[12]" :customClass="`rounded-none p-2 px-3 border-b focus:outline-none block w-full`" :label="`Provinsi`" />
+                                <PartialsSelect :required="true" :submitted="submit.biodata" :selectedData="dataStore?.profile?.province" @selected="handleSelectedProvince" :options="options.provinces" class="flex-1 relative z-[12]" :customClass="`rounded-none p-2 px-3 border-b focus:outline-none block w-full`" :label="`Provinsi`" />
                             </li>
                             <li class="flex items-center gap-4 text-sm">
                                 <div class="text-slate-600">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 48 48"><g fill="none"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="4" d="M4 42h40"/><rect width="8" height="16" x="8" y="26" stroke="currentColor" stroke-linejoin="round" stroke-width="4" rx="2"/><path stroke="currentColor" stroke-linecap="square" stroke-linejoin="round" stroke-width="4" d="M12 34h1"/><rect width="24" height="38" x="16" y="4" stroke="currentColor" stroke-linejoin="round" stroke-width="4" rx="2"/><path fill="currentColor" d="M22 10h4v4h-4zm8 0h4v4h-4zm-8 7h4v4h-4zm8 0h4v4h-4zm0 7h4v4h-4zm0 7h4v4h-4z"/></g></svg>
                                 </div>
-                                <PartialsSelect :selectedData="dataStore?.profile?.city" @selected="(value) => {dataStore.profile.city = value.key}" :options="options.filteredCitys" class="flex-1 relative z-10" :customClass="`rounded-none p-2 px-3 border-b focus:outline-none block w-full`" :label="`Kota`" />
+                                <PartialsSelect :required="true" :submitted="submit.biodata" :selectedData="dataStore?.profile?.city" @selected="(value) => {dataStore.profile.city = value.key}" :options="options.filteredCitys" class="flex-1 relative z-10" :customClass="`rounded-none p-2 px-3 border-b focus:outline-none block w-full`" :label="`Kota`" />
                             </li>
                             <li class="flex items-start gap-4 text-sm">
                                 <div class="text-slate-600">
@@ -379,27 +379,27 @@
                         <h3 class="font-medium pb-3 border-b mb-3">Dokumen</h3>
                         <div class="mb-3">
                             <div class="text-sm text-slate-500 mb-2">KTP</div>
-                            <PartialsInput :inputClass="`border border-slate-200`" :placeholder="`No KTP`" />
+                            <PartialsInput :required="true" :submitted="submit.document" :inputClass="`border border-slate-200`" :placeholder="`No KTP`" />
                             <PartialsFile />
                         </div>
                         <div class="mb-3">
                             <div class="text-sm text-slate-500 mb-2">NPWP</div>
-                            <PartialsInput :inputClass="`border border-slate-200`" :placeholder="`No NPWP`" />
+                            <PartialsInput :required="true" :submitted="submit.document" :inputClass="`border border-slate-200`" :placeholder="`No NPWP`" />
                             <PartialsFile />
                         </div>
                         <div class="mb-3">
                             <div class="text-sm text-slate-500 mb-2">Transkrip Nilai</div>
-                            <PartialsInput :inputClass="`border border-slate-200`" :placeholder="`Transkrip Nilai`" />
+                            <PartialsInput :required="true" :submitted="submit.document" :inputClass="`border border-slate-200`" :placeholder="`Transkrip Nilai`" />
                             <PartialsFile />
                         </div>
                         <div class="mb-3">
                             <div class="text-sm text-slate-500 mb-2">SIM A/B</div>
-                            <PartialsInput :inputClass="`border border-slate-200`" :placeholder="`SIM A/B`" />
+                            <PartialsInput :required="true" :submitted="submit.document" :inputClass="`border border-slate-200`" :placeholder="`SIM A/B`" />
                             <PartialsFile />
                         </div>
                         <div class="mb-3">
                             <div class="text-sm text-slate-500 mb-2">SIM C</div>
-                            <PartialsInput :inputClass="`border border-slate-200`" :placeholder="`SIM C`" />
+                            <PartialsInput :required="true" :submitted="submit.document" :inputClass="`border border-slate-200`" :placeholder="`SIM C`" />
                             <PartialsFile />
                         </div>
                     </div>
@@ -438,28 +438,28 @@
                         <div class="pt-5">
                             <div v-if="show.pengalaman" class="grid grid-cols-12 gap-x-5 py-3 mb-5">
                                 <div class="col-span-12 md:col-span-6">
-                                    <PartialsInput v-model="singleData.experience.last_position" :modelValue="singleData.experience.last_position" :inputClass="`border border-slate-200`" :placeholder="`Jabatan / Posisi`" :label="`Jabatan / Posisi`" />
+                                    <PartialsInput :required="true" :submitted="submit.experience" v-model="singleData.experience.last_position" :modelValue="singleData.experience.last_position" :inputClass="`border border-slate-200`" :placeholder="`Jabatan / Posisi`" :label="`Jabatan / Posisi`" />
                                 </div>
                                 <div class="col-span-12 md:col-span-6">
-                                    <PartialsInput v-model="singleData.experience.company_name" :modelValue="singleData.experience.company_name" :inputClass="`border border-slate-200`" :placeholder="`Nama Perusahaan`" :label="`Nama Perusahaan`" />
+                                    <PartialsInput :required="true" :submitted="submit.experience" v-model="singleData.experience.company_name" :modelValue="singleData.experience.company_name" :inputClass="`border border-slate-200`" :placeholder="`Nama Perusahaan`" :label="`Nama Perusahaan`" />
                                 </div>
                                 <div class="col-span-12 md:col-span-6">
-                                    <PartialsInput v-model="singleData.experience.company_address" :modelValue="singleData.experience.company_address" :inputClass="`border border-slate-200`" :placeholder="`Lokasi kerja`" :label="`Lokasi kerja`" />
+                                    <PartialsInput :required="true" :submitted="submit.experience" v-model="singleData.experience.company_address" :modelValue="singleData.experience.company_address" :inputClass="`border border-slate-200`" :placeholder="`Lokasi kerja`" :label="`Lokasi kerja`" />
                                 </div>
                                 <div class="col-span-12 md:col-span-6">
                                     <div class="text-xs mb-2 block">Tipe Kontrak</div>
-                                    <PartialsSelect class="text-sm mb-3" :customClass="`text-sm border rounded-3xl`" :selectedData="singleData.experience.type_contract" @selected="(value) => {singleData.experience.type_contract = value.key}" :options="options.contracts" :label="`Tipe Kontrak`"></PartialsSelect>
+                                    <PartialsSelect :required="true" :submitted="submit.experience" class="text-sm mb-3" :customClass="`text-sm border rounded-3xl`" :selectedData="singleData.experience.type_contract" @selected="(value) => {singleData.experience.type_contract = value.key}" :options="options.contracts" :label="`Tipe Kontrak`"></PartialsSelect>
                                 </div>
                                 <div class="col-span-12 md:col-span-6">
-                                    <PartialsInput v-model="singleData.experience.start_date" :modelValue="singleData.experience.start_date" :inputClass="`border border-slate-200`" :label="`Tgl Mulai Kerja`" :typeInput="`date`" />
+                                    <PartialsInput :required="true" :submitted="submit.experience" v-model="singleData.experience.start_date" :modelValue="singleData.experience.start_date" :inputClass="`border border-slate-200`" :label="`Tgl Mulai Kerja`" :typeInput="`date`" />
                                 </div>
                                 <div class="col-span-12 md:col-span-6">
-                                    <PartialsInput v-model="singleData.experience.end_date" :modelValue="singleData.experience.end_date" :inputClass="`border border-slate-200`" :label="`Tgl Berakhir`" :typeInput="`date`" />
+                                    <PartialsInput :required="true" :submitted="submit.experience" v-model="singleData.experience.end_date" :modelValue="singleData.experience.end_date" :inputClass="`border border-slate-200`" :label="`Tgl Berakhir`" :typeInput="`date`" />
                                     <div class="mb-5"><input type="checkbox" v-model="singleData.experience.status" class="form-checkbox rounded text-emerald-500 me-4 focus:ring-emerald-600" /><span class="text-sm">Saya masih kerja disini</span></div>
                                 </div>
                                 <div class="col-span-12">
                                     <label for="desc_experience" class="text-sm mb-3 block text-slate-500">Deksripsi Pengalaman</label>
-                                    <textarea v-model="singleData.experience.job_description" name="desc_experience" id="desc_experience" cols="30" rows="10" class="w-full rounded-lg border border-slate-200 text-sm p-2 px-4 focus:border-emerald-600 focus:ring-emerald-600"></textarea>
+                                    <textarea required v-model="singleData.experience.job_description" name="desc_experience" id="desc_experience" cols="30" rows="10" class="w-full rounded-lg border border-slate-200 text-sm p-2 px-4 focus:border-emerald-600 focus:ring-emerald-600"></textarea>
                                 </div>
                                 <div class="col-span-12">
                                     <div class="flex items-center justify-end gap-3 mt-4">
@@ -541,26 +541,26 @@
                         <div class="pt-5">
                             <div v-if="show.pendidikan" class="grid grid-cols-12 gap-x-5 py-3 mb-5">
                                 <div class="col-span-12 md:col-span-4">
-                                    <PartialsInput v-model="singleData.education.institutions" :modelValue="singleData.education.institutions" :inputClass="`border border-slate-200`" :placeholder="`Nama Kampus / Univ / Institute`" :label="`Nama Kampus / Univ / Institute`" />
+                                    <PartialsInput :required="true" :submitted="submit.education" v-model="singleData.education.institutions" :modelValue="singleData.education.institutions" :inputClass="`border border-slate-200`" :placeholder="`Nama Kampus / Univ / Institute`" :label="`Nama Kampus / Univ / Institute`" />
                                 </div>
                                 <div class="col-span-12 md:col-span-4">
                                     <div class="text-xs mb-3 block">Jenjang Pendidikan</div>
-                                    <PartialsSelect class="text-sm" :customClass="`mb-3 text-sm border rounded-3xl`" :selectedData="singleData.education.educational_level" @selected="(value) => {singleData.education.educational_level = value.key}" :options="options.educational_levels" :label="`Jenjang Pendidikan`"></PartialsSelect>
+                                    <PartialsSelect :required="true" :submitted="submit.education" class="text-sm" :customClass="`mb-3 text-sm border rounded-3xl`" :selectedData="singleData.education.educational_level" @selected="(value) => {singleData.education.educational_level = value.key}" :options="options.educational_levels" :label="`Jenjang Pendidikan`"></PartialsSelect>
                                 </div>
                                 <div class="col-span-12 md:col-span-4">
-                                    <PartialsInput v-model="singleData.education.majoring" :modelValue="singleData.education.majoring" :inputClass="`border border-slate-200`" :placeholder="`Kejuruan / Program Studi`" :label="`Kejuruan / Program Studi`" />
+                                    <PartialsInput :required="true" :submitted="submit.education" v-model="singleData.education.majoring" :modelValue="singleData.education.majoring" :inputClass="`border border-slate-200`" :placeholder="`Kejuruan / Program Studi`" :label="`Kejuruan / Program Studi`" />
                                 </div>
                                 <div class="col-span-12 md:col-span-6">
-                                    <PartialsInput v-model="singleData.education.city_name" :modelValue="singleData.education.city_name" :inputClass="`border border-slate-200`" :placeholder="`Lokasi`" :label="`Lokasi`" />
+                                    <PartialsInput :required="true" :submitted="submit.education" v-model="singleData.education.city_name" :modelValue="singleData.education.city_name" :inputClass="`border border-slate-200`" :placeholder="`Lokasi`" :label="`Lokasi`" />
                                 </div>
                                 <div class="col-span-12 md:col-span-6">
-                                    <PartialsInput v-model="singleData.education.gpa" :modelValue="singleData.education.gpa" :inputClass="`border border-slate-200`" :placeholder="`Nilai Akhir (IPK/UN/UASBN)`" :label="`Nilai Akhir`" :typeInput="`number`" />
+                                    <PartialsInput :required="true" :submitted="submit.education" v-model="singleData.education.gpa" :modelValue="singleData.education.gpa" :inputClass="`border border-slate-200`" :placeholder="`Nilai Akhir (IPK/UN/UASBN)`" :label="`Nilai Akhir`" :typeInput="`number`" />
                                 </div>
                                 <div class="col-span-12 md:col-span-6">
-                                    <PartialsInput v-model="singleData.education.start_date" :modelValue="singleData.education.start_date" :inputClass="`border border-slate-200`" :label="`Tgl Mulai`" :typeInput="`date`" />
+                                    <PartialsInput :required="true" :submitted="submit.education" v-model="singleData.education.start_date" :modelValue="singleData.education.start_date" :inputClass="`border border-slate-200`" :label="`Tgl Mulai`" :typeInput="`date`" />
                                 </div>
                                 <div class="col-span-12 md:col-span-6">
-                                    <PartialsInput v-model="singleData.education.end_date" :modelValue="singleData.education.end_date" :inputClass="`border border-slate-200`" :label="`Tgl Berakhir`" :typeInput="`date`" />
+                                    <PartialsInput :required="true" :submitted="submit.education" v-model="singleData.education.end_date" :modelValue="singleData.education.end_date" :inputClass="`border border-slate-200`" :label="`Tgl Berakhir`" :typeInput="`date`" />
                                     <div class="mb-5"><input v-model="singleData.education.status" type="checkbox" class="form-checkbox rounded text-emerald-500 focus:ring-emerald-500 me-4" /><span class="text-sm">Saya masih aktif disini</span></div>
                                 </div>
                                 <div class="col-span-12">
@@ -629,19 +629,19 @@
                         <div class="pt-5">
                             <div v-if="show.organisasi" class="grid grid-cols-12 gap-x-5 py-3 mb-5">
                                 <div class="col-span-12 md:col-span-4">
-                                    <PartialsInput v-model="singleData.organization.organization_name" :modelValue="singleData.organization.organization_name" :inputClass="`border border-slate-200`" :placeholder="`Nama Lembaga / Organisasi`" :label="`Nama Lembaga / Organisasi`" />
+                                    <PartialsInput :required="true" :submitted="submit.organization" v-model="singleData.organization.organization_name" :modelValue="singleData.organization.organization_name" :inputClass="`border border-slate-200`" :placeholder="`Nama Lembaga / Organisasi`" :label="`Nama Lembaga / Organisasi`" />
                                 </div>
                                 <div class="col-span-12 md:col-span-4">
-                                    <PartialsInput v-model="singleData.organization.organization_address" :modelValue="singleData.organization.organization_address" :inputClass="`border border-slate-200`" :placeholder="`Lokasi`" :label="`Lokasi`" />
+                                    <PartialsInput :required="true" :submitted="submit.organization" v-model="singleData.organization.organization_address" :modelValue="singleData.organization.organization_address" :inputClass="`border border-slate-200`" :placeholder="`Lokasi`" :label="`Lokasi`" />
                                 </div>
                                 <div class="col-span-12 md:col-span-4">
-                                    <PartialsInput v-model="singleData.organization.position" :modelValue="singleData.organization.position" :inputClass="`border border-slate-200`" :placeholder="`Peran / Posisi`" :label="`Peran / Posisi`" />
+                                    <PartialsInput :required="true" :submitted="submit.organization" v-model="singleData.organization.position" :modelValue="singleData.organization.position" :inputClass="`border border-slate-200`" :placeholder="`Peran / Posisi`" :label="`Peran / Posisi`" />
                                 </div>
                                 <div class="col-span-12 md:col-span-6">
-                                    <PartialsInput v-model="singleData.organization.start_date" :modelValue="singleData.organization.start_date" :inputClass="`border border-slate-200`" :label="`Tgl Mulai`" :typeInput="`date`" />
+                                    <PartialsInput :required="true" :submitted="submit.organization" v-model="singleData.organization.start_date" :modelValue="singleData.organization.start_date" :inputClass="`border border-slate-200`" :label="`Tgl Mulai`" :typeInput="`date`" />
                                 </div>
                                 <div class="col-span-12 md:col-span-6">
-                                    <PartialsInput v-model="singleData.organization.end_date" :modelValue="singleData.organization.end_date" :inputClass="`border border-slate-200`" :label="`Tgl Berakhir`" :typeInput="`date`" />
+                                    <PartialsInput :required="true" :submitted="submit.organization" v-model="singleData.organization.end_date" :modelValue="singleData.organization.end_date" :inputClass="`border border-slate-200`" :label="`Tgl Berakhir`" :typeInput="`date`" />
                                 </div>
                                 <div class="col-span-12">
                                     <div class="flex items-center justify-end gap-3 mt-4">
@@ -700,7 +700,7 @@
                                         <h6 class="mb-3 text-sm">Pilih Skills</h6>
                                         <PartialsMultiselect :selectedOptions="dataStore?.skills" @selected="selectSkill" :svgData="skillSvg" :options="skillStore.options" class="z-10 border text-sm border-slate-200 rounded-3xl mb-3" :placeholder="`Skills`" :label="`Skills`" />
                                         <div class="flex items-end gap-2">
-                                            <PartialsInput v-model="singleData.skill.skill_name" :modelValue="singleData.skill.skill_name" class="flex-1" :inputClass="`border text-sm border-slate-200`" :placeholder="`Tambah Skill`" :label="`Jika skill anda tidak ditemukan, silahkan Tambah Skill`" />
+                                            <PartialsInput :required="true" :submitted="submit.family" v-model="singleData.skill.skill_name" :modelValue="singleData.skill.skill_name" class="flex-1" :inputClass="`border text-sm border-slate-200`" :placeholder="`Tambah Skill`" :label="`Jika skill anda tidak ditemukan, silahkan Tambah Skill`" />
                                             <PartialsButton @click="handleAddSkill" class="mb-3">+</PartialsButton>
                                         </div>
                                     </div>
@@ -753,34 +753,19 @@
                         <div class="pt-5">
                             <div v-if="show.bahasa" class="grid grid-cols-12 gap-x-5 py-3 mb-5">
                                 <div class="col-span-12">
-                                    <PartialsInput v-model="singleData.language.language" :modelValue="singleData.language.language" :inputClass="`border border-slate-200`" :placeholder="`Bahasa`" :label="`Bahasa`" />
+                                    <PartialsInput :required="true" :submitted="submit.language" v-model="singleData.language.language" :modelValue="singleData.language.language" :inputClass="`border border-slate-200`" :placeholder="`Bahasa`" :label="`Bahasa`" />
                                 </div>
                                 <div class="col-span-12 lg:col-span-4">
                                     <div class="text-sm mb-2 block text-slate-500">Membaca</div>
-                                    <select v-model="singleData.language.reading" name="" id="" class="border border-slate-200 rounded-lg p-2 px-3 block w-full focus:border-emerald-600 focus:ring-emerald-600 text-sm">
-                                        <option selected>-- Lvl. Membaca --</option>
-                                        <option value="0">Kurang</option>
-                                        <option value="1">Baik</option>
-                                        <option value="2">Lancar</option>
-                                    </select>
+                                    <PartialsSelect :required="true" :submitted="submit.language" class="text-sm" :customClass="`mb-3 text-sm border rounded-3xl`" :selectedData="singleData.language.reading" @selected="(value) => {singleData.language.reading = value.key}" :options="options.language_levels" :label="`Lvl. Membaca`"></PartialsSelect>
                                 </div>
                                 <div class="col-span-12 lg:col-span-4">
                                     <div class="text-sm mb-2 block text-slate-500">Menulis</div>
-                                    <select v-model="singleData.language.writing" name="" id="" class="border border-slate-200 rounded-lg p-2 px-3 block w-full focus:border-emerald-600 focus:ring-emerald-600 text-sm">
-                                        <option selected>-- Lvl. Menulis --</option>
-                                        <option value="0">Kurang</option>
-                                        <option value="1">Baik</option>
-                                        <option value="2">Lancar</option>
-                                    </select>
+                                    <PartialsSelect :required="true" :submitted="submit.language" class="text-sm" :customClass="`mb-3 text-sm border rounded-3xl`" :selectedData="singleData.language.writing" @selected="(value) => {singleData.language.writing = value.key}" :options="options.language_levels" :label="`Lvl. Menulis`"></PartialsSelect>
                                 </div>
                                 <div class="col-span-12 lg:col-span-4">
                                     <div class="text-sm mb-2 block text-slate-500">Berbicara</div>
-                                    <select v-model="singleData.language.speaking" name="" id="" class="border border-slate-200 rounded-lg p-2 px-3 block w-full focus:border-emerald-600 focus:ring-emerald-600 text-sm">
-                                        <option selected>-- Lvl. Berbicara --</option>
-                                        <option value="0">Kurang</option>
-                                        <option value="1">Baik</option>
-                                        <option value="2">Lancar</option>
-                                    </select>
+                                    <PartialsSelect :required="true" :submitted="submit.language" class="text-sm" :customClass="`mb-3 text-sm border rounded-3xl`" :selectedData="singleData.language.speaking" @selected="(value) => {singleData.language.speaking = value.key}" :options="options.language_levels" :label="`Lvl. Berbicara`"></PartialsSelect>
                                 </div>
                                 <div class="col-span-12">
                                     <div class="flex items-center justify-end gap-3 mt-4">
@@ -805,7 +790,7 @@
                                             <table class="w-full rounded-xl overflow-hidden">
                                                 <tr>
                                                     <th class="text-start p-2 px-4 font-medium text-xs bg-slate-50 border-b">Membaca</th>
-                                                    <td v-if="lang.inging == 0" class="p-2 px-4 text-sm">Kurang</td>
+                                                    <td v-if="lang.reading == 0" class="p-2 px-4 text-sm">Kurang</td>
                                                     <td v-if="lang.reading == 1" class="p-2 px-4 text-sm">Baik</td>
                                                     <td v-if="lang.reading == 2" class="p-2 px-4 text-sm">Lancar</td>
                                                 </tr>
@@ -853,45 +838,45 @@
                           
                             <div v-if="show.family" class="grid grid-cols-12 gap-x-5 py-3 mb-5">
                                 <div class="col-span-12 md:col-span-6">
-                                    <PartialsInput v-model="singleData.family_contact.fullname" :modelValue="singleData.family_contact.fullname" :inputClass="`border border-slate-200`" :placeholder="`Nama Lengkap Keluarga`" :label="`Nama Lengkap Keluarga`" />
+                                    <PartialsInput :required="true" :submitted="submit.family" v-model="singleData.family_contact.fullname" :modelValue="singleData.family_contact.fullname" :inputClass="`border border-slate-200`" :placeholder="`Nama Lengkap Keluarga`" :label="`Nama Lengkap Keluarga`" />
                                 </div>
                                 <div class="col-span-12 md:col-span-6">
-                                    <PartialsInput v-model="singleData.family_contact.phone" :modelValue="singleData.family_contact.phone" :inputClass="`border border-slate-200`" :typeInput="`number`" :placeholder="`No HP / Whatsapp`" :label="`No HP / Whatsapp`" />
+                                    <PartialsInput :required="true" :submitted="submit.family" v-model="singleData.family_contact.phone" :modelValue="singleData.family_contact.phone" :inputClass="`border border-slate-200`" :typeInput="`number`" :placeholder="`No HP / Whatsapp`" :label="`No HP / Whatsapp`" />
                                 </div>
                                 <div class="col-span-12 md:col-span-6">
-                                    <PartialsInput v-model="singleData.family_contact.job_title" :modelValue="singleData.family_contact.job_title" :inputClass="`border border-slate-200`" :placeholder="`Profesi / Jabatan`" :label="`Profesi / Jabatan`" />
+                                    <PartialsInput :required="true" :submitted="submit.family" v-model="singleData.family_contact.job_title" :modelValue="singleData.family_contact.job_title" :inputClass="`border border-slate-200`" :placeholder="`Profesi / Jabatan`" :label="`Profesi / Jabatan`" />
                                 </div>
                                 <div class="col-span-12 md:col-span-6">
-                                    <PartialsInput v-model="singleData.family_contact.company_name" :modelValue="singleData.family_contact.company_name" :inputClass="`border border-slate-200`" :placeholder="`Nama Perusahaan / Lembaga / Institusi`" :label="`Nama Perusahaan / Lembaga / Institusi`" />
+                                    <PartialsInput :required="true" :submitted="submit.family" v-model="singleData.family_contact.company_name" :modelValue="singleData.family_contact.company_name" :inputClass="`border border-slate-200`" :placeholder="`Nama Perusahaan / Lembaga / Institusi`" :label="`Nama Perusahaan / Lembaga / Institusi`" />
                                 </div>
                                 <div class="col-span-12 md:col-span-6">
                                     <div class="text-xs mb-3 block">Pendidikan Terakhir</div>
-                                    <PartialsSelect class="text-sm relative z-[16]" :customClass="`mb-3 text-sm border rounded-3xl`" :selectedData="singleData.family_contact.last_education" @selected="(value) => {singleData.family_contact.last_education = value.key}" :options="options.educational_levels" :label="`Jenjang Pendidikan`"></PartialsSelect>
+                                    <PartialsSelect :required="true" :submitted="submit.family" class="text-sm relative z-[16]" :customClass="`mb-3 text-sm border rounded-3xl`" :selectedData="singleData.family_contact.last_education" @selected="(value) => {singleData.family_contact.last_education = value.key}" :options="options.educational_levels" :label="`Jenjang Pendidikan`"></PartialsSelect>
                                 </div>
                                 <div class="col-span-12 md:col-span-6">
                                     <div class="text-xs mb-3 block">Hubungan Keluarga</div>
-                                    <PartialsSelect class="text-sm relative z-[14]" :customClass="`mb-3 text-sm border rounded-3xl`" :selectedData="singleData.family_contact.relationship" @selected="(value) => {singleData.family_contact.relationship = value.key}" :options="relationships" :label="`Hubungan Keluarga`"></PartialsSelect>
+                                    <PartialsSelect :required="true" :submitted="submit.family" class="text-sm relative z-[14]" :customClass="`mb-3 text-sm border rounded-3xl`" :selectedData="singleData.family_contact.relationship" @selected="(value) => {singleData.family_contact.relationship = value.key}" :options="relationships" :label="`Hubungan Keluarga`"></PartialsSelect>
                                 </div>
                                 <div class="col-span-12 md:col-span-4">
                                     <div class="text-xs mb-3 block">Jenis Kelamin</div>
-                                    <PartialsSelect class="text-sm relative z-[15]" :customClass="`mb-3 text-sm border rounded-3xl`" :selectedData="singleData.family_contact.gender" @selected="(value) => {singleData.family_contact.gender = value.key}" :options="[{key:'male',value:'Laki Laki'},{key:'female', value:'Perempuan'}]" :label="`Jenis Kelamin`"></PartialsSelect>
+                                    <PartialsSelect :required="true" :submitted="submit.family" class="text-sm relative z-[15]" :customClass="`mb-3 text-sm border rounded-3xl`" :selectedData="singleData.family_contact.gender" @selected="(value) => {singleData.family_contact.gender = value.key}" :options="[{key:'male',value:'Laki Laki'},{key:'female', value:'Perempuan'}]" :label="`Jenis Kelamin`"></PartialsSelect>
                                 </div>
                                 <div class="col-span-12 md:col-span-4">
-                                    <PartialsInput v-model="singleData.family_contact.birth_place" :modelValue="singleData.family_contact.birth_place" :inputClass="`border border-slate-200`" :label="`Tempat Lahir`" :placeholder="`Tempat Lahir`" />
+                                    <PartialsInput :required="true" :submitted="submit.family" v-model="singleData.family_contact.birth_place" :modelValue="singleData.family_contact.birth_place" :inputClass="`border border-slate-200`" :label="`Tempat Lahir`" :placeholder="`Tempat Lahir`" />
                                 </div>
                                 <div class="col-span-12 md:col-span-4">
-                                    <PartialsInput v-model="singleData.family_contact.birth_date" :modelValue="singleData.family_contact.birth_date" :inputClass="`border border-slate-200`" :label="`Tanggal Lahir`" :typeInput="`date`" />
+                                    <PartialsInput :required="true" :submitted="submit.family" v-model="singleData.family_contact.birth_date" :modelValue="singleData.family_contact.birth_date" :inputClass="`border border-slate-200`" :label="`Tanggal Lahir`" :typeInput="`date`" />
                                 </div>
                                 <div class="col-span-12 md:col-span-6">
                                     <div class="text-xs mb-3 block">Provinsi Tinggal</div>
-                                    <PartialsSelect class="text-sm" :customClass="`mb-3 text-sm border rounded-3xl`" :selectedData="singleData.family_contact.province_id" @selected="handleFamSelectedProvince" :options="options.provinces" :label="`Provinsi Tinggal`"></PartialsSelect>
+                                    <PartialsSelect :required="true" :submitted="submit.family" class="text-sm" :customClass="`mb-3 text-sm border rounded-3xl`" :selectedData="singleData.family_contact.province_id" @selected="handleFamSelectedProvince" :options="options.provinces" :label="`Provinsi Tinggal`"></PartialsSelect>
                                 </div>
                                 <div class="col-span-12 md:col-span-6">
                                     <div class="text-xs mb-3 block">Kota Tinggal</div>
-                                    <PartialsSelect class="text-sm" :customClass="`mb-3 text-sm border rounded-3xl`" :selectedData="singleData.family_contact.city_id" @selected="(value) => {singleData.family_contact.city_id = value.key}" :options="options.filteredFamilyCitys" :label="`Kota Tinggal`"></PartialsSelect>
+                                    <PartialsSelect :required="true" :submitted="submit.family" class="text-sm" :customClass="`mb-3 text-sm border rounded-3xl`" :selectedData="singleData.family_contact.city_id" @selected="(value) => {singleData.family_contact.city_id = value.key}" :options="options.filteredFamilyCitys" :label="`Kota Tinggal`"></PartialsSelect>
                                 </div>
                                 <div class="col-span-12 md:col-span-6">
-                                    <PartialsInput v-model="singleData.family_contact.postal_code" :modelValue="singleData.family_contact.postal_code" :inputClass="`border border-slate-200`" :label="`Postal Code`" :placeholder="`Postal Code`" :typeInput="`number`" />
+                                    <PartialsInput :required="true" :submitted="submit.family" v-model="singleData.family_contact.postal_code" :modelValue="singleData.family_contact.postal_code" :inputClass="`border border-slate-200`" :label="`Postal Code`" :placeholder="`Postal Code`" :typeInput="`number`" />
                                 </div>
                                 <div class="col-span-12 md:col-span-6">
                                     <div class="text-xs mb-3 block">Alamat Lengkap Tinggal</div>
@@ -1048,6 +1033,11 @@ const options = ref({
     religions : [],
     skills : [],
     educational_levels : [],
+    language_levels : [
+        {key:'0',value:'Kurang'},
+        {key:'1',value:'Baik'},
+        {key:'2',value:'Lancar'},
+    ],
 })
 const selected = ref({
     province_id : null,
@@ -1172,6 +1162,15 @@ const singleData = ref({
         address : '',
         postal_code : '',
     }
+})
+
+const submit = ref({
+    biodata : false,
+    experience : false,
+    education : false,
+    organization :false,
+    language :false,
+    family :false,
 })
 
 const relationships = [
@@ -1404,6 +1403,7 @@ const editFamcontact = async (i) => {
 }
 
 const updateFamcontact = async () => {
+    submit.value.family = true;
     const sde = singleData.value?.family_contact;
     const i = dataStore.value.familys.findIndex(fam => fam.id == in_edit.value);
     const fam_id = dataStore.value.familys[i].id;
@@ -1465,18 +1465,24 @@ const cancelData = (section) => {
     resetValue();
     in_edit.value = null;
     if(section == 'experience'){
+        submit.value.experience = false;
         show.value.pengalaman = false;
     }else if(section == 'organization'){
+        submit.value.organization = false;
         show.value.organisasi = false;
     }else if(section == 'language'){
+        submit.value.language = false;
         show.value.bahasa = false;
     }else if(section == 'education'){
+        submit.value.education = false;
         show.value.pendidikan = false;
     }else if(section == 'family'){
+        submit.value.family = false;
         show.value.family = false;
     }
 }
 const saveData = async (section = '') => {
+    submit.value.biodata = true;
     const check = isRequiredDataFilled()
     if(check){
         let message = 'Harus mengisi data : ';
@@ -1513,7 +1519,7 @@ const saveData = async (section = '') => {
         ds?.profile?.sosmed?.in,
         ds?.profile?.sosmed?.others
     );
-    console.log(updateProfile);
+    if(updateProfile.success)submit.value.biodata = false;
 
     localStorage.setItem('data_buat_cv', JSON.stringify(dataStore.value));
 
@@ -1522,6 +1528,7 @@ const saveData = async (section = '') => {
     }else{
         show.value[section] = false;
     }
+
     toast.success('Berhasil menyimpan data');
 }
 
@@ -1529,15 +1536,18 @@ const saveSingleData = async (section) => {
     const created_at = new Date().toISOString();
 
     if (section === 'experience') {
+        submit.value.experience = true;
         const sde = singleData.value.experience;
         const addExperience = await experienceStore.addExperience(sde.last_position, sde.company_name, sde.company_address, sde.start_date, sde.end_date, sde.status, sde.type_contract, sde.job_description);
         if(addExperience.success){
             toast.success(addExperience?.message);
+            submit.value.experience = false;
             show.value.pengalaman = false;
         }else{
             toast.error(addExperience?.message);
         }
     } else if (section === 'education') {
+        submit.value.education = true;
         const sde = singleData.value.education;
         const addEducation = await educationStore.addEducation(
             sde.institutions,
@@ -1551,30 +1561,33 @@ const saveSingleData = async (section) => {
             "");
         if(addEducation?.success){
             toast.success(addEducation?.message);
+            submit.value.education = false;
             show.value.pendidikan = false;
         }else{
             toast.error(addEducation?.message);
         }
     } else if (section === 'organization') {
+        submit.value.organization = true;
         const sde = singleData.value.organization;
         const addOrganization = await organizationStore.addOrganization(sde.position, sde.organization_name, sde.organization_address, `${formatDate(sde.start_date)} - ${formatDate(sde.end_date)}`);
         if(addOrganization.success){
             toast.success(addOrganization?.message);
+            submit.value.organization = false;
             show.value.organisasi = false;
         }else{
             toast.error(addOrganization?.message);
         }  
     } else if (section === 'language') {
+        submit.value.language = true;
         const sde = singleData.value.language;
         const addLanguage = await languageStore.addLanguage(sde.language, sde.reading, sde.writing, sde.speaking);
         if(addLanguage.success){
             toast.success(addLanguage?.message);
+            submit.value.language = false;
             show.value.bahasa = false;
         }else{
             toast.error(addLanguage?.message);
         }
-    }else if (section === 'family') {
-        
     }
     resetValue();
 };
@@ -1642,20 +1655,28 @@ const updateData = (section) => {
     };
     
     if(section == 'experience'){
+        submit.value.experience = true;
         const sde = singleData.value.experience;
         const updateExperience = experienceStore.updateExperience(in_edit.value, sde.last_position, sde.company_name, sde.company_address, sde.start_date, sde.end_date, sde.status, sde.type_contract, sde.job_description);
+        if(updateExperience.success)submit.value.experience = false;
         show.value.pengalaman = false;
     }else if(section == 'organization'){
+        submit.value.organization = true;
         const sde = singleData.value.organization;
         const updateOrganization = organizationStore.updateOrganization(in_edit.value, sde.position, sde.organization_name, sde.organization_address, `${formatDate(sde.start_date)} - ${formatDate(sde.end_date)}`);
+        if(updateOrganization.success)submit.value.organization = false;
         show.value.organisasi = false;
     }else if(section == 'language'){
+        submit.value.language = true;
         const sde = singleData.value.language;
         const updateLanguage = languageStore.updateLanguage(in_edit.value, sde.language, sde.reading, sde.writing, sde.speaking);
+        if(updateLanguage.success)submit.value.language = false;
         show.value.bahasa = false;
     }else if(section == 'education'){
+        submit.value.education = true;
         const sde = singleData.value.education;
         const updateEducation = educationStore.updateEducation(in_edit.value, sde.institutions, sde.city_name, sde.majoring, sde.start_date, sde.end_date, sde.status, sde.gpa, sde.institute_name, "");
+        if(updateEducation.success)submit.value.education = false;
         show.value.pendidikan = false;
     }
 
