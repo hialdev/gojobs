@@ -9,7 +9,7 @@
                         <div class="flex items-start justify-between">
                             <NuxtImg
                                 :src="`${job?.logo ?? '/image/logo-ish.png'}`"
-                                :alt="`image logo ${job?.job_company} - ${job?.job_title.toLowerCase()}`"
+                                :alt="`image logo PT Infomedia Solusi Humanika - ${job?.job_title.toLowerCase()}`"
                                 width=""
                                 height=""
                                 class="h-[3em] mb-3 object-fit-contain"
@@ -17,7 +17,10 @@
                             <PartialsFavbtn :job="job" />
                         </div>
                         <h2 class="text-base capitalize mb-1">{{ job?.job_title.toLowerCase() }}</h2>
-                        <p class="text-slate-500 text-sm mb-3 uppercase">{{ job?.job_company.toLowerCase() }}</p>
+                        <p class="text-slate-500 text-sm mb-3 uppercase">
+                            PT Infomedia Solusi Humanika
+                            <!-- {{ job?.job_company.toLowerCase() }} -->
+                        </p>
                         <ul class="text-slate-600 mt-auto">
                             <li class="flex items-center gap-3 text-sm">
                                 <div class="w-[20px]">
@@ -70,6 +73,7 @@
 
 <script setup>
 definePageMeta({
+    title: 'Lowongan / Job - Terakhir dilihat',
     layout:'seeker',
     middleware: ["auth"]
 })

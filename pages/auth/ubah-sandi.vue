@@ -7,6 +7,7 @@
 
 <script setup>
 definePageMeta({
+    title: 'Ubah Sandi',
     layout: 'simple',
 })
 

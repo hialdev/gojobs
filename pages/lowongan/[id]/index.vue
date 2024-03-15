@@ -6,8 +6,10 @@
 
 <script setup>
 definePageMeta({
+    title: 'Lowongan / Job - Detail ',
     layout: 'lowongan-detail',
 });
+
 const store = useJobStore();
 
 onMounted(async () => {

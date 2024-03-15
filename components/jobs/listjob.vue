@@ -2,7 +2,7 @@
     <div v-for="job in jobs" :key="job?.id">
         <NuxtLink :to="`/lowongan/${job.id}`" activeClass="ring-4 ring-orange-700/20 border-primary border" class="cursor-pointer block mb-5 bg-white rounded-3xl p-6 hover:ring-4 hover:ring-orange-700/20 border border-white hover:border-primary">
             <div class="flex items-center justify-between">
-                <NuxtImg :src="job?.logo" :alt="`Logo ${job?.company}`" class="h-[3em] mb-3" />
+                <NuxtImg :src="job?.logo" :alt="`Logo PT Infomedia Solusi Humanika`" class="h-[3em] mb-3" />
                 <div class="w-[24px] cursor-pointer text-orange-100 hover:text-orange-200">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 30" fill="currentColor">
                         <path d="M23.75 26.25L15 21.25L6.25 26.25V6.25C6.25 5.58696 6.51339 4.95107 6.98223 4.48223C7.45107 4.01339 8.08696 3.75 8.75 3.75H21.25C21.913 3.75 22.5489 4.01339 23.0178 4.48223C23.4866 4.95107 23.75 5.58696 23.75 6.25V26.25Z" stroke="#FA6900" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>

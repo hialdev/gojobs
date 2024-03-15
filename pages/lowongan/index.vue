@@ -82,6 +82,7 @@
 import { useJobStore } from '#imports';
 
 definePageMeta({
+    title: 'Lowongan / Job - Lamar pekerjaan yang ada minati di BUMN, Perusahaan Ternama dan Perusahaan Luar Negri',
     layout: 'lowongan',
 });
 

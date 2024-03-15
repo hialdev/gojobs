@@ -7,7 +7,7 @@
                     <div class="flex items-start justify-between">
                         <NuxtImg
                             :src="`${job?.joborder?.logo ?? '/image/logo-ish.png'}`"
-                            :alt="`image logo ${job?.joborder?.job_company} - ${job?.joborder?.job_title.toLowerCase()}`"
+                            :alt="`image logo PT Infomedia Solusi Humanika - ${job?.joborder?.job_title.toLowerCase()}`"
                             width=""
                             height=""
                             class="h-[3em] mb-3 object-fit-contain"
@@ -67,6 +67,7 @@
 
 <script setup>
 definePageMeta({
+    title: 'Lowongan / Job - DiSimpan',
     layout:'seeker',
     middleware: ["auth"]
 })

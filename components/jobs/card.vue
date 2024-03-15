@@ -4,7 +4,7 @@
             <div class="flex items-start justify-between">
                 <NuxtImg
                     :src="`${job?.logo ?? '/image/logo-ish.png'}`"
-                    :alt="`image logo ${job?.job_company} - ${job?.job_title.toLowerCase()}`"
+                    :alt="`image logo PT Infomedia Solusi Humanika - ${job?.job_title.toLowerCase()}`"
                     width=""
                     height=""
                     class="h-[3em] mb-3 object-fit-contain"

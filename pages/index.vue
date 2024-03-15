@@ -223,6 +223,7 @@
 
 <script setup>
 definePageMeta({
+    title: 'Temukan lowongan dan dapatkan pekerjaan terbaik di BUMN, Perusahaan Ternama, dan Luar Negri | Gojobs.id - PT Infomedia Solusi Humanika',
     layout: 'fixed',
 })
 import { Swiper, SwiperSlide } from 'swiper/vue';

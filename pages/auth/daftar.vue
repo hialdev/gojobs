@@ -8,6 +8,7 @@
 
 <script setup>
 definePageMeta({
+    title: 'Daftar - Ambil kesempatan untuk bekerja di BUMN, Perusahaan Ternama dan Perusahaan Luar Negri',
     layout: 'simple',
 })
 

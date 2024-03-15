@@ -1,5 +1,6 @@
 
 <template>
+    <div v-if="!isReady" class="bg-slate-200 p-5 py-7"></div>
     <div v-if="isReady" class="bg-white">
         <div class="container mx-auto flex items-center justify-between px-5 py-2">
             <PartialsLogo :path="`/seeker/dashboard`" />
@@ -47,7 +48,7 @@
                 <div class="relative">
                     <button @click="() => {menuShow = !menuShow; notifShow = false}" type="button" class="bg-slate-50 p-1 flex items-center gap-3 text-slate-400 rounded-3xl pe-4" id="user-menu-button" aria-expanded="false" data-dropdown-toggle="dropdown">
                         <span class="sr-only">Open user menu</span>
-                        <NuxtImg class="w-8 h-8 rounded-full" :src="`https://ui-avatars.com/api/?name=${profile?.name}`" alt="user photo" />
+                        <NuxtImg class="w-8 h-8 rounded-full object-cover" :src="profile?.profile.photo != null || profile?.profile.photo != '' ? profile?.profile.photo : `https://ui-avatars.com/api/?name=${profile?.name}`" alt="user photo" width="100" height="100" />
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 256 256"><path fill="currentColor" d="m216.49 104.49l-80 80a12 12 0 0 1-17 0l-80-80a12 12 0 0 1 17-17L128 159l71.51-71.52a12 12 0 0 1 17 17Z"/></svg>
                     </button>
                     <!-- Dropdown menu -->
@@ -169,7 +170,8 @@ const logoutHandle = async () => {
 onMounted(async () => {
     const fetch = await notifStore.getNotifications();
 
-    profile.value = await store.getProfile();
+    profile.value = await store.getFullProfile();
+    console.log('Profile Data', profile.value)
     isReady.value = true;
 })
 </script>

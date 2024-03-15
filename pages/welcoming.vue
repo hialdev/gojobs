@@ -22,6 +22,7 @@
 
 <script setup>
 definePageMeta({
+    layout: 'Selamat Datang!',
     layout: 'simple',
     middleware: ["auth"]
 })

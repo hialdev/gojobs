@@ -817,6 +817,7 @@
 import { useToast } from 'vue-toastification'
 
 definePageMeta({
+    title: 'Buat CV Gratis | Gojobs.id',
     layout:'default'
 });
 

@@ -8,10 +8,13 @@
         <div v-if="job?.selectedJob != null" class="grid grid-cols-12 relative">
             <div class="col-span-12 px-5">
                 <div class="mb-3 mt-6 px-5">
-                    <NuxtImg :src="`${job?.selectedJob?.job_company_logo ?? '/image/logo-ish.png'}`" :alt="`logo ${job?.selectedJob?.company}`" class="h-[4em] mb-2" />
+                    <NuxtImg :src="`${job?.selectedJob?.job_company_logo ?? '/image/logo-ish.png'}`" :alt="`logo PT Infomedia Solusi Humanika`" class="h-[4em] mb-2" />
                     <div>
                         <h2 class="text-lg capitalize">{{job?.selectedJob?.job_title.toLowerCase()}}</h2>
-                        <p class="text-sm text-slate-500">{{job?.selectedJob?.job_company}}</p>
+                        <p class="text-sm text-slate-500">
+                            PT Infomedia Solusi Humanika
+                            <!-- {{job?.selectedJob?.job_company}} -->
+                        </p>
                     </div>
                 </div>
                 <ul class="text-sm text-slate-600 px-5">

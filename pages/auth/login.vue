@@ -8,6 +8,7 @@
 
 <script setup>
 definePageMeta({
+    title: 'Login - Selamat datang di Gojobs.id',
     layout: 'default',
 })
 

@@ -6,6 +6,7 @@
 
 <script setup>
 definePageMeta({
+    title: 'Verifikasi',
     layout: 'simple',
 })
 </script>

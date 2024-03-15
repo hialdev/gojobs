@@ -182,6 +182,7 @@
 
 <script setup>
 definePageMeta({
+    title: 'Buat Profile',
     middleware: ['profile']
 });
 

@@ -45,6 +45,7 @@
 
 <script setup>
 definePageMeta({
+    title: 'Notifikasi | Gojobs.id',
     middleware: ["auth"]
 })
 

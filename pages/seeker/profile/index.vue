@@ -34,7 +34,7 @@
                                     <path d="M15 5.9997L18 8.9997M13 19.9997H21M5 15.9997L4 19.9997L8 18.9997L19.586 7.4137C19.9609 7.03864 20.1716 6.53003 20.1716 5.9997C20.1716 5.46937 19.9609 4.96075 19.586 4.5857L19.414 4.4137C19.0389 4.03876 18.5303 3.82812 18 3.82812C17.4697 3.82813 16.9611 4.03876 16.586 4.4137L5 15.9997Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                                 </svg>
                             </div>
-                            <img :src="userStore?.detail?.profile?.image != null || userStore?.detail?.profile?.image != '' ? userStore?.detail?.profile?.image : `https://ui-avatars.com/api/?name=${userStore?.detail?.profile?.name}`" alt="Image Buat CV" width="150" height="150" class="block rounded-full border p-1" />
+                            <NuxtImg :src="userStore?.detail?.profile?.image != null || userStore?.detail?.profile?.image != '' ? userStore?.detail?.profile?.image : `https://ui-avatars.com/api/?name=${userStore?.detail?.profile?.name}`" alt="Image Buat CV" width="150" height="150" class="block rounded-full border p-1" />
                             <h2 class="text-xl font-medium">{{userStore?.detail?.profile.name}}</h2>
                             <div>{{userStore?.detail?.profile?.role}}</div>
                             <div class="py-3 flex w-full items-center gap-x-3">
@@ -1002,6 +1002,7 @@
 import { useToast } from 'vue-toastification'
 
 definePageMeta({
+    title: 'My Profile',
     layout:'default',
     middleware: ["auth"]
 });
