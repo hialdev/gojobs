@@ -20,7 +20,7 @@
                 </div>
             </div>
         </section>
-        <section class="py-[4em] bg-slate-200">
+        <section class="py-[4em] bg-slate-200" id="industri">
             <div class="container mx-auto px-5">
                 <div class="grid grid-cols-12 gap-3">
                     <div class="col-span-12">
@@ -69,7 +69,7 @@
             </div>
         </section>
 
-        <section class="py-[5em] bg-white">
+        <section class="py-[5em] bg-white" id="rekurtmen">
             <div class="container mx-auto px-5">
                 <div class="grid grid-cols-12 lg:gap-12">
                     <div class="col-span-12 mb-12 lg:mb-0 lg:col-span-5">
@@ -156,27 +156,43 @@
                             <NuxtImg src="/image/logo-gojobs-colour.png" class="h-[2.7em] mb-6" />
                             <p class="text-white mb-9 text-sm">gojobs.id adalah aplikasi job portal berbasis website yang dimiliki oleh PT Infomedia Solusi Humanika</p>
                             <div class="flex items-center gap-5">
-                                <NuxtLink to="" class="w-[50px] h-[50px] flex items-center justify-center border border-white rounded-[99px] p-2 hover:border-primary cursor-pointer"><NuxtImg class="hover:text-primary" src="/icon/fb.svg" /></NuxtLink>
-                                <NuxtLink to="" class="w-[50px] h-[50px] flex items-center justify-center border border-white rounded-[99px] p-2 hover:border-primary cursor-pointer"><NuxtImg class="hover:text-primary" src="/icon/x.svg" /></NuxtLink>
-                                <NuxtLink to="" class="w-[50px] h-[50px] flex items-center justify-center border border-white rounded-[99px] p-2 hover:border-primary cursor-pointer"><NuxtImg class="hover:text-primary" src="/icon/ig.svg" /></NuxtLink>
-                                <NuxtLink to="" class="w-[50px] h-[50px] flex items-center justify-center border border-white rounded-[99px] p-2 hover:border-primary cursor-pointer"><NuxtImg class="hover:text-primary" src="/icon/yt.svg" /></NuxtLink>
+                                <a target="_blank" href="http://www.facebook.com/ishrecruitment" class="group w-[50px] h-[50px] flex items-center justify-center border border-white rounded-[99px] p-2 hover:border-primary cursor-pointer">
+                                    <div class="flex text-white group-hover:text-primary items-center justify-center">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="12.5" height="20" viewBox="0 0 320 512"><path fill="currentColor" d="m279.14 288l14.22-92.66h-88.91v-60.13c0-25.35 12.42-50.06 52.24-50.06h40.42V6.26S260.43 0 225.36 0c-73.22 0-121.08 44.38-121.08 124.72v70.62H22.89V288h81.39v224h100.17V288z"/></svg>
+                                    </div>
+                                </a>
+                                <a target="_blank" href="https://www.linkedin.com/company/pt-infomedia-solusi-humanika" class="group w-[50px] h-[50px] flex items-center justify-center border border-white rounded-[99px] p-2 hover:border-primary cursor-pointer">
+                                    <div class="flex text-white group-hover:text-primary items-center justify-center">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="20.43" height="20" viewBox="0 0 1536 1504"><path fill="currentColor" d="M349 497v991H19V497zm21-306q1 73-50.5 122T184 362h-2q-82 0-132-49T0 191q0-74 51.5-122.5T186 20t133 48.5T370 191m1166 729v568h-329V958q0-105-40.5-164.5T1040 734q-63 0-105.5 34.5T871 854q-11 30-11 81v553H531q2-399 2-647t-1-296l-1-48h329v144h-2q20-32 41-56t56.5-52t87-43.5T1157 474q171 0 275 113.5T1536 920"/></svg>
+                                    </div>
+                                </a>
+                                <a target="_blank" href="http://www.instagram.com/ishrecruitment" class="group w-[50px] h-[50px] flex items-center justify-center border border-white rounded-[99px] p-2 hover:border-primary cursor-pointer">
+                                    <div class="flex text-white group-hover:text-primary items-center justify-center">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 16 16"><path fill="currentColor" d="M8 0C5.829 0 5.556.01 4.703.048C3.85.088 3.269.222 2.76.42a3.9 3.9 0 0 0-1.417.923A3.9 3.9 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7C.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297c.04.852.174 1.433.372 1.942c.205.526.478.972.923 1.417c.444.445.89.719 1.416.923c.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.9 3.9 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417c.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.9 3.9 0 0 0-.923-1.417A3.9 3.9 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046c.78.035 1.204.166 1.486.275c.373.145.64.319.92.599s.453.546.598.92c.11.281.24.705.275 1.485c.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.5 2.5 0 0 1-.599.919c-.28.28-.546.453-.92.598c-.28.11-.704.24-1.485.276c-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.5 2.5 0 0 1-.92-.598a2.5 2.5 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485c-.038-.843-.046-1.096-.046-3.233s.008-2.388.046-3.231c.036-.78.166-1.204.276-1.486c.145-.373.319-.64.599-.92s.546-.453.92-.598c.282-.11.705-.24 1.485-.276c.738-.034 1.024-.044 2.515-.045zm4.988 1.328a.96.96 0 1 0 0 1.92a.96.96 0 0 0 0-1.92m-4.27 1.122a4.109 4.109 0 1 0 0 8.217a4.109 4.109 0 0 0 0-8.217m0 1.441a2.667 2.667 0 1 1 0 5.334a2.667 2.667 0 0 1 0-5.334"/></svg>
+                                    </div>
+                                </a>
+                                <a target="_blank" href="https://www.youtube.com/@infomediasolusihumanika1239" class="group w-[50px] h-[50px] flex items-center justify-center border border-white rounded-[99px] p-2 hover:border-primary cursor-pointer">
+                                    <div class="flex text-white group-hover:text-primary items-center justify-center">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path fill="currentColor" d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814M9.545 15.568V8.432L15.818 12z"/></svg>
+                                    </div>
+                                </a>
                             </div>
                         </div>
                         <div class="order-1 lg:order-none col-span-6 lg:col-span-3">
                             <nav class="flex flex-col gap-4">
                                 <h5 class="text-lg lg:text-xl font-semibold text-white">Link Terkait</h5>
-                                <a href="" class="text-white hover:underline hover:underline-2 text-sm hover:decoration-primary">Tentang Perusahaan</a>
-                                <a href="" class="text-white hover:underline hover:underline-2 text-sm hover:decoration-primary">Proses Rekrutmen</a>
-                                <a href="" class="text-white hover:underline hover:underline-2 text-sm hover:decoration-primary">Industri Pekerjaan</a>
-                                <a href="" class="text-white hover:underline hover:underline-2 text-sm hover:decoration-primary">Kebijakan Privasi</a>
+                                <a target="_blank" href="https://ish.co.id" class="text-white hover:underline hover:underline-2 text-sm hover:decoration-primary">Tentang Perusahaan</a>
+                                <NuxtLink :to="`#rekurtmen`" class="text-white hover:underline hover:underline-2 text-sm hover:decoration-primary">Proses Rekrutmen</NuxtLink>
+                                <NuxtLink :to="`#industri`" class="text-white hover:underline hover:underline-2 text-sm hover:decoration-primary">Industri Pekerjaan</NuxtLink>
+                                <a href="/kebijakan-privasi" class="text-white hover:underline hover:underline-2 text-sm hover:decoration-primary">Kebijakan Privasi</a>
                             </nav>
                         </div>
                         <div class="order-last lg:order-none col-span-6 lg:col-span-3">
                             <nav class="flex flex-col gap-4">
                                 <h5 class="text-lg lg:text-xl font-semibold text-white">Layanan</h5>
-                                <a href="" class="text-white hover:underline hover:underline-2 text-sm hover:decoration-primary">CV Gratis</a>
-                                <a href="" class="text-white hover:underline hover:underline-2 text-sm hover:decoration-primary">Pencari Lowongan</a>
-                                <a href="" class="text-white hover:underline hover:underline-2 text-sm hover:decoration-primary">Bantuan</a>
+                                <a href="/buat-cv" class="text-white hover:underline hover:underline-2 text-sm hover:decoration-primary">CV Gratis</a>
+                                <a href="/lowongan" class="text-white hover:underline hover:underline-2 text-sm hover:decoration-primary">Pencari Lowongan</a>
+                                <a href="/bantuan" class="text-white hover:underline hover:underline-2 text-sm hover:decoration-primary">Bantuan</a>
                             </nav>
                         </div>
                         <div class="col-span-12 lg:col-span-3 mb-12 lg:mt-0">
@@ -186,21 +202,21 @@
                                     <NuxtImg class="w-[40px] h-[40px]" src="/icon/phone.svg" />
                                     <div>
                                         <div class="text-xs text-slate-400">Nomor Telepon</div>
-                                        <a href="" class="hover:underline hover:underline-2 hover:decoration-primary text-normal lg:text-lg text-white">(021) 806 70900</a>
+                                        <a target="_blank" href="tel:02180670900" class="hover:underline hover:underline-2 hover:decoration-primary text-normal lg:text-lg text-white">(021) 806 70900</a>
                                     </div>
                                 </div>
                                 <div class="flex items-center gap-6">
                                     <NuxtImg class="w-[40px] h-[40px]" src="/icon/mail.svg" />
                                     <div>
                                         <div class="text-xs text-slate-400">Email</div>
-                                        <a href="" class="hover:underline hover:underline-2 hover:decoration-primary text-normal lg:text-lg text-white">recuirtment@ish.co.id</a>
+                                        <a target="_blank" href="mailto:recruitment@ish.co.id" class="hover:underline hover:underline-2 hover:decoration-primary text-normal lg:text-lg text-white">recruitment@ish.co.id</a>
                                     </div>
                                 </div>
                                 <div class="flex items-center gap-6">
                                     <NuxtImg class="w-[40px] h-[40px]" src="/icon/location.svg" />
                                     <div>
                                         <div class="text-xs text-slate-400">Lokasi</div>
-                                        <a href="" class="hover:underline hover:underline-2 hover:decoration-primary text-normal lg:text-lg text-white">Fatmawati, Jakarta</a>
+                                        <a target="_blank" href="https://maps.app.goo.gl/FrT7oHB6dn89d4DN7" class="hover:underline hover:underline-2 hover:decoration-primary text-normal lg:text-lg text-white">Fatmawati, Jakarta</a>
                                     </div>
                                 </div>
                             </nav>
@@ -312,7 +328,7 @@ const industriesList = [
             "Content Creator",
             "Riset & Surveyor",
         ],
-        to: "/lowongan/industri=pemasaran",
+        to: "/lowongan?industri=pemasaran",
         image: {
             src: "/icon/marketing.svg",
             alt: "Icon Pemasaran Industry",
@@ -432,27 +448,27 @@ const recruitmentProcess = [
     {
         number: 1,
         title: "Seleksi CV",
-        description: "Mulai dari sini! Tim ISH akan reviu CV / Resume yang kamu kirim, mencocokkan kompetensimudengan kualifikasi yang dibutuhkan dan kontak kamu bila memenuhi kualifikasi",
+        description: "Mulai dari sini! Tim ISH akan reviu CV / Resume yang kamu kirim, mencocokkan kompetensi mu dengan kualifikasi yang dibutuhkan dan kontak kamu bila memenuhi kualifikasi",
     },
     {
         number: 2,
         title: "Psikotest",
-        description: "Agar memastikan profilmu cocok dengan dengan jabatan yang dilamar kamu diminta untukmengerjakan soal-soal psikotes. Tips: Kerjakan tes di pagi hari, fokus tanpa gangguan, danselesaikan segera.",
+        description: "Agar memastikan profilmu cocok dengan dengan jabatan yang dilamar kamu diminta untuk mengerjakan soal-soal psikotes. Tips: Kerjakan tes di pagi hari, fokus tanpa gangguan, danselesaikan segera.",
     },
     {
         number: 3,
         title: "Wawancara HR",
-        description: "Tim ISH akan menggali lebih dalam pengalaman, ketrampilan, dan pengetahuan seputar profesiserta jabatan yang kamu lamar. Tips: Persiapan, Berlatih, dan tampil percaya diri.",
+        description: "Tim ISH akan menggali lebih dalam pengalaman, ketrampilan, dan pengetahuan seputar profesi serta jabatan yang kamu lamar. Tips: Persiapan, Berlatih, dan tampil percaya diri.",
     },
     {
         number: 4,
         title: "Wawancara User",
-        description: "Di tahap ini profil kamu akan digali lebih dalam oleh Tim Klien. Pertanyaan teknis dan roleplaybiasanya diajukan dalam sesi wawancara. Tips: Kuasai teknis pekerjaan, banyak berlatih, dan hadir tepat waktu. ",
+        description: "Di tahap ini profil kamu akan digali lebih dalam oleh Tim Klien. Pertanyaan teknis dan roleplay biasanya diajukan dalam sesi wawancara. Tips: Kuasai teknis pekerjaan, banyak berlatih, dan hadir tepat waktu. ",
     },
     {
         number: 5,
         title: "Hiring",
-        description: "Hore! Ini tahap akhir proses rekrutmen kamu. Segera melengkapi data untuk pembuatan kontrakkerja dan payroll. Semakin cepat kamu lengkapi, semakin cepat kamu bisa bekerja. Selamat ya Ka!",
+        description: "Hore! Ini tahap akhir proses rekrutmen kamu. Segera melengkapi data untuk pembuatan kontrak kerja dan payroll. Semakin cepat kamu lengkapi, semakin cepat kamu bisa bekerja. Selamat ya Ka!",
     },
 ]
 const testimonials = [
@@ -464,7 +480,7 @@ const testimonials = [
         name: "Vebriyano Lahallo",
         rate: 5,
         position: "Promotor Elektronik",
-        quote: "Terima Kasih kepada ISH telah memberikan kesempatan sayainterview untuk ke 2 kalinya, dan pada akhirnya saya bisabergabung di perusahaan besar ini",
+        quote: "Terima Kasih kepada ISH telah memberikan kesempatan sayainterview untuk ke 2 kalinya, dan pada akhirnya saya bisa bergabung di perusahaan besar ini",
     },
     {
         image:{
@@ -474,7 +490,7 @@ const testimonials = [
         name: "Siska Ramadhona",
         rate: 4,
         position: "Promotor Elektronik",
-        quote: "Selama saya event di ISH sangat nyaman karena memiliki leader yang humble dan bisa mengayomi saya selama event  disana dan salary nya juga sesuai dengan perjanjian diawal",
+        quote: "Selama saya event di ISH sangat nyaman karena memiliki leader yang humble dan bisa mengayomi saya selama event disana dan salary nya juga sesuai dengan perjanjian diawal",
     },
     {
         image:{

@@ -10,6 +10,7 @@ export default defineNuxtConfig({
     '@nuxt/image',
     '@pinia/nuxt',
     '@nuxtjs/seo',
+    '@stefanobartoletti/nuxt-social-share',
   ],
   devtools: { enabled: true },
   css: [ 

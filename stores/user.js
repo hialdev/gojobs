@@ -71,6 +71,14 @@ export const useUserStore = defineStore('user',{
             console.log(profile);
             return profile;
         },
+
+        async getUsernameProfile(username){
+            const profile = await $fetch(`${this.API_URL}/user?username=${username}`, {
+                method : 'GET',
+            })
+
+            return profile;
+        },
         async login(username = this.loginForm.username, password = this.loginForm.password){
             let formdata = new FormData();
             formdata.append("username", username);

@@ -143,6 +143,7 @@ export const useJobStore = defineStore('job',{
                 headers : headers,
             });
 
+            this.getJobs();
             return favorite;
         },
 
@@ -154,7 +155,8 @@ export const useJobStore = defineStore('job',{
                 method : 'POST',
                 headers : headers,
             });
-
+            
+            this.getJobs();
             return unfavorite;
         },
 

@@ -72,7 +72,7 @@
                         </div>
                         <div>
                             <div class="flex w-full items-center justify-between gap-6 p-4 rounded-lg border">
-                                <div class="font-medium text-xs flex-1">{{ profile }}</div>
+                                <div class="font-medium text-xs flex-1">https://{{domain}}/u/{{ username }}</div>
                                 <button class="text-primary text-sm" @click="copyToClipboard">Copy</button>
                             </div>
                         </div>
@@ -89,7 +89,8 @@ definePageMeta({
     layout:'seeker-setting',
 })
 const toast = useToast();
-const profile = ref('https://gojobs.co.id/profile/algans');
+const username = ref('noeralif63');
+const domain = ref('gojobs.id');
 
 const dataStore = ref({
     mail : {
@@ -104,6 +105,7 @@ const user = useUserStore();
 
 onMounted(async () => {
     const profile = await user.getProfile();
+    username.value = profile?.username;
     dataStore.value.mail.job = profile?.is_notification_mail == 'yes' ? true : false;
     dataStore.value.mail.recuirtment = profile?.is_notification_mail_recruitment == 'yes' ? true : false;
     dataStore.value.others = profile?.is_notification_other == 'yes' ? true : false;
@@ -111,9 +113,9 @@ onMounted(async () => {
 })
 
 const copyToClipboard = () => {
-  navigator.clipboard.writeText(profile.value)
-    .then(() => console.log('Text copied to clipboard'))
-    .catch((error) => console.error('Error copying text to clipboard:', error));
+  navigator.clipboard.writeText(`http://${domain.value}/u/${username.value}`)
+    .then(() => toast.success('Success copying profile link to clipboard'))
+    .catch((error) => toast.error('Error copying text to clipboard : ' + error));
 };
 
 const changeNotifJob = async() => {

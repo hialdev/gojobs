@@ -1,6 +1,34 @@
 <template>
     <ModalLazyLoad v-if="!isReady" />
     <div v-if="isReady" class="bg-slate-50">
+
+        <div v-if="isShare" class="fixed bg-black/20 z-[999] top-0 bottom-0 start-0 end-0 p-5 flex items-center justify-center">
+            <div class="bg-white p-7 rounded-lg max-w-[30em]">
+                <div class="flex mb-3 pb-3 border-b items-center justify-between">
+                    <h4 class="text-lg font-medium">Bagikan Profil</h4>
+                    <div @click="isShare = false" class="cursor-pointer text-slate-500 hover:text-rose-600">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 48 48"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="4" d="m8 8l32 32M8 40L40 8"/></svg>
+                    </div>
+                </div>
+                <div class="flex mb-3 w-full items-center justify-between gap-6 p-4 rounded-lg border">
+                    <div class="font-medium text-xs flex-1">https://gojobs.id/u/{{ profileData?.username }}</div>
+                    <button class="text-primary text-sm" @click="copyToClipboard">Copy</button>
+                </div>
+                <div class="flex flex-wrap gap-4 mb-3 text-white">
+                    <SocialShare
+                        v-for="network in ['facebook', 'twitter', 'whatsapp','telegram', 'linkedin', 'email']"
+                        :key="network"
+                        :network="network"
+                        :styled="true"
+                        :label="false"
+                        :url="`https://gojobs.id/u/${profileData?.username}`"
+                        class="p-2 rounded-lg"
+                    />
+                </div>
+                <p class="text-sm text-slate-500 mb-3">Pastikan anda mengidzinkan visibilitas profil anda agar dapat dilihat orang lain, <strong>Pergi ke Account Setting -> Notification -> Visibility</strong></p>
+            </div>
+        </div>
+
         <div class="container mx-auto p-8 px-0 md:px-8">
             <div class="grid grid-cols-12 gap-4">
                 <div class="col-span-12">
@@ -10,6 +38,15 @@
                         <PartialsButton @click="downloadHandle" class="flex gap-5 items-center justify-between px-5 rounded-lg text-sm">Download CV
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2M7 11l5 5l5-5m-5-7v12"/></svg>
                         </PartialsButton>
+
+                        <button @click="isShare = true" class="p-2.5 rounded-3xl bg-slate-100 hover:bg-orange-100 hover:border-orange-100">
+                            <div class="w-[24px] h-[24px]">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
+                                    <path d="M18 22C17.1667 22 16.4583 21.7083 15.875 21.125C15.2917 20.5417 15 19.8333 15 19C15 18.8833 15.0083 18.7623 15.025 18.637C15.0417 18.5117 15.0667 18.3993 15.1 18.3L8.05 14.2C7.76667 14.45 7.45 14.646 7.1 14.788C6.75 14.93 6.38333 15.0007 6 15C5.16667 15 4.45833 14.7083 3.875 14.125C3.29167 13.5417 3 12.8333 3 12C3 11.1667 3.29167 10.4583 3.875 9.875C4.45833 9.29167 5.16667 9 6 9C6.38333 9 6.75 9.071 7.1 9.213C7.45 9.355 7.76667 9.55067 8.05 9.8L15.1 5.7C15.0667 5.6 15.0417 5.48767 15.025 5.363C15.0083 5.23833 15 5.11733 15 5C15 4.16667 15.2917 3.45833 15.875 2.875C16.4583 2.29167 17.1667 2 18 2C18.8333 2 19.5417 2.29167 20.125 2.875C20.7083 3.45833 21 4.16667 21 5C21 5.83333 20.7083 6.54167 20.125 7.125C19.5417 7.70833 18.8333 8 18 8C17.6167 8 17.25 7.92933 16.9 7.788C16.55 7.64667 16.2333 7.45067 15.95 7.2L8.9 11.3C8.93333 11.4 8.95833 11.5127 8.975 11.638C8.99167 11.7633 9 11.884 9 12C9 12.1167 8.99167 12.2377 8.975 12.363C8.95833 12.4883 8.93333 12.6007 8.9 12.7L15.95 16.8C16.2333 16.55 16.55 16.3543 16.9 16.213C17.25 16.0717 17.6167 16.0007 18 16C18.8333 16 19.5417 16.2917 20.125 16.875C20.7083 17.4583 21 18.1667 21 19C21 19.8333 20.7083 20.5417 20.125 21.125C19.5417 21.7083 18.8333 22 18 22Z" fill="#FA6900"/>
+                                </svg>
+                            </div>
+                        </button>
+
                     </div>
                 </div>
                 <div class="col-span-12 lg:col-span-4">
@@ -378,29 +415,159 @@
                     <div class="mt-4 p-5 rounded-xl bg-white">
                         <h3 class="font-medium pb-3 border-b mb-3">Dokumen</h3>
                         <div class="mb-3">
+                            <div class="text-sm text-slate-500 mb-2">CV / Resume</div>
+                            <div v-if="documents?.profile?.resume != null" class="flex gap-x-3 mb-2 items-center p-2 rounded-lg bg-slate-100 text-slate-600">
+                                <div class="flex items-center justify-center">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path fill="currentColor" d="M18 22a2 2 0 0 0 2-2V8l-6-6H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2zM13 4l5 5h-5zM7 8h3v2H7zm0 4h10v2H7zm0 4h10v2H7z"/></svg>
+                                </div>
+                                <a class="block text-sm" target="_blank" :href="documents?.profile?.resume" >Resume</a>
+                            </div>
+                            <PartialsFile @selectedFile="(value) => handleFile(value, 'resume')" />
+                            <div v-if="error.resume" class="text-xs mt-1 text-red-500">{{ error.resume }}</div>
+                        </div>
+                        <div class="mb-3">
+                            <div class="text-sm text-slate-500 mb-2">Cover Letter</div>
+                            <div v-if="documents?.important?.cover_letter != null" class="flex gap-x-3 mb-2 items-center p-2 rounded-lg bg-slate-100 text-slate-600">
+                                <div class="flex items-center justify-center">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path fill="currentColor" d="M18 22a2 2 0 0 0 2-2V8l-6-6H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2zM13 4l5 5h-5zM7 8h3v2H7zm0 4h10v2H7zm0 4h10v2H7z"/></svg>
+                                </div>
+                                <a class="block text-sm" target="_blank" :href="documents?.important?.cover_letter" >Cover Letter</a>
+                            </div>
+                            <PartialsFile @selectedFile="(value) => handleFile(value, 'cover')" />
+                            <div v-if="error.cover" class="text-xs mt-1 text-red-500">{{ error.cover }}</div>
+                        </div>
+                        <div class="mb-3">
                             <div class="text-sm text-slate-500 mb-2">KTP</div>
-                            <PartialsInput :required="true" :submitted="submit.document" :inputClass="`border border-slate-200`" :placeholder="`No KTP`" />
-                            <PartialsFile />
+                            <div v-if="documents?.important?.id_card != null" class="flex gap-x-3 mb-2 items-center p-2 rounded-lg bg-slate-100 text-slate-600">
+                                <div class="flex items-center justify-center">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path fill="currentColor" d="M18 22a2 2 0 0 0 2-2V8l-6-6H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2zM13 4l5 5h-5zM7 8h3v2H7zm0 4h10v2H7zm0 4h10v2H7z"/></svg>
+                                </div>
+                                <a class="block text-sm" target="_blank" :href="documents?.important?.id_card" >{{documents?.important?.id_number}}</a>
+                            </div>
+                            <PartialsInput v-model="document.ktp.number" :modelValue="document.ktp.number" :typeInput="`number`" :required="true" :submitted="submit.document" :inputClass="`border border-slate-200`" :placeholder="`No KTP`" />
+                            <PartialsFile @selectedFile="(value) => handleFile(value, 'ktp')" />
+                            <div v-if="error.ktp" class="text-xs mt-1 text-red-500">{{ error.ktp }}</div>
+                        </div>
+                        <div class="mb-3">
+                            <div class="text-sm text-slate-500 mb-2">Kartu Keluarga</div>
+                            <div v-if="documents?.important?.family_card != null" class="flex gap-x-3 mb-2 items-center p-2 rounded-lg bg-slate-100 text-slate-600">
+                                <div class="flex items-center justify-center">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path fill="currentColor" d="M18 22a2 2 0 0 0 2-2V8l-6-6H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2zM13 4l5 5h-5zM7 8h3v2H7zm0 4h10v2H7zm0 4h10v2H7z"/></svg>
+                                </div>
+                                <a class="block text-sm" target="_blank" :href="documents?.important?.family_card" >{{documents?.important?.family_number}}</a>
+                            </div>
+                            <PartialsInput v-model="document.kk.number" :modelValue="document.kk.number" :typeInput="`number`" :required="true" :submitted="submit.document" :inputClass="`border border-slate-200`" :placeholder="`No Kartu Keluarga`" />
+                            <PartialsFile @selectedFile="(value) => handleFile(value, 'kk')" />
+                            <div v-if="error.kk" class="text-xs mt-1 text-red-500">{{ error.kk }}</div>
                         </div>
                         <div class="mb-3">
                             <div class="text-sm text-slate-500 mb-2">NPWP</div>
-                            <PartialsInput :required="true" :submitted="submit.document" :inputClass="`border border-slate-200`" :placeholder="`No NPWP`" />
-                            <PartialsFile />
+                            <div v-if="documents?.important?.npwp_card != null" class="flex gap-x-3 mb-2 items-center p-2 rounded-lg bg-slate-100 text-slate-600">
+                                <div class="flex items-center justify-center">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path fill="currentColor" d="M18 22a2 2 0 0 0 2-2V8l-6-6H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2zM13 4l5 5h-5zM7 8h3v2H7zm0 4h10v2H7zm0 4h10v2H7z"/></svg>
+                                </div>
+                                <a class="block text-sm" target="_blank" :href="documents?.important?.npwp_card" >{{documents?.important?.npwp_number}}</a>
+                            </div>
+                            <PartialsInput v-model="document.npwp.number" :modelValue="document.npwp.number" :typeInput="`number`" :required="true" :submitted="submit.document" :inputClass="`border border-slate-200`" :placeholder="`No NPWP`" />
+                            <PartialsFile @selectedFile="(value) => handleFile(value, 'npwp')" />
+                            <div v-if="error.npwp" class="text-xs mt-1 text-red-500">{{ error.npwp }}</div>
+                        </div>
+                        <div class="mb-3">
+                            <div class="text-sm text-slate-500 mb-2">Ijazah</div>
+                            <div v-if="documents?.important?.degree_card != null" class="flex gap-x-3 mb-2 items-center p-2 rounded-lg bg-slate-100 text-slate-600">
+                                <div class="flex items-center justify-center">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path fill="currentColor" d="M18 22a2 2 0 0 0 2-2V8l-6-6H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2zM13 4l5 5h-5zM7 8h3v2H7zm0 4h10v2H7zm0 4h10v2H7z"/></svg>
+                                </div>
+                                <a class="block text-sm" target="_blank" :href="documents?.important?.degree_card" >Ijazah</a>
+                            </div>
+                            <PartialsFile @selectedFile="(value) => handleFile(value, 'ijazah')" />
+                            <div v-if="error.ijazah" class="text-xs mt-1 text-red-500">{{ error.ijazah }}</div>
                         </div>
                         <div class="mb-3">
                             <div class="text-sm text-slate-500 mb-2">Transkrip Nilai</div>
-                            <PartialsInput :required="true" :submitted="submit.document" :inputClass="`border border-slate-200`" :placeholder="`Transkrip Nilai`" />
-                            <PartialsFile />
+                            <div v-if="documents?.important?.transcript_card != null" class="flex gap-x-3 mb-2 items-center p-2 rounded-lg bg-slate-100 text-slate-600">
+                                <div class="flex items-center justify-center">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path fill="currentColor" d="M18 22a2 2 0 0 0 2-2V8l-6-6H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2zM13 4l5 5h-5zM7 8h3v2H7zm0 4h10v2H7zm0 4h10v2H7z"/></svg>
+                                </div>
+                                <a class="block text-sm" target="_blank" :href="documents?.important?.transcript_card" >Transkrip</a>
+                            </div>
+                            <PartialsFile @selectedFile="(value) => handleFile(value, 'transkrip')" />
+                            <div v-if="error.transkrip" class="text-xs mt-1 text-red-500">{{ error.transkrip }}</div>
                         </div>
                         <div class="mb-3">
                             <div class="text-sm text-slate-500 mb-2">SIM A/B</div>
-                            <PartialsInput :required="true" :submitted="submit.document" :inputClass="`border border-slate-200`" :placeholder="`SIM A/B`" />
-                            <PartialsFile />
+                            <div v-if="documents?.important?.driving_car_card != null" class="flex gap-x-3 mb-2 items-center p-2 rounded-lg bg-slate-100 text-slate-600">
+                                <div class="flex items-center justify-center">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path fill="currentColor" d="M18 22a2 2 0 0 0 2-2V8l-6-6H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2zM13 4l5 5h-5zM7 8h3v2H7zm0 4h10v2H7zm0 4h10v2H7z"/></svg>
+                                </div>
+                                <a class="block text-sm" target="_blank" :href="documents?.important?.driving_car_card" >{{documents?.important?.driving_car_number}}</a>
+                            </div>
+                            <PartialsInput v-model="document.simab.number" :modelValue="document.simab.number" :typeInput="`number`" :required="true" :submitted="submit.document" :inputClass="`border border-slate-200`" :placeholder="`SIM A/B`" />
+                            <PartialsFile @selectedFile="(value) => handleFile(value, 'simab')" />
+                            <div v-if="error.simab" class="text-xs mt-1 text-red-500">{{ error.simab }}</div>
                         </div>
                         <div class="mb-3">
                             <div class="text-sm text-slate-500 mb-2">SIM C</div>
-                            <PartialsInput :required="true" :submitted="submit.document" :inputClass="`border border-slate-200`" :placeholder="`SIM C`" />
-                            <PartialsFile />
+                            <div v-if="documents?.important?.driving_car_card != null" class="flex gap-x-3 mb-2 items-center p-2 rounded-lg bg-slate-100 text-slate-600">
+                                <div class="flex items-center justify-center">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path fill="currentColor" d="M18 22a2 2 0 0 0 2-2V8l-6-6H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2zM13 4l5 5h-5zM7 8h3v2H7zm0 4h10v2H7zm0 4h10v2H7z"/></svg>
+                                </div>
+                                <a class="block text-sm" target="_blank" :href="documents?.important?.driving_car_card" >{{documents?.important?.driving_car_number}}</a>
+                            </div>
+                            <PartialsInput v-model="document.simc.number" :modelValue="document.simc.number" :typeInput="`number`" :required="true" :submitted="submit.document" :inputClass="`border border-slate-200`" :placeholder="`SIM C`" />
+                            <PartialsFile @selectedFile="(value) => handleFile(value, 'simc')" />
+                            <div v-if="error.simc" class="text-xs mt-1 text-red-500">{{ error.simc }}</div>
+                        </div>
+                        <div class="mb-3">
+                            <div class="text-sm text-slate-500 mb-2">BPJS</div>
+                            <div v-if="documents?.important?.bpjs_card != null" class="flex gap-x-3 mb-2 items-center p-2 rounded-lg bg-slate-100 text-slate-600">
+                                <div class="flex items-center justify-center">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path fill="currentColor" d="M18 22a2 2 0 0 0 2-2V8l-6-6H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2zM13 4l5 5h-5zM7 8h3v2H7zm0 4h10v2H7zm0 4h10v2H7z"/></svg>
+                                </div>
+                                <a class="block text-sm" target="_blank" :href="documents?.important?.bpjs_card" >{{documents?.important?.bpjs_number}}</a>
+                            </div>
+                            <PartialsInput v-model="document.bpjs.number" :modelValue="document.bpjs.number" :required="true" :submitted="submit.document" :inputClass="`border border-slate-200`" :placeholder="`No BPJS`" />
+                            <PartialsFile @selectedFile="(value) => handleFile(value, 'bpjs')" />
+                            <div v-if="error.bpjs" class="text-xs mt-1 text-red-500">{{ error.bpjs }}</div>
+                        </div>
+                        <div class="mb-3">
+                            <div class="text-sm text-slate-500 mb-2">Jamsostek</div>
+                            <div v-if="documents?.important?.jamsostek_card != null" class="flex gap-x-3 mb-2 items-center p-2 rounded-lg bg-slate-100 text-slate-600">
+                                <div class="flex items-center justify-center">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path fill="currentColor" d="M18 22a2 2 0 0 0 2-2V8l-6-6H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2zM13 4l5 5h-5zM7 8h3v2H7zm0 4h10v2H7zm0 4h10v2H7z"/></svg>
+                                </div>
+                                <a class="block text-sm" target="_blank" :href="documents?.important?.jamsostek_card" >{{documents?.important?.jamsostek_number}}</a>
+                            </div>
+                            <PartialsInput v-model="document.jamsostek.number" :modelValue="document.jamsostek.number" :required="true" :submitted="submit.document" :inputClass="`border border-slate-200`" :placeholder="`No Jamsostek`" />
+                            <PartialsFile @selectedFile="(value) => handleFile(value, 'jamsostek')" />
+                            <div v-if="error.jamsostek" class="text-xs mt-1 text-red-500">{{ error.jamsostek }}</div>
+                        </div>
+                        <div class="mb-3">
+                            <div class="text-sm text-slate-500 mb-2">Vaksin 1</div>
+                            <div v-if="documents?.vaccine?.vaccine_card_1 != null" class="flex gap-x-3 mb-2 items-center p-2 rounded-lg bg-slate-100 text-slate-600">
+                                <div class="flex items-center justify-center">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path fill="currentColor" d="M18 22a2 2 0 0 0 2-2V8l-6-6H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2zM13 4l5 5h-5zM7 8h3v2H7zm0 4h10v2H7zm0 4h10v2H7z"/></svg>
+                                </div>
+                                <a class="block text-sm" target="_blank" :href="documents?.vaccine?.vaccine_card_1" >Vaksin 1</a>
+                            </div>
+                            <PartialsInput v-model="document.vaksin1.number" :modelValue="document.vaksin1.number" :required="true" :submitted="submit.document" :inputClass="`border border-slate-200`" :placeholder="`Vaksin 1`" />
+                            <PartialsFile @selectedFile="(value) => handleFile(value, 'vaksin1')" />
+                            <div v-if="error.vaksin1" class="text-xs mt-1 text-red-500">{{ error.vaksin1 }}</div>
+                        </div>
+                        <div class="mb-3">
+                            <div class="text-sm text-slate-500 mb-2">Vaksin 2</div>
+                            <div v-if="documents?.vaccine?.vaccine_card_2 != null" class="flex gap-x-3 mb-2 items-center p-2 rounded-lg bg-slate-100 text-slate-600">
+                                <div class="flex items-center justify-center">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path fill="currentColor" d="M18 22a2 2 0 0 0 2-2V8l-6-6H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2zM13 4l5 5h-5zM7 8h3v2H7zm0 4h10v2H7zm0 4h10v2H7z"/></svg>
+                                </div>
+                                <a class="block text-sm" target="_blank" :href="documents?.vaccine?.vaccine_card_2" >Vaksin 1</a>
+                            </div>
+                            <PartialsInput v-model="document.vaksin2.number" :modelValue="document.vaksin2.number" :required="true" :submitted="submit.document" :inputClass="`border border-slate-200`" :placeholder="`Vaksin 2`" />
+                            <PartialsFile @selectedFile="(value) => handleFile(value, 'vaksin2')" />
+                            <div v-if="error.vaksin2" class="text-xs mt-1 text-red-500">{{ error.vaksin2 }}</div>
+                        </div>
+                        <div class="flex items-center justify-end sticky bottom-0 bg-white p-2">
+                            <button @click="saveDocument" class="p-2 px-3 rounded-lg text-sm text-white bg-primary block w-full">Simpan Dokumen</button>
                         </div>
                     </div>
                 </div>
@@ -1009,6 +1176,7 @@ definePageMeta({
 
 const openLogin = ref(false)
 const isReady = ref(false)
+const isShare = ref(false)
 const toast = useToast();
 const in_edit = ref(null);
 
@@ -1023,6 +1191,7 @@ const famStore = useFamcontactStore();
 const organizationStore = useOrganizationStore();
 const languageStore = useLanguageStore();
 const medsosStore = useMedsosStore();
+const docStore = useDocumentStore();
 
 const skillSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 14 14"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" d="M4.194 8.094a1.86 1.86 0 1 0 0-3.719a1.86 1.86 0 0 0 0 3.719M.523 13.479A3.68 3.68 0 0 1 1 11.704a3.711 3.711 0 0 1 3.195-1.868c1.31.003 2.55.727 3.195 1.868a3.68 3.68 0 0 1 .477 1.774m2.02-12.095v-.82m2.799 1.827l.671-.471m-6.271.471l-.672-.471m5.506 3.139a2.055 2.055 0 0 0-2.077-2.042a2.055 2.055 0 0 0-1.99 2.127a2.067 2.067 0 0 0 1.126 1.73v1a.227.227 0 0 0 .226.22h1.361a.227.227 0 0 0 .227-.22V6.855a2.07 2.07 0 0 0 1.128-1.797Z"/></svg>`
 const options = ref({
@@ -1100,6 +1269,57 @@ const dataStore = ref({
     contacts: [],
     languages : [],
 })
+const documents = ref(null);
+const document = ref({
+    resume:{
+        card:null,
+    },
+    ktp:{
+        number:null,
+        card:null,
+    },
+    kk:{
+        number:null,
+        card:null,
+    },
+    ijazah:{
+        card:null,
+    },
+    transkrip:{
+        card:null,
+    },
+    npwp:{
+        number:null,
+        card:null,
+    },
+    bpjs:{
+        number:null,
+        card:null,
+    },
+    jamsostek:{
+        number:null,
+        card:null,
+    },
+    simc:{
+        number:null,
+        card:null,
+    },
+    simab:{
+        number:null,
+        card:null,
+    },
+    vaksin1:{
+        number:null,
+        card:null,
+    },
+    vaksin2:{
+        number:null,
+        card:null,
+    },
+    cover:{
+        card:null,
+    },
+})
 
 const dataNormal = ref({
     biodata:{
@@ -1174,6 +1394,25 @@ const submit = ref({
     family :false,
 })
 
+const error = ref(
+    {
+        resume: null,
+        ktp: null,
+        kk: null,
+        ijazah: null,
+        transkrip: null,
+        npwp: null,
+        bpjs: null,
+        jamsostek: null,
+        simc: null,
+        simab: null,
+        vaksin1: null,
+        vaksin2: null,
+        cover: null
+    }
+);
+const profileData = ref(null);
+
 const relationships = [
     {key: 'father', value: 'Father'},
     {key: 'mother', value: 'Mother'},
@@ -1194,6 +1433,7 @@ onMounted(async () => {
     // if(data) dataStore.value = data;
 
     const fetchProfile = await userStore.getFullProfile();
+    profileData.value = fetchProfile;
     dataStore.value = userStore?.detail;
     
     console.log(dataStore.value);
@@ -1242,6 +1482,9 @@ onMounted(async () => {
     if(dataStore.value?.organizations?.length == 0 || dataStore.value?.organizations?.length == undefined) {show.value.organisasi = true;}
     if(dataStore.value?.languages?.length == 0 || dataStore.value?.languages?.length == undefined) {show.value.bahasa = true;}
 
+    const fetchDocument = await docStore.getDocuments();
+    documents.value = fetchDocument.data;
+
     isReady.value = true;
 })
 
@@ -1257,7 +1500,7 @@ const handleFamSelectedProvince = (value) => {
     singleData.value.family_contact.province_id = value.key;
 }
 // ------
-function capitalize(str) {
+const capitalize = (str) => {
   return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
 }
 
@@ -1292,6 +1535,12 @@ const parseDateRange = (dateRangeString) => {
     const endDate = parseDateString(endDateString);
     return { startDate, endDate };
 }
+
+const copyToClipboard = () => {
+  navigator.clipboard.writeText(`https://gojobs.id/u/${profileData?.username}`)
+    .then(() => toast.success('Success copying profile link to clipboard'))
+    .catch((error) => toast.error('Error copying text to clipboard : ' + error));
+};
 
 const parseDateString = (dateString) => {
     const [day, month, year] = dateString.split(' ');
@@ -1726,6 +1975,130 @@ const resetValue = () => {
             talk : 0,
         },
     }
+}
+
+// Document Function
+const saveDocument = () => {
+    if(document.value.resume.card != null){
+        const fetch = docStore.createDocument('resume', '', document.value.resume.card);
+        if(!fetch.success) 
+        {
+            error.value.resume = fetch.message;
+        }else{
+            toast.success(fetch.message)
+        } 
+    }
+
+    if(document.value.ktp.number != null && document.value.ktp.card != null){
+        const fetch = docStore.createDocument('ktp', document.value.ktp.number, document.value.ktp.card);
+        if(!fetch.success)
+        {
+            error.value.ktp = fetch.message;
+        }else{
+            toast.success(fetch.message)
+        } 
+    }
+
+    if(document.value.kk.number != null && document.value.card != null){
+        const fetch = docStore.createDocument('kk', document.value.kk.number, document.value.card);
+        if(!fetch.success)
+        {
+            error.value.kk = fetch.message;
+        }else{
+            toast.success(fetch.message)
+        } 
+    }
+
+    if(document.value.ijazah.card != null && document.value.transkrip.card != null){
+        const fetch = docStore.createDocument('ijazah', '', document.value.ijazah.card);
+        if(!fetch.success) 
+        {
+            error.value.ijazah = fetch.message;
+        }else{
+            toast.success(fetch.message)
+        } 
+
+    }
+
+    if(document.value.npwp.number != null && document.value.npwp.card != null){
+        const fetch = docStore.createDocument('npwp', document.value.npwp.number, document.value.npwp.card);
+        if(!fetch.success) 
+        {
+            error.value.npwp = fetch.message;
+        }else{
+            toast.success(fetch.message)
+        } 
+    }
+
+    if(document.value.bpjs.number != null && document.value.bpjs.card != null){
+        const fetch = docStore.createDocument('bpjs', document.value.bpjs.number, document.value.bpjs.card);
+        if(!fetch.success)
+        {
+            error.value.bpjs = fetch.message;
+        }else{
+            toast.success(fetch.message)
+        } 
+    }
+
+    if(document.value.jamsostek.number != null && document.value.jamsostek.card != null){
+        const fetch = docStore.createDocument('jamsostek', document.value.jamsostek.number, document.value.jamsostek.card);
+        if(!fetch.success)
+        {
+            error.value.jamsostek = fetch.message;
+        }else{
+            toast.success(fetch.message)
+        } 
+    }
+
+    if(document.value.simc.number != null && document.value.simc.card != null){
+        const fetch = docStore.createDocument('simc', document.value.simc.number, document.value.simc.card);
+        if(!fetch.success)
+        {error.value.simc = fetch.message;
+        }else{
+            toast.success(fetch.message)
+        } 
+    }
+
+    if(document.value.simab.number != null && document.value.simab.card != null){
+        const fetch = docStore.createDocument('simab', document.value.simab.number, document.value.simab.card);
+        if(!fetch.success) 
+        {error.value.simab = fetch.message;
+        }else{
+            toast.success(fetch.message)
+        } 
+    }
+
+    if(document.value.vaksin1.number != null && document.value.vaksin1.card != null){
+        const fetch = docStore.createDocument('vaksin1', document.value.vaksin1.number, document.value.vaksin1.card);
+        if(!fetch.success){
+            error.value.vaksin1 = fetch.message;
+        }else{
+            toast.success(fetch.message)
+        } 
+    }
+
+    if(document.value.vaksin2.number != null && document.value.vaksin2.card != null){
+        const fetch = docStore.createDocument('vaksin2', document.value.vaksin2.number, document.value.vaksin2.card);
+        if(!fetch.success){
+            error.value.vaksin2 = fetch.message;
+        }else{
+            toast.success(fetch.message)
+        } 
+    }
+
+    if(document.value.cover.card != null){
+        const fetch = docStore.createDocument('cover', '', document.value.cover.card);
+        if(!fetch.success){
+            error.value.cover = fetch.message;
+        }else{
+            toast.success(fetch.message)
+        } 
+    }
+
+}
+
+const handleFile = (file, type) => {
+    document.value[type].card = file;
 }
 
 const downloadHandle = () => {

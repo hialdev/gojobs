@@ -76,6 +76,17 @@
             Sudah mempunyai akun gojobs? <NuxtLink to="/" class="text-primary underline">Kembali dan Login</NuxtLink>
         </div>
 
+        <!-- Modal Data CV -->
+        <div v-if="confirm_datacv" class="bg-black/30 fixed top-0 bottom-0 start-0 end-0 flex items-center justify-center">
+            <div class="bg-white p-5 rounded-xl m-5 w-full max-w-[30em]">
+                <h4 class="text-primary text-lg">Gunakan Data CV ?</h4>
+                <p class="mb-4 text-sm text-slate-500">Data CV terdeteksi, gunakan data dari CV Gratis untuk mengisi formulir ?</p>
+                <div class="flex gap-x-3 items-center justify-end">
+                    <button @click="confirm_datacv = false" class="p-2 px-3 rounded-lg text-sm bg-slate-100 text-slate-600">Batal</button>
+                    <button @click="useDataCv" class="p-2 px-3 rounded-lg text-sm bg-primary text-white">Gunakan Data</button>
+                </div>
+            </div>
+        </div>
         <ModalAuthSuccess v-if="successRegister" :title="`Berhasil Daftar`" :message="`Kami telah mengirimkan kode verifikasi ke ${registForm.email}, Silahkan periksa email anda (termasuk folder spam)`"/>
     </div>
 </template>
@@ -87,6 +98,8 @@ const props = defineProps({
         default: false,
     },
 })
+const confirm_datacv = ref(false);
+const data_cv = ref(null);
 const successRegister = ref(false);
 const store = useUserStore()
 const registForm = ref({
@@ -120,6 +133,23 @@ const hidePassword = () => {
     isShowPwd.value = false
 };
 const error = ref(null);
+
+onMounted(() => {
+    data_cv.value = JSON.parse(localStorage.getItem('data_buat_cv'));
+    if(data_cv.value != null){
+        confirm_datacv.value = true;
+    }
+})
+
+const useDataCv = () => {
+    if(data_cv.value != null){
+        registForm.value.name = data_cv.value.profile?.name;
+        registForm.value.email = data_cv.value.profile?.email;
+        registForm.value.mobile = data_cv.value.profile?.phone;
+    }
+    confirm_datacv.value = false;
+}
+
 const registHandle = async () => {
     console.log(registForm.value);
     console.log(store.registForm);
