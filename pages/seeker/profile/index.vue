@@ -11,7 +11,7 @@
                     </div>
                 </div>
                 <div class="flex mb-3 w-full items-center justify-between gap-6 p-4 rounded-lg border">
-                    <div class="font-medium text-xs flex-1">https://gojobs.id/u/{{ profileData?.username }}</div>
+                    <div class="font-medium text-xs flex-1">{{url?.protocol}}//{{url?.host}}/u/{{ profileData?.username }}</div>
                     <button class="text-primary text-sm" @click="copyToClipboard">Copy</button>
                 </div>
                 <div class="flex flex-wrap gap-4 mb-3 text-white">
@@ -415,28 +415,6 @@
                     <div class="mt-4 p-5 rounded-xl bg-white">
                         <h3 class="font-medium pb-3 border-b mb-3">Dokumen</h3>
                         <div class="mb-3">
-                            <div class="text-sm text-slate-500 mb-2">CV / Resume</div>
-                            <div v-if="documents?.profile?.resume != null" class="flex gap-x-3 mb-2 items-center p-2 rounded-lg bg-slate-100 text-slate-600">
-                                <div class="flex items-center justify-center">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path fill="currentColor" d="M18 22a2 2 0 0 0 2-2V8l-6-6H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2zM13 4l5 5h-5zM7 8h3v2H7zm0 4h10v2H7zm0 4h10v2H7z"/></svg>
-                                </div>
-                                <a class="block text-sm" target="_blank" :href="documents?.profile?.resume" >Resume</a>
-                            </div>
-                            <PartialsFile @selectedFile="(value) => handleFile(value, 'resume')" />
-                            <div v-if="error.resume" class="text-xs mt-1 text-red-500">{{ error.resume }}</div>
-                        </div>
-                        <div class="mb-3">
-                            <div class="text-sm text-slate-500 mb-2">Cover Letter</div>
-                            <div v-if="documents?.important?.cover_letter != null" class="flex gap-x-3 mb-2 items-center p-2 rounded-lg bg-slate-100 text-slate-600">
-                                <div class="flex items-center justify-center">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path fill="currentColor" d="M18 22a2 2 0 0 0 2-2V8l-6-6H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2zM13 4l5 5h-5zM7 8h3v2H7zm0 4h10v2H7zm0 4h10v2H7z"/></svg>
-                                </div>
-                                <a class="block text-sm" target="_blank" :href="documents?.important?.cover_letter" >Cover Letter</a>
-                            </div>
-                            <PartialsFile @selectedFile="(value) => handleFile(value, 'cover')" />
-                            <div v-if="error.cover" class="text-xs mt-1 text-red-500">{{ error.cover }}</div>
-                        </div>
-                        <div class="mb-3">
                             <div class="text-sm text-slate-500 mb-2">KTP</div>
                             <div v-if="documents?.important?.id_card != null" class="flex gap-x-3 mb-2 items-center p-2 rounded-lg bg-slate-100 text-slate-600">
                                 <div class="flex items-center justify-center">
@@ -449,6 +427,29 @@
                             <div v-if="error.ktp" class="text-xs mt-1 text-red-500">{{ error.ktp }}</div>
                         </div>
                         <div class="mb-3">
+                            <div class="text-sm text-slate-500 mb-2">CV / Resume</div>
+                            <div v-if="documents?.profile?.resume != null" class="flex gap-x-3 mb-2 items-center p-2 rounded-lg bg-slate-100 text-slate-600">
+                                <div class="flex items-center justify-center">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path fill="currentColor" d="M18 22a2 2 0 0 0 2-2V8l-6-6H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2zM13 4l5 5h-5zM7 8h3v2H7zm0 4h10v2H7zm0 4h10v2H7z"/></svg>
+                                </div>
+                                <a class="block text-sm" target="_blank" :href="documents?.profile?.resume" >Resume</a>
+                            </div>
+                            <PartialsFile @selectedFile="(value) => handleFile(value, 'resume')" />
+                            <div v-if="error.resume" class="text-xs mt-1 text-red-500">{{ error.resume }}</div>
+                        </div>
+
+                        <div v-if="ktpUploaded != null && ktpUploaded != '-'" class="mb-3">
+                            <div class="text-sm text-slate-500 mb-2">Cover Letter</div>
+                            <div v-if="documents?.important?.cover_letter != null" class="flex gap-x-3 mb-2 items-center p-2 rounded-lg bg-slate-100 text-slate-600">
+                                <div class="flex items-center justify-center">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path fill="currentColor" d="M18 22a2 2 0 0 0 2-2V8l-6-6H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2zM13 4l5 5h-5zM7 8h3v2H7zm0 4h10v2H7zm0 4h10v2H7z"/></svg>
+                                </div>
+                                <a class="block text-sm" target="_blank" :href="documents?.important?.cover_letter" >Cover Letter</a>
+                            </div>
+                            <PartialsFile @selectedFile="(value) => handleFile(value, 'cover')" />
+                            <div v-if="error.cover" class="text-xs mt-1 text-red-500">{{ error.cover }}</div>
+                        </div>
+                        <div v-if="ktpUploaded != null && ktpUploaded != '-'" class="mb-3">
                             <div class="text-sm text-slate-500 mb-2">Kartu Keluarga</div>
                             <div v-if="documents?.important?.family_card != null" class="flex gap-x-3 mb-2 items-center p-2 rounded-lg bg-slate-100 text-slate-600">
                                 <div class="flex items-center justify-center">
@@ -460,7 +461,7 @@
                             <PartialsFile @selectedFile="(value) => handleFile(value, 'kk')" />
                             <div v-if="error.kk" class="text-xs mt-1 text-red-500">{{ error.kk }}</div>
                         </div>
-                        <div class="mb-3">
+                        <div v-if="ktpUploaded != null && ktpUploaded != '-'" class="mb-3">
                             <div class="text-sm text-slate-500 mb-2">NPWP</div>
                             <div v-if="documents?.important?.npwp_card != null" class="flex gap-x-3 mb-2 items-center p-2 rounded-lg bg-slate-100 text-slate-600">
                                 <div class="flex items-center justify-center">
@@ -472,7 +473,7 @@
                             <PartialsFile @selectedFile="(value) => handleFile(value, 'npwp')" />
                             <div v-if="error.npwp" class="text-xs mt-1 text-red-500">{{ error.npwp }}</div>
                         </div>
-                        <div class="mb-3">
+                        <div v-if="ktpUploaded != null && ktpUploaded != '-'" class="mb-3">
                             <div class="text-sm text-slate-500 mb-2">Ijazah</div>
                             <div v-if="documents?.important?.degree_card != null" class="flex gap-x-3 mb-2 items-center p-2 rounded-lg bg-slate-100 text-slate-600">
                                 <div class="flex items-center justify-center">
@@ -483,7 +484,7 @@
                             <PartialsFile @selectedFile="(value) => handleFile(value, 'ijazah')" />
                             <div v-if="error.ijazah" class="text-xs mt-1 text-red-500">{{ error.ijazah }}</div>
                         </div>
-                        <div class="mb-3">
+                        <div v-if="ktpUploaded != null && ktpUploaded != '-'" class="mb-3">
                             <div class="text-sm text-slate-500 mb-2">Transkrip Nilai</div>
                             <div v-if="documents?.important?.transcript_card != null" class="flex gap-x-3 mb-2 items-center p-2 rounded-lg bg-slate-100 text-slate-600">
                                 <div class="flex items-center justify-center">
@@ -494,7 +495,7 @@
                             <PartialsFile @selectedFile="(value) => handleFile(value, 'transkrip')" />
                             <div v-if="error.transkrip" class="text-xs mt-1 text-red-500">{{ error.transkrip }}</div>
                         </div>
-                        <div class="mb-3">
+                        <div v-if="ktpUploaded != null && ktpUploaded != '-'" class="mb-3">
                             <div class="text-sm text-slate-500 mb-2">SIM A/B</div>
                             <div v-if="documents?.important?.driving_car_card != null" class="flex gap-x-3 mb-2 items-center p-2 rounded-lg bg-slate-100 text-slate-600">
                                 <div class="flex items-center justify-center">
@@ -506,7 +507,7 @@
                             <PartialsFile @selectedFile="(value) => handleFile(value, 'simab')" />
                             <div v-if="error.simab" class="text-xs mt-1 text-red-500">{{ error.simab }}</div>
                         </div>
-                        <div class="mb-3">
+                        <div v-if="ktpUploaded != null && ktpUploaded != '-'" class="mb-3">
                             <div class="text-sm text-slate-500 mb-2">SIM C</div>
                             <div v-if="documents?.important?.driving_car_card != null" class="flex gap-x-3 mb-2 items-center p-2 rounded-lg bg-slate-100 text-slate-600">
                                 <div class="flex items-center justify-center">
@@ -518,7 +519,7 @@
                             <PartialsFile @selectedFile="(value) => handleFile(value, 'simc')" />
                             <div v-if="error.simc" class="text-xs mt-1 text-red-500">{{ error.simc }}</div>
                         </div>
-                        <div class="mb-3">
+                        <div v-if="ktpUploaded != null && ktpUploaded != '-'" class="mb-3">
                             <div class="text-sm text-slate-500 mb-2">BPJS</div>
                             <div v-if="documents?.important?.bpjs_card != null" class="flex gap-x-3 mb-2 items-center p-2 rounded-lg bg-slate-100 text-slate-600">
                                 <div class="flex items-center justify-center">
@@ -530,7 +531,7 @@
                             <PartialsFile @selectedFile="(value) => handleFile(value, 'bpjs')" />
                             <div v-if="error.bpjs" class="text-xs mt-1 text-red-500">{{ error.bpjs }}</div>
                         </div>
-                        <div class="mb-3">
+                        <div v-if="ktpUploaded != null && ktpUploaded != '-'" class="mb-3">
                             <div class="text-sm text-slate-500 mb-2">Jamsostek</div>
                             <div v-if="documents?.important?.jamsostek_card != null" class="flex gap-x-3 mb-2 items-center p-2 rounded-lg bg-slate-100 text-slate-600">
                                 <div class="flex items-center justify-center">
@@ -542,7 +543,7 @@
                             <PartialsFile @selectedFile="(value) => handleFile(value, 'jamsostek')" />
                             <div v-if="error.jamsostek" class="text-xs mt-1 text-red-500">{{ error.jamsostek }}</div>
                         </div>
-                        <div class="mb-3">
+                        <div v-if="ktpUploaded != null && ktpUploaded != '-'" class="mb-3">
                             <div class="text-sm text-slate-500 mb-2">Vaksin 1</div>
                             <div v-if="documents?.vaccine?.vaccine_card_1 != null" class="flex gap-x-3 mb-2 items-center p-2 rounded-lg bg-slate-100 text-slate-600">
                                 <div class="flex items-center justify-center">
@@ -554,7 +555,7 @@
                             <PartialsFile @selectedFile="(value) => handleFile(value, 'vaksin1')" />
                             <div v-if="error.vaksin1" class="text-xs mt-1 text-red-500">{{ error.vaksin1 }}</div>
                         </div>
-                        <div class="mb-3">
+                        <div v-if="ktpUploaded != null && ktpUploaded != '-'" class="mb-3">
                             <div class="text-sm text-slate-500 mb-2">Vaksin 2</div>
                             <div v-if="documents?.vaccine?.vaccine_card_2 != null" class="flex gap-x-3 mb-2 items-center p-2 rounded-lg bg-slate-100 text-slate-600">
                                 <div class="flex items-center justify-center">
@@ -1385,6 +1386,8 @@ const singleData = ref({
     }
 })
 
+const ktpUploaded = ref(null);
+
 const submit = ref({
     biodata : false,
     experience : false,
@@ -1412,6 +1415,7 @@ const error = ref(
     }
 );
 const profileData = ref(null);
+const url = useRequestURL();
 
 const relationships = [
     {key: 'father', value: 'Father'},
@@ -1423,6 +1427,10 @@ const relationships = [
 ];
 
 onMounted(async () => {
+    const doc = await docStore.getDocuments();
+    ktpUploaded.value = doc?.data?.important?.id_card;
+    console.log(doc, ktpUploaded.value);
+
     options.value.citys = await cityStore.getOptionsMaster();
     options.value.provinces = await cityStore.getProvinceOptions();
     options.value.religions = await religionStore.getOptions();
@@ -1537,9 +1545,9 @@ const parseDateRange = (dateRangeString) => {
 }
 
 const copyToClipboard = () => {
-  navigator.clipboard.writeText(`https://gojobs.id/u/${profileData?.value.username}`)
-    .then(() => toast.success('Success copying profile link to clipboard'))
-    .catch((error) => toast.error('Error copying text to clipboard : ' + error));
+    navigator.clipboard.writeText(`${url.protocol}//${url.host}/u/${profileData?.value.username}`)
+        .then(() => toast.success('Success copying profile link to clipboard'))
+        .catch((error) => toast.error('Error copying text to clipboard : ' + error));
 };
 
 const parseDateString = (dateString) => {

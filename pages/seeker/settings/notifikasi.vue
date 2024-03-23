@@ -72,7 +72,7 @@
                         </div>
                         <div>
                             <div class="flex w-full items-center justify-between gap-6 p-4 rounded-lg border">
-                                <div class="font-medium text-xs flex-1">https://{{domain}}/u/{{ username }}</div>
+                                <div class="font-medium text-xs flex-1">{{url.protocol}}//{{url.host}}/u/{{ username }}</div>
                                 <button class="text-primary text-sm" @click="copyToClipboard">Copy</button>
                             </div>
                         </div>
@@ -89,6 +89,7 @@ definePageMeta({
     layout:'seeker-setting',
 })
 const toast = useToast();
+const url = useRequestURL();
 const username = ref('noeralif63');
 const domain = ref('gojobs.id');
 
@@ -113,7 +114,7 @@ onMounted(async () => {
 })
 
 const copyToClipboard = () => {
-  navigator.clipboard.writeText(`http://${domain.value}/u/${username.value}`)
+  navigator.clipboard.writeText(`${url.protocol}//${url.host}/u/${username.value}`)
     .then(() => toast.success('Success copying profile link to clipboard'))
     .catch((error) => toast.error('Error copying text to clipboard : ' + error));
 };

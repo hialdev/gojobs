@@ -104,6 +104,7 @@ export const useDocumentStore = defineStore('document',{
                 body: formdata,
             })
             
+            this.getDocuments();
             return document;
         },
 

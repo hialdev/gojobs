@@ -108,7 +108,7 @@
                     </div>
                 </div>
                 <div class="flex mb-3 w-full items-center justify-between gap-6 p-4 rounded-lg border">
-                    <div class="font-medium text-xs flex-1">https://gojobs.id{{ route?.fullPath }}</div>
+                    <div class="font-medium text-xs flex-1">{{url.protocol}}//{{url.host}}{{ route?.fullPath }}</div>
                     <button class="text-primary text-sm" @click="copyToClipboard">Copy</button>
                 </div>
                 <div class="flex flex-wrap gap-4 text-white">
@@ -139,6 +139,7 @@ const job = useJobStore();
 const { id } = useRoute().params;
 const access = ref(null);
 const route = useRoute();
+const url = useRequestURL();
 
 const lamarHandle = async (id) => {
     const apply = await job.applyJob(id)
@@ -189,7 +190,7 @@ const beFavorite = async () => {
 }
 
 const copyToClipboard = () => {
-  navigator.clipboard.writeText(`https://gojobs.id${route.fullPath}`)
+  navigator.clipboard.writeText(`${url.protocol}//${url.host}/${route.fullPath}`)
     .then(() => toast.success('Success copying profile link to clipboard'))
     .catch((error) => toast.error('Error copying text to clipboard : ' + error));
 };
