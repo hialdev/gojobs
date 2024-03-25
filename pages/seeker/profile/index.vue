@@ -416,7 +416,7 @@
                         <h3 class="font-medium pb-3 border-b mb-3">Dokumen</h3>
                         <div class="mb-3">
                             <div class="text-sm text-slate-500 mb-2">KTP</div>
-                            <div v-if="documents?.important?.id_card != null" class="flex gap-x-3 mb-2 items-center p-2 rounded-lg bg-slate-100 text-slate-600">
+                            <div v-if="documents?.important?.id_card != null && documents?.important?.id_card != '-'" class="flex gap-x-3 mb-2 items-center p-2 rounded-lg bg-slate-100 text-slate-600">
                                 <div class="flex items-center justify-center">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path fill="currentColor" d="M18 22a2 2 0 0 0 2-2V8l-6-6H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2zM13 4l5 5h-5zM7 8h3v2H7zm0 4h10v2H7zm0 4h10v2H7z"/></svg>
                                 </div>
@@ -428,7 +428,7 @@
                         </div>
                         <div class="mb-3">
                             <div class="text-sm text-slate-500 mb-2">CV / Resume</div>
-                            <div v-if="documents?.profile?.resume != null" class="flex gap-x-3 mb-2 items-center p-2 rounded-lg bg-slate-100 text-slate-600">
+                            <div v-if="documents?.profile?.resume != null && documents?.profile?.resume != '-'" class="flex gap-x-3 mb-2 items-center p-2 rounded-lg bg-slate-100 text-slate-600">
                                 <div class="flex items-center justify-center">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path fill="currentColor" d="M18 22a2 2 0 0 0 2-2V8l-6-6H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2zM13 4l5 5h-5zM7 8h3v2H7zm0 4h10v2H7zm0 4h10v2H7z"/></svg>
                                 </div>
@@ -440,7 +440,7 @@
 
                         <div v-if="ktpUploaded != null && ktpUploaded != '-'" class="mb-3">
                             <div class="text-sm text-slate-500 mb-2">Cover Letter</div>
-                            <div v-if="documents?.important?.cover_letter != null" class="flex gap-x-3 mb-2 items-center p-2 rounded-lg bg-slate-100 text-slate-600">
+                            <div v-if="documents?.important?.cover_letter != null && documents?.important?.cover_letter != '-'" class="flex gap-x-3 mb-2 items-center p-2 rounded-lg bg-slate-100 text-slate-600">
                                 <div class="flex items-center justify-center">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path fill="currentColor" d="M18 22a2 2 0 0 0 2-2V8l-6-6H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2zM13 4l5 5h-5zM7 8h3v2H7zm0 4h10v2H7zm0 4h10v2H7z"/></svg>
                                 </div>
@@ -451,7 +451,7 @@
                         </div>
                         <div v-if="ktpUploaded != null && ktpUploaded != '-'" class="mb-3">
                             <div class="text-sm text-slate-500 mb-2">Kartu Keluarga</div>
-                            <div v-if="documents?.important?.family_card != null" class="flex gap-x-3 mb-2 items-center p-2 rounded-lg bg-slate-100 text-slate-600">
+                            <div v-if="documents?.important?.family_card != null && documents?.important?.family_card != '-'" class="flex gap-x-3 mb-2 items-center p-2 rounded-lg bg-slate-100 text-slate-600">
                                 <div class="flex items-center justify-center">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path fill="currentColor" d="M18 22a2 2 0 0 0 2-2V8l-6-6H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2zM13 4l5 5h-5zM7 8h3v2H7zm0 4h10v2H7zm0 4h10v2H7z"/></svg>
                                 </div>
@@ -463,7 +463,7 @@
                         </div>
                         <div v-if="ktpUploaded != null && ktpUploaded != '-'" class="mb-3">
                             <div class="text-sm text-slate-500 mb-2">NPWP</div>
-                            <div v-if="documents?.important?.npwp_card != null" class="flex gap-x-3 mb-2 items-center p-2 rounded-lg bg-slate-100 text-slate-600">
+                            <div v-if="documents?.important?.npwp_card != null && documents?.important?.npwp_card != '-'" class="flex gap-x-3 mb-2 items-center p-2 rounded-lg bg-slate-100 text-slate-600">
                                 <div class="flex items-center justify-center">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path fill="currentColor" d="M18 22a2 2 0 0 0 2-2V8l-6-6H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2zM13 4l5 5h-5zM7 8h3v2H7zm0 4h10v2H7zm0 4h10v2H7z"/></svg>
                                 </div>
@@ -475,7 +475,7 @@
                         </div>
                         <div v-if="ktpUploaded != null && ktpUploaded != '-'" class="mb-3">
                             <div class="text-sm text-slate-500 mb-2">Ijazah</div>
-                            <div v-if="documents?.important?.degree_card != null" class="flex gap-x-3 mb-2 items-center p-2 rounded-lg bg-slate-100 text-slate-600">
+                            <div v-if="documents?.important?.degree_card != null && documents?.important?.degree_card != '-'" class="flex gap-x-3 mb-2 items-center p-2 rounded-lg bg-slate-100 text-slate-600">
                                 <div class="flex items-center justify-center">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path fill="currentColor" d="M18 22a2 2 0 0 0 2-2V8l-6-6H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2zM13 4l5 5h-5zM7 8h3v2H7zm0 4h10v2H7zm0 4h10v2H7z"/></svg>
                                 </div>
@@ -486,7 +486,7 @@
                         </div>
                         <div v-if="ktpUploaded != null && ktpUploaded != '-'" class="mb-3">
                             <div class="text-sm text-slate-500 mb-2">Transkrip Nilai</div>
-                            <div v-if="documents?.important?.transcript_card != null" class="flex gap-x-3 mb-2 items-center p-2 rounded-lg bg-slate-100 text-slate-600">
+                            <div v-if="documents?.important?.transcript_card != null && documents?.important?.transcript_card != '-'" class="flex gap-x-3 mb-2 items-center p-2 rounded-lg bg-slate-100 text-slate-600">
                                 <div class="flex items-center justify-center">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path fill="currentColor" d="M18 22a2 2 0 0 0 2-2V8l-6-6H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2zM13 4l5 5h-5zM7 8h3v2H7zm0 4h10v2H7zm0 4h10v2H7z"/></svg>
                                 </div>
@@ -497,7 +497,7 @@
                         </div>
                         <div v-if="ktpUploaded != null && ktpUploaded != '-'" class="mb-3">
                             <div class="text-sm text-slate-500 mb-2">SIM A/B</div>
-                            <div v-if="documents?.important?.driving_car_card != null" class="flex gap-x-3 mb-2 items-center p-2 rounded-lg bg-slate-100 text-slate-600">
+                            <div v-if="documents?.important?.driving_car_card != null && documents?.important?.driving_car_card != '-'" class="flex gap-x-3 mb-2 items-center p-2 rounded-lg bg-slate-100 text-slate-600">
                                 <div class="flex items-center justify-center">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path fill="currentColor" d="M18 22a2 2 0 0 0 2-2V8l-6-6H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2zM13 4l5 5h-5zM7 8h3v2H7zm0 4h10v2H7zm0 4h10v2H7z"/></svg>
                                 </div>
@@ -509,7 +509,7 @@
                         </div>
                         <div v-if="ktpUploaded != null && ktpUploaded != '-'" class="mb-3">
                             <div class="text-sm text-slate-500 mb-2">SIM C</div>
-                            <div v-if="documents?.important?.driving_car_card != null" class="flex gap-x-3 mb-2 items-center p-2 rounded-lg bg-slate-100 text-slate-600">
+                            <div v-if="documents?.important?.driving_car_card != null && documents?.important?.driving_car_card != '-'" class="flex gap-x-3 mb-2 items-center p-2 rounded-lg bg-slate-100 text-slate-600">
                                 <div class="flex items-center justify-center">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path fill="currentColor" d="M18 22a2 2 0 0 0 2-2V8l-6-6H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2zM13 4l5 5h-5zM7 8h3v2H7zm0 4h10v2H7zm0 4h10v2H7z"/></svg>
                                 </div>
@@ -521,7 +521,7 @@
                         </div>
                         <div v-if="ktpUploaded != null && ktpUploaded != '-'" class="mb-3">
                             <div class="text-sm text-slate-500 mb-2">BPJS</div>
-                            <div v-if="documents?.important?.bpjs_card != null" class="flex gap-x-3 mb-2 items-center p-2 rounded-lg bg-slate-100 text-slate-600">
+                            <div v-if="documents?.important?.bpjs_card != null && documents?.important?.bpjs_card != '-'" class="flex gap-x-3 mb-2 items-center p-2 rounded-lg bg-slate-100 text-slate-600">
                                 <div class="flex items-center justify-center">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path fill="currentColor" d="M18 22a2 2 0 0 0 2-2V8l-6-6H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2zM13 4l5 5h-5zM7 8h3v2H7zm0 4h10v2H7zm0 4h10v2H7z"/></svg>
                                 </div>
@@ -533,7 +533,7 @@
                         </div>
                         <div v-if="ktpUploaded != null && ktpUploaded != '-'" class="mb-3">
                             <div class="text-sm text-slate-500 mb-2">Jamsostek</div>
-                            <div v-if="documents?.important?.jamsostek_card != null" class="flex gap-x-3 mb-2 items-center p-2 rounded-lg bg-slate-100 text-slate-600">
+                            <div v-if="documents?.important?.jamsostek_card != null && documents?.important?.jamsostek_card != '-'" class="flex gap-x-3 mb-2 items-center p-2 rounded-lg bg-slate-100 text-slate-600">
                                 <div class="flex items-center justify-center">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path fill="currentColor" d="M18 22a2 2 0 0 0 2-2V8l-6-6H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2zM13 4l5 5h-5zM7 8h3v2H7zm0 4h10v2H7zm0 4h10v2H7z"/></svg>
                                 </div>
@@ -545,7 +545,7 @@
                         </div>
                         <div v-if="ktpUploaded != null && ktpUploaded != '-'" class="mb-3">
                             <div class="text-sm text-slate-500 mb-2">Vaksin 1</div>
-                            <div v-if="documents?.vaccine?.vaccine_card_1 != null" class="flex gap-x-3 mb-2 items-center p-2 rounded-lg bg-slate-100 text-slate-600">
+                            <div v-if="documents?.vaccine?.vaccine_card_1 != null && documents?.vaccine?.vaccine_card_1 != '-'" class="flex gap-x-3 mb-2 items-center p-2 rounded-lg bg-slate-100 text-slate-600">
                                 <div class="flex items-center justify-center">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path fill="currentColor" d="M18 22a2 2 0 0 0 2-2V8l-6-6H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2zM13 4l5 5h-5zM7 8h3v2H7zm0 4h10v2H7zm0 4h10v2H7z"/></svg>
                                 </div>
@@ -557,7 +557,7 @@
                         </div>
                         <div v-if="ktpUploaded != null && ktpUploaded != '-'" class="mb-3">
                             <div class="text-sm text-slate-500 mb-2">Vaksin 2</div>
-                            <div v-if="documents?.vaccine?.vaccine_card_2 != null" class="flex gap-x-3 mb-2 items-center p-2 rounded-lg bg-slate-100 text-slate-600">
+                            <div v-if="documents?.vaccine?.vaccine_card_2 != null && documents?.vaccine?.vaccine_card_2 != '-'" class="flex gap-x-3 mb-2 items-center p-2 rounded-lg bg-slate-100 text-slate-600">
                                 <div class="flex items-center justify-center">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path fill="currentColor" d="M18 22a2 2 0 0 0 2-2V8l-6-6H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2zM13 4l5 5h-5zM7 8h3v2H7zm0 4h10v2H7zm0 4h10v2H7z"/></svg>
                                 </div>
@@ -2076,18 +2076,10 @@ const saveDocument = () => {
         } 
     }
 
-    if(document.value.vaksin1.number != null && document.value.vaksin1.card != null){
-        const fetch = docStore.createDocument('vaksin1', document.value.vaksin1.number, document.value.vaksin1.card);
+    if((document.value.vaksin1.number != null && document.value.vaksin1.card != null) && (document.value.vaksin2.number != null && document.value.vaksin2.card != null)){
+        const fetch = docStore.createVaccine(document.value.vaksin1.number, document.value.vaksin1.card, document.value.vaksin2.number, document.value.vaksin2.card);
         if(!fetch.success){
             error.value.vaksin1 = fetch.message;
-        }else{
-            toast.success(fetch.message)
-        } 
-    }
-
-    if(document.value.vaksin2.number != null && document.value.vaksin2.card != null){
-        const fetch = docStore.createDocument('vaksin2', document.value.vaksin2.number, document.value.vaksin2.card);
-        if(!fetch.success){
             error.value.vaksin2 = fetch.message;
         }else{
             toast.success(fetch.message)
@@ -2102,7 +2094,7 @@ const saveDocument = () => {
             toast.success(fetch.message)
         } 
     }
-
+    toast.success('Document Disimpan')
 }
 
 const handleFile = (file, type) => {

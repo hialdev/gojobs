@@ -108,6 +108,28 @@ export const useDocumentStore = defineStore('document',{
             return document;
         },
 
+        async createVaccine(number = '', fileData = null, number2 = '', fileData2 = null){
+            var headers = new Headers();
+            headers.append("token",localStorage.getItem('access_token'));
+            let url_create = '';
+            const formdata = new FormData();
+
+            formdata.append("vaccine_number_1", number);
+            formdata.append("vaccinde_card_1", fileData);
+            formdata.append("vaccine_number_2", number2);
+            formdata.append("vaccinde_card_2", fileData2);
+            url_create = 'create-vaccinecard';
+            
+            const document = await $fetch(`${this.API_URL}/biodata-document/${url_create}`, {
+                method : 'POST',
+                headers: headers,
+                body: formdata,
+            })
+            
+            this.getDocuments();
+            return document;
+        },
+
         async updateDocument(type="", number = '', fileData = null){
             var headers = new Headers();
             headers.append("token",localStorage.getItem('access_token'));

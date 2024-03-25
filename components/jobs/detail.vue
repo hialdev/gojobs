@@ -191,7 +191,7 @@ const beFavorite = async () => {
 
 const copyToClipboard = () => {
   navigator.clipboard.writeText(`${url.protocol}//${url.host}/${route.fullPath}`)
-    .then(() => toast.success('Success copying profile link to clipboard'))
+    .then(() => toast.success('Success copying job link to clipboard'))
     .catch((error) => toast.error('Error copying text to clipboard : ' + error));
 };
 </script>
