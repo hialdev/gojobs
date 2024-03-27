@@ -551,7 +551,8 @@
                                 </div>
                                 <a class="block text-sm" target="_blank" :href="documents?.vaccine?.vaccine_card_1" >Vaksin 1</a>
                             </div>
-                            <PartialsInput v-model="document.vaksin1.number" :modelValue="document.vaksin1.number" :required="true" :submitted="submit.document" :inputClass="`border border-slate-200`" :placeholder="`Vaksin 1`" />
+                            <PartialsInput v-model="document.vaksin1.date" :modelValue="document.vaksin1.date" :required="true" :submitted="submit.document" :typeInput="`date`" :inputClass="`border border-slate-200`" :placeholder="`Tanggal Vaksin 1`" />
+                            <PartialsInput v-model="document.vaksin1.location" :modelValue="document.vaksin1.location" :required="true" :submitted="submit.document" :inputClass="`border border-slate-200`" :placeholder="`Lokasi Vaksin 1`" />
                             <PartialsFile @selectedFile="(value) => handleFile(value, 'vaksin1')" />
                             <div v-if="error.vaksin1" class="text-xs mt-1 text-red-500">{{ error.vaksin1 }}</div>
                         </div>
@@ -563,7 +564,8 @@
                                 </div>
                                 <a class="block text-sm" target="_blank" :href="documents?.vaccine?.vaccine_card_2" >Vaksin 1</a>
                             </div>
-                            <PartialsInput v-model="document.vaksin2.number" :modelValue="document.vaksin2.number" :required="true" :submitted="submit.document" :inputClass="`border border-slate-200`" :placeholder="`Vaksin 2`" />
+                            <PartialsInput v-model="document.vaksin2.date" :modelValue="document.vaksin2.date" :required="true" :submitted="submit.document" :typeInput="`date`" :inputClass="`border border-slate-200`" :placeholder="`Tanggal Vaksin 2`" />
+                            <PartialsInput v-model="document.vaksin2.location" :modelValue="document.vaksin2.location" :required="true" :submitted="submit.document" :inputClass="`border border-slate-200`" :placeholder="`Lokasi Vaksin 2`" />
                             <PartialsFile @selectedFile="(value) => handleFile(value, 'vaksin2')" />
                             <div v-if="error.vaksin2" class="text-xs mt-1 text-red-500">{{ error.vaksin2 }}</div>
                         </div>
@@ -1310,11 +1312,13 @@ const document = ref({
         card:null,
     },
     vaksin1:{
-        number:null,
+        date:null,
+        location:null,
         card:null,
     },
     vaksin2:{
-        number:null,
+        date:null,
+        location:null,
         card:null,
     },
     cover:{
@@ -1986,9 +1990,9 @@ const resetValue = () => {
 }
 
 // Document Function
-const saveDocument = () => {
+const saveDocument = async () => {
     if(document.value.resume.card != null){
-        const fetch = docStore.createDocument('resume', '', document.value.resume.card);
+        const fetch = await docStore.createDocument('resume', '', document.value.resume.card);
         if(!fetch.success) 
         {
             error.value.resume = fetch.message;
@@ -1998,7 +2002,7 @@ const saveDocument = () => {
     }
 
     if(document.value.ktp.number != null && document.value.ktp.card != null){
-        const fetch = docStore.createDocument('ktp', document.value.ktp.number, document.value.ktp.card);
+        const fetch = await docStore.createDocument('ktp', document.value.ktp.number, document.value.ktp.card);
         if(!fetch.success)
         {
             error.value.ktp = fetch.message;
@@ -2008,7 +2012,7 @@ const saveDocument = () => {
     }
 
     if(document.value.kk.number != null && document.value.card != null){
-        const fetch = docStore.createDocument('kk', document.value.kk.number, document.value.card);
+        const fetch = await docStore.createDocument('kk', document.value.kk.number, document.value.card);
         if(!fetch.success)
         {
             error.value.kk = fetch.message;
@@ -2018,7 +2022,7 @@ const saveDocument = () => {
     }
 
     if(document.value.ijazah.card != null && document.value.transkrip.card != null){
-        const fetch = docStore.createDocument('ijazah', '', document.value.ijazah.card);
+        const fetch = await docStore.createDocument('ijazah', '', document.value.ijazah.card);
         if(!fetch.success) 
         {
             error.value.ijazah = fetch.message;
@@ -2029,7 +2033,7 @@ const saveDocument = () => {
     }
 
     if(document.value.npwp.number != null && document.value.npwp.card != null){
-        const fetch = docStore.createDocument('npwp', document.value.npwp.number, document.value.npwp.card);
+        const fetch = await docStore.createDocument('npwp', document.value.npwp.number, document.value.npwp.card);
         if(!fetch.success) 
         {
             error.value.npwp = fetch.message;
@@ -2039,7 +2043,7 @@ const saveDocument = () => {
     }
 
     if(document.value.bpjs.number != null && document.value.bpjs.card != null){
-        const fetch = docStore.createDocument('bpjs', document.value.bpjs.number, document.value.bpjs.card);
+        const fetch = await docStore.createDocument('bpjs', document.value.bpjs.number, document.value.bpjs.card);
         if(!fetch.success)
         {
             error.value.bpjs = fetch.message;
@@ -2049,7 +2053,7 @@ const saveDocument = () => {
     }
 
     if(document.value.jamsostek.number != null && document.value.jamsostek.card != null){
-        const fetch = docStore.createDocument('jamsostek', document.value.jamsostek.number, document.value.jamsostek.card);
+        const fetch = await docStore.createDocument('jamsostek', document.value.jamsostek.number, document.value.jamsostek.card);
         if(!fetch.success)
         {
             error.value.jamsostek = fetch.message;
@@ -2059,7 +2063,7 @@ const saveDocument = () => {
     }
 
     if(document.value.simc.number != null && document.value.simc.card != null){
-        const fetch = docStore.createDocument('simc', document.value.simc.number, document.value.simc.card);
+        const fetch = await docStore.createDocument('simc', document.value.simc.number, document.value.simc.card);
         if(!fetch.success)
         {error.value.simc = fetch.message;
         }else{
@@ -2068,7 +2072,7 @@ const saveDocument = () => {
     }
 
     if(document.value.simab.number != null && document.value.simab.card != null){
-        const fetch = docStore.createDocument('simab', document.value.simab.number, document.value.simab.card);
+        const fetch = await docStore.createDocument('simab', document.value.simab.number, document.value.simab.card);
         if(!fetch.success) 
         {error.value.simab = fetch.message;
         }else{
@@ -2076,8 +2080,8 @@ const saveDocument = () => {
         } 
     }
 
-    if((document.value.vaksin1.number != null && document.value.vaksin1.card != null) && (document.value.vaksin2.number != null && document.value.vaksin2.card != null)){
-        const fetch = docStore.createVaccine(document.value.vaksin1.number, document.value.vaksin1.card, document.value.vaksin2.number, document.value.vaksin2.card);
+    if((document.value.vaksin1.date != null && document.value.vaksin1.location != null && document.value.vaksin1.card != null) && (document.value.vaksin2.date != null && document.value.vaksin2.location != null && document.value.vaksin2.card != null)){
+        const fetch = await docStore.createVaccine(document.value.vaksin1.date, document.value.vaksin1.location, document.value.vaksin1.card, document.value.vaksin2.date, document.value.vaksin2.location, document.value.vaksin2.card);
         if(!fetch.success){
             error.value.vaksin1 = fetch.message;
             error.value.vaksin2 = fetch.message;
@@ -2087,14 +2091,13 @@ const saveDocument = () => {
     }
 
     if(document.value.cover.card != null){
-        const fetch = docStore.createDocument('cover', '', document.value.cover.card);
+        const fetch = await docStore.createDocument('cover', '', document.value.cover.card);
         if(!fetch.success){
             error.value.cover = fetch.message;
         }else{
             toast.success(fetch.message)
         } 
     }
-    toast.success('Document Disimpan')
 }
 
 const handleFile = (file, type) => {
