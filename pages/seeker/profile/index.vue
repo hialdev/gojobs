@@ -1999,6 +1999,7 @@ const saveDocument = async () => {
         {
             error.value.resume = fetch.message;
         }else{
+            error.value.resume = null;
             toast.success(fetch.message)
         } 
     }
@@ -2009,6 +2010,7 @@ const saveDocument = async () => {
         {
             error.value.ktp = fetch.message;
         }else{
+            error.value.ktp = null;
             toast.success(fetch.message)
         } 
     }
@@ -2019,6 +2021,7 @@ const saveDocument = async () => {
         {
             error.value.kk = fetch.message;
         }else{
+            error.value.kk = null;
             toast.success(fetch.message)
         } 
     }
@@ -2029,6 +2032,7 @@ const saveDocument = async () => {
         {
             error.value.ijazah = fetch.message;
         }else{
+            error.value.ijazah = null;
             toast.success(fetch.message)
         } 
 
@@ -2040,6 +2044,7 @@ const saveDocument = async () => {
         {
             error.value.npwp = fetch.message;
         }else{
+            error.value.npwp = null;
             toast.success(fetch.message)
         } 
     }
@@ -2050,6 +2055,7 @@ const saveDocument = async () => {
         {
             error.value.bpjs = fetch.message;
         }else{
+            error.value.bpjs = null;
             toast.success(fetch.message)
         } 
     }
@@ -2060,6 +2066,7 @@ const saveDocument = async () => {
         {
             error.value.jamsostek = fetch.message;
         }else{
+            error.value.jamsostek = null;
             toast.success(fetch.message)
         } 
     }
@@ -2069,6 +2076,7 @@ const saveDocument = async () => {
         if(!fetch.success)
         {error.value.simc = fetch.message;
         }else{
+            error.value.simc = null;
             toast.success(fetch.message)
         } 
     }
@@ -2078,6 +2086,7 @@ const saveDocument = async () => {
         if(!fetch.success) 
         {error.value.simab = fetch.message;
         }else{
+        error.value.simab = null;
             toast.success(fetch.message)
         } 
     }
@@ -2088,6 +2097,8 @@ const saveDocument = async () => {
             error.value.vaksin1 = fetch.message;
             error.value.vaksin2 = fetch.message;
         }else{
+            error.value.vaksin1 = null;
+            error.value.vaksin2 = null;
             toast.success(fetch.message)
         } 
     }
@@ -2097,6 +2108,7 @@ const saveDocument = async () => {
         if(!fetch.success){
             error.value.cover = fetch.message;
         }else{
+            error.value.cover = null;
             toast.success(fetch.message)
         } 
     }
