@@ -416,11 +416,11 @@
                         <h3 class="font-medium pb-3 border-b mb-3">Dokumen</h3>
                         <div class="mb-3">
                             <div class="text-sm text-slate-500 mb-2">KTP</div>
-                            <div v-if="docStore.documents?.important?.id_card != null && docStore.documents?.important?.id_card != '-'" class="flex gap-x-3 mb-2 items-center p-2 rounded-lg bg-slate-100 text-slate-600">
+                            <div v-if="docStore.documents.important.id_card != null && docStore.documents.important.id_card != '-'" class="flex gap-x-3 mb-2 items-center p-2 rounded-lg bg-slate-100 text-slate-600">
                                 <div class="flex items-center justify-center">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path fill="currentColor" d="M18 22a2 2 0 0 0 2-2V8l-6-6H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2zM13 4l5 5h-5zM7 8h3v2H7zm0 4h10v2H7zm0 4h10v2H7z"/></svg>
                                 </div>
-                                <a class="block text-sm" target="_blank" :href="docStore.documents?.important?.id_card" >{{docStore.documents?.important?.id_number}}</a>
+                                <a class="block text-sm" target="_blank" :href="docStore.documents.important.id_card" >{{docStore.documents.important.id_number}}</a>
                             </div>
                             <PartialsInput v-model="document.ktp.number" :modelValue="document.ktp.number" :typeInput="`number`" :required="true" :submitted="submit.document" :inputClass="`border border-slate-200`" :placeholder="`No KTP`" />
                             <PartialsFile @selectedFile="(value) => handleFile(value, 'ktp')" />
@@ -444,18 +444,18 @@
                                 <div class="flex items-center justify-center">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path fill="currentColor" d="M18 22a2 2 0 0 0 2-2V8l-6-6H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2zM13 4l5 5h-5zM7 8h3v2H7zm0 4h10v2H7zm0 4h10v2H7z"/></svg>
                                 </div>
-                                <a class="block text-sm" target="_blank" :href="docStore.documents?.important?.cover_letter" >Cover Letter</a>
+                                <a class="block text-sm" target="_blank" :href="docStore.documents.important.cover_letter" >Cover Letter</a>
                             </div>
                             <PartialsFile @selectedFile="(value) => handleFile(value, 'cover')" />
                             <div v-if="error.cover" class="text-xs mt-1 text-red-500">{{ error.cover }}</div>
                         </div>
                         <div v-if="docStore.documents.important.id_card != null && docStore.documents.important.id_card != '-'" class="mb-3">
                             <div class="text-sm text-slate-500 mb-2">Kartu Keluarga</div>
-                            <div v-if="docStore.documents?.important?.family_card != null && docStore.documents?.important?.family_card != '-'" class="flex gap-x-3 mb-2 items-center p-2 rounded-lg bg-slate-100 text-slate-600">
+                            <div v-if="docStore.documents.important.family_card != null && docStore.documents.important.family_card != '-'" class="flex gap-x-3 mb-2 items-center p-2 rounded-lg bg-slate-100 text-slate-600">
                                 <div class="flex items-center justify-center">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path fill="currentColor" d="M18 22a2 2 0 0 0 2-2V8l-6-6H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2zM13 4l5 5h-5zM7 8h3v2H7zm0 4h10v2H7zm0 4h10v2H7z"/></svg>
                                 </div>
-                                <a class="block text-sm" target="_blank" :href="docStore.documents?.important?.family_card" >{{docStore.documents?.important?.family_number}}</a>
+                                <a class="block text-sm" target="_blank" :href="docStore.documents.important.family_card" >{{docStore.documents.important.family_number}}</a>
                             </div>
                             <PartialsInput v-model="document.kk.number" :modelValue="document.kk.number" :typeInput="`number`" :required="true" :submitted="submit.document" :inputClass="`border border-slate-200`" :placeholder="`No Kartu Keluarga`" />
                             <PartialsFile @selectedFile="(value) => handleFile(value, 'kk')" />
@@ -463,11 +463,11 @@
                         </div>
                         <div v-if="docStore.documents.important.id_card != null && docStore.documents.important.id_card != '-'" class="mb-3">
                             <div class="text-sm text-slate-500 mb-2">NPWP</div>
-                            <div v-if="docStore.documents?.important?.npwp_card != null && docStore.documents?.important?.npwp_card != '-'" class="flex gap-x-3 mb-2 items-center p-2 rounded-lg bg-slate-100 text-slate-600">
+                            <div v-if="docStore.documents.important.npwp_card != null && docStore.documents.important.npwp_card != '-'" class="flex gap-x-3 mb-2 items-center p-2 rounded-lg bg-slate-100 text-slate-600">
                                 <div class="flex items-center justify-center">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path fill="currentColor" d="M18 22a2 2 0 0 0 2-2V8l-6-6H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2zM13 4l5 5h-5zM7 8h3v2H7zm0 4h10v2H7zm0 4h10v2H7z"/></svg>
                                 </div>
-                                <a class="block text-sm" target="_blank" :href="docStore.documents?.important?.npwp_card" >{{docStore.documents?.important?.npwp_number}}</a>
+                                <a class="block text-sm" target="_blank" :href="docStore.documents.important.npwp_card" >{{docStore.documents.important.npwp_number}}</a>
                             </div>
                             <PartialsInput v-model="document.npwp.number" :modelValue="document.npwp.number" :typeInput="`number`" :required="true" :submitted="submit.document" :inputClass="`border border-slate-200`" :placeholder="`No NPWP`" />
                             <PartialsFile @selectedFile="(value) => handleFile(value, 'npwp')" />
@@ -475,33 +475,33 @@
                         </div>
                         <div v-if="docStore.documents.important.id_card != null && docStore.documents.important.id_card != '-'" class="mb-3">
                             <div class="text-sm text-slate-500 mb-2">Ijazah</div>
-                            <div v-if="docStore.documents?.important?.degree_card != null && docStore.documents?.important?.degree_card != '-'" class="flex gap-x-3 mb-2 items-center p-2 rounded-lg bg-slate-100 text-slate-600">
+                            <div v-if="docStore.documents.important.degree_card != null && docStore.documents.important.degree_card != '-'" class="flex gap-x-3 mb-2 items-center p-2 rounded-lg bg-slate-100 text-slate-600">
                                 <div class="flex items-center justify-center">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path fill="currentColor" d="M18 22a2 2 0 0 0 2-2V8l-6-6H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2zM13 4l5 5h-5zM7 8h3v2H7zm0 4h10v2H7zm0 4h10v2H7z"/></svg>
                                 </div>
-                                <a class="block text-sm" target="_blank" :href="docStore.documents?.important?.degree_card" >Ijazah</a>
+                                <a class="block text-sm" target="_blank" :href="docStore.documents.important.degree_card" >Ijazah</a>
                             </div>
                             <PartialsFile @selectedFile="(value) => handleFile(value, 'ijazah')" />
                             <div v-if="error.ijazah" class="text-xs mt-1 text-red-500">{{ error.ijazah }}</div>
                         </div>
                         <div v-if="docStore.documents.important.id_card != null && docStore.documents.important.id_card != '-'" class="mb-3">
                             <div class="text-sm text-slate-500 mb-2">Transkrip Nilai</div>
-                            <div v-if="docStore.documents?.important?.transcript_card != null && docStore.documents?.important?.transcript_card != '-'" class="flex gap-x-3 mb-2 items-center p-2 rounded-lg bg-slate-100 text-slate-600">
+                            <div v-if="docStore.documents.important.transcript_card != null && docStore.documents.important.transcript_card != '-'" class="flex gap-x-3 mb-2 items-center p-2 rounded-lg bg-slate-100 text-slate-600">
                                 <div class="flex items-center justify-center">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path fill="currentColor" d="M18 22a2 2 0 0 0 2-2V8l-6-6H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2zM13 4l5 5h-5zM7 8h3v2H7zm0 4h10v2H7zm0 4h10v2H7z"/></svg>
                                 </div>
-                                <a class="block text-sm" target="_blank" :href="docStore.documents?.important?.transcript_card" >Transkrip</a>
+                                <a class="block text-sm" target="_blank" :href="docStore.documents.important.transcript_card" >Transkrip</a>
                             </div>
                             <PartialsFile @selectedFile="(value) => handleFile(value, 'transkrip')" />
                             <div v-if="error.transkrip" class="text-xs mt-1 text-red-500">{{ error.transkrip }}</div>
                         </div>
                         <div v-if="docStore.documents.important.id_card != null && docStore.documents.important.id_card != '-'" class="mb-3">
                             <div class="text-sm text-slate-500 mb-2">SIM A/B</div>
-                            <div v-if="docStore.documents?.important?.driving_car_card != null && docStore.documents?.important?.driving_car_card != '-'" class="flex gap-x-3 mb-2 items-center p-2 rounded-lg bg-slate-100 text-slate-600">
+                            <div v-if="docStore.documents.important.driving_car_card != null && docStore.documents.important.driving_car_card != '-'" class="flex gap-x-3 mb-2 items-center p-2 rounded-lg bg-slate-100 text-slate-600">
                                 <div class="flex items-center justify-center">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path fill="currentColor" d="M18 22a2 2 0 0 0 2-2V8l-6-6H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2zM13 4l5 5h-5zM7 8h3v2H7zm0 4h10v2H7zm0 4h10v2H7z"/></svg>
                                 </div>
-                                <a class="block text-sm" target="_blank" :href="docStore.documents?.important?.driving_car_card" >{{docStore.documents?.important?.driving_car_number}}</a>
+                                <a class="block text-sm" target="_blank" :href="docStore.documents.important.driving_car_card" >{{docStore.documents.important.driving_car_number}}</a>
                             </div>
                             <PartialsInput v-model="document.simab.number" :modelValue="document.simab.number" :typeInput="`number`" :required="true" :submitted="submit.document" :inputClass="`border border-slate-200`" :placeholder="`SIM A/B`" />
                             <PartialsFile @selectedFile="(value) => handleFile(value, 'simab')" />
@@ -509,11 +509,11 @@
                         </div>
                         <div v-if="docStore.documents.important.id_card != null && docStore.documents.important.id_card != '-'" class="mb-3">
                             <div class="text-sm text-slate-500 mb-2">SIM C</div>
-                            <div v-if="docStore.documents?.important?.driving_car_card != null && docStore.documents?.important?.driving_car_card != '-'" class="flex gap-x-3 mb-2 items-center p-2 rounded-lg bg-slate-100 text-slate-600">
+                            <div v-if="docStore.documents.important.driving_car_card != null && docStore.documents.important.driving_car_card != '-'" class="flex gap-x-3 mb-2 items-center p-2 rounded-lg bg-slate-100 text-slate-600">
                                 <div class="flex items-center justify-center">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path fill="currentColor" d="M18 22a2 2 0 0 0 2-2V8l-6-6H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2zM13 4l5 5h-5zM7 8h3v2H7zm0 4h10v2H7zm0 4h10v2H7z"/></svg>
                                 </div>
-                                <a class="block text-sm" target="_blank" :href="docStore.documents?.important?.driving_car_card" >{{docStore.documents?.important?.driving_car_number}}</a>
+                                <a class="block text-sm" target="_blank" :href="docStore.documents.important.driving_car_card" >{{docStore.documents.important.driving_car_number}}</a>
                             </div>
                             <PartialsInput v-model="document.simc.number" :modelValue="document.simc.number" :typeInput="`number`" :required="true" :submitted="submit.document" :inputClass="`border border-slate-200`" :placeholder="`SIM C`" />
                             <PartialsFile @selectedFile="(value) => handleFile(value, 'simc')" />
@@ -521,11 +521,11 @@
                         </div>
                         <div v-if="docStore.documents.important.id_card != null && docStore.documents.important.id_card != '-'" class="mb-3">
                             <div class="text-sm text-slate-500 mb-2">BPJS</div>
-                            <div v-if="docStore.documents?.important?.bpjs_card != null && docStore.documents?.important?.bpjs_card != '-'" class="flex gap-x-3 mb-2 items-center p-2 rounded-lg bg-slate-100 text-slate-600">
+                            <div v-if="docStore.documents.important.bpjs_card != null && docStore.documents.important.bpjs_card != '-'" class="flex gap-x-3 mb-2 items-center p-2 rounded-lg bg-slate-100 text-slate-600">
                                 <div class="flex items-center justify-center">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path fill="currentColor" d="M18 22a2 2 0 0 0 2-2V8l-6-6H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2zM13 4l5 5h-5zM7 8h3v2H7zm0 4h10v2H7zm0 4h10v2H7z"/></svg>
                                 </div>
-                                <a class="block text-sm" target="_blank" :href="docStore.documents?.important?.bpjs_card" >{{docStore.documents?.important?.bpjs_number}}</a>
+                                <a class="block text-sm" target="_blank" :href="docStore.documents.important.bpjs_card" >{{docStore.documents.important.bpjs_number}}</a>
                             </div>
                             <PartialsInput v-model="document.bpjs.number" :modelValue="document.bpjs.number" :required="true" :submitted="submit.document" :inputClass="`border border-slate-200`" :placeholder="`No BPJS`" />
                             <PartialsFile @selectedFile="(value) => handleFile(value, 'bpjs')" />
@@ -533,11 +533,11 @@
                         </div>
                         <div v-if="docStore.documents.important.id_card != null && docStore.documents.important.id_card != '-'" class="mb-3">
                             <div class="text-sm text-slate-500 mb-2">Jamsostek</div>
-                            <div v-if="docStore.documents?.important?.jamsostek_card != null && docStore.documents?.important?.jamsostek_card != '-'" class="flex gap-x-3 mb-2 items-center p-2 rounded-lg bg-slate-100 text-slate-600">
+                            <div v-if="docStore.documents.important.jamsostek_card != null && docStore.documents.important.jamsostek_card != '-'" class="flex gap-x-3 mb-2 items-center p-2 rounded-lg bg-slate-100 text-slate-600">
                                 <div class="flex items-center justify-center">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path fill="currentColor" d="M18 22a2 2 0 0 0 2-2V8l-6-6H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2zM13 4l5 5h-5zM7 8h3v2H7zm0 4h10v2H7zm0 4h10v2H7z"/></svg>
                                 </div>
-                                <a class="block text-sm" target="_blank" :href="docStore.documents?.important?.jamsostek_card" >{{docStore.documents?.important?.jamsostek_number}}</a>
+                                <a class="block text-sm" target="_blank" :href="docStore.documents.important.jamsostek_card" >{{docStore.documents.important.jamsostek_number}}</a>
                             </div>
                             <PartialsInput v-model="document.jamsostek.number" :modelValue="document.jamsostek.number" :required="true" :submitted="submit.document" :inputClass="`border border-slate-200`" :placeholder="`No Jamsostek`" />
                             <PartialsFile @selectedFile="(value) => handleFile(value, 'jamsostek')" />
@@ -1991,6 +1991,8 @@ const resetValue = () => {
 
 // Document Function
 const saveDocument = async () => {
+    console.log('clicked');
+    console.log(document.value);
     if(document.value.resume.card != null){
         const fetch = await docStore.createDocument('resume', '', document.value.resume.card);
         if(!fetch.success) 
