@@ -185,6 +185,7 @@
                                 <NuxtLink :to="`#rekurtmen`" class="text-white hover:underline hover:underline-2 text-sm hover:decoration-primary">Proses Rekrutmen</NuxtLink>
                                 <NuxtLink :to="`#industri`" class="text-white hover:underline hover:underline-2 text-sm hover:decoration-primary">Industri Pekerjaan</NuxtLink>
                                 <a href="/kebijakan-privasi" class="text-white hover:underline hover:underline-2 text-sm hover:decoration-primary">Kebijakan Privasi</a>
+                                <a href="/kebijakan-pengguna" class="text-white hover:underline hover:underline-2 text-sm hover:decoration-primary">Kebijakan Pengguna</a>
                             </nav>
                         </div>
                         <div class="order-last lg:order-none col-span-6 lg:col-span-3">

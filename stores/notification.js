@@ -14,7 +14,9 @@ export const useNotificationStore = defineStore('notification',{
         notifications: [],
     }),
     getters : {
-
+        unreadNotificationsCount() {
+            return this.notifications.filter(notification => notification.is_read === 0).length;
+        },
     },
     actions : {
         async getNotifications(){

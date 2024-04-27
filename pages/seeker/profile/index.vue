@@ -2118,14 +2118,11 @@ const handleFile = (file, type) => {
     document.value[type].card = file;
 }
 
-const downloadHandle = () => {
-    const login = localStorage.getItem('login')
-    if(login != 'true'){
-        openLogin.value = true;
-    }else{
-        const dokumenUrl = '/Example CV.pdf';
-        window.open(dokumenUrl, '_blank')
-    }
-       
+const downloadHandle = async () => {
+    const blob = await userStore.generateCV();
+
+    const fileURL = URL.createObjectURL(blob);
+    window.open(fileURL, '_blank'); 
+      
 }
 </script>

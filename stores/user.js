@@ -609,6 +609,19 @@ export const useUserStore = defineStore('user',{
             });
 
             return deactive;
+        },
+
+        async generateCV(){
+            var headers = new Headers();
+            headers.append("token", localStorage.getItem('access_token'));
+
+            const gencv = await $fetch(`${this.API_URL}/user/generate-resume`, {
+                method : 'GET',
+                headers: headers,
+            });
+            console.log(gencv);
+            const blob = gencv.blob();
+            return blob;
         }
     },
     
