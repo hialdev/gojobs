@@ -32,10 +32,9 @@ export const useLanguageStore = defineStore('language',{
 
             const formdata = new FormData();
             formdata.append("language", lang);
-            formdata.append("understanding", understand);
-            formdata.append("speaking", speak);
-            formdata.append("writing", write);
-            formdata.append("reading", read);
+            formdata.append("speaking", parseInt(speak));
+            formdata.append("writing", parseInt(write));
+            formdata.append("reading", parseInt(read));
             formdata.append("understanding", "0");
 
             const language = await $fetch(`${this.API_URL}/biodata-language/create`, {

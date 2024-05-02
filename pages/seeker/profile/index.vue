@@ -1,7 +1,6 @@
 <template>
     <ModalLazyLoad v-if="!isReady" />
     <div v-if="isReady" class="bg-slate-50">
-
         <div v-if="isShare" class="fixed bg-black/20 z-[999] top-0 bottom-0 start-0 end-0 p-5 flex items-center justify-center">
             <div class="bg-white p-7 rounded-lg max-w-[30em]">
                 <div class="flex mb-3 pb-3 border-b items-center justify-between">
@@ -927,15 +926,15 @@
                                 </div>
                                 <div class="col-span-12 lg:col-span-4">
                                     <div class="text-sm mb-2 block text-slate-500">Membaca</div>
-                                    <PartialsSelect :required="true" :submitted="submit.language" class="text-sm" :customClass="`mb-3 text-sm border rounded-3xl`" :selectedData="singleData.language.reading" @selected="(value) => {singleData.language.reading = value.key}" :options="options.language_levels" :label="`Lvl. Membaca`"></PartialsSelect>
+                                    <PartialsSelect :required="true" :submitted="submit.language" class="text-sm relative z-[20]" :customClass="`mb-3 text-sm border rounded-3xl`" :selectedData="singleData.language.reading" @selected="(value) => {singleData.language.reading = value.key}" :options="options.language_levels" :label="`Lvl. Membaca`"></PartialsSelect>
                                 </div>
                                 <div class="col-span-12 lg:col-span-4">
                                     <div class="text-sm mb-2 block text-slate-500">Menulis</div>
-                                    <PartialsSelect :required="true" :submitted="submit.language" class="text-sm" :customClass="`mb-3 text-sm border rounded-3xl`" :selectedData="singleData.language.writing" @selected="(value) => {singleData.language.writing = value.key}" :options="options.language_levels" :label="`Lvl. Menulis`"></PartialsSelect>
+                                    <PartialsSelect :required="true" :submitted="submit.language" class="text-sm relative z-[14]" :customClass="`mb-3 text-sm border rounded-3xl`" :selectedData="singleData.language.writing" @selected="(value) => {singleData.language.writing = value.key}" :options="options.language_levels" :label="`Lvl. Menulis`"></PartialsSelect>
                                 </div>
                                 <div class="col-span-12 lg:col-span-4">
                                     <div class="text-sm mb-2 block text-slate-500">Berbicara</div>
-                                    <PartialsSelect :required="true" :submitted="submit.language" class="text-sm" :customClass="`mb-3 text-sm border rounded-3xl`" :selectedData="singleData.language.speaking" @selected="(value) => {singleData.language.speaking = value.key}" :options="options.language_levels" :label="`Lvl. Berbicara`"></PartialsSelect>
+                                    <PartialsSelect :required="true" :submitted="submit.language" class="text-sm relative z-[13]" :customClass="`mb-3 text-sm border rounded-3xl`" :selectedData="singleData.language.speaking" @selected="(value) => {singleData.language.speaking = value.key}" :options="options.language_levels" :label="`Lvl. Berbicara`"></PartialsSelect>
                                 </div>
                                 <div class="col-span-12">
                                     <div class="flex items-center justify-end gap-3 mt-4">
@@ -1840,7 +1839,8 @@ const saveSingleData = async (section) => {
     } else if (section === 'language') {
         submit.value.language = true;
         const sde = singleData.value.language;
-        const addLanguage = await languageStore.addLanguage(sde.language, sde.reading, sde.writing, sde.speaking);
+        const addLanguage = await languageStore.addLanguage(sde.language, 0, parseInt(sde.reading), parseInt(sde.writing), parseInt(sde.speaking));
+        console.log(sde);
         if(addLanguage.success){
             toast.success(addLanguage?.message);
             submit.value.language = false;
@@ -2119,10 +2119,7 @@ const handleFile = (file, type) => {
 }
 
 const downloadHandle = async () => {
-    const blob = await userStore.generateCV();
-
-    const fileURL = URL.createObjectURL(blob);
-    window.open(fileURL, '_blank'); 
+    navigateTo('/seeker/profile/generate-cv'); 
       
 }
 </script>

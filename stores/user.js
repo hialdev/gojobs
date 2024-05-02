@@ -615,13 +615,12 @@ export const useUserStore = defineStore('user',{
             var headers = new Headers();
             headers.append("token", localStorage.getItem('access_token'));
 
-            const gencv = await $fetch(`${this.API_URL}/user/generate-resume`, {
+            const gencv = await $fetch(`${this.API_URL}/user/generate-data`, {
                 method : 'GET',
                 headers: headers,
             });
-            console.log(gencv);
-            const blob = gencv.blob();
-            return blob;
+
+            return gencv;
         }
     },
     

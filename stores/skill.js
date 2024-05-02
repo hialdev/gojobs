@@ -38,22 +38,23 @@ export const useSkillStore = defineStore('skill',{
             return localSkills;
         },
 
-        async getOptions(){
+        async getOptions() {
             var headers = new Headers();
-            headers.append("token",localStorage.getItem('access_token') ?? 'rbkmzydqknor0t5q236n01j38');
-
+            headers.append("token", localStorage.getItem('access_token') ?? 'rbkmzydqknor0t5q236n01j38');
+        
             const skill = await $fetch(`${this.API_URL}/master-skill/read?id=&status_name=&page=&page_size=`, {
-                method : 'GET',
+                method: 'GET',
                 headers: headers,
             })
-            
-            let opts = skill?.data.map(item => ({ key: item.id, value : item.skill_name}));
-            
-            if(skill?.success){
+        
+            let opts = skill?.data.map(item => ({ key: item.id, value: item.skill_name.toLowerCase().trim() })) // Mengubah ke huruf kecil dan menghapus spasi di awal dan akhir
+                .filter((item, index, self) => item.value !== '' && self.findIndex(t => t.value === item.value) === index); // Menghilangkan nilai yang kosong dan duplikat
+        
+            if (skill?.success) {
                 this.skills = skill?.data;
             }
             this.options = opts;
-
+        
             return opts;
         },
 
@@ -112,21 +113,31 @@ export const useSkillStore = defineStore('skill',{
             return skill;
         },
 
-        async addMasterSkill(skill_name = ''){
+        async addMasterSkill(skill_name = '') {
+            // Menghapus spasi di awal dan akhir skill_name, dan mengubah ke huruf kecil
+            const cleanSkillName = skill_name.trim().toLowerCase();
+        
+            // Memastikan skill_name tidak kosong dan tidak duplikat
+            if (cleanSkillName === '' || this.options.some(opt => opt.value === cleanSkillName)) {
+                return { success: false, message: 'Skill name must be unique and not empty' };
+            }
+        
             var headers = new Headers();
-            headers.append("token",localStorage.getItem('access_token') ?? 'rbkmzydqknor0t5q236n01j38');
+            headers.append("token", localStorage.getItem('access_token') ?? 'rbkmzydqknor0t5q236n01j38');
             const formdata = new FormData();
-            formdata.append("skill_name", `${skill_name}`);
-
+            formdata.append("skill_name", `${cleanSkillName}`);
+        
             const skill = await $fetch(`${this.API_URL}/master-skill/create`, {
-                method : 'POST',
+                method: 'POST',
                 headers: headers,
                 body: formdata,
             })
-            
-            this.getOptions();
+        
+            if (skill?.success) {
+                this.getOptions();
+            }
             return skill;
-        },
+        },        
 
         async updateSkill(id, name){
             var headers = new Headers();

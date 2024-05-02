@@ -10,6 +10,7 @@ export default defineNuxtConfig({
     '@nuxt/image',
     '@pinia/nuxt',
     '@nuxtjs/seo',
+    '@sidebase/nuxt-pdf',
     '@stefanobartoletti/nuxt-social-share',
   ],
   devtools: { enabled: true },
@@ -24,6 +25,8 @@ export default defineNuxtConfig({
   },
   build:{
     transpile: ['vue-toastification', ]
-  }
-
+  },
+  plugins:[
+    {src: '~/plugins/html2pdf.client.ts', mode: 'client'}
+  ]
 })
