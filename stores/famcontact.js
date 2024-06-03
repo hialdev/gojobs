@@ -103,6 +103,7 @@ export const useFamcontactStore = defineStore('famcontact',{
                 headers: headers,
             })
             
+            this.getFamilys();
             return family;
         },
 
@@ -116,7 +117,6 @@ export const useFamcontactStore = defineStore('famcontact',{
                 headers: headers,
             })
             this.contacts = contact?.data;
-            
             return contact;
         },
 
@@ -181,6 +181,7 @@ export const useFamcontactStore = defineStore('famcontact',{
                 headers: headers,
             })
             
+            this.getContacts();
             return contact;
         },
         
