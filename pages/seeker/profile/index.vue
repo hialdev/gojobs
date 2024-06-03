@@ -892,7 +892,7 @@
                                 </li>                  
                                 <li class="mb-7 me-6">            
                                     <div class="flex items-center gap-2 flex-wrap">
-                                        <span v-for="skill in skillStore.my_skills" :key="skill.id" class="block p-1 px-2 rounded-lg bg-primary text-white text-xs lowercase">{{ skill.skill_name }}</span>
+                                        <span v-for="skill in skillStore.my_skills" :key="skill.id" class="block p-1 px-2 rounded-lg bg-primary text-white text-xs lowercase">{{ skill.name }}</span>
                                     </div>
                                 </li>
                                 
@@ -1124,31 +1124,31 @@
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="21" viewBox="0 0 20 21" fill="none">
                                                         <path d="M17.3727 12.8795L13.6922 11.2303L13.682 11.2256C13.491 11.1439 13.2825 11.1111 13.0756 11.1302C12.8687 11.1493 12.6698 11.2197 12.4969 11.335C12.4765 11.3484 12.457 11.3631 12.4383 11.3787L10.5367 12.9998C9.33204 12.4147 8.08829 11.1803 7.50313 9.99125L9.12657 8.06078C9.14219 8.04125 9.15704 8.02172 9.1711 8.00062C9.28394 7.8282 9.35239 7.63056 9.37039 7.42529C9.38838 7.22002 9.35534 7.01348 9.27423 6.82406V6.81469L7.62032 3.12797C7.51309 2.88052 7.3287 2.67438 7.09468 2.54034C6.86067 2.4063 6.58958 2.35153 6.32188 2.38422C5.26326 2.52352 4.29155 3.04341 3.58824 3.84679C2.88492 4.65017 2.49809 5.6821 2.50001 6.74984C2.50001 12.953 7.54688 17.9998 13.75 17.9998C14.8177 18.0018 15.8497 17.6149 16.6531 16.9116C17.4564 16.2083 17.9763 15.2366 18.1156 14.178C18.1484 13.9104 18.0937 13.6393 17.9598 13.4053C17.8259 13.1713 17.62 12.9869 17.3727 12.8795ZM13.75 16.7498C11.0987 16.7469 8.55687 15.6924 6.68214 13.8177C4.8074 11.943 3.7529 9.40112 3.75001 6.74984C3.74707 5.98694 4.02192 5.24906 4.52324 4.67399C5.02456 4.09892 5.71806 3.72599 6.47423 3.62484C6.47392 3.62796 6.47392 3.6311 6.47423 3.63422L8.11485 7.30609L6.50001 9.2389C6.48362 9.25776 6.46873 9.27788 6.45548 9.29906C6.33791 9.47947 6.26894 9.68718 6.25525 9.90208C6.24157 10.117 6.28362 10.3318 6.37735 10.5256C7.08516 11.9733 8.54376 13.4209 10.007 14.128C10.2023 14.2208 10.4184 14.2614 10.634 14.2458C10.8497 14.2302 11.0576 14.1589 11.2375 14.0389C11.2576 14.0254 11.2769 14.0108 11.2953 13.9952L13.1945 12.3748L16.8664 14.0194H16.875C16.7751 14.7766 16.4027 15.4715 15.8275 15.9741C15.2524 16.4766 14.5138 16.7524 13.75 16.7498Z" fill="#797979"/>
                                                     </svg>
-                                                    <span class="">{{dataStore.contacts[index].phone}}</span>
+                                                    <span class="">{{dataStore.contacts[index]?.phone}}</span>
                                                 </li>
                                                 <li class="col-span-12 md:col-span-6 flex items-center gap-4 text-sm">
                                                     <div>
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 22V12c0-1.886 0-2.828.586-3.414C4.172 8 5.114 8 7 8c1.886 0 2.828 0 3.414.586C11 9.172 11 10.114 11 12"/><path d="M17 22v-6c0-1.886 0-2.828-.586-3.414C15.828 12 14.886 12 13 12h-2c-1.886 0-2.828 0-3.414.586C7 13.172 7 14.114 7 16v6"/><path d="M21 22V7.772c0-1.34 0-2.011-.356-2.525c-.356-.514-.984-.75-2.24-1.22c-2.455-.921-3.682-1.381-4.543-.785C13 3.84 13 5.15 13 7.772V12"/><path stroke-linecap="round" d="M4 8V6.5c0-.943 0-1.414.293-1.707C4.586 4.5 5.057 4.5 6 4.5h2c.943 0 1.414 0 1.707.293C10 5.086 10 5.557 10 6.5V8M7 4V2m15 20H2m8-7h4m-4 3h4"/></g></svg>
                                                     </div>
-                                                    <span class="">{{dataStore.contacts[index].province_name}}</span>
+                                                    <span class="">{{dataStore.contacts[index]?.province_name}}</span>
                                                 </li>
                                                 <li class="col-span-12 md:col-span-6 flex items-center gap-4 text-sm">
                                                     <div>
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 48 48"><g fill="none"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="4" d="M4 42h40"/><rect width="8" height="16" x="8" y="26" stroke="currentColor" stroke-linejoin="round" stroke-width="4" rx="2"/><path stroke="currentColor" stroke-linecap="square" stroke-linejoin="round" stroke-width="4" d="M12 34h1"/><rect width="24" height="38" x="16" y="4" stroke="currentColor" stroke-linejoin="round" stroke-width="4" rx="2"/><path fill="currentColor" d="M22 10h4v4h-4zm8 0h4v4h-4zm-8 7h4v4h-4zm8 0h4v4h-4zm0 7h4v4h-4zm0 7h4v4h-4z"/></g></svg>
                                                     </div>
-                                                    <span class="">{{dataStore.contacts[index].city_name}}</span>
+                                                    <span class="">{{dataStore.contacts[index]?.city_name}}</span>
                                                 </li>
                                                 <li class="col-span-12 md:col-span-6 flex items-start gap-4 text-sm">
                                                     <div>
                                                         <svg class="text-slate-600" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 15 15"><g fill="none" fill-rule="evenodd" stroke="currentColor" stroke-linecap="square" clip-rule="evenodd"><path d="M7.5 8.495a2 2 0 0 0 2-1.999a2 2 0 0 0-4 0a2 2 0 0 0 2 1.999Z"/><path d="M13.5 6.496c0 4.997-5 7.995-6 7.995s-6-2.998-6-7.995A5.999 5.999 0 0 1 7.5.5c3.313 0 6 2.685 6 5.996Z"/></g></svg>
                                                     </div>
-                                                    <span class="">{{dataStore.contacts[index].address}}</span>
+                                                    <span class="">{{dataStore.contacts[index]?.address}}</span>
                                                 </li>
                                                 <li class="col-span-12 md:col-span-6 flex items-center gap-4 text-sm">
                                                     <div>
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 16 16"><path fill="currentColor" d="M15.5 14.69h-1.25V7.78a.62.62 0 0 0-.25-.47L8.4 2.7a.65.65 0 0 0-.81 0L2 7.31a.62.62 0 0 0-.22.47v6.91H.5V7.78a1.87 1.87 0 0 1 .68-1.44l5.62-4.6a1.88 1.88 0 0 1 2.39 0l5.63 4.6a1.87 1.87 0 0 1 .68 1.44z"/><path fill="currentColor" d="M11.05 12.11H9.8A1.72 1.72 0 0 0 8 10.49a1.72 1.72 0 0 0-1.8 1.62H5a3 3 0 0 1 3-2.87a3 3 0 0 1 3.05 2.87m-6.1 0H6.2v2.58H4.95zm4.85 0h1.25v2.58H9.8z"/></svg>
                                                     </div>
-                                                    <span class="">{{dataStore.contacts[index].postal_code}}</span>
+                                                    <span class="">{{dataStore.contacts[index]?.postal_code}}</span>
                                                 </li>
                                             </ul>
                                         </div>
@@ -1469,17 +1469,20 @@ onMounted(async () => {
     dataStore.value.educations = fetchEducation?.data;
 
     const fetchSkill = await skillStore.getSkills();
+    console.log(fetchSkill)
     if(fetchSkill.message != "Data not found"){
-        dataStore.value.skills = fetchSkill?.data.map(skill => skill.id);
+        dataStore.value.skills = fetchSkill?.data[0].skills.map(skill => skill.id);
     }else{
         dataStore.value.skills = [];
     }
+    console.log(dataStore.value.skills);
 
     const familysFetch = await famStore.getFamilys();
     dataStore.value.familys = familysFetch.data;
 
     const contactsFetch = await famStore.getContacts();
     dataStore.value.contacts = contactsFetch.data;
+    console.log(dataStore.value.contacts)
 
     const fetchLanguage = await languageStore.getLanguages();
     dataStore.value.languages = fetchLanguage?.data;
@@ -1581,23 +1584,32 @@ const editSkill = () => {
 }
 
 const saveSkills = async () => {
-    const resetSkill = await skillStore.delAllSkill();
+    // const resetSkill = await skillStore.delAllSkill();
     
-    if(resetSkill.success){
-        toast.success('Reset Skills...');
-        toast.success('Success.. Reset Skills');
-        toast.success('Adding skills...');
-        console.log(dataStore.value.skills);
-        dataStore.value.skills.forEach(async (skill) => {
-            const addSkill = await skillStore.saveSkill(skill);
-            if(addSkill.success){
-                toast.success(addSkill.message);
-            }else{
-                toast.error(addSkill.message);
-            }
-        });
+    // if(resetSkill.success){
+    //     toast.success('Reset Skills...');
+    //     toast.success('Success.. Reset Skills');
+    //     toast.success('Adding skills...');
+    //     console.log(dataStore.value.skills);
+    //     dataStore.value.skills.forEach(async (skill) => {
+    //         const addSkill = await skillStore.saveSkill(skill);
+    //         if(addSkill.success){
+    //             toast.success(addSkill.message);
+    //         }else{
+    //             toast.error(addSkill.message);
+    //         }
+    //     });
+    // }else{
+    //     toast.error(resetSkill.message);
+    // }
+
+    toast.success('Adding skills...');
+    console.log(dataStore.value.skills);
+    const addSkill = await skillStore.saveSkill(`[${Object.values(dataStore.value.skills).join(', ')}]`);
+    if(addSkill.success){
+        toast.success(addSkill.message);
     }else{
-        toast.error(resetSkill.message);
+        toast.error(addSkill.message);
     }
 }
 // ------
@@ -1651,11 +1663,11 @@ const editFamcontact = async (i) => {
         company_name : dataStore.value.familys[i].company_name,
         relationship : dataStore.value.familys[i].relationship,
         description : dataStore.value.familys[i].description,
-        phone : dataStore.value?.contacts[i].phone,
-        province_id : dataStore.value?.contacts[i].province_id,
-        city_id : dataStore.value?.contacts[i].city_id,
-        address : dataStore.value?.contacts[i].address,
-        postal_code : dataStore.value?.contacts[i].postal_code,
+        phone : dataStore.value?.contacts[i]?.phone,
+        province_id : dataStore.value?.contacts[i]?.province_id,
+        city_id : dataStore.value?.contacts[i]?.city_id,
+        address : dataStore.value?.contacts[i]?.address,
+        postal_code : dataStore.value?.contacts[i]?.postal_code,
     }
     in_edit.value = dataStore.value.familys[i].id;
     show.value.family = true;
@@ -1705,17 +1717,33 @@ const updateFamcontact = async () => {
 
 const delFamcontact = async () => {
     const i = dataStore.value.familys.findIndex(fam => fam.id == in_edit.value);
-    const fam_id = dataStore.value.familys[i].id;
-    const con_id = dataStore.value.contacts[i].id;
+    console.log(dataStore.value)
+    console.log(i, in_edit.value)
+    const fam_id = dataStore.value.familys[i]?.id;
+    
+    const con_id = dataStore.value.contacts[i]?.id;
+    console.log(fam_id, con_id)
 
-    const delFamily = await famStore.delFamily(fam_id);
-    const delContact = await famStore.delContact(con_id);
-    if(delFamily.success && delContact.success){
-        toast.success(delFamily?.message);
-        toast.success(delContact?.message);
+    if(con_id){
+        const delContact = await famStore.delContact(con_id);
+        if(delContact.success){
+            toast.success(delContact?.message);
+        }else{
+            toast.error(delContact?.message);
+        }
     }else{
-        toast.error(delFamily?.message);
-        toast.error(delContact?.message);
+        toast.error('Tidak ada data Contact yang dihapus')
+    }
+
+    if(fam_id){
+        const delFamily = await famStore.delFamily(fam_id);
+        if(delFamily.success){
+            toast.success(delFamily?.message);
+        }else{
+            toast.error(delFamily?.message);
+        }
+    }else{
+        toast.error('Tidak ada data Family yang dihapus')
     }
 }
 
@@ -2015,10 +2043,11 @@ const saveDocument = async () => {
         } 
     }
 
-    if(document.value.kk.number != null && document.value.card != null){
-        const fetch = await docStore.createDocument('kk', document.value.kk.number, document.value.card);
+    if(document.value.kk.number != null && document.value.kk.card != null){
+        const fetch = await docStore.createDocument('kk', document.value.kk.number, document.value.kk.card);
         if(!fetch.success)
         {
+            console.log("kk : ", document.value.kk)
             error.value.kk = fetch.message;
         }else{
             error.value.kk = null;

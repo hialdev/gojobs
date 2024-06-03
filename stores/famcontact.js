@@ -96,7 +96,7 @@ export const useFamcontactStore = defineStore('famcontact',{
 
         async delFamily(id){
             var headers = new Headers();
-            headers.append("token",localStorage.getItem('access_token') ?? 'rbkmzydqknor0t5q236n01j38');
+            headers.append("token",localStorage.getItem('access_token'));
 
             const family = await $fetch(`${this.API_URL}/biodata-family/delete?id=${id}`, {
                 method : 'DELETE',
@@ -174,7 +174,7 @@ export const useFamcontactStore = defineStore('famcontact',{
 
         async delContact(id){
             var headers = new Headers();
-            headers.append("token",localStorage.getItem('access_token') ?? 'rbkmzydqknor0t5q236n01j38');
+            headers.append("token",localStorage.getItem('access_token'));
 
             const contact = await $fetch(`${this.API_URL}/biodata-emergency/delete?id=${id}`, {
                 method : 'DELETE',

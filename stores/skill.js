@@ -28,7 +28,7 @@ export const useSkillStore = defineStore('skill',{
             //     headers: headers,
             // })
             
-            this.my_skills = skill?.data;
+            this.my_skills = skill?.data[0].skills;
             return skill;
         },
 

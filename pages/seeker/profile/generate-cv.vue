@@ -6,7 +6,7 @@
             <!-- Sidebar -->
             <div style="background-color: #f5f5f5; padding: 35px; width: 30%; height: 100%;">
                 <div>
-                    <img :src="`${cvData.about.photo}`" width="170" height="170" alt="Image Name Surname" style="display: block;margin: 10px auto; border-radius: 999px; object-fit: cover; border: 5px solid #fff;">
+                    <img :src="`${cvData.about.photo_base.startsWith('data:image') ? cvData.about.photo_base : cvData.about.photo}`" width="170" height="170" alt="Image Name Surname" style="display: block;margin: 10px auto; border-radius: 999px; object-fit: cover; border: 5px solid #fff;">
                 </div>
                 <ul style="padding:0px; list-style: none;">
                     <li><h3>Biodata</h3></li>
@@ -222,7 +222,7 @@
                 <div style="padding: 35px; border-bottom: 4px solid #f5f5f5;">
                     <h3 style="margin: 0px; margin-bottom: 0.7em; color: #65bb7f">Keterampilan</h3>
                     <div style="display: flex; align-items: center; flex-wrap: wrap; gap: 0.4em;">
-                        <span v-if="cvData.skills.length > 0" v-for="skill in cvData.skills" style="padding: 0px 5px; padding-bottom:3px; font-size: 12px;">{{skill.skill_name}}</span>
+                        <span v-if="skill.my_skills.length > 0" v-for="skillData in skill.my_skills" :key="skillData.id" style="padding: 0px 5px; padding-bottom:3px; font-size: 12px;">{{skillData.name}}</span>
                     </div>
                 </div>
             </div>
@@ -283,6 +283,9 @@ const cvData = ref({
 const isReady = ref(false)
 
 onMounted(async () => {
+    const genCV = await user.generateCV();
+    console.log('CV Detail : ',genCV);
+
     const profileDetail = await user.getFullProfile();
     console.log('Profile Detail : ',profileDetail);
 
@@ -290,10 +293,10 @@ onMounted(async () => {
     console.log('Skill Detail : ',skills);
 
     const experiences = await experience.getExperiences();
-    console.log('Skill Detail : ',experiences);
+    console.log('Experience Detail : ',experiences);
 
     const educations = await education.getEducations();
-    console.log('Skill Detail : ',educations);
+    console.log('Education Detail : ',educations);
 
     const languages = await language.getLanguages();
     console.log('Language Detail : ',languages);
@@ -322,6 +325,7 @@ onMounted(async () => {
         role : profileDetail.profile.work_type,
         summary : profileDetail.profile_detail.summary,
         photo : profileDetail.profile.photo,
+        photo_base : genCV.data.profile.photo_base,
     }
 
     cvData.value.sosmed = {
