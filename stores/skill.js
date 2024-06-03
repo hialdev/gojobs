@@ -27,8 +27,9 @@ export const useSkillStore = defineStore('skill',{
             //     method : 'GET',
             //     headers: headers,
             // })
-            
-            this.my_skills = skill?.data[0].skills;
+            if(skill.message != "Data not found"){
+                this.my_skills = skill?.data[0].skills;
+            }
             return skill;
         },
 

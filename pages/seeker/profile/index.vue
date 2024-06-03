@@ -34,7 +34,10 @@
                     <div class="relative flex flex-wrap items-center justify-end gap-4 my-5 px-5 lg:px-0">
                         
                         <PartialsButton :is_submit="true" @click="saveData" class="ms-auto border-2 border-primary text-sm" :primary="false">Simpan</PartialsButton>
-                        <PartialsButton @click="downloadHandle" class="flex gap-5 items-center justify-between px-5 rounded-lg text-sm">Download CV
+                        <PartialsButton v-if="checkCompletedData" @click="downloadHandle" class="flex gap-5 items-center justify-between px-5 rounded-lg text-sm">Download CV
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2M7 11l5 5l5-5m-5-7v12"/></svg>
+                        </PartialsButton>
+                        <PartialsButton v-if="!checkCompletedData" @click="downloadHandle" class="flex gap-5 items-center justify-between px-5 rounded-lg text-sm bg-slate-800 text-white">Download CV
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2M7 11l5 5l5-5m-5-7v12"/></svg>
                         </PartialsButton>
 
@@ -1502,6 +1505,9 @@ onMounted(async () => {
     isReady.value = true;
 })
 
+const checkCompletedData = () => {
+    return (dataStore.value?.skills?.length == 0 || dataStore.value?.skills?.length == undefined) && (dataStore.value?.languages?.length == 0 || dataStore.value?.languages?.length == undefined) && (dataStore.value?.experiences?.length == 0 || dataStore.value?.experiences?.length == undefined) && (dataStore.value?.educations?.length == 0 || dataStore.value?.educations?.length == undefined) && (dataStore.value?.organizations?.length == 0 || dataStore.value?.organizations?.length == undefined) && userStore.detail?.biodata?.birth_place == undefined
+}
 
 // Filtering
 const handleSelectedProvince = (value) => {

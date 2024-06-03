@@ -6,7 +6,9 @@
             <!-- Sidebar -->
             <div style="background-color: #f5f5f5; padding: 35px; width: 30%; height: 100%;">
                 <div>
-                    <img :src="`${cvData.about.photo_base.startsWith('data:image') ? cvData.about.photo_base : cvData.about.photo}`" width="170" height="170" alt="Image Name Surname" style="display: block;margin: 10px auto; border-radius: 999px; object-fit: cover; border: 5px solid #fff;">
+                    <img @load="onLoad" @error="onError" :src="cvData.about.photo_base" width="170" height="170" alt="Image Name Surname" style="display: none;margin: 10px auto; border-radius: 999px; object-fit: cover; border: 5px solid #fff;">
+                    <img v-if="loadStatus === 'success'" :src="cvData.about.photo_base" width="170" height="170" alt="Image Name Surname" style="display: block;margin: 10px auto; border-radius: 999px; object-fit: cover; border: 5px solid #fff;">
+                    <img v-if="loadStatus === 'error'" :src="cvData.about.photo" width="170" height="170" alt="Image Name Surname" style="display: block;margin: 10px auto; border-radius: 999px; object-fit: cover; border: 5px solid #fff;">
                 </div>
                 <ul style="padding:0px; list-style: none;">
                     <li><h3>Biodata</h3></li>
@@ -346,6 +348,17 @@ onMounted(async () => {
 
     isReady.value = true;
 })
+
+const loadStatus = ref('')
+const onLoad = () => {
+  loadStatus.value = 'success'
+  console.log('Image loaded successfully!')
+}
+
+const onError = () => {
+  loadStatus.value = 'error'
+  console.error('Failed to load image.')
+}
 
 const downloadPDF = () => {
     html2pdf()
