@@ -77,7 +77,7 @@ export const useMedsosStore = defineStore('medsos',{
             headers.append("token",localStorage.getItem('access_token') ?? 'rbkmzydqknor0t5q236n01j38');
 
             const medsos = await $fetch(`${this.API_URL}/biodata-mediasocial/delete?id=${id}`, {
-                method : 'DELETE',
+                method : 'POST',
                 headers: headers,
             })
 

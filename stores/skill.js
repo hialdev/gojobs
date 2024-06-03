@@ -93,7 +93,7 @@ export const useSkillStore = defineStore('skill',{
             headers.append("token",localStorage.getItem('access_token') ?? 'rbkmzydqknor0t5q236n01j38');
 
             const skill = await $fetch(`${this.API_URL}/biodata-skill/deleteall`, {
-                method : 'DELETE',
+                method : 'POST',
                 headers: headers,
             })
             
@@ -106,7 +106,7 @@ export const useSkillStore = defineStore('skill',{
             headers.append("token",localStorage.getItem('access_token') ?? 'rbkmzydqknor0t5q236n01j38');
 
             const skill = await $fetch(`${this.API_URL}/biodata-skill/delete?id=${id}`, {
-                method : 'DELETE',
+                method : 'POST',
                 headers: headers,
             })
             
@@ -161,7 +161,7 @@ export const useSkillStore = defineStore('skill',{
             headers.append("token",localStorage.getItem('access_token') ?? 'rbkmzydqknor0t5q236n01j38');
 
             const skill = await $fetch(`${this.API_URL}/master-skill/delete?id=${id}`, {
-                method : 'DELETE',
+                method : 'POST',
                 headers: headers,
             })
             

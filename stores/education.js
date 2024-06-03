@@ -117,7 +117,7 @@ export const useEducationStore = defineStore('education',{
             headers.append("token",localStorage.getItem('access_token') ?? 'rbkmzydqknor0t5q236n01j38');
 
             const education = await $fetch(`${this.API_URL}/biodata-education/delete?id=${id}`, {
-                method : 'DELETE',
+                method : 'POST',
                 headers: headers,
             })
             this.getEducations();

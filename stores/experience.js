@@ -94,7 +94,7 @@ export const useExperienceStore = defineStore('experience',{
             headers.append("token",localStorage.getItem('access_token') ?? 'rbkmzydqknor0t5q236n01j38');
 
             const experience = await $fetch(`${this.API_URL}/biodata-experience/delete?id=${id}`, {
-                method : 'DELETE',
+                method : 'POST',
                 headers: headers,
             })
 

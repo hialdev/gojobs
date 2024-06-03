@@ -99,7 +99,7 @@ export const useFamcontactStore = defineStore('famcontact',{
             headers.append("token",localStorage.getItem('access_token'));
 
             const family = await $fetch(`${this.API_URL}/biodata-family/delete?id=${id}`, {
-                method : 'DELETE',
+                method : 'POST',
                 headers: headers,
             })
             
@@ -177,7 +177,7 @@ export const useFamcontactStore = defineStore('famcontact',{
             headers.append("token",localStorage.getItem('access_token'));
 
             const contact = await $fetch(`${this.API_URL}/biodata-emergency/delete?id=${id}`, {
-                method : 'DELETE',
+                method : 'POST',
                 headers: headers,
             })
             

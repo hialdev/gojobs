@@ -79,7 +79,7 @@ export const useOrganizationStore = defineStore('organization',{
             headers.append("token",localStorage.getItem('access_token') ?? 'rbkmzydqknor0t5q236n01j38');
 
             const organization = await $fetch(`${this.API_URL}/biodata-organization/delete?id=${id}`, {
-                method : 'DELETE',
+                method : 'POST',
                 headers: headers,
             })
             this.getOrganizations();

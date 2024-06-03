@@ -77,7 +77,7 @@ export const useLanguageStore = defineStore('language',{
             headers.append("token",localStorage.getItem('access_token') ?? 'rbkmzydqknor0t5q236n01j38');
 
             const language = await $fetch(`${this.API_URL}/biodata-language/delete?id=${id}`, {
-                method : 'DELETE',
+                method : 'POST',
                 headers: headers,
             })
             this.getLanguages();
