@@ -1507,10 +1507,48 @@ onMounted(async () => {
     isReady.value = true;
 })
 
-const checkCompletedData = () => {
-    const dataComplete = (dataStore.value?.skills?.length == 0 || dataStore.value?.skills?.length == undefined) && (dataStore.value?.languages?.length == 0 || dataStore.value?.languages?.length == undefined) && (dataStore.value?.experiences?.length == 0 || dataStore.value?.experiences?.length == undefined) && (dataStore.value?.educations?.length == 0 || dataStore.value?.educations?.length == undefined) && (dataStore.value?.organizations?.length == 0 || dataStore.value?.organizations?.length == undefined) && userStore.detail?.biodata?.birth_place == undefined
-    console.log("check completed data",dataComplete);
+const isEmpty = (array) => !array?.length;
+const checkCompletedData = async () => {
+    let dataCheck = {
+        experiences : [],
+        organizations : [],
+        educations : [],
+        skills : [],
+        languages : [],
+    }
+
+    const fetchExperience = await experienceStore.getExperiences();
+    dataCheck.experiences = fetchExperience?.data;
+
+    const fetchOrganization = await organizationStore.getOrganizations();
+    dataCheck.organizations = fetchOrganization?.data;
+
+    const fetchEducation = await educationStore.getEducations();
+    dataCheck.educations = fetchEducation?.data;
+
+    const fetchSkill = await skillStore.getSkills();
+    console.log(fetchSkill)
+    if(fetchSkill.message != "Data not found"){
+        dataCheck.skills = fetchSkill?.data[0].skills.map(skill => skill.id);
+    }else{
+        dataCheck.skills = [];
+    }
+    console.log(dataCheck.skills);
+
+    const fetchLanguage = await languageStore.getLanguages();
+    dataCheck.languages = fetchLanguage?.data;
+    
+    const dataCheckValues = dataCheck;
+    const dataComplete =
+        !isEmpty(dataCheckValues?.skills) &&
+        !isEmpty(dataCheckValues?.languages) &&
+        !isEmpty(dataCheckValues?.experiences) &&
+        !isEmpty(dataCheckValues?.educations) &&
+        !isEmpty(dataCheckValues?.organizations);
+
+    console.log("check completed data", dataComplete);
     is_completed.value = dataComplete;
+    console.log("Data Complete ? ",dataComplete);
 }
 
 // Filtering
@@ -1621,6 +1659,7 @@ const saveSkills = async () => {
     }else{
         toast.error(addSkill.message);
     }
+    checkCompletedData();
 }
 // ------
 
@@ -1888,6 +1927,7 @@ const saveSingleData = async (section) => {
         }
     }
     resetValue();
+    checkCompletedData();
 };
 
 const editData = (section, data, id) => {
@@ -1939,6 +1979,7 @@ const deleteData = (section) => {
 
     in_edit.value = null;
     resetValue();
+    checkCompletedData();
     toast.success('Berhasil menghapus '+ sections[section]);
 
 };
@@ -1980,6 +2021,7 @@ const updateData = (section) => {
 
     in_edit.value = null;
     resetValue();
+    checkCompletedData();
     toast.success('Berhasil memperbarui '+ sections[section]);
 
 };
