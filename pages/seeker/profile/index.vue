@@ -34,10 +34,10 @@
                     <div class="relative flex flex-wrap items-center justify-end gap-4 my-5 px-5 lg:px-0">
                         
                         <PartialsButton :is_submit="true" @click="saveData" class="ms-auto border-2 border-primary text-sm" :primary="false">Simpan</PartialsButton>
-                        <PartialsButton v-if="checkCompletedData" @click="downloadHandle" class="flex gap-5 items-center justify-between px-5 rounded-lg text-sm">Download CV
+                        <PartialsButton v-if="is_completed" @click="downloadHandle" class="flex gap-5 items-center justify-between px-5 rounded-lg text-sm">Download CV
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2M7 11l5 5l5-5m-5-7v12"/></svg>
                         </PartialsButton>
-                        <PartialsButton v-if="!checkCompletedData" @click="downloadHandle" class="flex gap-5 items-center justify-between px-5 rounded-lg text-sm bg-slate-800 text-white">Download CV
+                        <PartialsButton v-if="!is_completed" @click="downloadHandle" class="flex gap-5 items-center justify-between px-5 rounded-lg text-sm bg-slate-400 border-slate-400 hover:bg-slate-500 hover:border-slate-500">Download CV
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2M7 11l5 5l5-5m-5-7v12"/></svg>
                         </PartialsButton>
 
@@ -1422,6 +1422,7 @@ const error = ref(
 );
 const profileData = ref(null);
 const url = useRequestURL();
+const is_completed = ref();
 
 const relationships = [
     {key: 'father', value: 'Father'},
@@ -1499,6 +1500,7 @@ onMounted(async () => {
     if(dataStore.value?.organizations?.length == 0 || dataStore.value?.organizations?.length == undefined) {show.value.organisasi = true;}
     if(dataStore.value?.languages?.length == 0 || dataStore.value?.languages?.length == undefined) {show.value.bahasa = true;}
 
+    checkCompletedData();
     const fetchDocument = await docStore.getDocuments();
     documents.value = fetchDocument.data;
 
@@ -1506,7 +1508,9 @@ onMounted(async () => {
 })
 
 const checkCompletedData = () => {
-    return (dataStore.value?.skills?.length == 0 || dataStore.value?.skills?.length == undefined) && (dataStore.value?.languages?.length == 0 || dataStore.value?.languages?.length == undefined) && (dataStore.value?.experiences?.length == 0 || dataStore.value?.experiences?.length == undefined) && (dataStore.value?.educations?.length == 0 || dataStore.value?.educations?.length == undefined) && (dataStore.value?.organizations?.length == 0 || dataStore.value?.organizations?.length == undefined) && userStore.detail?.biodata?.birth_place == undefined
+    const dataComplete = (dataStore.value?.skills?.length == 0 || dataStore.value?.skills?.length == undefined) && (dataStore.value?.languages?.length == 0 || dataStore.value?.languages?.length == undefined) && (dataStore.value?.experiences?.length == 0 || dataStore.value?.experiences?.length == undefined) && (dataStore.value?.educations?.length == 0 || dataStore.value?.educations?.length == undefined) && (dataStore.value?.organizations?.length == 0 || dataStore.value?.organizations?.length == undefined) && userStore.detail?.biodata?.birth_place == undefined
+    console.log("check completed data",dataComplete);
+    is_completed.value = dataComplete;
 }
 
 // Filtering
@@ -2154,7 +2158,12 @@ const handleFile = (file, type) => {
 }
 
 const downloadHandle = async () => {
-    navigateTo('/seeker/profile/generate-cv'); 
-      
+    if(is_completed.value){
+        toast.success('Mengarahkan Generate CV');
+        navigateTo('/seeker/profile/generate-cv'); 
+    }else{
+        toast.error('Data belum lengkap, Tidak dapat generate');
+    }
+    
 }
 </script>
